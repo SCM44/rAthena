@@ -1,0 +1,130 @@
+prontera,164,172,4	script	Coin Dealer	667,{
+
+    mes "[^0000FFCoin Dealer^000000]";
+    mes "Salut ! je suis un marchand itinérant , je suis venu en ville pour vendre ma collecte ";
+    mes "Je te propose d'échanger tes "+getitemname(.IDcoin)+" contre tout un tat d'objets rare!!!";
+    next;
+    mes "[^0000FFCoin Dealer^000000]";
+    mes "Quel objet t'intéresse ?";
+    mes "(tu as sur toi ^FF9900"+countitem(.IDcoin)+"^000000 "+getitemname(.IDcoin)+")";
+    next;
+    .@menu$ = "";
+    .@i = 0;
+    while (.LstItemPrix[.@i] != 0)
+    {
+        .@menu$ = .@menu$ + getitemname(.LstItemCraft[.@i])+" - "+.LstItemPrix[.@i]+" "+getitemname(.IDcoin);
+        .@i++;
+        if (.LstItemPrix[.@i] != 0) .@menu$ = .@menu$ + ":";
+    }
+    .@nomitem = select(.@menu$);
+    .@nomitem--;
+    if (countitem(.IDcoin) < .LstItemPrix[.@nomitem])
+    {
+        mes "[^0000FFCoin Dealer^000000]";
+        mes "Tu n'as même pas assez de "+getitemname(.IDcoin)+" pour en obtenir un...";
+        close;
+    }
+    mes "[^0000FFCoin Dealer^000000]";
+    mes "Combien de "+getitemname(.LstItemCraft[.@nomitem])+" veux-tu craft ? Si tu me donne une valeur plus grande que ce que tu peux produire, je t'en ferai le plus possible";
+    next;
+    input(.@valvoulu);
+    if (.@valvoulu == 0)
+    {
+        mes "[^0000FFCoin Dealer^000000]";
+        mes "Bruh...";
+        close;
+    }
+    if (.@valvoulu*.LstItemPrix[.@nomitem] > countitem(.IDcoin))
+    {
+        .@valvoulu = 0;
+        while (.@valvoulu*.LstItemPrix[.@nomitem] < countitem(.IDcoin)) .@valvoulu++;
+        if (.@valvoulu*.LstItemPrix[.@nomitem] > countitem(.IDcoin)) .@valvoulu--;
+        mes "[^0000FFCoin Dealer^000000]";
+        mes "Avec ce que tu as sur toi je vais t'en donner "+.@valvoulu;
+        delitem .IDcoin,(.@valvoulu*.LstItemPrix[.@nomitem]);
+        getitem .LstItemCraft[.@nomitem],.@valvoulu;
+        close;
+    }
+    else
+    {
+        delitem .IDcoin,(.@valvoulu*.LstItemPrix[.@nomitem]);
+        getitem .LstItemCraft[.@nomitem],.@valvoulu;
+        mes "[^0000FFCoin Dealer^000000]";
+        mes "Voilà pour toi !";
+        close;
+    }
+    close;
+
+    OnInit:
+        .IDcoin = 18010;
+        setarray .LstItemCraft[0],616,12246,12210,12263,13534,13810,12103,7619,7620,18015,18016,7776,14380,13869,13809,18017,13889,13890,12075,12080,12095,12090,12085,12100,13995;
+        setarray .LstItemPrix[0],300,1500,200,200,50,50,1000,200,200,200,200,100,500,200,20,20,75,75,200,200,200,200,200,200,30;
+    end;
+}
+
+//============================================================
+
+
+prontera,164,168,4	script	Rune Dealer	664,{
+
+    mes "[^0000FFRune Dealer^000000]";
+    mes "Hein ? Quoi ? des rune ? oui j'en connais un rayon....j'étudis sur le sujet depuis un petit moment et j'ai trouvé un moyen d'en créer a partir de matériaux rares...";
+    mes "Si tu as des "+getitemname(.IDcoin)+" sur toi, je pourrais surement en faire quelque chose...";
+    next;
+    mes "[^0000FFRune Dealer^000000]";
+    mes "Quelle Rune t'intéresse ?";
+    mes "(tu as sur toi ^FF9900"+countitem(.IDcoin)+"^000000 "+getitemname(.IDcoin)+")";
+    next;
+    .@menu$ = "";
+    .@i = 0;
+    while (.LstItemPrix[.@i] != 0)
+    {
+        .@menu$ = .@menu$ + getitemname(.LstItemCraft[.@i]) + " - "+.LstItemPrix[.@i]+" "+getitemname(.IDcoin);
+        .@i++;
+        if (.LstItemPrix[.@i] != 0) .@menu$ = .@menu$ + ":";
+    }
+    .@nomitem = select(.@menu$);
+    .@nomitem--;
+    if (countitem(.IDcoin) < .LstItemPrix[.@nomitem])
+    {
+        mes "[^0000FFRune Dealer^000000]";
+        mes "Tu n'as même pas assez de "+getitemname(.IDcoin)+" pour en obtenir une...";
+        close;
+    }
+    mes "[^0000FFRune Dealer^000000]";
+    mes "Combien de "+getitemname(.LstItemCraft[.@nomitem])+" veux-tu craft ? Si tu me donne une valeur plus grande que ce que tu peux produire, je t'en ferai le plus possible";
+    next;
+    input(.@valvoulu);
+    if (.@valvoulu == 0)
+    {
+        mes "[^0000FFRune Dealer^000000]";
+        mes "Bruh...";
+        close;
+    }
+    if (.@valvoulu*.LstItemPrix[.@nomitem] > countitem(.IDcoin))
+    {
+        .@valvoulu = 0;
+        while (.@valvoulu*.LstItemPrix[.@nomitem] < countitem(.IDcoin)) .@valvoulu++;
+        if (.@valvoulu*.LstItemPrix[.@nomitem] > countitem(.IDcoin)) .@valvoulu--;
+        mes "[^0000FFRune Dealer^000000]";
+        mes "Avec ce que tu as sur toi je vais t'en donner "+.@valvoulu;
+        delitem .IDcoin,(.@valvoulu*.LstItemPrix[.@nomitem]);
+        getitem .LstItemCraft[.@nomitem],.@valvoulu;
+        close;
+    }
+    else
+    {
+        delitem .IDcoin,(.@valvoulu*.LstItemPrix[.@nomitem]);
+        getitem .LstItemCraft[.@nomitem],.@valvoulu;
+        mes "[^0000FFRune Dealer^000000]";
+        mes "Voilà pour toi !";
+        close;
+    }
+    close;
+
+    OnInit:
+        .IDcoin = 18005;
+        setarray .LstItemCraft[0],18006,18007,18008,18009;
+        setarray .LstItemPrix[0],5,5,2,20;
+    end;
+}

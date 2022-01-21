@@ -1277,7 +1277,7 @@ Body:
   - Jobs:
       Star_Gladiator: true
       Star_Gladiator2: true
-    MaxJobLevel: 50
+    MaxJobLevel: 70
     JobExp:
       - Level: 1
         Exp: 27434

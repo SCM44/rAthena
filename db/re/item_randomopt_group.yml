@@ -7454,3 +7454,3086 @@ Body:
         MinValue: 1
         MaxValue: 5
         Chance: 625
+  - Id: 1000
+    Group: RdmStatsWeapon
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_NOTHING
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_UNDEAD
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_ANIMAL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_PLANT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_INSECT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_FISHS
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_DEVIL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_HUMAN
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_ANGEL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: RACE_DAMAGE_DRAGON
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: DAMAGE_SIZE_SMALL_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: DAMAGE_SIZE_MIDIUM_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: DAMAGE_SIZE_LARGE_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 160
+          - Option: VAR_PLUSASPDPERCENT
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 160
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 160
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 10
+            MaxValue: 25
+            Param: -1
+            Chance: 160
+          - Option: VAR_ATTPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 160
+          - Option: VAR_ATTMPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 160
+          - Option: VAR_ATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 160
+          - Option: VAR_MAGICATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+      - Slot: 2
+        Options:
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_NOTHING
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_UNDEAD
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_ANIMAL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_PLANT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_INSECT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_FISHS
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_DEVIL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_HUMAN
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_ANGEL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: RACE_DAMAGE_DRAGON
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: DAMAGE_SIZE_SMALL_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: DAMAGE_SIZE_MIDIUM_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: DAMAGE_SIZE_LARGE_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 40
+          - Option: VAR_PLUSASPDPERCENT
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 40
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 40
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 10
+            MaxValue: 25
+            Param: -1
+            Chance: 40
+          - Option: VAR_ATTPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 40
+          - Option: VAR_ATTMPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 40
+          - Option: VAR_ATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 40
+          - Option: VAR_MAGICATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 40
+      - Slot: 3
+        Options:
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_NOTHING
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_UNDEAD
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_ANIMAL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_PLANT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_INSECT
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_FISHS
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_DEVIL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_HUMAN
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_ANGEL
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: RACE_DAMAGE_DRAGON
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: DAMAGE_SIZE_SMALL_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: DAMAGE_SIZE_MIDIUM_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: DAMAGE_SIZE_LARGE_TARGET
+            MinValue: 5
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 20
+          - Option: VAR_PLUSASPDPERCENT
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 20
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 20
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 10
+            MaxValue: 25
+            Param: -1
+            Chance: 20
+          - Option: VAR_ATTPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 20
+          - Option: VAR_ATTMPOWER
+            MinValue: 20
+            MaxValue: 50
+            Param: -1
+            Chance: 20
+          - Option: VAR_ATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 20
+          - Option: VAR_MAGICATKPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 160
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 20
+  - Id: 1001
+    Group: RdmStatsArmor
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+          - Option: VAR_MDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_ANGEL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 2
+            MaxValue: 3
+            Param: -1
+            Chance: 118
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 118
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 200
+            MaxValue: 1000
+            Param: -1
+            Chance: 118
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 118
+      - Slot: 2
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+          - Option: VAR_MDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_ANGEL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 2
+            MaxValue: 3
+            Param: -1
+            Chance: 29
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 29
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 200
+            MaxValue: 1000
+            Param: -1
+            Chance: 29
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 29
+      - Slot: 3
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+          - Option: VAR_MDEFPOWER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_ANGEL
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 2
+            MaxValue: 3
+            Param: -1
+            Chance: 15
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 5
+            Param: -1
+            Chance: 15
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 200
+            MaxValue: 1000
+            Param: -1
+            Chance: 15
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 3
+            MaxValue: 10
+            Param: -1
+            Chance: 15
+  - Id: 1002
+    Group: RdmStatsShield
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 138
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+      - Slot: 2
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 34
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+      - Slot: 3
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_ANIMAL
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_PLANT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_INSECT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_FISHS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_DEVIL
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_HUMAN
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_TOLERACE_DRAGON
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: DAMAGE_SIZE_SMALL_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: DAMAGE_SIZE_MIDIUM_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: DAMAGE_SIZE_LARGE_USER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 2
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 17
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+  - Id: 1003
+    Group: RdmStatsBoots
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 500
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 500
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 500
+          - Option: VAR_MAXSPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 500
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 500
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 500
+      - Slot: 2
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 125
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 125
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 125
+          - Option: VAR_MAXSPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 125
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 125
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 125
+      - Slot: 3
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 63
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 63
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 63
+          - Option: VAR_MAXSPAMOUNT
+            MinValue: 10
+            MaxValue: 100
+            Param: -1
+            Chance: 63
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 63
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 63
+  - Id: 1004
+    Group: RdmStatsAccessory
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_ATTPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 333
+          - Option: VAR_ATTMPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 333
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 333
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 333
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 333
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 333
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 333
+      - Slot: 2
+        Options:
+          - Option: VAR_ATTPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 83
+          - Option: VAR_ATTMPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 83
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 83
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 83
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 83
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 83
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 83
+      - Slot: 3
+        Options:
+          - Option: VAR_ATTPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 42
+          - Option: VAR_ATTMPOWER
+            MinValue: 1
+            MaxValue: 20
+            Param: -1
+            Chance: 42
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 42
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 42
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Param: -1
+            Chance: 42
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Param: -1
+            Chance: 42
+          - Option: VAR_CRITICALSUCCESSVALUE
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 42
+  - Id: 1005
+    Group: RdmStatsHat
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 222
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 222
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 222
+          - Option: VAR_ATTPOWER
+            MinValue: 1
+            MaxValue: 15
+            Param: -1
+            Chance: 222
+          - Option: VAR_ATTMPOWER
+            MinValue: 1
+            MaxValue: 15
+            Param: -1
+            Chance: 222
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 222
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 222
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 222
+      - Slot: 2
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 56
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 56
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 56
+          - Option: VAR_ATTPOWER
+            MinValue: 5
+            MaxValue: 15
+            Param: -1
+            Chance: 56
+          - Option: VAR_ATTMPOWER
+            MinValue: 5
+            MaxValue: 15
+            Param: -1
+            Chance: 56
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 56
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 56
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 56
+      - Slot: 3
+        Options:
+          - Option: VAR_ITEMDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 28
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 28
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 28
+          - Option: VAR_ATTPOWER
+            MinValue: 5
+            MaxValue: 15
+            Param: -1
+            Chance: 28
+          - Option: VAR_ATTMPOWER
+            MinValue: 5
+            MaxValue: 15
+            Param: -1
+            Chance: 28
+          - Option: DEC_SPELL_DELAY_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 28
+          - Option: DEC_SPELL_CAST_TIME
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 28
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 28
+  - Id: 1006
+    Group: RdmStatsGarment
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 138
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 138
+      - Slot: 2
+        Options:
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 34
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 34
+      - Slot: 3
+        Options:
+          - Option: ATTR_TOLERACE_NOTHING
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_WATER
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_GROUND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_FIRE
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_WIND
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_POISON
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_SAINT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_DARKNESS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_TELEKINESIS
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: ATTR_TOLERACE_UNDEAD
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 3
+            Param: -1
+            Chance: 17
+          - Option: REFLECT_PHYSICAL_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: REFLECT_MAGIC_DAMAGE_PERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_DEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_NOTHING
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_UNDEAD
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANIMAL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_PLANT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_INSECT
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_FISHS
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_DEVIL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_HUMAN
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_ANGEL
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17
+          - Option: RACE_IGNORE_MDEF_PERCENT_DRAGON
+            MinValue: 1
+            MaxValue: 10
+            Param: -1
+            Chance: 17

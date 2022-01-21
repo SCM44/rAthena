@@ -21505,3 +21505,124 @@ Body:
     Locations:
       Ammo: true
     EquipLevelMin: 99
+  - Id: 18005
+    AegisName: Mixed_Rune_Fragment
+    Name: Mixed Rune Fragment
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18006
+    AegisName: Rune_reset
+    Name: Rune reset
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18007
+    AegisName: Rune_lvl_up
+    Name: Rune lvl up
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18008
+    AegisName: Rune_+
+    Name: Rune +
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18009
+    AegisName: Rune_max
+    Name: Rune max
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18010
+    AegisName: Rare_Coin
+    Name: Rare Coin
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18015
+    AegisName: 5% XP
+    Name: 5% XP
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bExpAddRace,RC_All,5;
+  - Id: 18016
+    AegisName: 3% Drop
+    Name: 3% Drop
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bDropAddRace,RC_All,3;
+  - Id: 18018
+    AegisName: 1% Vol de vie
+    Name: 1% Vol de vie
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bHPDrainRate,1000,1;
+      bonus2 bMagicHPDrainRate,1000,1;
+  - Id: 18019
+    AegisName: ATK + 2
+    Name: ATK + 2
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bBaseAtk,2;
+  - Id: 18020
+    AegisName: MATK + 2
+    Name: MATK + 2
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMatk,2;
+  - Id: 18021
+    AegisName: HP + 1%
+    Name: HP + 1%
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMaxHPrate,1;
+  - Id: 18022
+    AegisName: Def + 1
+    Name: Def + 1
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bDef,2;
+  - Id: 18023
+    AegisName: Mdef + 1
+    Name: Mdef + 1
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMdef,2;

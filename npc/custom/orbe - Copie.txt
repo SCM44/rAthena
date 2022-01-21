@@ -1,0 +1,104 @@
+prontera,194,188,4	script	Enchant Expert	712,{
+	mes .npc$;
+	mes "Puff puff , Salut jeune aventurier !";
+	mes "Je peux placer tes runes XP et Drop sur tes équipements,";
+	mes "pour une somme maudique de "+.pric+"z.";
+	emotion e_no1,0; next;
+	if(select("Yes:No")&2) { mes .npc$; mes "Alright, thanks anyways!"; close; }
+	if(Zeny<.pric) { mes .npc$; mes "Je suis désolé mais tu manques d'argent, reviens plus tard."; close; }
+	
+	mes .npc$;
+	mes "Quel équipement veux-tu enchant ?"; next;
+	while(set(.@a,.@a+1)<=.e_len-2) {
+		if(getequipid(.@a)>-2)
+			set .@menu$, .@menu$+.eqp$[.@a]+"- [^0000FF"+getitemname(getequipid(.@a))+"^000000]:";
+		else set .@menu$, .@menu$+"^adb4be"+.eqp$[.@a]+"- [Empty]^000000:";
+	}
+		
+	select(.@menu$);
+	set .@eq_loc, @menu;
+	set .@eq_itm, getequipid(.@eq_loc);
+	if(.@eq_itm<0) {
+		mes .npc$;
+		mes "Hmm, tu n'as rien d'équipé içi.";
+		close;
+	}
+	
+	set .@menu$, "";
+	set .@a, .en_orb[0];
+	while((set(.@a,.@a+1)-1)<=.en_orb[1])
+		if(getiteminfo(.@a-1,2)>-1)
+			if(set(.@c,countitem(.@a-1))) {
+				set .@menu$, .@menu$+getitemname(.@a-1)+" x"+.@c+":";
+				set .@b,.@b+1; set .@item[.@b], .@a-1;
+			}
+			
+	if(.@menu$=="") {
+		mes .npc$;
+		mes "Hmm, tu n'as pas de runes sur toi.";
+		close;
+	}
+
+	mes .npc$;
+	mes "Choisis un enchant."; next;
+	select(.@menu$);
+	set .@itm, .@item[@menu];
+
+	set .@menu$, ""; set .@a, 0;
+	while((set(.@a,.@a+1))<4) {
+		if(getequipcardid(.@eq_loc,.@a))
+			set .@menu$, .@menu$+(.@a+1)+.crd_c$[.@a]+" Slot- [^a92435"+getitemname(getequipcardid(.@eq_loc,.@a))+"^000000]:";
+		else set .@menu$, .@menu$+(.@a+1)+.crd_c$[.@a]+" Slot- [^30ad25Empty^000000]:";
+	}
+	
+	setarray .@card, getequipcardid(.@eq_loc,0), getequipcardid(.@eq_loc,1), getequipcardid(.@eq_loc,2), getequipcardid(.@eq_loc,3);
+	
+	mes .npc$;
+	mes "Select a slot."; next;
+	set .@men, select(.@menu$);
+	set .@eqrf,	getequiprefinerycnt(.@eq_loc);
+	if(getequipcardid(.@eq_loc,@menu)) {
+		mes .npc$;
+		mes "Veux tu enlever cette carte / rune ?"; next;
+		if(select("Yes:No")&2) { mes .npc$; mes "Ca marche, merci quand même !"; close; }
+		getitem getequipcardid(.@eq_loc,.@men),1;
+		unequip(.@eq_loc);
+		delitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
+		set .@card[.@men], 0;
+		getitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
+	}
+
+	//if(rand(100)>.perc) {
+	//	mes .npc$;
+	//	mes "I'm sorry but I've failed you!";
+	//	misceffect 155; emotion e_sob,0;
+	//	set Zeny,Zeny-.pric;
+	//	close;
+	//}
+	
+	set Zeny,Zeny-.pric;
+	delitem .@itm,1;
+	delitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
+	set .@card[.@men], .@itm;
+	getitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
+	misceffect .efet;
+	emotion e_no1,0;
+	mes .npc$;
+	mes "Et voilà !";
+	equip .@eq_itm;
+	close;
+
+//NPC Constants
+	OnInit:
+		//=-=-=-=-=-=-=Configuration=-=-=-=-=-=-=
+		set      .npc$  ,	"[^0000FFEnchant Expert^000000]"; // NPC Name
+		set      .pric  ,	1000000;                          // Price
+		set      .efet  ,	154;                              // Effect Number
+		set      .perc  ,	rand(50,80);                      // Percent
+		setarray .crd_c$,	"st", "nd", "rd", "th";           // Count
+		setarray .en_orb,	18015, 18016;                       // Range of IDs selected for enchanting.
+		setarray .eqp$  ,	"Accessory", "Accessory", "Shoes", "Garment", "Lower Headgear",
+					"Middle Headgear", "Upper Headgear", "Armor", "Shield", "Weapon";
+		set      .e_len ,	getarraysize(.eqp$);
+		//=-=-=-=-=-=-=-=-Skorm-=-=-=-=-=-=-=-=-=
+}

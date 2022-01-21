@@ -34,16 +34,14 @@
 //----------------------------------------------------------------------------
 // PVP
 //----------------------------------------------------------------------------
-1013,2	//BS_GREED
-
+26,2	//AL_TELEPORT
+27,2	//AL_WARP
 //----------------------------------------------------------------------------
 // GVG
 //----------------------------------------------------------------------------
 26,4	//AL_TELEPORT
 27,4	//AL_WARP
 87,4	//WZ_ICEWALL
-150,4	//TF_BACKSLIDING
-219,4	//RG_INTIMIDATE
 336,4	//WE_CALLPARTNER
 361,4	//HP_ASSUMPTIO
 362,4	//HP_BASILICA
@@ -51,9 +49,7 @@
 409,4	//WE_CALLPARENT
 410,4	//WE_CALLBABY
 491,4	//CR_CULTIVATION
-530,4	//NJ_KIRIKAGE
 691,4	//CASH_ASSUMPTIO
-1013,4	//BS_GREED
 2300,4	//SC_DIMENSIONDOOR
 
 //----------------------------------------------------------------------------
@@ -62,9 +58,6 @@
 26,8	//AL_TELEPORT
 27,8	//AL_WARP
 87,8	//WZ_ICEWALL
-150,8	//TF_BACKSLIDING
-219,8	//RG_INTIMIDATE
-264,8	//MO_BODYRELOCATION
 336,8	//WE_CALLPARTNER
 361,8	//HP_ASSUMPTIO
 362,8	//HP_BASILICA
@@ -72,25 +65,7 @@
 409,8	//WE_CALLPARENT
 410,8	//WE_CALLBABY
 491,8	//CR_CULTIVATION
-411,8	//TK_RUN
-426,8	//TK_HIGHJUMP
-427,8	//SG_FEEL
-428,8	//SG_SUN_WARM
-429,8	//SG_MOON_WARM
-430,8	//SG_STAR_WARM
-431,8	//SG_SUN_COMFORT
-432,8	//SG_MOON_COMFORT
-433,8	//SG_STAR_COMFORT
-434,8	//SG_HATE
-435,8	//SG_SUN_ANGER
-436,8	//SG_MOON_ANGER
-437,8	//SG_STAR_ANGER
-438,8	//SG_SUN_BLESS
-439,8	//SG_MOON_BLESS
-440,8	//SG_STAR_BLESS
-530,8	//NJ_KIRIKAGE
 691,8	//CASH_ASSUMPITO
-2300,8	//SC_DIMENSIONDOOR
 
 //----------------------------------------------------------------------------
 // Mixed
@@ -135,7 +110,6 @@
 //----------------------------------------------------------------------------
 // Zone 4 - WoE:SE
 //----------------------------------------------------------------------------
-426,256 //TK_HIGHJUMP
 290,256	//SA_ABRACADABRA
 
 //----------------------------------------------------------------------------
@@ -165,8 +139,6 @@
 //----------------------------------------------------------------------------
 232,2048	//AM_CANNIBALIZE
 233,2048	//AM_SPHEREMINE
-491,2048	//CR_CULTIVATION
-1013,2048	//BS_GREED
 2299,2048	//SC_MANHOLE
 2300,2048	//SC_DIMENSIONDOOR
 2301,2048	//SC_CHAOSPANIC

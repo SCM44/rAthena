@@ -1596,6 +1596,8 @@ Body:
             Level: 1
       - Name: MG_FIREBOLT
         MaxLevel: 10
+      - Name: PF_DOUBLECASTING
+        MaxLevel: 5
       - Name: MG_LIGHTNINGBOLT
         MaxLevel: 10
       - Name: MG_THUNDERSTORM
@@ -2018,12 +2020,8 @@ Body:
       - Name: LK_PARRYING
         MaxLevel: 10
         Requires:
-          - Name: SM_TWOHAND
-            Level: 10
           - Name: SM_PROVOKE
             Level: 5
-          - Name: KN_TWOHANDQUICKEN
-            Level: 3
       - Name: LK_CONCENTRATION
         MaxLevel: 5
         Requires:
@@ -3223,11 +3221,11 @@ Body:
             Level: 7
           - Name: SL_STUN
             Level: 7
-      - Name: SL_SWOO
-        MaxLevel: 7
-        Requires:
-          - Name: SL_PRIEST
-            Level: 1
+      #- Name: SL_SWOO 
+       # MaxLevel: 7
+        #Requires:
+         # - Name: SL_PRIEST
+         #   Level: 1
       - Name: SL_SKE
         MaxLevel: 3
         Requires:

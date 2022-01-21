@@ -2133,6 +2133,14 @@ void mob_setdropitem_option(item *item, s_mob_drop *mobdrop) {
 				std::shared_ptr<s_random_opt_group_entry> option = util::vector_random(group->slots[static_cast<uint16>(i)]);
 
 				if (rnd() % 10000 < option->chance) {
+					bool skip = false;
+					for (size_t a = 0; a < group->slots.size(); a++) {
+						if (item->option[a].id == option->id)
+							skip = true;
+					}
+					if (skip)
+						continue;
+
 					mob_setitem_option(item->option[i], option);
 					break;
 				}
@@ -2143,7 +2151,10 @@ void mob_setdropitem_option(item *item, s_mob_drop *mobdrop) {
 				std::shared_ptr<s_random_opt_group_entry> option = util::vector_random(group->slots[static_cast<uint16>(i)]);
 
 				// Apply an entry without checking the chance
-				mob_setitem_option(item->option[i], option);
+				if (option->param != -1)
+					mob_setitem_option(item->option[i], option);
+				else
+					break;
 			}
 		}
 

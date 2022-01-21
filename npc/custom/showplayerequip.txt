@@ -1,0 +1,54 @@
+
+prontera,168,177,4	script	Voyante	757,{
+// ItemID + Amount
+setarray .@Item[0],969,1;
+
+mes "Je suis la grand voyante....je peux espionner l'équipement et les stats d'un joueur...mes services vont te couter ^FF0000"+.@Item[1]+" x "+getitemname(.@Item[0])+"^000000";
+if( countitem(.@Item[0]) < .@Item[1] ) close;
+mes "Ecris le nom d'un joueur , mais attention, il doit être connecté !.( je ne peux pas te montrer les runes)";
+input .@Name$;
+if( isloggedin( getcharid(3,.@Name$) ) ){
+	delitem .@Item[0],.@Item[1];
+	set .@ID,getcharid(3);
+	attachrid( getcharid(3,.@Name$) );
+	for( set .@i,1; .@i <= 10; set .@i,.@i + 1 )
+		if( getequipid(.@i) > 0 ){
+			set .@EquipList[.@i],getequipid(.@i);
+			set .@ItemSlot[.@i],getitemslots(getequipid(.@i));
+			set .@Refine[.@i],getequiprefinerycnt(.@i);
+			set .@Slot_1[.@i],getequipcardid(.@i,0);
+			set .@Slot_2[.@i],getequipcardid(.@i,1);
+			set .@Slot_3[.@i],getequipcardid(.@i,2);
+			set .@Slot_4[.@i],getequipcardid(.@i,3);
+		}
+	setarray .@Stats[0],readparam(13),readparam(14),readparam(15),readparam(16),readparam(17),readparam(18);
+	attachrid( .@ID );
+	message .@Name$,"Le joueur"+strcharinfo(0)+" Observe ton personnage !.";
+	do{
+		set .@Option,select(( .@Option == 1 )?"":"Voir l'équipement du joueur",
+							( .@Option == 2 )?"":"Voir les stats du joueur",
+							( !.@Option )?"":"Cancel" );
+		next;
+		switch( .@Option ){
+			Case 1:
+				mes "^FF0000Equipment Lists :^000000";
+				for( set .@i,1; .@i < getarraysize( .@EquipList ); set .@i,.@i + 1 )
+					if( .@EquipList[.@i] ){
+						mes "^0055FF"+( (.@Refine[.@i])?"+"+.@Refine[.@i]:"" )+" "+getitemname(.@EquipList[.@i])+" ["+.@ItemSlot[.@i]+"]";
+						if( .@Slot_1[.@i] ) mes " ~ ^777777"+getitemname( .@Slot_1[.@i] )+"^000000";
+						if( .@Slot_2[.@i] ) mes " ~ ^777777"+getitemname( .@Slot_2[.@i] )+"^000000";
+						if( .@Slot_3[.@i] ) mes " ~ ^777777"+getitemname( .@Slot_3[.@i] )+"^000000";
+						if( .@Slot_4[.@i] ) mes " ~ ^777777"+getitemname( .@Slot_4[.@i] )+"^000000";
+					}
+				break;
+			Case 2:
+				setarray .@Stat$[0],"STR","AGI","VIT","INT","DEX","LUK";
+				mes "^FF0000Status Build :^000000";
+				for( set .@i,0; .@i < getarraysize( .@Stat$ ); set .@i,.@i + 1 )
+					mes "^0055FF"+.@Stat$[.@i]+" : ^777777"+.@Stats[.@i]+"^000000";
+			default: break;
+		}
+	}while( .@Option != 3 );
+}
+close;
+}

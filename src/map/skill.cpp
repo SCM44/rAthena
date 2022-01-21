@@ -1765,7 +1765,7 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 		break;
 	case GS_BULLSEYE: //0.1% coma rate.
 		if(tstatus->race == RC_BRUTE || tstatus->race == RC_DEMIHUMAN || tstatus->race == RC_PLAYER_HUMAN || tstatus->race == RC_PLAYER_DORAM)
-			status_change_start(src,bl,SC_COMA,10,skill_lv,0,src->id,0,0,SCSTART_NONE);
+			status_change_start(src,bl,SC_COMA,500,skill_lv,0,src->id,0,0,SCSTART_NONE);
 		break;
 	case GS_PIERCINGSHOT:
 		sc_start2(src,bl,SC_BLEEDING,(skill_lv*3),skill_lv,src->id,skill_get_time2(skill_id,skill_lv));
@@ -5258,7 +5258,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 		uint8 dir = map_calc_dir(bl, src->x, src->y);
 
 		// teleport to target (if not on WoE grounds)
-		if (skill_check_unit_movepos(5, src, bl->x, bl->y, 0, 1))
+		if (skill_check_unit_movepos(0, src, bl->x, bl->y, 1, 1))
 			skill_blown(src, src, 1, (dir+4)%8, BLOWN_NONE); //Target position is actually one cell next to the target
 
 		// cause damage and knockback if the path to target was a straight one
@@ -7427,13 +7427,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case CR_PROVIDENCE:
-		if(sd && dstsd){ //Check they are not another crusader [Skotlex]
-			if ((dstsd->class_&MAPID_UPPERMASK) == MAPID_CRUSADER) {
-				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
-				map_freeblock_unlock();
-				return 1;
-			}
-		}
 		clif_skill_nodamage(src,bl,skill_id,skill_lv,
 			sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
 		break;
@@ -10344,6 +10337,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if(!sd->feel_map[skill_lv-1].index)
 				clif_feel_req(sd->fd,sd, skill_lv);
 			else
+				clif_feel_req(sd->fd,sd, skill_lv);
 				clif_feel_info(sd, skill_lv-1, 1);
 		}
 		break;
@@ -10351,8 +10345,11 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case SG_HATE:
 		if (sd) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
-			if (!pc_set_hate_mob(sd, skill_lv-1, bl))
-				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+			if (!pc_set_hate_mob(sd, skill_lv - 1, bl))
+				pc_resethate(sd);
+				clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
+				if (!pc_set_hate_mob(sd, skill_lv - 1, bl))
+					clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 		}
 		break;
 
@@ -10377,10 +10374,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case GS_GLITTERING:
 		if(sd) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
-			if(rnd()%100 < (20+10*skill_lv))
+			for (i = 0; i < 10; i++)
 				pc_addspiritball(sd,skill_get_time(skill_id,skill_lv),10);
-			else if(sd->spiritball > 0 && !pc_checkskill(sd,RL_RICHS_COIN))
-				pc_delspiritball(sd,1,0);
 		}
 		break;
 
@@ -13723,7 +13718,7 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 		}
 		break;
 	case NJ_SHADOWJUMP:
-		if( map_getcell(src->m,x,y,CELL_CHKREACH) && skill_check_unit_movepos(5, src, x, y, 1, 0) ) //You don't move on GVG grounds.
+		if( map_getcell(src->m,x,y,CELL_CHKREACH) && skill_check_unit_movepos(0, src, x, y, 1, 1) ) //You don't move on GVG grounds.
 			clif_blown(src);
 		status_change_end(src, SC_HIDING, INVALID_TIMER);
 		break;
@@ -15581,12 +15576,9 @@ int skill_unit_onplace_timer(struct skill_unit *unit, struct block_list *bl, t_t
 
 					//If target isn't knocked back it should hit every "interval" ms [Playtester]
 					do {
-						if( bl->type == BL_PC )
-							status_zap(bl, 0, 15); // sp damage to players
-						else // mobs
 						if( status_charge(ss, 0, 2) ) { // costs 2 SP per hit
 							if( !skill_attack(BF_WEAPON,ss,&unit->bl,bl,sg->skill_id,sg->skill_lv,tick+(t_tick)count*sg->interval,0) )
-								status_charge(ss, 0, 8); //costs additional 8 SP if miss
+								status_charge(ss, 0, 4); //costs additional 8 SP if miss
 						} else { //should end when out of sp.
 							sg->limit = DIFF_TICK(tick,sg->tick);
 							break;
@@ -16575,7 +16567,7 @@ int skill_check_condition_char_sub (struct block_list *bl, va_list ap)
 	bool is_chorus = skill_get_inf2(skill_id, INF2_ISCHORUS);
 
 	if (skill_id == PR_BENEDICTIO) {
-		if (*c >= 2) // Check for two companions for Benedictio. [Skotlex]
+		if (*c >= 0) // Check for 0 companions for Benedictio. doesnt need companions anymore [Skotlex]
 			return 0;
 	}
 	else if (is_chorus) {
@@ -16603,14 +16595,6 @@ int skill_check_condition_char_sub (struct block_list *bl, va_list ap)
 	} else {
 
 		switch(skill_id) {
-			case PR_BENEDICTIO: {
-				uint8 dir = map_calc_dir(&sd->bl,tsd->bl.x,tsd->bl.y);
-				dir = (unit_getdir(&sd->bl) + dir)%8; //This adjusts dir to account for the direction the sd is facing.
-				if ((tsd->class_&MAPID_BASEMASK) == MAPID_ACOLYTE && (dir == 2 || dir == 6) //Must be standing to the left/right of Priest.
-					&& sd->status.sp >= 10)
-					p_sd[(*c)++]=tsd->bl.id;
-				return 1;
-			}
 			case AB_ADORAMUS:
 			// Adoramus does not consume Blue Gemstone when there is at least 1 Priest class next to the caster
 				if( (tsd->class_&MAPID_UPPERMASK) == MAPID_PRIEST )
@@ -16676,7 +16660,6 @@ int skill_check_pc_partner(struct map_session_data *sd, uint16 skill_id, uint16 
 	if (cast_flag) {	//Execute the skill on the partners.
 		struct map_session_data* tsd;
 		switch (skill_id) {
-			case PR_BENEDICTIO:
 			case WM_GREAT_ECHO:
 				for (i = 0; i < c; i++) {
 					if ((tsd = map_id2sd(p_sd[i])) != NULL)
@@ -16714,7 +16697,7 @@ int skill_check_pc_partner(struct map_session_data *sd, uint16 skill_id, uint16 
 	memset (p_sd, 0, sizeof(p_sd));
 	i = map_foreachinallrange(skill_check_condition_char_sub, &sd->bl, range, BL_PC, &sd->bl, &c, &p_sd, skill_id);
 
-	if ( skill_id != PR_BENEDICTIO && skill_id != AB_ADORAMUS && skill_id != WM_GREAT_ECHO && 
+	if ( skill_id != AB_ADORAMUS && skill_id != WM_GREAT_ECHO && 
 		!(skill_id >= TR_GEF_NOCTURN && skill_id <= TR_PRON_MARCH)) //Apply the average lv to encore skills.
 		*skill_lv = (i+(*skill_lv))/(c+1); //I know c should be one, but this shows how it could be used for the average of n partners.
 	return c;
@@ -17169,12 +17152,6 @@ bool skill_check_condition_castbegin(struct map_session_data* sd, uint16 skill_i
 			}
 			break;
 #endif
-		case PR_BENEDICTIO:
-			if (skill_check_pc_partner(sd, skill_id, &skill_lv, 1, 0) < 2) {
-				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
-				return false;
-			}
-			break;
 		case SL_SMA:
 			if(sc && !(sc->data[SC_SMA] || sc->data[SC_USE_SKILL_SP_SHA]))
 				return false;
@@ -17961,9 +17938,6 @@ bool skill_check_condition_castend(struct map_session_data* sd, uint16 skill_id,
 
 	// perform skill-specific checks (and actions)
 	switch( skill_id ) {
-		case PR_BENEDICTIO:
-			skill_check_pc_partner(sd, skill_id, &skill_lv, 1, 1);
-			break;
 		case AM_CANNIBALIZE:
 		case AM_SPHEREMINE: {
 			int c=0;
@@ -18743,8 +18717,6 @@ int skill_castfix_sc(struct block_list *bl, double time, uint8 flag)
 		if (sc->data[SC_SUFFRAGIUM]) {
 			if(!(flag&2))
 				time -= time * sc->data[SC_SUFFRAGIUM]->val2 / 100;
-			//Suffragium ends even if the skill is not affected by it
-			status_change_end(bl, SC_SUFFRAGIUM, INVALID_TIMER);
 		}
 	}
 

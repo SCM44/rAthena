@@ -1782,28 +1782,7 @@ Body:
         Plagiarism: true
         Reproduce: true
     Requires:
-      SpCost: 5
-      ZenyCost:
-        - Level: 1
-          Amount: 100
-        - Level: 2
-          Amount: 200
-        - Level: 3
-          Amount: 300
-        - Level: 4
-          Amount: 400
-        - Level: 5
-          Amount: 500
-        - Level: 6
-          Amount: 600
-        - Level: 7
-          Amount: 700
-        - Level: 8
-          Amount: 800
-        - Level: 9
-          Amount: 900
-        - Level: 10
-          Amount: 1000
+      SpCost: 12
   - Id: 43
     Name: AC_OWL
     Description: Owl's Eye
@@ -1930,6 +1909,7 @@ Body:
     Hit: Multi_Hit
     HitCount: 2
     Element: Weapon
+    Critical: true
   - Id: 49
     Name: TF_MISS
     Description: Improve Dodge
@@ -2318,7 +2298,7 @@ Body:
     HitCount: 1
     CastCancel: true
     AfterCastActDelay: 3000
-    Duration1: 60000
+    Duration1: 200000
     Requires:
       SpCost:
         - Level: 1
@@ -2339,8 +2319,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      NoTargetSelf: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -2348,11 +2326,11 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 30000
+        Time: 10000
       - Level: 2
         Time: 20000
       - Level: 3
-        Time: 10000
+        Time: 30000
     Requires:
       SpCost: 8
   - Id: 68
@@ -2411,8 +2389,6 @@ Body:
       NoDamage: true
       Splash: true
       IgnoreDefense: true
-    Flags:
-      IsEnsemble: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -2434,7 +2410,12 @@ Body:
       - Level: 5
         Time: 200000
     Requires:
-      SpCost: 20
+      SpCost: 50
+      ItemCost:
+        - Item: Blue_Gemstone
+          Amount: 1
+        - Item: Holy_Water
+          Amount: 2
   - Id: 70
     Name: PR_SANCTUARY
     Description: Sanctuary
@@ -2610,15 +2591,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 30000
+        Time: 100000
       - Level: 2
-        Time: 45000
+        Time: 150000
       - Level: 3
-        Time: 60000
+        Time: 200000
       - Level: 4
-        Time: 75000
+        Time: 250000
       - Level: 5
-        Time: 90000
+        Time: 300000
     Requires:
       SpCost: 40
   - Id: 75
@@ -2637,15 +2618,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 100000
       - Level: 2
-        Time: 15000
+        Time: 150000
       - Level: 3
-        Time: 20000
+        Time: 200000
       - Level: 4
-        Time: 25000
+        Time: 250000
       - Level: 5
-        Time: 30000
+        Time: 300000
     Requires:
       SpCost: 20
   - Id: 76
@@ -3923,15 +3904,15 @@ Body:
     SplashArea: -1
     Duration1:
       - Level: 1
-        Time: 30000
+        Time: 100000
       - Level: 2
-        Time: 60000
+        Time: 200000
       - Level: 3
-        Time: 90000
+        Time: 200000
       - Level: 4
-        Time: 120000
+        Time: 250000
       - Level: 5
-        Time: 150000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -3964,15 +3945,15 @@ Body:
     SplashArea: -1
     Duration1:
       - Level: 1
-        Time: 10000
+        Time: 100000
       - Level: 2
-        Time: 20000
+        Time: 200000
       - Level: 3
-        Time: 30000
+        Time: 300000
       - Level: 4
-        Time: 40000
+        Time: 300000
       - Level: 5
-        Time: 50000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -4001,15 +3982,15 @@ Body:
     SplashArea: -1
     Duration1:
       - Level: 1
-        Time: 20000
+        Time: 200000
       - Level: 2
-        Time: 40000
+        Time: 200000
       - Level: 3
-        Time: 60000
+        Time: 200000
       - Level: 4
-        Time: 80000
+        Time: 200000
       - Level: 5
-        Time: 100000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -4060,15 +4041,15 @@ Body:
     HitCount: 1
     Duration1:
       - Level: 1
-        Time: 1000
+        Time: 200000
       - Level: 2
-        Time: 2000
+        Time: 200000
       - Level: 3
-        Time: 3000
+        Time: 200000
       - Level: 4
-        Time: 4000
+        Time: 250000
       - Level: 5
-        Time: 5000
+        Time: 300000
     Requires:
       SpCost: 10
   - Id: 115
@@ -4096,7 +4077,7 @@ Body:
       - Level: 4
         Amount: 9
       - Level: 5
-        Amount: 10
+        Amount: 14
     Duration1:
       - Level: 1
         Time: 300000
@@ -5127,7 +5108,7 @@ Body:
       IgnoreKagehumi: true
     Hit: Single
     HitCount: 1
-    Knockback: 5
+    Knockback: 7
     Requires:
       SpCost: 7
   - Id: 151
@@ -6697,15 +6678,15 @@ Body:
     HitCount: 1
     Knockback:
       - Level: 1
-        Amount: 5
-      - Level: 2
         Amount: 6
-      - Level: 3
-        Amount: 7
-      - Level: 4
+      - Level: 2
         Amount: 8
+      - Level: 3
+        Amount: 10
+      - Level: 4
+        Amount: 12
       - Level: 5
-        Amount: 9
+        Amount: 14
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -6914,8 +6895,6 @@ Body:
     TargetType: Support
     DamageFlags:
       NoDamage: true
-    Flags:
-      NoTargetSelf: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -7873,7 +7852,7 @@ Body:
       NoTargetSelf: true
       PartyOnly: true
       GuildOnly: true
-      TargetHidden: true
+      TargetHidden: false
     Range: 9
     Hit: Single
     HitCount: 1
@@ -9353,15 +9332,15 @@ Body:
     HitCount: 1
     Duration1:
       - Level: 1
-        Time: 40000
-      - Level: 2
-        Time: 60000
-      - Level: 3
-        Time: 80000
-      - Level: 4
-        Time: 100000
-      - Level: 5
         Time: 120000
+      - Level: 2
+        Time: 150000
+      - Level: 3
+        Time: 180000
+      - Level: 4
+        Time: 250000
+      - Level: 5
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -9431,7 +9410,28 @@ Body:
     Requires:
       SpCost: 50
       Weapon:
+        Dagger: true
+        1hSword: true
         2hSword: true
+        1hSpear: true
+        2hSpear: true
+        1hAxe: true
+        2hAxe: true
+        Mace: true
+        2hMace: true
+        Staff: true
+        Bow: true
+        Knuckle: true
+        Musical: true
+        Whip: true
+        Book: true
+        Katar: true
+        Revolver: true
+        Rifle: true
+        Gatling: true
+        Shotgun: true
+        Grenade: true
+        Huuma: true
   - Id: 357
     Name: LK_CONCENTRATION
     Description: Concentration
@@ -9444,15 +9444,15 @@ Body:
     HitCount: 1
     Duration1:
       - Level: 1
-        Time: 25000
+        Time: 150000
       - Level: 2
-        Time: 30000
+        Time: 180000
       - Level: 3
-        Time: 35000
+        Time: 200000
       - Level: 4
-        Time: 40000
+        Time: 250000
       - Level: 5
-        Time: 45000
+        Time: 300000
     Requires:
       SpCost:
         - Level: 1
@@ -10114,25 +10114,25 @@ Body:
     CastTime: 700
     AfterCastActDelay:
       - Level: 1
-        Time: 1000
+        Time: 800
       - Level: 2
-        Time: 1200
+        Time: 1000
       - Level: 3
-        Time: 1400
+        Time: 1200
       - Level: 4
-        Time: 1600
+        Time: 1200
       - Level: 5
-        Time: 1800
+        Time: 1200
       - Level: 6
-        Time: 2000
+        Time: 1200
       - Level: 7
-        Time: 2200
+        Time: 1200
       - Level: 8
-        Time: 2400
+        Time: 1000
       - Level: 9
-        Time: 2600
+        Time: 1200
       - Level: 10
-        Time: 2800
+        Time: 1400
     Requires:
       SpCost:
         - Level: 1
@@ -10201,7 +10201,7 @@ Body:
     HitCount: 1
     CastCancel: true
     CastTime: 1000
-    AfterCastActDelay: 3000
+    AfterCastActDelay: 1500
     Requires:
       SpCost:
         - Level: 1
@@ -10847,9 +10847,11 @@ Body:
     Name: PF_MINDBREAKER
     Description: Mind Breaker
     MaxLevel: 5
-    TargetType: Attack
+    TargetType: Support
     DamageFlags:
       NoDamage: true
+    Flags:
+      IgnoreHovering: true
     Range: 9
     Hit: Single
     HitCount: 1
@@ -11430,9 +11432,9 @@ Body:
     Hit: Single
     HitCount: 1
     CastCancel: true
-    CastTime: 1000
+    CastTime: 100
     Requires:
-      SpCost: 100
+      SpCost: 10
   - Id: 428
     Name: SG_SUN_WARM
     Description: Warmth of the Sun
@@ -11634,9 +11636,9 @@ Body:
     Hit: Single
     HitCount: 1
     CastCancel: true
-    CastTime: 1000
+    CastTime: 100
     Requires:
-      SpCost: 100
+      SpCost: 10
   - Id: 435
     Name: SG_SUN_ANGER
     Description: Anger of the Sun
@@ -11685,10 +11687,10 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 100
     Duration1: 600000
     Requires:
-      SpCost: 100
+      SpCost: 10
   - Id: 445
     Name: SL_ALCHEMIST
     Description: Spirit of the Alchemist
@@ -12228,7 +12230,6 @@ Body:
       NoDamage: true
       Splash: true
     Flags:
-      IsSpirit: true
       AllowOnMado: true
     Hit: Single
     HitCount: 1
@@ -12849,7 +12850,7 @@ Body:
     MaxLevel: 5
     Type: Weapon
     TargetType: Attack
-    Range: 4
+    Range: 9
     Hit: Multi_Hit
     HitCount: 5
     CastTime: 1000
@@ -13005,28 +13006,7 @@ Body:
     Element: Weapon
     Duration2: 5000
     Requires:
-      SpCost: 15
-      ZenyCost:
-        - Level: 1
-          Amount: 600
-        - Level: 2
-          Amount: 700
-        - Level: 3
-          Amount: 800
-        - Level: 4
-          Amount: 900
-        - Level: 5
-          Amount: 1000
-        - Level: 6
-          Amount: 1100
-        - Level: 7
-          Amount: 1200
-        - Level: 8
-          Amount: 1300
-        - Level: 9
-          Amount: 1400
-        - Level: 10
-          Amount: 1500
+      SpCost: 30
       Weapon:
         Fist: true
         Dagger: true
@@ -13064,20 +13044,9 @@ Body:
       AllowOnMado: true
     Hit: Single
     HitCount: 1
-    Duration1: 180000
+    Duration1: 3000000
     Requires:
       SpCost: 15
-      ZenyCost:
-        - Level: 1
-          Amount: 3000
-        - Level: 2
-          Amount: 3500
-        - Level: 3
-          Amount: 4000
-        - Level: 4
-          Amount: 4500
-        - Level: 5
-          Amount: 5000
       Weapon:
         Fist: true
         Dagger: true
@@ -13340,15 +13309,23 @@ Body:
     TargetType: Self
     DamageFlags:
       NoDamage: true
-    Flags:
-      IsSpirit: true
     Hit: Single
     HitCount: 1
     Duration1: 300000
     Requires:
       SpCost: 100
       Weapon:
+        Fist: true
+        Dagger: true
         1hSword: true
+        1hAxe: true
+        Mace: true
+        Staff: true
+        Knuckle: true
+        Musical: true
+        Whip: true
+        Book: true
+        Revolver: true
   - Id: 496
     Name: AM_TWILIGHT1
     Description: Twilight Alchemy 1
@@ -13441,7 +13418,7 @@ Body:
     Duration1: 600000
     Requires:
       SpCost: 2
-      ZenyCost: 1
+      ZenyCost: 0
   - Id: 501
     Name: GS_FLING
     Description: Fling
@@ -13498,7 +13475,7 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Weapon
-    CastTime: 500
+    CastTime: 200
     Requires:
       SpCost: 30
       Ammo:
@@ -13523,9 +13500,9 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
-    CastTime: 3000
-    AfterCastActDelay: 4000
-    Duration1: 15000
+    CastTime: 500
+    AfterCastActDelay: 500
+    Duration1: 300000
     Requires:
       SpCost: 30
       SpiritSphereCost: 4
@@ -13539,9 +13516,9 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
-    CastTime: 1000
-    AfterCastActDelay: 1000
-    Duration1: 30000
+    CastTime: 500
+    AfterCastActDelay: 500
+    Duration1: 300000
     Requires:
       SpCost: 15
       SpiritSphereCost: 2
@@ -13555,8 +13532,8 @@ Body:
       NoDamage: true
     Hit: Single
     HitCount: 1
-    AfterCastActDelay: 1000
-    Duration1: 60000
+    AfterCastActDelay: 500
+    Duration1: 300000
     Requires:
       SpCost: 30
       SpiritSphereCost: 4
@@ -13585,7 +13562,7 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Weapon
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 100
     Duration2: 5000
     Requires:
       SpCost: 10
@@ -13758,7 +13735,7 @@ Body:
     Hit: Multi_Hit
     HitCount: -5
     Element: Weapon
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 600
     Requires:
       SpCost:
         - Level: 1
@@ -13785,7 +13762,7 @@ Body:
         Revolver: true
       Ammo:
         Bullet: true
-      AmmoAmount: 5
+      AmmoAmount: 1
   - Id: 516
     Name: GS_DESPERADO
     Description: Desperado
@@ -13798,8 +13775,8 @@ Body:
     HitCount: 1
     Element: Weapon
     SplashArea: 3
-    AfterCastActDelay: 1000
-    AfterCastWalkDelay: 1000
+    AfterCastActDelay: 666
+    AfterCastWalkDelay: 666
     Duration1: 1000
     Requires:
       SpCost:
@@ -13827,7 +13804,7 @@ Body:
         Revolver: true
       Ammo:
         Bullet: true
-      AmmoAmount: 10
+      AmmoAmount: 1
     Unit:
       Id: Dummyskill
       Layout: 3
@@ -14565,9 +14542,6 @@ Body:
           Amount: 46
         - Level: 10
           Amount: 48
-      ItemCost:
-        - Item: Shadow_Orb
-          Amount: 1
   - Id: 533
     Name: NJ_NINPOU
     Description: Spirit of the Blade
@@ -14691,9 +14665,6 @@ Body:
     Duration1: 20000
     Requires:
       SpCost: 25
-      ItemCost:
-        - Item: Flame_Stone
-          Amount: 1
     Unit:
       Id: Kaen
       Layout: -1
@@ -14732,9 +14703,6 @@ Body:
           Amount: 35
         - Level: 5
           Amount: 40
-      ItemCost:
-        - Item: Flame_Stone
-          Amount: 1
     Unit:
       Id: Dummyskill
       Layout: 2
@@ -14900,9 +14868,6 @@ Body:
           Amount: 39
         - Level: 10
           Amount: 42
-      ItemCost:
-        - Item: Ice_Stone
-          Amount: 1
     Unit:
       Id: Suiton
       Layout:
@@ -14980,9 +14945,6 @@ Body:
           Amount: 55
         - Level: 5
           Amount: 60
-      ItemCost:
-        - Item: Ice_Stone
-          Amount: 1
     Unit:
       Id: Dummyskill
       Layout: 3
@@ -15098,9 +15060,6 @@ Body:
           Amount: 28
         - Level: 5
           Amount: 32
-      ItemCost:
-        - Item: Wind_Stone
-          Amount: 1
     Unit:
       Id: Dummyskill
       Layout:
@@ -15170,9 +15129,6 @@ Body:
           Amount: 36
         - Level: 5
           Amount: 40
-      ItemCost:
-        - Item: Wind_Stone
-          Amount: 1
   - Id: 543
     Name: NJ_NEN
     Description: Soul
@@ -16656,8 +16612,6 @@ Body:
     MaxLevel: 1
     Type: Weapon
     TargetType: Attack
-    Flags:
-      IsQuest: true
     Range: 14
     Hit: Single
     HitCount: 1
@@ -32614,13 +32568,13 @@ Body:
       - Level: 1
         Size: 7
       - Level: 2
-        Size: 8
-      - Level: 3
         Size: 9
-      - Level: 4
-        Size: 10
-      - Level: 5
+      - Level: 3
         Size: 11
+      - Level: 4
+        Size: 12
+      - Level: 5
+        Size: 14
     Hit: Single
     HitCount: 1
     CastCancel: true

@@ -15102,9 +15102,8 @@ Body:
     View: 4
     Script: |
       bonus bStr,1;
-      bonus2 bSkillAtk,"PA_SHIELDCHAIN",30;
-      bonus2 bSkillAtk,"CR_SHIELDBOOMERANG",30;
-      bonus bUseSPrate,10;
+      bonus2 bSkillAtk,"PA_SHIELDCHAIN",50;
+      bonus2 bSkillAtk,"CR_SHIELDBOOMERANG",50;
   - Id: 2131
     AegisName: Magic_Study_Vol1
     Name: Magic Bible Vol1

@@ -3165,7 +3165,6 @@ bool status_check_skilluse(struct block_list *src, struct block_list *target, ui
 		if (
 			(sc->data[SC_TRICKDEAD] && skill_id != NV_TRICKDEAD)
 			|| (sc->data[SC_AUTOCOUNTER] && !flag && skill_id)
-			|| (sc->data[SC_GOSPEL] && sc->data[SC_GOSPEL]->val4 == BCT_SELF && skill_id != PA_GOSPEL)
 			|| (sc->data[SC_SUHIDE] && skill_id != SU_HIDE)
 		)
 			return false;
@@ -6432,13 +6431,12 @@ void status_calc_state( struct block_list *bl, struct status_change *sc, enum sc
 	if( flag&SCS_NOMOVE ) {
 		if( !(flag&SCS_NOMOVECOND) )
 			sc->cant.move += ( start ? 1 : ((sc->cant.move)? -1:0) );
-		else if(
-				     (sc->data[SC_GOSPEL] && sc->data[SC_GOSPEL]->val4 == BCT_SELF)	// cannot move while gospel is in effect
+		else if( 
+				(sc->data[SC_CAMOUFLAGE] && sc->data[SC_CAMOUFLAGE]->val1 < 3)
 #ifndef RENEWAL
 				  || (sc->data[SC_BASILICA] && sc->data[SC_BASILICA]->val4 == bl->id) // Basilica caster cannot move
 				  || (sc->data[SC_GRAVITATION] && sc->data[SC_GRAVITATION]->val3 == BCT_SELF)
 #endif
-				  || (sc->data[SC_CAMOUFLAGE] && sc->data[SC_CAMOUFLAGE]->val1 < 3)
 				)
 			sc->cant.move += ( start ? 1 : ((sc->cant.move)? -1:0) );
 	}
@@ -7922,7 +7920,7 @@ static unsigned short status_calc_batk(struct block_list *bl, struct status_chan
 		batk += batk * sc->data[SC_CONCENTRATION]->val2/100;
 #endif
 	if(sc->data[SC_SKE])
-		batk += batk * 3;
+		batk += batk * 1/2;
 	if(sc->data[SC_BLOODLUST])
 		batk += batk * sc->data[SC_BLOODLUST]->val2/100;
 	if(sc->data[SC_JOINTBEAT] && sc->data[SC_JOINTBEAT]->val2&BREAK_WAIST)
@@ -8004,7 +8002,7 @@ static unsigned short status_calc_watk(struct block_list *bl, struct status_chan
 	if(sc->data[SC_PROVOKE])
 		watk += watk * sc->data[SC_PROVOKE]->val3/100;
 	if(sc->data[SC_SKE])
-		watk += watk * 3;
+		watk += watk * 1/2;
 	if(sc->data[SC_FLEET])
 		watk += watk * sc->data[SC_FLEET]->val3/100;
 	if(sc->data[SC_CURSE])
@@ -11863,13 +11861,6 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 			case SC_SOULUNITY:
 			case SC_SERVANT_SIGN:
 				break;
-			case SC_GOSPEL:
-				 // Must not override a casting gospel char.
-				if(sce->val4 == BCT_SELF)
-					return 0;
-				if(sce->val1 > val1)
-					return 1;
-				break;
 			case SC_ENDURE:
 				if(sce->val4 && !val4)
 					return 1; // Don't let you override infinite endure.
@@ -14708,13 +14699,6 @@ int status_change_clear(struct block_list* bl, int type)
 			case SC_JEXPBOOST:
 			case SC_AUTOTRADE:
 			case SC_WHISTLE:
-			case SC_ASSNCROS:
-			case SC_POEMBRAGI:
-			case SC_APPLEIDUN:
-			case SC_HUMMING:
-			case SC_DONTFORGETME:
-			case SC_FORTUNE:
-			case SC_SERVICE4U:
 			case SC_FOOD_STR_CASH:
 			case SC_FOOD_AGI_CASH:
 			case SC_FOOD_VIT_CASH:
@@ -17194,7 +17178,7 @@ int status_change_spread(struct block_list *src, struct block_list *bl, bool typ
 			case SC_SIGNUMCRUCIS:
 			case SC_DECREASEAGI:
 			//case SC_SLOWDOWN:
-			//case SC_MINDBREAKER:
+			case SC_MINDBREAKER:
 			//case SC_WINKCHARM:
 			//case SC_STOP:
 			case SC_ORCISH:

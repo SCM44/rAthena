@@ -23010,3 +23010,43 @@ Body:
       Third_Upper: true
       Third_Baby: true
     EquipLevelMin: 1
+  - Id: 18011
+    AegisName: PvP_Light_White_Pot
+    Name: PvP Light White Potion
+    Type: Healing
+    Buy: 0
+    Weight: 1
+    Script: |
+      itemheal rand(325,405),0;
+  - Id: 18012
+    AegisName: PvP_Light_Blue_Pot
+    Name: PvP Light Blue Potion
+    Type: Healing
+    Buy: 0
+    Weight: 1
+    Script: |
+      itemheal 0,rand(40,60);
+  - Id: 18013
+    AegisName: PvP_Blue_Potion_Box
+    Name: PvP_Blue Potion Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 18012,50;
+  - Id: 18014
+    AegisName: PvP_Light_White_Pot_Box
+    Name: PvP_Light White Potion Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 18011,50;
+  - Id: 18017
+    AegisName: Yellow_Gemstone_Box
+    Name: Yellow Gemstone Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 715,100;
