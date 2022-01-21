@@ -96,7 +96,7 @@ prontera,194,188,4	script	Orbe Enchanter	712,{
 		set      .efet  ,	154;                              // Effect Number
 		set      .perc  ,	rand(50,80);                      // Percent
 		setarray .crd_c$,	"st", "nd", "rd", "th";           // Count
-		setarray .en_orb,	18015, 18016;                       // Range of IDs selected for enchanting.
+		setarray .en_orb,	18016, 18023;                       // Range of IDs selected for enchanting.
 		setarray .eqp$  ,	"Accessory", "Accessory", "Shoes", "Garment", "Lower Headgear",
 					"Middle Headgear", "Upper Headgear", "Armor", "Shield", "Weapon";
 		set      .e_len ,	getarraysize(.eqp$);

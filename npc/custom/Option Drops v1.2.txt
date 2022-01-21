@@ -412,11 +412,11 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.MAGICATKPERCENT), 1, 10;
 		setarray getd(".@values_"+.RACE_IGNORE_DEF_PERCENT_HUMAN), 1, 30;
 		setarray getd(".@values_"+.RACE_IGNORE_MDEF_PERCENT_HUMAN), 1, 30;
-		setarray getd(".@values_"+.WEAPON_ATTR_POISON);
-		setarray getd(".@values_"+.WEAPON_ATTR_SAINT);
-		setarray getd(".@values_"+.WEAPON_ATTR_DARKNESS);
-		setarray getd(".@values_"+.WEAPON_ATTR_TELEKINESIS);
-		setarray getd(".@values_"+.WEAPON_ATTR_UNDEAD);
+		setarray getd(".@values_"+.WEAPON_ATTR_POISON),0,0;
+		setarray getd(".@values_"+.WEAPON_ATTR_SAINT),0,0;
+		setarray getd(".@values_"+.WEAPON_ATTR_DARKNESS),0,0;
+		setarray getd(".@values_"+.WEAPON_ATTR_TELEKINESIS),0,0;
+		setarray getd(".@values_"+.WEAPON_ATTR_UNDEAD),0,0;
 		setarray .@options,
 			.VAR_STRAMOUNT,
 			.VAR_AGIAMOUNT,
