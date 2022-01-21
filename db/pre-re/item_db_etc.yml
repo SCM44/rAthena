@@ -21553,7 +21553,7 @@ Body:
     Weight: 0
     Flags:
       BuyingStore: true
-  - Id: 18015
+  - Id: 18016
     AegisName: 5% XP
     Name: 5% XP
     Type: Card
@@ -21562,7 +21562,7 @@ Body:
     Weight: 10
     Script: |
       bonus2 bExpAddRace,RC_All,5;
-  - Id: 18016
+  - Id: 18017
     AegisName: 3% Drop
     Name: 3% Drop
     Type: Card

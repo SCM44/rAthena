@@ -23042,7 +23042,7 @@ Body:
     Weight: 10
     Script: |
       getitem 18011,50;
-  - Id: 18017
+  - Id: 18015
     AegisName: Yellow_Gemstone_Box
     Name: Yellow Gemstone Box
     Type: Cash
