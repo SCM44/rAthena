@@ -79,3 +79,39 @@ Body:
       Y: 36
     AdditionalMaps:
       2@nyd: true
+  - Id: 5
+    Name: Poring Village
+    Enter:
+      Map: 1@begi
+      X: 102
+      Y: 24
+  - Id: 6
+    Name: Prontera Culvert
+    Enter:
+      Map: 1@prtc
+      X: 20
+      Y: 16
+  - Id: 7
+    Name: Ant Hell
+    Enter:
+      Map: 1@ant
+      X: 35
+      Y: 263
+  - Id: 8
+    Name: Izlude Deepsea
+    Enter:
+      Map: 1@izu
+      X: 235
+      Y: 204
+  - Id: 9
+    Name: Sunken Ship
+    Enter:
+      Map: 1@tre02
+      X: 101
+      Y: 30
+  - Id: 10
+    Name: Suspicious Shipwreck
+    Enter:
+      Map: 1@tre
+      X: 68
+      Y: 32

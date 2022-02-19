@@ -1,0 +1,447 @@
+//===== rAthena Script =======================================
+//= Ant Hell Instance (kRo Zero)
+//============================================================
+
+
+//Warning
+1@ant,41,253,3	script	Warning Board#ant2	2_BULLETIN_BOARD,{
+
+	mes "A warning message appears as if someone had scribbled it desperately.";
+	next;
+	switch(select("Ignore.","Read warning.")){
+		
+		case 1:
+			mes "...";
+			close;
+		
+		case 2:
+			mes "[Warning Board]";
+			mes "This is a warning to the explorers who have fallen here out of bad luck.";
+			next;
+			mes "[Warning Board]";
+			mes "Variant creatures that prey on humans are prowling in this dungeon. If possible, please return as soon as possible.";
+			next;
+			mes "[Warning Board]";
+			mes "Still want to explore this front?";
+			next;
+			mes "[Warning Board]";
+			mes "As a warning repeatedly, these variants have a brutal attack power that cannot even be compared to the abilities of the normal creatures around them.";
+			next;
+			mes "[Warning Board]";
+			mes "Whether you came here thinking of a common-sense game or to dig for treasure, it doesn't matter. If you want to live, run away from here.";
+			next;
+			mes "[Warning Board]";
+			mes "If you nevertheless wish to continue your reckless adventures, I hope you do not encounter any of the variants.";
+			next;
+			mes "^990099A pile of dirt, a figure that looks like it's starting a fire, and the silhouette of a gigantic monster are drawn in a mess.^000000";
+			viewpoint 1,104,259,1,0xFF0000; //Poison1
+			viewpoint 1,77,99,2,0xFF0000; //Poison2
+			viewpoint 1,180,27,3,0xFF0000; //Poison3
+			viewpoint 1,262,235,4,0xFF0000; //Poison4
+			viewpoint 1,239,31,5,0xFF0000; //Poison5
+			close;
+	}
+
+}
+
+//Main Script
+1@ant,35,262,3	script	#start_sw	HIDDEN_WARP_NPC,3,3,{
+
+
+OnTouch:
+	if(is_party_leader() == false) {
+		end;
+	}
+	disablenpc instance_npcname(strnpcinfo(0));
+	donpcevent instance_npcname("#start_sw2") + "::OnStart";
+	end;
+		
+OnInstanceInit:
+	'poison1 = 0;
+	'poison2 = 0;
+	'poison3 = 0;
+	'poison4 = 0;
+	'poison5 = 0;
+	'Boss = 0;
+	'Weaken = 0;
+	'Map$ = instance_mapname("1@ant");
+	end;
+
+}
+
+1@ant,254,32,3	script	#boss1	HIDDEN_WARP_NPC,{
+
+OnBoss:
+	specialeffect EF_CIRCLELIGHT;
+	sleep 1000;
+	specialeffect EF_DUST;
+	sleep 3000;
+	disablenpc instance_npcname("#boss1");
+	end;
+	
+}
+
+1@ant,35,262,3	script	#start_sw2	HIDDEN_WARP_NPC,{
+
+OnStart:
+	//Spawn Dynamic Mobs
+	monster 'Map$,0,0,"--ja--",20077,7;
+	monster 'Map$,0,0,"--ja--",20078,16;
+	monster 'Map$,0,0,"--ja--",20079,13;
+	monster 'Map$,0,0,"--ja--",20080,13;
+	//Normal Mobs
+	monster 'Map$,0,0,"--ja--",1005,10;	//Familiar
+	monster 'Map$,0,0,"--ja--",1160,15;	//Piere
+	monster 'Map$,0,0,"--ja--",1105,15;	//Deniro
+	monster 'Map$,0,0,"--ja--",1095,7;	//Andre
+	monster 'Map$,0,0,"--ja--",1176,3;	//Vitata
+	end;
+
+OnBoss:
+	killmonsterall 'Map$;
+	instance_announce 0,"Maya, the owner of the dungeon, walks out of the deep darkness.",bc_map,"0xFFFFFF",FW_BOLD;
+	donpcevent instance_npcname("#boss1") + "::OnBoss";
+	sleep 5000;
+	//Initialize Array
+	deletearray $@mobid[0],getarraysize($@mobid);
+		
+	if('Boss == 0) monster 'Map$,254,32,"--ja--",20076,1,instance_npcname("#start_sw2") + "::OnBossDead";
+	'Boss = $@mobid[0];
+	getunitdata 'Boss,.@boss_data;
+	setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP];
+	setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP];
+	
+	//Save Stats
+	'atk1_nm = .@boss_data[UMOB_ATKMIN];
+	'atk2_nm = .@boss_data[UMOB_ATKMAX];
+	'matk1_nm = .@boss_data[UMOB_MATKMIN];
+	'matk2_nm = .@boss_data[UMOB_MATKMAX];
+	'def_nm = .@boss_data[UMOB_DEF];
+	'mdef_nm = .@boss_data[UMOB_MDEF];
+	'hit_nm = .@boss_data[UMOB_HIT];
+	'flee_nm = .@boss_data[UMOB_FLEE];
+	
+	//Set 'Weakened' Stats
+	'atk1_wk = 'atk1_nm/2;
+	'atk2_wk = 'atk2_nm/2;
+	'matk1_wk = 'matk1_nm/2;
+	'matk2_wk = 'matk2_nm/2;
+	'def_wk = 'def_nm/2;
+	'mdef_wk = 'mdef_nm/2;
+	'hit_wk = 'hit_nm/2;
+	'flee_wk = 'flee_nm/2;
+	
+	initnpctimer;
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnRestore";
+	end;
+
+OnTimer2500:
+	getunitdata 'Boss, .@arr;
+	.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
+	.@label$ = instance_npcname("#start_sw2") + "::OnDarkCross";
+	if(.@percent_hp / 10 >= 4) end;
+OnTimer15000:
+	getunitdata 'Boss, .@arr;
+	.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
+	.@label$ = instance_npcname("#start_sw2") + "::OnDarkCross";
+	switch( .@percent_hp / 10 ) {
+	case 10: 
+	case 9:
+	case 8:
+	case 7:
+	case 6:
+		break;
+	case 5:
+	case 4:
+	case 3:
+		monster 'Map$,.@arr[UMOB_X]-4,.@arr[UMOB_Y]+4,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]+4,.@arr[UMOB_Y]+4,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]-4,.@arr[UMOB_Y]-4,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]+4,.@arr[UMOB_Y]-4,"#darkcross",3038,1, .@label$;
+		sleep 3500;
+		killmonster 'Map$,.@label$;
+		break;
+	case 2:
+	case 1:
+	case 0:
+		monster 'Map$,.@arr[UMOB_X]-9,.@arr[UMOB_Y]+9,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]+9,.@arr[UMOB_Y]+9,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]+9,.@arr[UMOB_Y],"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]-9,.@arr[UMOB_Y],"#darkcross",3038,1, .@label$;		
+		monster 'Map$,.@arr[UMOB_X]-9,.@arr[UMOB_Y]-9,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X]+9,.@arr[UMOB_Y]-9,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X],.@arr[UMOB_Y]+9,"#darkcross",3038,1, .@label$;
+		monster 'Map$,.@arr[UMOB_X],.@arr[UMOB_Y]-9,"#darkcross",3038,1, .@label$;
+		sleep 5000;
+		killmonster 'Map$,.@label$;
+		break;
+		break;	
+	}
+	end;
+	
+OnTimer20000:
+	if(rand(1,4)==3) {
+		'Weaken = 1;
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnWeaken";
+		instance_announce 0,"Maya is temporarily weakened, reducing her combat ability for about 10 seconds.",bc_map,"0xFFFFFF",FW_BOLD;		
+	}
+	end;
+OnTimer30000:
+	if('Weaken == 1) {
+		'Weaken = 0;	
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnRestore";
+		instance_announce 0,"The poison has dissipated. Maya has recovered from the poison.",bc_map,"0xFFFFFF",FW_BOLD;
+	}
+	initnpctimer;
+	end;	
+	
+OnWeaken:
+	setunitdata 'Boss,UMOB_ATKMIN,'atk1_wk;
+	setunitdata 'Boss,UMOB_ATKMAX,'atk2_wk;
+	setunitdata 'Boss,UMOB_MATKMIN,'matk1_wk;
+	setunitdata 'Boss,UMOB_MATKMAX,'matk1_wk;
+	setunitdata 'Boss,UMOB_DEF,'def_wk;
+	setunitdata 'Boss,UMOB_MDEF,'mdef_wk;
+	setunitdata 'Boss,UMOB_HIT,'hit_wk;
+	setunitdata 'Boss,UMOB_FLEE,'flee_wk;
+	end;
+OnRestore:
+	setunitdata 'Boss,UMOB_ATKMIN,'atk1_nm;
+	setunitdata 'Boss,UMOB_ATKMAX,'atk2_nm;
+	setunitdata 'Boss,UMOB_MATKMIN,'matk1_nm;
+	setunitdata 'Boss,UMOB_MATKMAX,'matk1_nm;
+	setunitdata 'Boss,UMOB_DEF,'def_nm;
+	setunitdata 'Boss,UMOB_MDEF,'mdef_nm;
+	setunitdata 'Boss,UMOB_HIT,'hit_nm;
+	setunitdata 'Boss,UMOB_FLEE,'flee_nm;
+	end;		
+		
+OnDarkCross:
+	end;
+OnBossDead:
+	stopnpctimer;
+	enablenpc instance_npcname("Memorial Association Member#ant3");
+	enablenpc instance_npcname("Treasure Chest#ant1");
+	end;
+}
+
+//Poisons 5 Poison spots to destroy to summon mvp.
+
+1@ant,104,259,3	script	#poison1	4_ENERGY_WHITE,{
+
+	if(is_party_leader() == false) {
+		end;
+	}
+	progressbar "FFFF00",7;
+	specialeffect EF_BIG_PORTAL;
+	killmonster 'Map$,instance_npcname("#poison1")+"::OnMobDead";
+	viewpoint 2,104,259,1,0xFF0000; //Poison1
+	'poison1 = 1;
+	.@sum = ('poison1 + 'poison2 + 'poison3 + 'poison4 + 'poison5);
+		if(.@sum == 5) donpcevent instance_npcname("#start_sw2") + "::OnBoss";
+	hideonnpc instance_npcname("#poison1");
+	end;
+
+
+OnInstanceInit:
+	monster 'Map$,97,207,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,100,210,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,101,203,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,106,204,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	end;
+
+OnMobDead:
+	end;
+
+}
+
+
+1@ant,77,99,3	script	#poison2	4_ENERGY_WHITE,{
+	
+	if(is_party_leader() == false) {
+		end;
+	}
+	progressbar "FFFF00",7;
+	specialeffect EF_BIG_PORTAL;
+	killmonster 'Map$,instance_npcname("#poison2")+"::OnMobDead";
+	viewpoint 2,77,99,2,0xFF0000; //Poison2
+	'poison2 = 1;
+	.@sum = ('poison1 + 'poison2 + 'poison3 + 'poison4 + 'poison5);
+		if(.@sum == 5) donpcevent instance_npcname("#start_sw2") + "::OnBoss";
+	hideonnpc instance_npcname("#poison2");
+	end;
+
+OnInstanceInit:
+	monster 'Map$,70,76,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,63,78,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,62,74,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,68,71,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,67,67,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,60,67,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	end;
+
+OnMobDead:
+	end;
+
+}
+
+
+1@ant,180,27,3	script	#poison3	4_ENERGY_WHITE,{
+	
+	if(is_party_leader() == false) {
+		end;
+	}
+	progressbar "FFFF00",7;
+	specialeffect EF_BIG_PORTAL;
+	killmonster 'Map$,instance_npcname("#poison3")+"::OnMobDead";
+	'poison3 = 1;
+	viewpoint 2,180,27,3,0xFF0000; //Poison3
+	.@sum = ('poison1 + 'poison2 + 'poison3 + 'poison4 + 'poison5);
+		if(.@sum == 5) donpcevent instance_npcname("#start_sw2") + "::OnBoss";
+	disablenpc instance_npcname("#poison3");
+	end;
+
+OnInstanceInit:
+	monster 'Map$,177,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,182,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,187,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,177,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,182,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,187,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	end;
+
+OnMobDead:
+	end;
+}
+
+1@ant,262,235,3	script	#poison4	4_ENERGY_WHITE,{
+	
+	if(is_party_leader() == false) {
+		end;
+	}
+	progressbar "FFFF00",7;
+	specialeffect EF_BIG_PORTAL;
+	killmonster 'Map$,instance_npcname("#poison4")+"::OnMobDead";
+	'poison4 = 1;
+	viewpoint 2,262,235,4,0xFF0000; //Poison4
+	.@sum = ('poison1 + 'poison2 + 'poison3 + 'poison4 + 'poison5);
+		if(.@sum == 5) donpcevent instance_npcname("#start_sw2") + "::OnBoss";
+	disablenpc instance_npcname("#poison4");
+	end;
+
+OnInstanceInit:
+	monster 'Map$,257,218,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,258,213,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,256,209,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,258,204,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	end;
+
+OnMobDead:
+	end;
+}
+
+
+1@ant,239,31,3	script	#poison5	4_ENERGY_WHITE,{
+	
+	if(is_party_leader() == false) {
+		end;
+	}
+	progressbar "FFFF00",7;
+	specialeffect EF_BIG_PORTAL;
+	killmonster 'Map$,instance_npcname("#poison5")+"::OnMobDead";
+	'poison5 = 1;
+	viewpoint 2,239,31,5,0xFF0000; //Poison5
+	.@sum = ('poison1 + 'poison2 + 'poison3 + 'poison4 + 'poison5);
+		if(.@sum == 5) donpcevent instance_npcname("#start_sw2") + "::OnBoss";
+	disablenpc instance_npcname("#poison5");
+	end;
+
+OnInstanceInit:
+	monster 'Map$,251,32,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	end;
+
+OnMobDead:
+	end;
+}
+
+
+1@ant,254,37,4	script	Treasure Chest#ant1	4_TREASURE_BOX,{
+
+	setarray .@reward[1],
+		25424,100,	//
+		25424,100,
+		25424,100,
+		25424,100,
+		25424,100,
+		25424,100,
+		25424,70,
+		25424,70,
+		25424,40,	//
+		25424,40,	//
+		23649,100,	//
+		23649,70,	//
+		23649,40,	//
+		25475,100,	//
+		25475,70,
+		25475,40,
+		25475,70,
+		25475,40,
+		25475,70,
+		25475,10,
+		25475,10,
+		25460,70,
+		25460,40,
+		25460,10;
+
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
+	
+	specialeffect EF_ASSUMPTIO; 
+	specialeffect EF_FORESTLIGHT2; //Forest Light
+	specialeffect EF_COIN;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	.@limit = getarraysize(.@reward);
+	for(.@i = 1; .@i<=.@limit; .@i+=2) {
+		if(rand(100) < (.@reward[.@i+1] + .@bonus))
+			makeitem .@reward[.@i],1,'Map$,.@x+rand(3)-1,.@y+rand(3)-1;
+	}
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;	
+}
+
+
+1@ant,254,40,4	script	Memorial Association Member#ant3	702,{
+	mes "["+strnpcinfo(1)+"]";
+	mes "I think the dimensional rift will be distorted soon. We need to get out of here.";
+	next;
+	switch(select("I'll stay for a little while.","Let's leave.")){
+		
+		case 1:
+			mes "["+strnpcinfo(1)+"]";
+			mes "It won't last long. hurry up, please.";
+			close;
+		
+		case 2:
+			mes "["+strnpcinfo(1)+"]";
+			mes "Sending you outside now...";
+			close2;
+			getitem 25475,1;
+			warp "prt_fild06",37,192;
+			end;
+	}
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;	
+}

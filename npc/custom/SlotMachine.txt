@@ -37,7 +37,7 @@ cmd_in02,187,107,4	script	Slot Machine 1#1SM	563,{ .@name$ = "[^4D5656 Slot Mach
 		// Set payoff for each prize [Chest | Coin | Bell | Yggdrasil | Apple] with the help of the Excel table
 
     	// X1 Prize Bet
-		setarray .SlotReward1[0],1000,100,20,5,3,2,1;
+		setarray .SlotReward1[0],1000,100,50,5,3,2,1;
 
 		// X2 Prize Bet
         setarray .SlotReward2[0],0,0,0,0,0,0,0; // Set this only if you want to give a non .SlotReward1 multiple quantity otherwise it will be calculated automatically

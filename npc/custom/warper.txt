@@ -23,17 +23,17 @@ function Go; function Disp; function Pick; function Restrict;
 //	Main Menu:
 // --------------------------------------------------
 
-menu	"Dernier Warp ^777777["+lastwarp$+"]^000000",-,
-    	" ~ Villes",Towns,
+menu	"Last Destination ^777777["+lastwarp$+"]^000000",-,
+    	" ~ Towns",Towns,
     	" ~ Fields",Fields,
     	" ~ Dungeons",Dungeons,
     	" ~ Guild Castles",Castles,
     	" ~ Guild Dungeons",Guild_Dungeons,
     	" ~ Instances",Instances,
-    	" ~ Zones Spéciales",Special;
+    	" ~ Special Area",Special;
 
 	if (lastwarp$ == "")
-		message strcharinfo(0),"Tu n'es encore allé nul part !.";
+		message strcharinfo(0),"You didn't go anywhere yet !.";
 	else
 		warp lastwarp$,lastwarpx,lastwarpy;
 	end;

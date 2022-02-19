@@ -387,7 +387,7 @@ Body:
     Flags:
       IsAutoShadowSpell: true
       TargetTrap: true
-    Range: 9
+    Range: 11
     Hit: Single
     HitCount: 1
     Element: Ghost
@@ -535,7 +535,7 @@ Body:
     TargetType: Attack
     Flags:
       IsAutoShadowSpell: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -616,7 +616,7 @@ Body:
     TargetType: Attack
     Flags:
       IsAutoShadowSpell: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -958,7 +958,7 @@ Body:
     TargetType: Attack
     Flags:
       IsAutoShadowSpell: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -1059,7 +1059,7 @@ Body:
     TargetType: Attack
     Flags:
       IsAutoShadowSpell: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -2290,15 +2290,16 @@ Body:
     Description: Impositio Manus
     MaxLevel: 5
     Type: Magic
-    TargetType: Support
+    TargetType: Self
     DamageFlags:
       NoDamage: true
-    Range: 9
+      Splash: true
     Hit: Single
     HitCount: 1
+    SplashArea: -1
     CastCancel: true
     AfterCastActDelay: 3000
-    Duration1: 200000
+    Duration1: 120000
     Requires:
       SpCost:
         - Level: 1
@@ -2316,21 +2317,22 @@ Body:
     Description: Suffragium
     MaxLevel: 3
     Type: Magic
-    TargetType: Support
+    TargetType: Self
     DamageFlags:
       NoDamage: true
-    Range: 9
+      Splash: true
     Hit: Single
     HitCount: 1
-    CastCancel: true
+    SplashArea: -1
+    CastCancel: true    
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
         Time: 10000
       - Level: 2
-        Time: 20000
+        Time: 10000
       - Level: 3
-        Time: 30000
+        Time: 10000
     Requires:
       SpCost: 8
   - Id: 68
@@ -2597,9 +2599,9 @@ Body:
       - Level: 3
         Time: 200000
       - Level: 4
-        Time: 250000
+        Time: 240000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost: 40
   - Id: 75
@@ -2618,15 +2620,15 @@ Body:
     AfterCastActDelay: 2000
     Duration1:
       - Level: 1
-        Time: 100000
+        Time: 120000
       - Level: 2
-        Time: 150000
+        Time: 120000
       - Level: 3
-        Time: 200000
+        Time: 120000
       - Level: 4
-        Time: 250000
+        Time: 120000
       - Level: 5
-        Time: 300000
+        Time: 120000
     Requires:
       SpCost: 20
   - Id: 76
@@ -3910,9 +3912,9 @@ Body:
       - Level: 3
         Time: 200000
       - Level: 4
-        Time: 250000
+        Time: 240000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost:
         - Level: 1
@@ -3949,11 +3951,11 @@ Body:
       - Level: 2
         Time: 200000
       - Level: 3
-        Time: 300000
+        Time: 240000
       - Level: 4
-        Time: 300000
+        Time: 240000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost:
         - Level: 1
@@ -3990,7 +3992,7 @@ Body:
       - Level: 4
         Time: 200000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost:
         - Level: 1
@@ -4047,9 +4049,9 @@ Body:
       - Level: 3
         Time: 200000
       - Level: 4
-        Time: 250000
+        Time: 230000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost: 10
   - Id: 115
@@ -5108,7 +5110,7 @@ Body:
       IgnoreKagehumi: true
     Hit: Single
     HitCount: 1
-    Knockback: 7
+    Knockback: 5
     Requires:
       SpCost: 7
   - Id: 151
@@ -6004,10 +6006,8 @@ Body:
     MaxLevel: 10
     Type: Weapon
     TargetType: Attack
-    DamageFlags:
-      IgnoreFlee: true
     Flags:
-      AllowWhenHidden: true
+       AllowWhenHidden: true
     Range: -1
     Hit: Single
     HitCount: 1
@@ -6017,8 +6017,31 @@ Body:
         Plagiarism: true
         Reproduce: true
     AfterCastActDelay: 500
+    Duration1: 5000
+    Cooldown: 500
     Requires:
       SpCost: 16
+# - Id: 212
+#   Name: RG_BACKSTAP
+#   Description: Back Stab
+#   MaxLevel: 10
+#   Type: Weapon
+#   TargetType: Attack
+#    DamageFlags:
+#      IgnoreFlee: true
+#   Flags:
+#      AllowWhenHidden: true
+#    Range: -1
+#    Hit: Single
+#    HitCount: 1
+#    Element: Weapon
+#    CopyFlags:
+#      Skill:
+#        Plagiarism: true
+#        Reproduce: true
+#    AfterCastActDelay: 500
+#    Requires:
+#      SpCost: 16
   - Id: 213
     Name: RG_TUNNELDRIVE
     Description: Stalk
@@ -6678,15 +6701,15 @@ Body:
     HitCount: 1
     Knockback:
       - Level: 1
-        Amount: 6
+        Amount: 5
       - Level: 2
-        Amount: 8
+        Amount: 6
       - Level: 3
-        Amount: 10
+        Amount: 7
       - Level: 4
-        Amount: 12
+        Amount: 8
       - Level: 5
-        Amount: 14
+        Amount: 9
     CopyFlags:
       Skill:
         Plagiarism: true
@@ -6842,7 +6865,7 @@ Body:
           Amount: 93
         - Level: 10
           Amount: 100
-      HpRateCost: 20
+      HpRateCost: 1
     Unit:
       Id: Dummyskill
       Layout: -1
@@ -7036,7 +7059,7 @@ Body:
     TargetType: Ground
     DamageFlags:
       NoDamage: true
-    Range: 18
+    Range: 25
     Hit: Single
     HitCount: 1
     Requires:
@@ -9338,9 +9361,9 @@ Body:
       - Level: 3
         Time: 180000
       - Level: 4
-        Time: 250000
+        Time: 240000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost:
         - Level: 1
@@ -9450,9 +9473,9 @@ Body:
       - Level: 3
         Time: 200000
       - Level: 4
-        Time: 250000
+        Time: 240000
       - Level: 5
-        Time: 300000
+        Time: 240000
     Requires:
       SpCost:
         - Level: 1
@@ -10106,7 +10129,7 @@ Body:
     TargetType: Attack
     DamageFlags:
       IgnoreAtkCard: true
-    Range: 9
+    Range: 11
     Hit: Single
     HitCount: 1
     Element: Weapon
@@ -10114,25 +10137,25 @@ Body:
     CastTime: 700
     AfterCastActDelay:
       - Level: 1
-        Time: 800
+        Time: 1000
       - Level: 2
-        Time: 1000
+        Time: 1200
       - Level: 3
-        Time: 1200
-      - Level: 4
-        Time: 1200
-      - Level: 5
-        Time: 1200
-      - Level: 6
-        Time: 1200
-      - Level: 7
-        Time: 1200
-      - Level: 8
-        Time: 1000
-      - Level: 9
-        Time: 1200
-      - Level: 10
         Time: 1400
+      - Level: 4
+        Time: 1600
+      - Level: 5
+        Time: 1800
+      - Level: 6
+        Time: 2000
+      - Level: 7
+        Time: 2200
+      - Level: 8
+        Time: 2400
+      - Level: 9
+        Time: 2600
+      - Level: 10
+        Time: 2800
     Requires:
       SpCost:
         - Level: 1
@@ -10196,12 +10219,12 @@ Body:
     TargetType: Attack
     DamageFlags:
       IgnoreFlee: true
-    Range: 9
+    Range: 14
     Hit: Multi_Hit
     HitCount: 1
     CastCancel: true
     CastTime: 1000
-    AfterCastActDelay: 1500
+    AfterCastActDelay: 3000
     Requires:
       SpCost:
         - Level: 1
@@ -10225,7 +10248,7 @@ Body:
       Critical: true
     Flags:
       TargetTrap: true
-    Range: 9
+    Range: 14
     Hit: Multi_Hit
     HitCount: 1
     Element: Weapon
@@ -10674,7 +10697,7 @@ Body:
       IgnoreDefense: true
     Flags:
       TargetTrap: true
-    Range: 5
+    Range: 11
     Hit: Multi_Hit
     HitCount: 5
     Element: Weapon
@@ -12850,7 +12873,7 @@ Body:
     MaxLevel: 5
     Type: Weapon
     TargetType: Attack
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount: 5
     CastTime: 1000
@@ -13007,6 +13030,27 @@ Body:
     Duration2: 5000
     Requires:
       SpCost: 30
+      ZenyCost:
+        - Level: 1
+          Amount: 60
+        - Level: 2
+          Amount: 70
+        - Level: 3
+          Amount: 80
+        - Level: 4
+          Amount: 90
+        - Level: 5
+          Amount: 100
+        - Level: 6
+          Amount: 110
+        - Level: 7
+          Amount: 120
+        - Level: 8
+          Amount: 130
+        - Level: 9
+          Amount: 140
+        - Level: 10
+          Amount: 150
       Weapon:
         Fist: true
         Dagger: true
@@ -13044,7 +13088,7 @@ Body:
       AllowOnMado: true
     Hit: Single
     HitCount: 1
-    Duration1: 3000000
+    Duration1: 240000
     Requires:
       SpCost: 15
       Weapon:
@@ -13502,7 +13546,7 @@ Body:
     HitCount: 1
     CastTime: 500
     AfterCastActDelay: 500
-    Duration1: 300000
+    Duration1: 240000
     Requires:
       SpCost: 30
       SpiritSphereCost: 4
@@ -13518,7 +13562,7 @@ Body:
     HitCount: 1
     CastTime: 500
     AfterCastActDelay: 500
-    Duration1: 300000
+    Duration1: 240000
     Requires:
       SpCost: 15
       SpiritSphereCost: 2
@@ -13533,7 +13577,7 @@ Body:
     Hit: Single
     HitCount: 1
     AfterCastActDelay: 500
-    Duration1: 300000
+    Duration1: 240000
     Requires:
       SpCost: 30
       SpiritSphereCost: 4
@@ -14145,7 +14189,7 @@ Body:
     TargetType: Attack
     DamageFlags:
       IgnoreFlee: true
-    Range: 9
+    Range: 11
     Hit: Single
     HitCount: 1
     Element: Weapon
@@ -14163,7 +14207,7 @@ Body:
     DamageFlags:
       IgnoreAtkCard: true
       IgnoreFlee: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount: 3
     Element: Weapon
@@ -14194,7 +14238,7 @@ Body:
       SplashSplit: true
     Flags:
       TargetTrap: true
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -14238,7 +14282,7 @@ Body:
     Flags:
       IgnoreBgReduction: true
       IgnoreGvgReduction: true
-    Range: 9
+    Range: 11
     Hit: Single
     HitCount: 1
     CopyFlags:
@@ -14554,7 +14598,7 @@ Body:
     MaxLevel: 10
     Type: Magic
     TargetType: Attack
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -14679,7 +14723,7 @@ Body:
     MaxLevel: 5
     Type: Magic
     TargetType: Attack
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount: -3
     Element: Fire
@@ -14716,7 +14760,7 @@ Body:
     MaxLevel: 10
     Type: Magic
     TargetType: Attack
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -14958,7 +15002,7 @@ Body:
     MaxLevel: 10
     Type: Magic
     TargetType: Attack
-    Range: 9
+    Range: 11
     Hit: Multi_Hit
     HitCount:
       - Level: 1
@@ -15037,7 +15081,7 @@ Body:
     MaxLevel: 5
     Type: Magic
     TargetType: Self
-    Range: 9
+    Range: 11
     Hit: Single
     HitCount: 1
     Element: Wind

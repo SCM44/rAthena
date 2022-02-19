@@ -1887,6 +1887,33 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 			if( !battle_check_range(battle_get_master(src), target, range + 1) )
 				return 0; // Aegis calc remove trap based on Master position, ignoring mercenary O.O
 		} else if( !battle_check_range(src, target, range) )
+
+		//if (src->type == BL_PC) { // Fix the client forced bonus +1 range when not walking
+                //short x, y;
+                //if (src->y == target->y){
+                   // x = (src->x - target->x) < 0 ? src->x + 1 : src->x - 1;
+                   // y = src->y;            
+               // }
+               // else if (src->x == target->x) {
+               //     x = src->x;
+                //    y = (src->y - target->y) < 0 ? src->y + 1 : src->y - 1;
+               // }
+               // else {
+                //    x = (src->x - target->x) < 0 ? src->x + 1 : src->x - 1;
+                //    y = (src->y - target->y) < 0 ? src->y + 1 : src->y - 1;
+               // }            
+              //  unit_walktoxy(&sd->bl, x, y, 4);
+               // ud->stepaction = true;
+               // ud->target_to = target_id;
+               // ud->stepskill_id = skill_id;
+               // ud->stepskill_lv = skill_lv;
+
+              //  ud->steptimer = add_timer(tick+status_get_speed(src) / 2, unit_step_timer, src->id, 0);
+              //  return 0;
+           // }
+          //  else
+
+
 			return 0; // Arrow-path check failed.
 	}
 

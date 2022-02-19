@@ -1,0 +1,1166 @@
+// Common Functions
+
+/**
+	* Duplicates NPC near you
+	* Usage: callfunc("F_SummonNPC",<NPC View ID>,<NPC to duplicate>,<Duplicated NPC display name>,<Duration in Seconds>);
+	* Example: callfunc("F_SummonNPC",10242,"Kafra#mdg",strcharinfo(0)+"'s Kafra",15);
+*/
+function	script	F_SummonNPC	{
+
+	.@npcid = getarg(0);
+	.@npc_full$ = getarg(1);
+	.@npc$ = getarg(2)+"#"+$NPC_DUPLICATE_CT;
+	.@seconds = getarg(3,5);
+	
+	if($NPC_DUPLICATE_CT <= 10000) $NPC_DUPLICATE_CT++;
+		else $NPC_DUPLICATE_CT = 1;
+
+	if(getd("@_"+.@npc_full$) >= gettimetick(2)) {
+		message strcharinfo(0),"You already have an active "+getarg(2)+" near you!!";
+		end;
+	}
+	
+	//Randomize spawn location
+	getmapxy .@map$,.@x,.@y,BL_PC;
+	do {
+		.@x_ = .@x + rand(-3,3);
+		.@y_ = .@y + rand(-3,3);
+
+	} while (!checkcell(.@map$,.@x_,.@y_,cell_chkpass));
+	.@loc$ = .@map$+","+.@x_+","+.@y_+",4";	
+
+	//duplicatenpc .@loc$,"duplicate("+.@npc_full$+")",.@npc$,"139",.@seconds * 1000;
+	classchange .@npcid,.@npc$,bc_self;
+	
+	setd("@_"+.@npc_full$),gettimetick(2) + .@seconds;	
+	
+	return;
+}
+
+/*
+	* Gets % Exp based on Level
+	* e.g. callfunc("F_GetExp",10,5);
+	* this will reward 5% of Exp required for Lv10 -> Lv11
+	* note that quest exp modifiers will multiply this bonus!!
+*/
+function	script	F_GetExp	{
+	.@lv = getarg(0,1);
+	.@pct = getarg(1,1);
+	
+	setarray .@exp[1],0,5270,5534,5810,6101,6405,6726,7600,8588,9830,
+	10832,11699,12634,13645,14750,16063,16866,17710,18595,19675,
+	20934,22609,24417,26371,27830,30759,32912,35216,37681,
+	39370,42134,44873,47789,50896,54204,57998,62638,67649,73061,
+	78786,86218,92253,98711,105621,1114600,120925,129390,138447,148139,
+	157671,169604,182324,195999,210699,223060,243488,260533,278770,294400,
+	315560,341505,361995,383715,414412,446400,487846,531752,574292,608750,
+	631540,675421,724096,775649,831686,890935,955728,1024140,1098464,1365940,
+	1699875,2120071,2636400,3282337,4086511,5090936,6334211,7887316,9810305,12226482,
+	14216681,20060000,27590000,28060500,32700000,33150000,41746180,54700000,67099429,75234429,85234427,999999999;
+	
+	.@exp_amt = .@exp[.@lv] * .@pct / 100;
+	
+	getexp .@exp_amt,0;
+	
+	return;
+}
+
+function	script	get_yrwk	{
+	query_sql("select YEARWEEK(CURRENT_TIMESTAMP()) from dual", .@yrwk$ );
+	.@ret = atoi(.@yrwk$);
+	
+	return .@ret;
+}
+
+function	script	F_TimeFormat	{
+	.@min = getarg(0);
+	
+	if(.@min > 60){
+		.@f_min = .@min%60;
+		.@hour = (.@min - .@f_min)/60;
+		.@time$ = "^0000FF"+.@hour+"^000000 Hours and ^0000FF"+.@f_min+"^000000 Minutes.";
+	} else {
+		.@time$ = "^0000FF"+.@min+"^000000 Minutes";
+	}
+	
+	
+	return .@time$;
+}
+
+//callfunc("F_CheckWeight",strnpcinfo(1),3);
+function	script	F_CheckWeight	{
+	.@npc$ = getarg(0);
+	.@ct = getarg(1);
+		
+	if (checkweight(1202,.@ct) == 0) {
+		if(.@npc$ != "") mes "["+.@npc$+"]";
+		mes "^3355FFJust a minute!";
+		mes "I can't offer any of my services to you because you're carrying too many items.";
+		mes "Put your excess items in Kafra Storage and come find me again.^000000";
+		close;
+	}
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FFJust a minute!";
+		mes "I can't offer any of my services to you because you're carrying rather heavy items.";
+		mes "Get at least 2000 free weight and come find me again.^000000";
+		close;
+	}	
+	return;
+}
+
+function	script	F_MobLink	{
+
+	.@mob = getarg(0);
+	
+	.@link$ = "<NAVI>"+getmonsterinfo(.@mob,MOB_NAME)+"<INFO>"+getmonsterinfo(.@mob,MOB_SPRITE)+",0,0,3,-222,1</INFO></NAVI>";
+	
+	return .@link$;
+}
+
+
+function	script	F_ItemLink	{
+
+	.@item = getarg(0);
+	
+	.@link$ = "<ITEM>"+getitemname(.@item)+"<INFO>"+.@item+"</INFO></ITEM>";
+	
+	return .@link$;
+}
+
+function	script	F_NaviLink	{
+
+	.@npc$ = getarg(0);
+	.@map$ = getarg(1);
+	.@x = getarg(2);
+	.@y = getarg(3);
+
+	.@link$ = "<NAVI>["+.@npc$+"]<INFO>"+.@map$+","+.@x+","+.@y+",0,000,0</INFO></NAVI>";
+	
+	return .@link$;
+}
+
+
+
+function	script	F_OptnDesc	{
+	.@id = getarg(0,0);
+	.@val = getarg(1,0);
+	
+	switch(.@id) {
+	case 1:	.@desc$="HP +"+.@val; break; //RDMOPT_VAR_MAXHPAMOUNT
+	case 2:	.@desc$="SP +"+.@val; break; //RDMOPT_VAR_MAXSPAMOUNT
+	case 3:	.@desc$="STR +"+.@val; break; //RDMOPT_VAR_STRAMOUNT
+	//.. todo later on since we dont have any option bound items yet
+	}
+	.@desc$ = "^0000FF"+.@desc$+"^000000";
+	
+	return .@desc$;	
+	
+}
+
+function	script	F_ChkFirstAidKit	{
+	.@current_itemid = getarg(0, -1);
+	
+	if (.@current_itemid != -1 || BaseLevel < 95) {
+		for (.@i = 23484; .@i <= 23502; .@i++)
+			.@sum += countitem(.@i);
+		
+		if (.@sum > 1) {
+			for (.@i = 23484; .@i <= 23502; .@i++)
+				delitem .@i, countitem(.@i);
+			.@sum = 0;
+		}
+
+		for (.@level = 5; .@level <= 95; .@level += 5) {
+			if (BaseLevel > .@level) {
+				.@offset++;
+			}
+		}
+
+		if (.@current_itemid != -1)
+			.@item_id = .@current_itemid + 1;
+		else if (.@sum == 0 && .@offset >= 0 && .@offset < 20)
+			.@item_id = (23484 + .@offset);
+		
+		if (.@item_id >= 23484 && .@item_id <= 23502)
+			if (!countitem(.@item_id))
+				getitem .@item_id, 1;
+	}
+	return;
+}
+
+function	script	F_GetUniqueID	{
+	.@aid = getarg(0,0);
+	if(.@aid == 0) .@aid = getcharid(3);
+	
+	query_sql("SELECT `last_unique_id` FROM `login` WHERE `account_id` = "+ .@aid +"", .@unique_id);
+
+	return .@unique_id;
+}
+
+function	script	F_IsCard	{
+	.@id = getarg(0);
+	return ((.@id >= 4700 && .@id < 5000) || (.@id >= 29000 && .@id <= 29162));
+}
+
+function	script	F_GetDayTime	{
+
+	.@yyyy = gettime(7);
+	.@mm = gettime(6);
+	.@dd = gettime(5);
+	return .@yyyy*10000+.@mm*100+.@dd;
+	//return 20141224;
+
+	.@type$ = getarg(1, "YYYY.MM.DD");
+	.@yyyy = .@yyyymmdd / 10000;
+	.@mm = (.@yyyymmdd % 10000) / 100;
+	.@dd = .@yyyymmdd % 100;
+
+	if(.@type$ == "YYYY") return .@yyyy;
+	if(.@type$ == "MM") return .@mm;
+	if(.@type$ == "DD") return .@dd;
+	
+	return .@yyyy+"."+.@mm+"."+.@dd;
+	
+}
+
+function	script	F_ChkTimeTick	{
+	.@dayleft = (getarg(0) - gettimetick(2))/86400;
+	.@hourleft = (getarg(0) - gettimetick(2))/3600 - (.@dayleft*24);
+	.@minleft = (getarg(0) - gettimetick(2))/60-(((getarg(0) - gettimetick(2))/3600)*60);
+		
+	if(.@dayleft > 0 && .@hourleft <= 0 && .@minleft <= 0) .@ret$ = .@dayleft+" Days";
+	else if (.@dayleft >= 1 && .@hourleft >= 1) .@ret$ = .@dayleft+" Days "+.@hourleft+" Hours "+.@minleft+" Minutes";
+	else if(.@dayleft <= 0 && .@hourleft >= 0) .@ret$ =  .@hourleft+" Hours "+.@minleft+" Minutes.";
+	else if(.@dayleft < 0 || .@hourleft < 0 || .@minleft < 0) .@ret$ = "";
+		else .@ret$ = .@minleft+" Minutes.";
+	
+	return .@ret$;	
+}
+
+function	script	F_ChkLevelReq	{
+	.@level = getarg(0);
+	.@name$ = getarg(1);
+
+	if(BaseLevel < .@level) {
+		mes "["+.@name$+"]";
+		mes "Hello there," +strcharinfo(0);
+		mes "I see that you are full of ambition.";
+		next;
+		mes "["+.@name$+"]";
+		mes "However, I am only looking for those of Level "+.@level+" or higher to assist me.";	
+		close3;
+	}
+	return;
+
+}
+
+function	script	F_MagicBead	{
+	.@type = getarg(0);
+	.@req = getarg(1);
+	
+	.@pos = EQI_HAND_R;
+	.@eq = getequipid(.@pos);
+	setarray .@shop_eq[1],1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1119,1120,1121,1122,1125,1126,1127,1116,1117,1118,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1162,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1301,1302,1303,1351,1352,1353,1354,1355,1356,1357,1358,1359,1360,1361,1362,1401,1402,1403,1404,1405,1406,1407,1408,1409,1410,1411,1412,1451,1452,1453,1454,1455,1456,1457,1458,1459,1460,1461,1462,1463,1464,1465,1501,1502,1503,1504,1505,1506,1507,1508,1509,1510,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1601,1602,1603,1604,1605,1606,1607,1608,1609,1610,1611,1612,1701,1702,1703,1704,1705,1706,1707,1708,1709,1710,1711,1712,1713,1714,1715,1716,1718,1551,1552,1250,1251,1252,1253,1254,1255,1801,1802,1803,1804,1805,1806,1807,1808,1809,1810,1811,1812,1901,1902,1903,1904,1905,1906,1907,1908,1909,1910,1911,1912,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960,1961,13003,13004,13007,13008,13010,13011,13100,13101,13102,13103,13104,13105,13150,13151,13152,13153,13154,13155,13157,13158,13159,13160,13161,13163,13164,1522,1532,1123,1128,1129,1149,1222,1226;
+	
+	.@ok = 0;
+	for(.@i = 1; .@i <= getarraysize(.@shop_eq); .@i++)
+		if(.@eq == .@shop_eq[.@i]) { .@ok = 1; break; }
+		
+	if(.@eq == -1) {
+		message strcharinfo(0),"Please equip the weapon you wish to enchant.";
+		end;
+	}	
+	if(.@ok == 0) {
+		message strcharinfo(0),getitemname(.@eq)+" is not eligible for Magic Bead enchantment.";
+		end;
+	}
+	
+	
+	.@opt1 = getequiprandomoption(.@pos,0,ROA_ID);
+	.@opt2 = getequiprandomoption(.@pos,1,ROA_ID);
+	.@opt3 = getequiprandomoption(.@pos,2,ROA_ID);
+	.@opt4 = getequiprandomoption(.@pos,3,ROA_ID);
+	.@opt5 = getequiprandomoption(.@pos,4,ROA_ID);
+
+	for(.@i = 3; .@i <= 5; .@i++) {
+		if(getd(".@opt"+.@i) > 0) {
+			message strcharinfo(0),getitemname(.@eq)+" is not eligible for Magic Bead enchantment.";
+			end;
+		}
+	}
+
+	switch(.@type) {
+	case 1:
+		setrandomoption(.@pos,0,RDMOPT_VAR_MAXHPAMOUNT,rand(50,300),0);
+		setrandomoption(.@pos,1,RDMOPT_VAR_MAXSPAMOUNT,rand(10,60),0);
+		break;
+	case 2:
+		setrandomoption(.@pos,0,RDMOPT_VAR_ATTPOWER,rand(3,20),0);
+		setrandomoption(.@pos,1,RDMOPT_VAR_ATTMPOWER,rand(3,20),0);
+		break;
+	case 3:
+		setrandomoption(.@pos,0,RDMOPT_VAR_HITSUCCESSVALUE,rand(3,20),0);
+		setrandomoption(.@pos,1,RDMOPT_VAR_AVOIDSUCCESSVALUE,rand(3,20),0);
+		break;
+	}
+	delitem .@req,1;
+	message strcharinfo(0),getitemname(.@eq) + " has been enchanted successfully!";
+	end;
+	
+}
+
+
+function	script	F_ChkSummonMiniBoss	{
+
+	.@npc$ = getarg(0);
+	.@killed = getvariableofnpc(.Killed_MB,.@npc$);
+	.@req = getarg(1);
+	.@champ = getarg(2);
+	.@label$ = .@npc$+"::OnMiniBoss";
+	
+	if(playerattached() != 0) getmapxy .@map$,.@x,.@y,BL_PC;
+		//else {
+		//	getmapxy(.@map$, .@x, .@y, BL_NPC, .@npc$);
+		//	.@x = 0; .@y = 0;
+		//}
+
+	if(.@map$ == "") {
+		callfunc("F_InsertDiarySQL","Summon MiniBoss Invalid Mapname Error",.@label$,.@npc$);
+		return;
+	}
+//	dispbottom .@killed+"Killed"+.@req+" Req";
+	if (.@killed == .@req) {
+		//do {
+		//	.@x = .@x + F_Rand(-5,-4,-3,3,4,5);
+		//	.@y = .@y + F_Rand(-5,-4,-3,3,4,5);
+		//} while (!checkcell(.@map$,.@x,.@y,cell_chkpass));
+		
+		monster .@map$,.@x,.@y,"--ja--",.@champ,1,.@label$;
+		mapannounce .@map$,"As the fallen cry for help, "+getmonsterinfo(.@champ,0)+" has descended to protect his kind.",bc_map;
+	}
+	set getvariableofnpc(.Killed_MB,.@npc$),.@killed + 1;
+	
+	return;
+
+}	
+	
+function	script	F_ChkSummonChampion	{
+
+	.@npc$ = getarg(0);
+	.@killed = getvariableofnpc(.Killed,.@npc$);
+	.@req = getarg(1);
+	.@champ = getarg(2);
+	.@label$ = .@npc$+"::OnChampion";
+
+	if(playerattached() != 0) getmapxy .@map$,.@x,.@y,BL_PC;
+		//else {
+		//	getmapxy(.@map$, .@x, .@y, BL_NPC, .@npc$);
+		//	.@x = 0; .@y = 0;
+		//}
+
+	if(.@map$ == "") {	
+		callfunc("F_InsertDiarySQL","Summon Champion Invalid Mapname Error",.@label$,.@npc$);
+		return;
+	}
+//	if(.@killed%25 == 0 && mobcount(.@map$,.@label$) == 0) mapannounce .@map$,"Summoning "+getmonsterinfo(.@champ,0)+" Progress: ["+.@killed+"/"+.@req+"]",bc_all,0xFFFF00;
+	
+	if (.@killed == .@req) {
+		//do {
+		//	.@x = .@x + F_Rand(-5,-4,-3,3,4,5);
+		//	.@y = .@y + F_Rand(-5,-4,-3,3,4,5);
+		//} while (!checkcell(.@map$,.@x,.@y,cell_chkpass));
+		
+		monster .@map$,.@x,.@y,"--ja--",.@champ,1,.@label$;
+		mapannounce .@map$,"As souls rise to heaven, "+getmonsterinfo(.@champ,0)+" has descended.",bc_map;
+	}
+	return;
+
+}
+
+function	script	F_SummonNormal	{
+	
+	.@npc$ = getarg(0);
+	.@map$ = getarg(1);
+	.@mob = getarg(2);
+	.@label$ = .@npc$+"::OnMyMobDead";
+	
+	.@add = getarg(3);
+	.@max_spawn = getarg(4);
+	.@curr_spawn = mobcount(.@map$,.@label$);
+	.@req = getarg(5);
+	
+	if((.@curr_spawn + .@add) <= .@max_spawn) {
+//		if(.@add <= 1) sleep 5000;
+		monster .@map$,0,0,"--ja--",.@mob,.@add,.@label$;
+	}
+	.@killed = getvariableofnpc(.Killed,.@npc$);
+	if(.@killed <= .@req) set getvariableofnpc(.Killed,.@npc$),.@killed + 1;
+	
+	.@killed = getvariableofnpc(.Killed,.@npc$);
+//	announce "Killed: "+.@map$+" "+.@killed+ "Current Spawn: "+.@curr_spawn+ " Add: "+.@add,bc_all;
+	return;
+}
+
+function	script	F_ChkPreReq	{
+
+	.@prereq = getarg(0);
+	.@npc$ = getarg(1);
+	.@txt1$ = getarg(2);
+	.@txt2$ = getarg(3);
+
+	switch(isbegin_quest(.@prereq)) {
+		case 0:
+			mes "["+.@npc$+"]";
+			mes .@txt1$;
+			mes .@txt2$;
+			close;
+		case 1:
+			if(.@level == 2) {
+				mes "["+.@npc$+"]";
+				mes .@txt1$;
+				mes .@txt2$;
+				close;
+			}
+		case 2:
+			break;
+	}
+	return;
+		
+}
+
+function	script	F_ChkSpawnFeverChamp	{
+
+
+	.@npc$ = getarg(0);
+	.@killed = getvariableofnpc(.Killed_C,.@npc$);
+	.@req = getarg(1);
+	.@champ = getarg(2);
+	.@label$ = .@npc$+"::OnFeverChamp";
+	
+	if(playerattached() != 0) getmapxy .@map$,.@x,.@y,BL_PC;
+    	//else {	
+		//	getmapxy(.@map$, .@x, .@y, BL_NPC, .@npc$);
+		//	.@x = 0; .@y = 0;
+		//}
+
+	if(.@map$ == "") {	
+		callfunc("F_InsertDiarySQL","Summon FeverChamp Invalid Mapname Error",.@label$,.@npc$);
+		return;
+	}
+	//if(.@killed%10 == 0 && mobcount(.@map$,.@label$) == 0) mapannounce .@map$,"Summoning "+getmonsterinfo(.@champ,0)+" Progress: ["+.@killed+"/"+.@req+"]",bc_all,0xFFFF00;
+	
+	if (.@killed == .@req) {
+		//do {
+		//	.@x = .@x + F_Rand(-5,-4,-3,3,4,5);
+		//	.@y = .@y + F_Rand(-5,-4,-3,3,4,5);
+		//} while (!checkcell(.@map$,.@x,.@y,cell_chkpass));
+		
+		monster .@map$,.@x,.@y,"--ja--",.@champ,1,.@label$;
+		mapannounce .@map$,"As souls rise to heaven, "+getmonsterinfo(.@champ,0)+" has descended.",bc_map;
+		
+		//Log Event
+		//callfunc("F_InsertDiarySQL","Fever Champion Summon",getmonsterinfo(.@champ,0),strcharinfo(0));
+	}
+	return;
+
+}
+
+function	script	F_ChkSpawnFeverBoss	{
+
+	.@npc$ = getarg(0);
+	.@killed = getvariableofnpc(.Killed,.@npc$);
+	.@req = getarg(1);
+	.@champ = getarg(2);
+	.@label$ = .@npc$+"::OnFeverBoss";
+	
+	if(playerattached() != 0) getmapxy .@map$,.@x,.@y,BL_PC;
+		//else {
+		//	getmapxy(.@map$, .@x, .@y, BL_NPC, .@npc$);
+		//	.@x = 0; .@y = 0;
+		//}
+
+	if(.@map$ == "") {	
+		callfunc("F_InsertDiarySQL","Summon FeverBoss Invalid Mapname Error",.@label$,.@npc$);
+		return;
+	}
+	if(.@killed%100 == 0 && mobcount(.@map$,.@label$) == 0) mapannounce .@map$,"Summoning "+getmonsterinfo(.@champ,0)+" Progress: ["+.@killed+"/"+.@req+"]",bc_all,0xFFFF00;
+	
+	if(getgmlevel() >= 50) dispbottom "Killed: "+.@killed+" Req: "+.@req;
+	if (.@killed == .@req) {
+		//do {
+		//	.@x = .@x + F_Rand(-5,-4,-3,3,4,5);
+		//	.@y = .@y + F_Rand(-5,-4,-3,3,4,5);
+		//} while (!checkcell(.@map$,.@x,.@y,cell_chkpass));
+		
+		hideonnpc "Grave#"+.@map$;
+		monster .@map$,.@x,.@y,"--ja--",.@champ,1,.@label$;
+		mapannounce .@map$,"The sky roars and the earth rumbles, the great "+getmonsterinfo(.@champ,0)+" has appeared.",bc_map;
+		
+		//Log Event
+		callfunc("F_InsertDiarySQL","Fever MvP Summon",getmonsterinfo(.@champ,0),strcharinfo(0));
+	}
+	
+	return;
+
+}
+
+function	script	F_FeverSpawn	{
+	
+	.@npc$ = getarg(0);
+	.@map$ = getarg(1);
+	.@mob = getarg(2);
+	if(compare(getarg(6),"::") == 1) .@label$ = getarg(6);
+		else .@label$ = .@npc$+"::"+getarg(6);
+//	announce "XX "+.@label$,bc_all,0xFFFFFF;	
+		
+	.@add = getarg(3);
+	.@max_spawn = getarg(4);
+	.@curr_spawn = mobcount(.@map$,.@label$);
+	.@req = getarg(5);
+	
+	if((.@curr_spawn + .@add) <= .@max_spawn) {
+		monster .@map$,0,0,"--ja--",.@mob,.@add,.@label$;
+	}
+	.@killed = getvariableofnpc(.Killed,.@npc$);
+	.@killed_c = getvariableofnpc(.Killed_C,.@npc$);
+	if(.@add == 1 && .@killed <= .@req) set getvariableofnpc(.Killed,.@npc$),.@killed + 1;
+	if(.@add == 1 && .@killed_c <= 100) set getvariableofnpc(.Killed_C,.@npc$),.@killed_c + 1;
+	
+//	.@killed = getvariableofnpc(.Killed,.@npc$);
+//	announce "MvP KillCount"+.@killed+ " Champion KillCount"+.@killed_c+ "Current Spawn: "+.@curr_spawn+ " Add: "+.@add,bc_all,0xFFFFFF;
+	return;
+}
+
+//callfunc ("F_FeverGraveSpawn","Grave#"+strnpcinfo(2),.@x,.@y,getmonsterinfo(.BossID,0),strcharinfo(0),gettimestr("%H:%M",6));
+function	script	F_FeverGraveSpawn	{
+	.@npc$ = getarg(0);
+	.@mvp$ = getarg(1);
+	.@killer$ = getarg(2);
+	.@time$ = getarg(3);
+	
+	getmapxy .@map$,.@x,.@y,BL_PC;
+	
+	set getvariableofnpc(.MvP_Name$,.@npc$), .@mvp$;
+	set getvariableofnpc(.Killer_Name$,.@npc$), .@killer$;
+	set getvariableofnpc(.DeathTime$,.@npc$), .@time$;
+	
+//	dispbottom .@npc$ + " "+.@x +","+.@y+" "+.@killer$;
+	hideoffnpc .@npc$;	
+	movenpc .@npc$,.@x+callfunc("F_Rand",-1,1),.@y+callfunc("F_Rand",-1,1);
+	
+	//Log Event
+	callfunc("F_InsertDiarySQL","Fever MvP Kill",.@mvp$,.@killer$);
+	
+	return;
+}
+
+//callfunc("F_FeverGraveDisplay",.MvP_Name$,.DeathTime$,.Killer_Name$;
+function	script	F_FeverGraveDisplay	{
+	mes "[^FF0000"+getarg(0)+"^000000]";
+	mes "Has met its demise.";
+	mes "Time of death: ^FF0000"+getarg(1)+"^000000";
+	mes "Defeated by";
+	mes "[^0000FF"+getarg(2)+"^000000]";
+	close;
+}
+
+//callfunc("F_ChkDQ_Collect",21073,21074,21075,strnpcinfo(1),"","","","","",2,511,1,512,1);
+function	script	F_ChkDQ_Collect	{
+	.@nq_quest = getarg(0);
+	.@cd_quest = getarg(1);
+	.@dq_quest = getarg(2);
+		
+	.@name$ = "["+getarg(3)+"]";
+	.@txt1$ = getarg(4);
+	.@txt2$ = getarg(5);
+	.@txt3$ = getarg(6);
+	.@txt4$ = getarg(7);
+	.@txt5$ = getarg(8);
+	
+	.@ct = getarg(10);
+if(.@ct >= 1) .@item_id1 = getarg(11);
+if(.@ct >= 1) .@item_amt1 = getarg(12);	
+if(.@ct >= 2) .@item_id2 = getarg(13);	
+if(.@ct >= 2) .@item_amt2 = getarg(14);	
+
+	if(.@cd_quest == 0 || .@dq_quest == 0) .@nq = 1;
+	
+	if(.@nq_quest == 0) .@switch = 2; //no normal quest required, skip to daily quest
+		else .@switch = isbegin_quest(.@nq_quest); //checks normal quest
+		
+	callfunc("F_CheckWeight",getarg(3),3);
+	
+	switch( .@switch ) {
+	case 0:
+		mes .@name$;
+		mes .@txt1$;
+		mes .@txt2$;
+		next;
+		if (select( "I'll gladly accept this request", "I need some time to reconsider" ) == 2) {
+			mes .@name$;
+			mes "You're pretty straightforward.";
+			mes "I wish that you would reconsider...";
+			close;
+		}
+		setquest .@nq_quest;// 1st Collection
+		mes .@name$;
+		mes "I have faith in your abilities.";
+		mes .@txt2$;
+		close;
+	case 1:
+			if(.@ct == 1 && (countitem(.@item_id1) >= .@item_amt1)) .@collected = 1;
+			if(.@ct == 2) {
+				if((countitem(.@item_id1) >= .@item_amt1) && (countitem(.@item_id2) >= .@item_amt2)) .@collected = 1;
+			}
+			if(.@ct == 3) {
+				if((countitem(.@item_id1) >= .@item_amt1) && (countitem(.@item_id2) >= .@item_amt2) && (countitem(.@item_id3) >= .@item_amt3)) .@collected = 1;
+			}		
+			if(.@ct != 0 && .@collected == 0) {
+			mes .@name$;
+			mes .@txt1$;
+			mes .@txt2$;
+			close;
+		}
+		if (select( "I have completed the mission", "Hold on, I'm not ready" ) == 2) {
+			mes .@name$;
+			mes "Okay, I'll be waiting";
+			close;
+		}
+		mes .@name$;
+		mes .@txt5$;
+		if(.@ct >= 1) delitem .@item_id1,.@item_amt1;
+		if(.@ct >= 2) delitem .@item_id2,.@item_amt2;
+		if(.@ct >= 3) delitem .@item_id3,.@item_amt3;					
+		completequest .@nq_quest; // 1st Collection
+		if(.@cd_quest != 0) setquest .@cd_quest; // Cooldown
+		//First Time Rewards
+		return 100;
+	case 2:
+		if(.@nq == 1) .@switch = 3;
+			else .@switch = checkquest(.@cd_quest,PLAYTIME);
+		switch( .@switch ) {
+		case -1:
+			if (isbegin_quest(.@dq_quest) == 0) {
+				mes .@name$;
+				mes .@txt3$;
+				mes .@txt4$;
+				next;
+				if (select( "I'll gladly accept this request", "I need some time to reconsider" ) == 2) {
+					mes .@name$;
+					mes "You're pretty straightforward.";
+					mes "I wish that you would reconsider...";
+					close;
+				}
+				setquest .@dq_quest;// Daily
+				mes .@name$;
+				mes "I'll be sure to show my appreciation!";
+				mes .@txt4$;
+				close;
+			}
+			if(.@ct == 1) { if(countitem(.@item_id1) >= .@item_amt1) .@collected = 1; }
+			else if(.@ct == 2) { if(countitem(.@item_id1) >= .@item_amt1 && countitem(.@item_id2) >= .@item_amt2) .@collected = 1; }
+			else if(.@ct == 3) { if(countitem(.@item_id1) >= .@item_amt1 && countitem(.@item_id2) >= .@item_amt2 && countitem(.@item_id3) >= .@item_amt3) .@collected = 1; }
+			if(.@ct != 0 && .@collected == 0) {
+				mes .@name$;
+				mes .@txt3$;
+				mes .@txt4$;
+				close;
+			}
+			if (select( "I have completed the mission", "Hold on, I'm not ready" ) == 2) {
+				mes .@name$;
+				mes "Okay, I'll be waiting";
+				close;
+			}
+			mes .@name$;
+			mes .@txt5$;
+			if(.@ct >= 1) delitem .@item_id1,.@item_amt1;
+			if(.@ct >= 2) delitem .@item_id2,.@item_amt2;
+			if(.@ct >= 3) delitem .@item_id3,.@item_amt3;			
+			completequest .@dq_quest;// Daily
+			setquest .@cd_quest;// Cooldown
+			return 1;
+		case 0:
+		case 1:
+			mes .@name$;
+			mes .@txt5$;
+			next;
+			mes .@name$;
+			mes "I sincerely thank you for giving it all in helping me. Best wishes to your adventurers!";
+			mes "I will be looking forward to work with you again tomorrow.";
+			close;
+		case 2:	
+			mes .@name$;
+			mes "Hey, "+strcharinfo(0)+"!"; 
+			mes .@txt3$;
+			mes .@txt4$;
+			next;
+			switch (select( "I'll gladly accept this request", "I need some time to reconsider" )) {
+				case 1:	
+					mes .@name$;
+					mes "Thank you!";
+					mes "Come back when you are done with the quest.";
+					mes .@txt4$;
+					erasequest .@dq_quest;// Erase Daily
+					erasequest .@cd_quest;// Cooldown
+					setquest .@dq_quest;//New Daily
+					close;				
+				case 2:
+					mes .@name$;
+					mes "No problem, have a good journey!";
+					mes "Though, I do wish that you reconsider...";
+					close;
+			}
+		case 3:
+			mes .@name$;
+			mes "Thank you for your assistance.";
+			mes "Society really needs people like you.";
+			next;
+			mes .@name$;
+			mes "I'm sure that there are people out there who are in need of your assistance.";
+			mes "Explore the world, and help them out.";
+			next;
+			mes .@name$;
+			mes "Your efforts would most likely be rewarded, wouldn't it?";
+			close;
+		}
+	}
+}
+
+//callfunc("F_ChkDQ_Hunt",21073,21074,21075,strnpcinfo(1),"","","","","",999,2,511,1,512,1);
+function	script	F_ChkDQ_Hunt	{
+	.@nq_quest = getarg(0);
+	.@cd_quest = getarg(1);
+	.@dq_quest = getarg(2);
+	
+	.@name$ = "["+getarg(3)+"]";
+	.@txt1$ = getarg(4);
+	.@txt2$ = getarg(5);
+	.@txt3$ = getarg(6);
+	.@txt4$ = getarg(7);
+	.@txt5$ = getarg(8);
+	
+	//ignore this unused param
+	//.@nq_type = getarg(9);
+	
+	.@ct = getarg(10);
+	
+if(.@ct >= 1) .@item_id1 = getarg(11);
+if(.@ct >= 1) .@item_amt1 = getarg(12);	
+if(.@ct >= 2) .@item_id2 = getarg(13);	
+if(.@ct >= 2) .@item_amt2 = getarg(14);		
+
+	callfunc("F_CheckWeight",getarg(3),3);
+
+	if(.@cd_quest == 0 || .@dq_quest == 0) .@nq = 1;
+		
+	if (checkweight(1202,3) == 0) {
+		mes "- You cannot proceed with the quest since you have too many items. -";
+		close;
+	}
+	
+	if(.@nq_quest == 0) .@switch = 2; //no normal quest required, skip to daily quest
+		else .@switch = isbegin_quest(.@nq_quest); //checks normal quest
+		
+	switch( .@switch ) {
+	case 0:
+		mes .@name$;
+		mes .@txt1$;
+		mes .@txt2$;
+		next;
+		if (select( "I'll gladly accept this request", "I need some time to reconsider" ) == 2) {
+			mes .@name$;
+			mes "You're pretty straightforward.";
+			mes "I wish that you would reconsider...";
+			close;
+		}
+		setquest .@nq_quest;// 1st Hunting
+		mes .@name$;
+		mes "I have faith in your abilities.";
+		mes .@txt2$;
+		close;
+	case 1:
+		if(checkquest(.@nq_quest,HUNTING) < 2) {
+			mes .@name$;
+			mes .@txt1$;
+			mes .@txt2$;
+			close;
+		}
+		if(.@ct == 1) { if(countitem(.@item_id1) >= .@item_amt1) .@collected = 1; }
+		if(.@ct == 2) { if(countitem(.@item_id1) >= .@item_amt1 && countitem(.@item_id2) >= .@item_amt2) .@collected = 1; }
+		if(.@ct == 3) { if(countitem(.@item_id1) >= .@item_amt1 && countitem(.@item_id2) >= .@item_amt2 && countitem(.@item_id3) >= .@item_amt3) .@collected = 1; }
+		if(.@ct != 0 && .@collected == 0) {
+			mes .@name$;
+			mes .@txt1$;
+			mes .@txt2$;
+			close;
+		}
+		if (select( "I have completed the mission", "Hold on, I'm not ready" ) == 2) {
+			mes .@name$;
+			mes "Okay, I'll be waiting";
+			close;
+		}
+		mes .@name$;
+		mes .@txt5$;
+		if(.@ct >= 1) delitem .@item_id1,.@item_amt1;
+		if(.@ct >= 2) delitem .@item_id2,.@item_amt2;
+		if(.@ct >= 3) delitem .@item_id3,.@item_amt3;			
+		completequest .@nq_quest; // 1st Hunting
+		if(.@cd_quest > 0) setquest .@cd_quest; // Cooldown
+		//First Time Rewards
+		return 100;
+	case 2:
+		if(.@nq == 1) .@switch = 3;
+			else .@switch = checkquest(.@cd_quest,PLAYTIME);
+		switch( .@switch ) {
+		case -1:
+			if (isbegin_quest(.@dq_quest) == 0) {
+				mes .@name$;
+				mes .@txt3$;
+				mes .@txt4$;
+				next;
+				if (select( "I'll gladly accept this request", "I need some time to reconsider" ) == 2) {
+					mes .@name$;
+					mes "You're pretty straightforward.";
+					mes "I wish that you would reconsider...";
+					close;
+				}
+				setquest .@dq_quest;// Daily
+				mes .@name$;
+				mes "I'll be sure to show my appreciation!";
+				mes .@txt4$;
+				close;
+			}
+			if (checkquest(.@dq_quest,HUNTING) < 2) {
+				mes .@name$;
+				mes .@txt3$;
+				mes .@txt4$;
+				close;
+			}
+			if(.@ct == 1 && .@item_id1 > 0)
+				if(countitem(.@item_id1) >= .@item_amt1) .@collected = 1;
+			if(.@ct == 2) {
+				if((countitem(.@item_id1) >= .@item_amt1) && (countitem(.@item_id2) > .@item_amt2)) .@collected = 1;
+			}
+			if(.@ct == 3) {
+				if((countitem(.@item_id1) >= .@item_amt1) && (countitem(.@item_id2) > .@item_amt2) && (countitem(.@item_id3) > .@item_amt3)) .@collected = 1;
+			}
+			if(.@ct != 0 && .@collected == 0) {
+				mes .@name$;
+				mes .@txt1$;
+				mes .@txt2$;
+				close;
+			}			
+			if (select( "I have completed the mission", "Hold on, I'm not ready" ) == 2) {
+				mes .@name$;
+				mes "Okay, I'll be waiting";
+				close;
+			}			
+			mes .@name$;
+			mes .@txt5$;
+			if(.@ct >= 1) delitem .@item_id1,.@item_amt1;
+			if(.@ct >= 2) delitem .@item_id2,.@item_amt2;
+			if(.@ct >= 3) delitem .@item_id3,.@item_amt3;	
+			completequest .@dq_quest;// Daily
+			setquest .@cd_quest;// Cooldown
+			if(.@nq_quest != 0 && isbegin_quest(.@nq_quest) < 2) {
+				completequest .@nq_quest;
+				return 100;
+			}
+			return 1;
+		case 0:
+		case 1:
+			mes .@name$;
+			mes .@txt5$;
+			next;
+			mes .@name$;
+			mes "I sincerely thank you for giving it all in helping me. Best wishes to your adventurers!";
+			mes "I will be looking forward to work with you again tomorrow.";
+			close;
+		case 2:
+			mes .@name$;
+			mes "Hey, "+strcharinfo(0)+"!"; 
+			mes .@txt3$;
+			mes .@txt4$;
+			next;
+			switch (select( "I'll gladly accept this request", "I need some time to reconsider" )) {
+				case 1:	
+					mes .@name$;
+					mes "Thank you!";
+					mes "Come back when you are done with the quest.";
+					mes .@txt4$;
+					if(isbegin_quest(.@dq_quest) == 2){
+						erasequest .@dq_quest;// Erase Daily
+					}
+					erasequest .@cd_quest;// Cooldown
+					setquest .@dq_quest;//New Daily
+					close;				
+				case 2:
+					mes .@name$;
+					mes "No problem, have a good journey!";
+					mes "Though, I do wish that you reconsider...";
+					close;
+			}			
+		case 3:
+			mes .@name$;
+			mes "Thank you "+strcharinfo(0);
+			mes "That was kind of you to assist me.";
+			next;
+			mes .@name$;
+			mes "If you ask around, there probably is someone who can make use of your help.";
+			close;
+		}
+	}
+}
+
+//callfunc("F_ChkNpcQuest",21073,21074,21075,Item,Item_Amt,"","","","","");
+function	script	F_ChkNpcQuest	{
+	.@npc_quest = getarg(0);
+	.@cd_quest = getarg(1);
+	.@extra_quest = getarg(2);
+	.@point_id = getarg(3);
+	.@point_amt = getarg(4);
+	.@txt1$ = getarg(5);
+	.@txt2$ = getarg(6);
+	.@txt3$ = getarg(7);
+	.@txt4$ = getarg(8);
+	.@txt5$ = getarg(9);
+	.@npc$ = getarg(10,"");
+	
+	callfunc("F_CheckWeight",.@name$,3);
+	
+	switch( checkquest(.@cd_quest,PLAYTIME) ) {
+	case -1:
+		switch( isbegin_quest(.@npc_quest) ) {
+		case 0:
+			mes .@name$;
+			mes .@txt1$;
+			mes .@txt2$;
+			mes .@txt3$;
+			mes .@txt4$;
+			mes .@txt5$;
+			next;
+			if(select("^0000FFAccept Quest^000000:Leave")==2) close;
+			mes .@name$;
+			mes "- Quest has been ^0000FFAccepted^000000 -";
+			setquest .@npc_quest;
+			close3;
+		case 1:
+			mes .@name$;
+			if(.@npc$=="") {
+				mes "- Quest in Progress -";
+				mes "- Check ^0000FFCTRL^000000 + ^0000FFQ^000000 for Details -";
+			} else {
+				getmapxy(.@map$,.@x,.@y,BL_NPC,.@npc$);
+				mes "Your task is to locate "+callfunc("F_NaviLink",.@npc$,.@map$,.@x,.@y);
+				mes "Best of luck in your mission.";
+				navigateto .@map$,.@x,.@y;
+			}
+			close3;
+		case 2:
+			mes "- Quest has been ^0000FFSuccessfully^000000 Completed -";
+			setquest .@cd_quest;// Cooldown
+			erasequest .@npc_quest;
+			if(.@extra_quest > 0) erasequest .@extra_quest;
+//			setd getd(.@point_id),getd(.@point_id) + .@point_amt;
+			getitem .@point_id,.@point_amt;
+			close3;
+		}
+	case 0:
+	case 1:
+		mes "-^FF0000Quest Cooldown in Effect^000000 -";
+		mes "- Check ^0000FFCTRL^000000 + ^0000FFQ^000000 for Details -";
+		close3;
+	case 2:
+		erasequest .@cd_quest;
+		mes "- ^0000FFQuest Cooldown Erased^000000 -";
+		mes "- You may begin this quest! -";
+		close3;
+	}
+
+}
+
+//callfunc("F_ChkHuntingQuest",21073,21074,Item,Item_Amt,"","","","","");
+function	script	F_ChkHuntingQuest	{
+	.@hunt_quest = getarg(0);
+	.@cd_quest = getarg(1);
+	.@point_id = getarg(2);
+	.@point_amt = getarg(3);
+	.@txt1$ = getarg(4);
+	.@txt2$ = getarg(5);
+	.@txt3$ = getarg(6);
+	.@txt4$ = getarg(7);
+	.@txt5$ = getarg(8);
+	
+	callfunc("F_CheckWeight",.@name$,3);
+	
+	switch( checkquest(.@cd_quest,PLAYTIME) ) {
+	case -1:
+		switch( checkquest(.@hunt_quest,HUNTING) ) {
+		case -1:
+			mes .@name$;
+			mes .@txt1$;
+			mes .@txt2$;
+			mes .@txt3$;
+			mes .@txt4$;
+			mes .@txt5$;
+			next;
+			if(select("^0000FFAccept Quest^000000:Leave")==2) close;
+			mes .@name$;
+			mes "- Quest has been ^0000FFAccepted^000000 -";
+			setquest .@hunt_quest;
+			close3;
+		case 0:
+		case 1:
+			mes .@name$;
+			mes "- Hunting Quest in Progress -";
+			mes "- Check ^0000FFCTRL^000000 + ^0000FFQ^000000 for Details -";
+			close3;
+		case 2:
+			mes "- Quest has been ^0000FFSuccessfully^000000 Completed -";
+			changequest .@hunt_quest,.@cd_quest;// Cooldown
+//			setd getd(.@point_id),getd(.@point_id) + .@point_amt;
+			getitem .@point_id,.@point_amt;
+			close3;
+		}
+	case 0:
+	case 1:
+		mes "-^FF0000Quest Cooldown in Effect^000000 -";
+		mes "- Check ^0000FFCTRL^000000 + ^0000FFQ^000000 for Details -";
+		close3;
+	case 2:
+		erasequest .@hunt_quest;
+		erasequest .@cd_quest;
+		mes "- ^0000FFQuest Cooldown Erased^000000 -";
+		mes "- You may begin this quest! -";
+		close3;
+	}
+
+}
+
+//Check if PartyLeader for Instance Script
+function	script	F_ChkInstancePT	{
+	.@name$ = getarg(0);
+	.@party_id = getcharid(1);
+
+	if((.@party_id == 0) || (getcharid(0) != getpartyleader(.@party_id,2))) {
+		mes "["+.@name$+"]";
+		mes "I require you to be a ^0000FFLeader^000000 in your party.";
+		mes "Please so do before talking to me.";
+		close;
+	}
+	return;
+}
+
+// Returns rightmost free card slot
+// return -1 if no free slot
+// useful for enchantment
+function	script	F_GetRightmostFreeCardSlot	{
+	.@slot = getarg(0);
+	for(.@i = 3; .@i >= 0; --.@i) {
+		if (getequipcardid(.@slot, .@i) == 0) {
+			return .@i;
+		}
+	}
+	return -1;
+}
+
+function	script	F_GetUniquePartyMemberCountInMap	{
+	.@partyid = getarg(0);
+	.@map$ = getarg(1);
+	getpartymember .@partyid,2,.@partymemberaids;
+	getpartymember .@partyid,1,.@partymembercids;
+	for (.@i = 0; .@i < $@partymembercount; ++.@i) {
+		if (!isloggedin(.@partymemberaids[.@i], .@partymembercids[.@i]))
+			continue;
+		.@unique_id = callfunc("F_GetUniqueID", .@partymemberaids[.@i]);
+		getmapxy(.@pmap$,.@x,.@y,BL_PC, strcharinfo(0, .@partymembercids[.@i]));
+		if (strpos(.@uniqueids$, "" + .@unique_id) == -1 && .@pmap$ == .@map$) {
+			.@count++;
+			.@uniqueids$ = .@uniqueids$ + "||" + .@unique_id;
+		}
+	}
+
+	return .@count;
+}
+
+
+function	script	F_GetItemBoundType	{
+	switch(getarg(0, 0)) {
+		default:
+		case BOUND_NONE: return "None";
+		case BOUND_ACCOUNT: return "Account";
+		case BOUND_GUILD: return "Guild";
+		case BOUND_PARTY: return "Party";
+		case BOUND_CHAR: return "Char";
+	}
+	return "unknown";
+}
+
+function	script	F_SelectStorage	{
+	next;
+	.@n = select("Main Storage:Extra Storage (1,500z):VIP Storage");
+	switch(.@n) {
+		case 1:
+			close2;
+			cutin "",255;
+			openstorage;
+			end;
+			
+			
+		case 2:
+			if(zeny < 1500) {
+				// Standard Message
+				mes "[Kafra Employee]";
+				mes "I'm sorry, but you don't";
+				mes "have enough zeny to use";
+				mes "the Storage 2 Service. Our";
+				mes "Storage access fee is 1500 zeny.";
+				return;
+			}
+			close2;
+			cutin "",255;
+			set zeny,zeny-1500;
+			openstorage2 2,STOR_MODE_GET|STOR_MODE_PUT; break;
+			end;
+			
+		case 3:
+		if (vip_status(VIP_STATUS_ACTIVE)) {
+			mes "[Kafra Employee]";
+			mes "I will open your VIP Storage.";
+			mes "Thank you for using our service.";
+			callfunc("F_CheckKafCode");	//check your storage password, if set
+			close2;
+			cutin "",255;
+			openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
+		} else {
+			mes "[Kafra Employee]";
+			mes "Sorry, your VIP status is expired.";
+			mes "VIP Storage will be opened but you can't put any item into it.";
+			callfunc("F_CheckKafCode");	//check your storage password, if set
+			close2;
+			cutin "",255;
+			openstorage2 1,STOR_MODE_GET;
+		}
+		end;
+	}
+}
+
+function	script	F_GetName	{
+	.@id = getarg(0,0);
+	
+	if(.@id == 0) return "";
+	
+	query_sql("select `name` from `char` where `char_id` = "+.@id,.@name$);
+				
+	return .@name$;
+}
+
+//= Duplicate for dummy cloaked npc
+-	script	dummynpc	HIDDEN_WARP_NPC,{
+    end;
+    
+OnInit:
+    cloakonnpc;
+end;
+}
+

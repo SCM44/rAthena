@@ -365,6 +365,7 @@ struct map_session_data {
 		unsigned short autoloot;
 		t_itemid autolootid[AUTOLOOTITEM_SIZE]; // [Zephyrus]
 		unsigned short autoloottype;
+		unsigned int spb : 1; // @spb / @partybuff
 		unsigned int autolooting : 1; //performance-saver, autolooting state for @alootid
 		unsigned int gmaster_flag : 1;
 		unsigned int prevend : 1;//used to flag wheather you've spent 40sp to open the vending or not.
@@ -383,6 +384,7 @@ struct map_session_data {
 		bool cashshop_open;
 		bool sale_open;
 		unsigned int block_action : 10;
+		unsigned int battleinfo : 1;
 		bool refineui_open;
 	} state;
 	struct {
@@ -1379,7 +1381,8 @@ int pc_skillheal_bonus(struct map_session_data *sd, uint16 skill_id);
 int pc_skillheal2_bonus(struct map_session_data *sd, uint16 skill_id);
 
 void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int hp, unsigned int sp, unsigned int ap);
-int pc_dead(struct map_session_data *sd,struct block_list *src);
+//int pc_dead(struct map_session_data *sd,struct block_list *src);
+int pc_dead(struct map_session_data *sd,struct block_list *src, uint16 skill_id);
 void pc_revive(struct map_session_data *sd,unsigned int hp, unsigned int sp, unsigned int ap = 0);
 bool pc_revive_item(struct map_session_data *sd);
 void pc_heal(struct map_session_data *sd,unsigned int hp,unsigned int sp, unsigned int ap, int type);

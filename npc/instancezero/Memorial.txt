@@ -1,0 +1,128 @@
+//===== rAthena Script =======================================
+//= Memorial Society combined entrance NPC (kRo Zero)
+//============================================================
+
+prt_fild06,36,197,5	script	Memorial Society Member#ant	702,{
+
+	mes "["+strnpcinfo(1)+"]";
+	mes "Hello!";
+	mes "I'm a member of the ^0000FFMemorial Society^000000,";
+	mes "Where we thrive with the assistance of people like you!";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Yes~ that's right!";
+	mes "We need the help of adventurers to explore ^0000FFnew dimensions^000000.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Which dimension would you be interested in exploring?";
+	next;	
+	switch(select(" ~>^0000FFAnt Hell^000000: ~>^0000FFIzlude Deepsea^000000: ~>^0000FFSunken Ship^000000:Cancel")) {
+		case 1: .@md_name$ = "Ant Hell"; break;
+		case 2: .@md_name$ = "Izlude Deepsea"; break;
+		case 3: .@md_name$ = "Sunken Ship"; break;
+		case 4: close;
+	}
+	.@party_id = getcharid(1);
+	.@ins_mas = getpartyleader(.@party_id,2);
+	.@p_name$ = getpartyname(.@party_id);
+
+	if(getcharid(0) != .@ins_mas) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "You must be a party leader to generate the instance.";
+		close;
+	}
+	
+	switch(select("Show me the way to ^0000FF"+.@md_name$+"^000000!","Cancel")) {
+	case 1: 	
+		//Load Config Settings
+		.@select = select(getvariableofnpc(.menu_config$,"#Instance_Config"));
+		.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
+		explode(.@config$,.@arr$,"-");
+		for(.@i = 0; .@i<getarraysize(.@config$); .@i+=11) {
+			if(.@config$[.@i+1] == .@md_name$) {
+				.@quest = atoi(.@config$[.@i+4 + 3*(.@select-1)]);
+				.@min_level = atoi(.@config$[.@i+2 + 3*(.@select-1)]);
+				.@max_level = atoi(.@config$[.@i+3 + 3*(.@select-1)]);
+				break;
+			}
+		}
+		//Check Cooldown
+		callfunc("F_ChkInsCD",.@quest);	
+		//Check Level
+		callfunc("F_ChkInsLv",.@min_level,.@max_level);
+		
+		//Create Instance
+		if (instance_create(.@md_name$) < 0) {
+			mes "Party Name: "+ getpartyname(.@party_id);
+			mes "Party Leader: "+strcharinfo(0);
+			mes "^0000ff"+.@md_name$+" ^000000 - Reservation Failed.";
+			close;
+		}
+		'Mode = .@select;
+
+		callfunc("F_InsertDiarySQL","Instance Creation",.@md_name$,strcharinfo(0));
+		break;
+	case 2: break;
+	}
+	close;
+	
+OnInit:
+	waitingroom "Memorial Society",0;
+	end;
+}
+
+prt_fild06,41,196,3	script	Transport Device#ins	PORTAL,{
+	
+	mes "["+strnpcinfo(1)+"]";
+	mes "- Select Instance that you wish to enter -";
+	next;
+	switch(select(" ~>^0000FFAnt Hell^000000: ~>^0000FFIzlude Deepsea^000000: ~>^0000FFSunken Ship^000000:Cancel")) {
+	case 1:
+		.@md_name$ = "Ant Hell";
+		break;
+	case 2:
+		.@md_name$ = "Izlude Deepsea";
+		break;
+	case 3:
+		.@md_name$ = "Sunken Ship";
+		break;
+	case 4: close;
+	}
+	
+	if(instance_id() != 0) {
+		//Load Config Settings
+		.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
+		explode(.@config$,.@arr$,"-");
+		for(.@i = 0; .@i<getarraysize(.@config$); .@i+=11) {
+			if(.@config$[.@i+1] == .@md_name$) {
+				.@quest = atoi(.@config$[.@i+4 + 3*('Mode-1)]);
+				.@min_level = atoi(.@config$[.@i+2 + 3*('Mode-1)]);
+				.@max_level = atoi(.@config$[.@i+3 + 3*('Mode-1)]);
+				break;
+			}
+		}
+		//Check Cooldown
+		callfunc("F_ChkInsCD",.@quest);	
+		//Check Level
+		callfunc("F_ChkInsLv",.@min_level,.@max_level);
+	}
+
+	mes "["+strnpcinfo(1)+"]";
+	switch( instance_enter(.@md_name$) ) {
+	case IE_OTHER:
+		mes "An unknown error has occurred.";
+		close;
+	case IE_NOINSTANCE:
+		mes "The memorial dungeon "+.@md_name$+" does not exist.";
+		mes "The party leader did not generate the dungeon yet.";
+		close;
+	case IE_NOMEMBER:
+		mes "You must be in a Party to enter the "+.@md_name$+".";
+		close;
+	case IE_OK:
+		setquest .@quest;
+		break;
+	}
+	callfunc("F_InsertDiarySQL","Instance Entry",.@md_name$,strcharinfo(0));
+	
+}

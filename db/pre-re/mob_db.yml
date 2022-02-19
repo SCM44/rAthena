@@ -41413,6 +41413,1492 @@ Body:
     AttackDelay: 1872
     AttackMotion: 672
     DamageMotion: 480
+  - Id: 3038
+    AegisName: HIDDEN_MOB7
+    Name: Monster 7
+    JapaneseName: Hidden Mob 7
+    Level: 151
+    Hp: 10000
+    Attack: 500
+    Defense: 50
+    MagicDefense: 50
+    Str: 100
+    Agi: 100
+    Vit: 100
+    Int: 100
+    Dex: 400
+    Luk: 100
+    AttackRange: 1
+    SkillRange: 12
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 1000
+    Class: Boss
+    Modes:
+      Aggressive: true
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3810
+    AegisName: MD_KING_PORING
+    Name: Great King Poring
+    Level: 35
+    Hp: 140000
+    BaseExp: 9580
+    JobExp: 4288
+    Attack: 189
+    Attack2: 128
+    Defense: 20
+    MagicDefense: 20
+    Str: 16
+    Agi: 10
+    Vit: 30
+    Int: 30
+    Dex: 35
+    Luk: 24
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1564
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Poring_Village_Leek
+        Rate: 300
+      - Item: Poring_Village_Carrot
+        Rate: 430
+    Drops:
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Mixed_Rune_Fragment
+        Rate: 40
+        StealProtected: true
+  - Id: 3811
+    AegisName: MD_GOLDRING
+    Name: Goldring
+    Level: 35
+    Hp: 72118
+    BaseExp: 6327
+    JobExp: 2565
+    Attack: 153
+    Attack2: 137
+    Defense: 10
+    MagicDefense: 10
+    Str: 26
+    Agi: 21
+    Vit: 20
+    Int: 20
+    Dex: 50
+    Luk: 55
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Holy
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1564
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Jellopy
+        Rate: 3000
+      - Item: Yellow_Herb
+        Rate: 3000
+      - Item: Golden_Jewel
+        Rate: 10
+  - Id: 3812
+    AegisName: MD_AMERING
+    Name: Amering
+    Level: 35
+    Hp: 72810
+    BaseExp: 6375
+    JobExp: 2524
+    Attack: 152
+    Attack2: 137
+    Defense: 10
+    MagicDefense: 10
+    Str: 16
+    Agi: 11
+    Vit: 15
+    Int: 10
+    Dex: 30
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1564
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Jellopy
+        Rate: 3000
+      - Item: Blue_Herb
+        Rate: 100
+      - Item: Violet_Jewel
+        Rate: 10
+      - Item: Red_Herb
+        Rate: 3000
+  - Id: 3813
+    AegisName: MD_DROPS
+    Name: Enhanced Drops
+    Level: 35
+    Hp: 1095
+    BaseExp: 377
+    JobExp: 300
+    Attack: 104
+    Attack2: 70
+    Defense: 10
+    MagicDefense: 10
+    Str: 8
+    Dex: 6
+    Luk: 2
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Fire
+    ElementLevel: 1
+    WalkSpeed: 400
+    AttackDelay: 1372
+    AttackMotion: 672
+    DamageMotion: 480
+    Ai: 02
+    Drops:
+      - Item: Jellopy
+        Rate: 5000
+      - Item: Sticky_Mucus
+        Rate: 600
+      - Item: Apple
+        Rate: 1000
+      - Item: Wing_Of_Fly
+        Rate: 500
+      - Item: Apple
+        Rate: 400
+      - Item: Orange_Juice
+        Rate: 20
+      - Item: Drops_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 3814
+    AegisName: MD_POPORING
+    Name: Enhanced Poporing
+    Level: 36
+    Hp: 1167
+    BaseExp: 384
+    JobExp: 309
+    Attack: 109
+    Attack2: 72
+    Defense: 10
+    MagicDefense: 12
+    Str: 17
+    Agi: 26
+    Vit: 20
+    Int: 18
+    Dex: 36
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Wind
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1672
+    AttackMotion: 672
+    DamageMotion: 480
+    Ai: 02
+    Drops:
+      - Item: Sticky_Mucus
+        Rate: 5000
+      - Item: Garlet
+        Rate: 1000
+      - Item: Green_Herb
+        Rate: 1000
+      - Item: Grape
+        Rate: 200
+      - Item: Wing_Of_Fly
+        Rate: 500
+      - Item: Green_Potion
+        Rate: 500
+      - Item: Poporing_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 3815
+    AegisName: MD_PORING
+    Name: Enhanced Poring
+    Level: 34
+    Hp: 1023
+    BaseExp: 369
+    JobExp: 291
+    Attack: 100
+    Attack2: 68
+    Defense: 10
+    MagicDefense: 12
+    Str: 6
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1564
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 02
+    Drops:
+      - Item: Jellopy
+        Rate: 5000
+      - Item: Sticky_Mucus
+        Rate: 400
+      - Item: Apple
+        Rate: 1000
+      - Item: Wing_Of_Fly
+        Rate: 500
+      - Item: Apple
+        Rate: 150
+      - Item: Unripe_Apple
+        Rate: 40
+      - Item: Poring_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 3816
+    AegisName: MD_MARIN
+    Name: Enhanced Marin
+    Level: 33
+    Hp: 960
+    BaseExp: 358
+    JobExp: 279
+    Attack: 95
+    Attack2: 66
+    Defense: 10
+    MagicDefense: 10
+    Str: 24
+    Agi: 5
+    Vit: 10
+    Int: 5
+    Dex: 30
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 400
+    AttackDelay: 1872
+    AttackMotion: 672
+    DamageMotion: 480
+    Ai: 02
+    Drops:
+      - Item: Garlet
+        Rate: 1600
+      - Item: Sticky_Mucus
+        Rate: 750
+      - Item: Wing_Of_Fly
+        Rate: 500
+      - Item: Blue_Herb
+        Rate: 38
+      - Item: Candy
+        Rate: 175
+      - Item: Marin_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 3897
+    AegisName: MD_ORC_SKELETON
+    Name: Corrupted Orc Skeleton
+    Level: 60
+    Hp: 4458
+    BaseExp: 627
+    JobExp: 562
+    Attack: 331
+    Attack2: 104
+    Defense: 82
+    MagicDefense: 10
+    Str: 52
+    Agi: 16
+    Vit: 24
+    Int: 5
+    Dex: 24
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 2420
+    AttackMotion: 720
+    DamageMotion: 648
+    Ai: 04
+    Drops:
+      - Item: Orcish_Cuspid
+        Rate: 2750
+      - Item: Skel_Bone
+        Rate: 1750
+      - Item: Elunium_Stone
+        Rate: 40
+      - Item: Viking_Helm
+        Rate: 1
+      - Item: Green_Herb
+        Rate: 25
+  - Id: 2569
+    AegisName: G_ANOPHELES
+    Name: Anopheles
+    Level: 60
+    Hp: 7238
+    Attack: 90
+    Attack2: 18
+    Defense: 7
+    MagicDefense: 10
+    Str: 44
+    Agi: 40
+    Vit: 22
+    Int: 38
+    Dex: 45
+    Luk: 22
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Wind
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 1084
+    AttackMotion: 2304
+    DamageMotion: 576
+    Ai: 04
+    Modes:
+      Detector: true
+  - Id: 3898
+    AegisName: MD_ORC_ZOMBIE
+    Name: Corrupted Orc Zombie
+    Level: 60
+    Hp: 4475
+    BaseExp: 649
+    JobExp: 600
+    Attack: 314
+    Attack2: 105
+    Defense: 71
+    MagicDefense: 5
+    Str: 45
+    Agi: 17
+    Vit: 32
+    Int: 5
+    Dex: 57
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Undead
+    ElementLevel: 1
+    WalkSpeed: 400
+    AttackDelay: 2852
+    AttackMotion: 1152
+    DamageMotion: 840
+    Ai: 04
+    Drops:
+      - Item: Nail_Of_Orc
+        Rate: 2750
+      - Item: Sticky_Mucus
+        Rate: 1500
+      - Item: Emperium
+        Rate: 1
+  - Id: 3899
+    AegisName: MD_HIGH_ORC
+    Name: Fallen_High Orc
+    JapaneseName: High Orc
+    Level: 80
+    Hp: 7512
+    BaseExp: 1029
+    JobExp: 1005
+    Attack: 389
+    Attack2: 439
+    Defense: 101
+    MagicDefense: 45
+    Str: 75
+    Agi: 16
+    Vit: 40
+    Int: 31
+    Dex: 69
+    Luk: 20
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1500
+    AttackMotion: 500
+    DamageMotion: 1000
+    Ai: 21
+  - Id: 3900
+    AegisName: MD_ORC_ARCHER
+    Name: Fallen_Orc Archer
+    JapaneseName: Orc Archer
+    Level: 80
+    Hp: 8199
+    BaseExp: 1058
+    JobExp: 1006
+    Attack: 260
+    Attack2: 303
+    Defense: 67
+    MagicDefense: 31
+    Str: 55
+    Agi: 32
+    Vit: 24
+    Int: 30
+    Dex: 99
+    Luk: 15
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1960
+    AttackMotion: 620
+    DamageMotion: 480
+    Ai: 09
+  - Id: 3901
+    AegisName: MD_ORK_HERO
+    Name: Fake Orc Hero
+    Level: 70
+    Hp: 2110562
+    BaseExp: 166639
+    JobExp: 118717
+    MvpExp: 53460
+    Attack: 600
+    Attack2: 130
+    Defense: 50
+    MagicDefense: 50
+    Str: 97
+    Agi: 82
+    Vit: 107
+    Int: 71
+    Dex: 144
+    Luk: 43
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1678
+    AttackMotion: 780
+    DamageMotion: 648
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 150
+        StealProtected: true
+  - Id: 3902
+    AegisName: MD_ORC_LORD
+    Name: Fallen Orc Lord
+    Level: 70
+    Hp: 2110562
+    MvpExp: 53460
+    Attack: 662
+    Attack2: 300
+    Defense: 50
+    MagicDefense: 50
+    Str: 97
+    Agi: 82
+    Vit: 107
+    Int: 71
+    Dex: 144
+    Luk: 43
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1678
+    AttackMotion: 780
+    DamageMotion: 648
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+  - Id: 3903
+    AegisName: MD_ORC_FLOWER
+    Name: Shaman Flower
+    Level: 98
+    Hp: 5
+    Attack: 1
+    Attack2: 1
+    Defense: 100
+    MagicDefense: 99
+    AttackRange: 1
+    SkillRange: 7
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 1
+    AttackMotion: 1
+    DamageMotion: 1
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3969
+    AegisName: MD_RED_MUSHROOM
+    Name: Red Mushroom
+    Level: 1
+    Hp: 5
+    Attack: 1
+    Attack2: 2
+    Defense: 100
+    MagicDefense: 99
+    AttackRange: 1
+    SkillRange: 7
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 1
+    AttackMotion: 1
+    DamageMotion: 1
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3970
+    AegisName: MD_BLACK_MUSHROOM
+    Name: Black Mushroom
+    Level: 1
+    Hp: 5
+    Attack: 1
+    Attack2: 2
+    Defense: 100
+    MagicDefense: 99
+    AttackRange: 1
+    SkillRange: 7
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 1
+    AttackMotion: 1
+    DamageMotion: 1
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3972
+    AegisName: MD_THIEF_BUG__
+    Name: Giant Wild Thief Bug
+    Level: 60
+    Hp: 3330
+    Attack: 146
+    Attack2: 167
+    Defense: 40
+    MagicDefense: 20
+    Str: 17
+    Agi: 37
+    Vit: 22
+    Int: 5
+    Dex: 71
+    Luk: 13
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Dark
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 588
+    AttackMotion: 288
+    DamageMotion: 568
+    Ai: 04
+    Drops:
+      - Item: Worm_Peelings
+        Rate: 2500
+      - Item: Red_Herb
+        Rate: 350
+      - Item: Jellopy
+        Rate: 2000
+      - Item: Iron_Ore
+        Rate: 250
+  - Id: 3973
+    AegisName: MD_THIEF_BUG
+    Name: Tiny Thief Bug
+    Level: 60
+    Hp: 200
+    Attack: 72
+    Attack2: 98
+    Defense: 24
+    MagicDefense: 3
+    Str: 12
+    Agi: 10
+    Vit: 23
+    Int: 10
+    Dex: 54
+    Luk: 10
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 588
+    AttackMotion: 288
+    DamageMotion: 568
+    Ai: 07
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Worm_Peelings
+        Rate: 2500
+  - Id: 3974
+    AegisName: MD_THIEF_BUG_EGG
+    Name: Dangerous Egg
+    Level: 60
+    Hp: 10
+    Attack: 1
+    Attack2: 2
+    Defense: 64
+    MagicDefense: 10
+    Str: 10
+    Vit: 50
+    Dex: 3
+    Luk: 15
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Dark
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 701
+    AttackMotion: 1
+    DamageMotion: 1
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3975
+    AegisName: MD_GOLDEN_BUG
+    Name: Ancient Golden Bug
+    Level: 60
+    Hp: 1200000
+    BaseExp: 75000
+    JobExp: 63000
+    MvpExp: 97200
+    Attack: 700
+    Attack2: 150
+    Defense: 50
+    MagicDefense: 50
+    Str: 71
+    Agi: 77
+    Vit: 80
+    Int: 62
+    Dex: 127
+    Luk: 76
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 768
+    AttackMotion: 768
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 150
+        StealProtected: true
+  - Id: 20076
+    AegisName: MD_MAYA
+    Name: Ancient Maya
+    Level: 70
+    Hp: 2200000
+    BaseExp: 165000
+    JobExp: 120000
+    MvpExp: 89280
+    Attack: 900
+    Attack2: 700
+    Defense: 50
+    MagicDefense: 50
+    Str: 88
+    Agi: 72
+    Vit: 76
+    Int: 102
+    Dex: 92
+    Luk: 76
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Earth
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 864
+    AttackMotion: 1000
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 200
+        StealProtected: true
+  - Id: 20077
+    AegisName: MD_DENIRO
+    Name: Cannibal Deniro
+    Level: 70
+    Hp: 5000
+    BaseExp: 834
+    JobExp: 740
+    Attack: 45
+    Attack2: 161
+    Defense: 52
+    MagicDefense: 16
+    Str: 15
+    Agi: 16
+    Vit: 30
+    Int: 10
+    Dex: 23
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1288
+    AttackMotion: 288
+    DamageMotion: 576
+    Ai: 04
+    Modes:
+      ChangeTargetMelee: true
+      Detector: true
+    Drops:
+      - Item: Worm_Peelings
+        Rate: 9000
+      - Item: Garlet
+        Rate: 3000
+      - Item: Sticky_Mucus
+        Rate: 1200
+      - Item: Boody_Red
+        Rate: 50
+      - Item: Sparkling_Dust
+        Rate: 8
+  - Id: 20078
+    AegisName: MD_VITATA
+    Name: Cannibal Vitata
+    Level: 71
+    Hp: 5000
+    BaseExp: 829
+    JobExp: 756
+    Attack: 68
+    Attack2: 186
+    Defense: 44
+    MagicDefense: 12
+    Str: 20
+    Agi: 11
+    Vit: 24
+    Int: 20
+    Dex: 21
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1768
+    AttackMotion: 768
+    DamageMotion: 384
+    Ai: 04
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Yellow_Live
+        Rate: 90
+      - Item: Worm_Peelings
+        Rate: 5000
+      - Item: Scell
+        Rate: 200
+      - Item: Honey
+        Rate: 350
+  - Id: 20079
+    AegisName: MD_ANDRE
+    Name: Cannibal Andre
+    Level: 70
+    Hp: 5000
+    BaseExp: 843
+    JobExp: 779
+    Attack: 51
+    Attack2: 72
+    Defense: 20
+    MagicDefense: 16
+    Str: 11
+    Agi: 20
+    Vit: 40
+    Int: 10
+    Dex: 24
+    Luk: 10
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 100
+    AttackDelay: 1288
+    AttackMotion: 288
+    DamageMotion: 384
+    Ai: 04
+    Modes:
+      ChangeTargetMelee: true
+      Detector: true
+    Drops:
+      - Item: Worm_Peelings
+        Rate: 9000
+      - Item: Garlet
+        Rate: 1000
+      - Item: Sticky_Mucus
+        Rate: 500
+      - Item: Yellow_Live
+        Rate: 50
+      - Item: Sparkling_Dust
+        Rate: 4
+      - Item: Iron_Ore
+        Rate: 350
+  - Id: 20080
+    AegisName: MD_PIERE
+    Name: Cannibal Piere
+    Level: 70
+    Hp: 5000
+    BaseExp: 843
+    JobExp: 779
+    Attack: 47
+    Attack2: 167
+    Defense: 57
+    MagicDefense: 16
+    Str: 19
+    Agi: 19
+    Vit: 36
+    Int: 8
+    Dex: 27
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1288
+    AttackMotion: 288
+    DamageMotion: 576
+    Ai: 04
+    Modes:
+      ChangeTargetMelee: true
+      Detector: true
+    Drops:
+      - Item: Worm_Peelings
+        Rate: 9000
+      - Item: Garlet
+        Rate: 1100
+      - Item: Sticky_Mucus
+        Rate: 600
+      - Item: Wind_Of_Verdure
+        Rate: 30
+      - Item: Sparkling_Dust
+        Rate: 5
+  - Id: 20081
+    AegisName: MD_IZ_COELACANTH
+    Name: Deepsea Coelacanth
+    Level: 80
+    Hp: 2200000
+    BaseExp: 168000
+    JobExp: 114000
+    MvpExp: 157580
+    Attack: 1000
+    Attack2: 350
+    Defense: 50
+    MagicDefense: 50
+    Str: 92
+    Agi: 68
+    Vit: 101
+    Int: 68
+    Dex: 115
+    Luk: 60
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 432
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 200
+        StealProtected: true
+  - Id: 20082
+    AegisName: MD_IZ_MARSE
+    Name: Deepsea Marse
+    Level: 80
+    Hp: 5000
+    BaseExp: 802
+    JobExp: 711
+    Attack: 85
+    Attack2: 105
+    Defense: 38
+    MagicDefense: 18
+    Str: 33
+    Agi: 17
+    Vit: 25
+    Int: 10
+    Dex: 33
+    Luk: 10
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 300
+    AttackDelay: 1956
+    AttackMotion: 756
+    DamageMotion: 528
+    Ai: 04
+    Drops:
+      - Item: Chinese_Ink
+        Rate: 9000
+      - Item: Tentacle
+        Rate: 3000
+      - Item: Blue_Gemstone
+        Rate: 200
+      - Item: Skyblue_Jewel
+        Rate: 10
+      - Item: Mistic_Frozen
+        Rate: 12
+      - Item: Penetration
+        Rate: 5
+      - Item: Grape
+        Rate: 300
+  - Id: 20083
+    AegisName: MD_IZ_MERMAN
+    Name: Deepsea Merman
+    Level: 80
+    Hp: 5000
+    BaseExp: 799
+    JobExp: 774
+    Attack: 125
+    Attack2: 157
+    Defense: 62
+    MagicDefense: 8
+    Str: 45
+    Agi: 29
+    Vit: 30
+    Int: 19
+    Dex: 60
+    Luk: 10
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 220
+    AttackDelay: 916
+    AttackMotion: 816
+    DamageMotion: 336
+    Ai: 04
+    Drops:
+      - Item: Lip_Of_Ancient_Fish
+        Rate: 1300
+      - Item: Lemon
+        Rate: 400
+      - Item: Skyblue_Jewel
+        Rate: 40
+      - Item: Mistic_Frozen
+        Rate: 35
+      - Item: Oridecon_Stone
+        Rate: 203
+  - Id: 20084
+    AegisName: MD_IZ_OBEAUNE
+    Name: Deepsea Obeaune
+    Level: 80
+    Hp: 5000
+    BaseExp: 799
+    JobExp: 774
+    Attack: 102
+    Attack2: 147
+    Defense: 48
+    MagicDefense: 26
+    Str: 54
+    Agi: 47
+    Vit: 21
+    Int: 40
+    Dex: 56
+    Luk: 25
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 1872
+    AttackMotion: 672
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Mistic_Frozen
+        Rate: 13
+      - Item: Heart_Of_Mermaid
+        Rate: 9000
+      - Item: Fin_Helm
+        Rate: 1
+      - Item: Skyblue_Jewel
+        Rate: 10
+      - Item: Fin
+        Rate: 500
+      - Item: Witherless_Rose
+        Rate: 30
+  - Id: 20085
+    AegisName: MD_IZ_CORNUTUS
+    Name: Deepsea Cornutus
+    Level: 80
+    Hp: 5000
+    BaseExp: 799
+    JobExp: 774
+    Attack: 79
+    Attack2: 126
+    Defense: 42
+    MagicDefense: 28
+    Str: 32
+    Agi: 27
+    Vit: 45
+    Int: 26
+    Dex: 27
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1248
+    AttackMotion: 48
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Crystal_Blue
+        Rate: 45
+      - Item: Conch
+        Rate: 5500
+      - Item: Scell
+        Rate: 800
+      - Item: Elunium_Stone
+        Rate: 53
+      - Item: Shield_
+        Rate: 5
+      - Item: Solid_Shell
+        Rate: 1000
+      - Item: Blue_Gemstone
+        Rate: 100
+  - Id: 20111
+    AegisName: MD_TRE_DRAKE
+    Name: Stormy Drake
+    Level: 99
+    Hp: 3000000
+    BaseExp: 670000
+    JobExp: 510000
+    MvpExp: 257580
+    Attack: 1500
+    Attack2: 400
+    Defense: 50
+    MagicDefense: 50
+    Str: 121
+    Agi: 103
+    Vit: 114
+    Int: 107
+    Dex: 135
+    Luk: 71
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 1
+    WalkSpeed: 400
+    AttackDelay: 620
+    AttackMotion: 420
+    DamageMotion: 360
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 200
+        StealProtected: true
+  - Id: 20112
+    AegisName: MD_MANHOLE
+    Name: Manhole
+    Level: 1
+    Hp: 9999
+    Attack: 5000
+    Attack2: 2
+    Defense: 100
+    MagicDefense: 99
+    Str: 300
+    Agi: 300
+    Vit: 300
+    Int: 300
+    Dex: 300
+    Luk: 300
+    AttackRange: 1
+    SkillRange: 7
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackDelay: 1308
+    AttackMotion: 1008
+    DamageMotion: 480
+    Ai: 10
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 20113
+    AegisName: MD_TRE_MIMIC
+    Name: Stormy Mimic
+    Level: 99
+    Hp: 20
+    BaseExp: 10
+    JobExp: 10
+    Attack: 221
+    Attack2: 243
+    Defense: 63
+    MagicDefense: 15
+    Str: 49
+    Agi: 120
+    Vit: 20
+    Int: 15
+    Dex: 99
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 3
+    WalkSpeed: 100
+    AttackDelay: 972
+    AttackMotion: 500
+    DamageMotion: 288
+    Ai: 09
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+    Drops:
+      - Item: Old_Violet_Box
+        Rate: 5
+      - Item: Old_Blue_Box
+        Rate: 45
+      - Item: Elunium_Stone
+        Rate: 270
+      - Item: Rare_Coin
+        Rate: 50
+        StealProtected: true
+  - Id: 20114
+    AegisName: MD_TRE_WRAITH
+    Name: Stormy Wraith
+    Level: 99
+    Hp: 12000
+    Attack: 335
+    Attack2: 396
+    Defense: 80
+    MagicDefense: 40
+    Str: 62
+    Agi: 26
+    Vit: 30
+    Int: 55
+    Dex: 76
+    Luk: 5
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Undead
+    ElementLevel: 4
+    WalkSpeed: 300
+    AttackDelay: 1816
+    AttackMotion: 576
+    DamageMotion: 240
+    Ai: 21
+    Drops:
+      - Item: Transparent_Cloth
+        Rate: 5820
+      - Item: Wedding_Veil
+        Rate: 10
+      - Item: Red_Gemstone
+        Rate: 650
+      - Item: Wing_Of_Butterfly
+        Rate: 1300
+      - Item: Crystal_Jewel_
+        Rate: 5
+  - Id: 20115
+    AegisName: MD_TRE_PIRATE_SKEL
+    Name: Stormy Pirate Skeleton
+    Level: 99
+    Hp: 12000
+    BaseExp: 2100
+    JobExp: 1900
+    Attack: 348
+    Attack2: 125
+    Defense: 53
+    MagicDefense: 20
+    Str: 35
+    Agi: 25
+    Vit: 25
+    Int: 15
+    Dex: 70
+    Luk: 30
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 1754
+    AttackMotion: 554
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Skel_Bone
+        Rate: 3000
+      - Item: Pirate_Bandana
+        Rate: 15
+      - Item: Oridecon_Stone
+        Rate: 43
+      - Item: Well_Dried_Bone
+        Rate: 20
+  - Id: 20116
+    AegisName: MD_TRE_WHISPER
+    Name: Stormy Whisper
+    Level: 99
+    Hp: 12000
+    BaseExp: 2100
+    JobExp: 1900
+    Attack: 452
+    Attack2: 120
+    Defense: 20
+    MagicDefense: 40
+    Str: 32
+    Agi: 48
+    Vit: 20
+    Int: 35
+    Dex: 52
+    Luk: 20
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 1960
+    AttackMotion: 960
+    DamageMotion: 504
+    Ai: 09
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Sparkling_Dust
+        Rate: 150
+      - Item: Transparent_Cloth
+        Rate: 5335
+      - Item: Spirit_Chain
+        Rate: 18
+      - Item: Fit_Pipe
+        Rate: 20
+  - Id: 20117
+    AegisName: MD_TRE_HYDRA
+    Name: Stormy Hydra
+    Level: 99
+    Hp: 12000
+    BaseExp: 233
+    JobExp: 263
+    Attack: 470
+    Attack2: 141
+    Defense: 20
+    MagicDefense: 32
+    Str: 10
+    Agi: 9
+    Vit: 14
+    Dex: 35
+    Luk: 2
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 1000
+    AttackDelay: 800
+    AttackMotion: 432
+    DamageMotion: 600
+    Ai: 10
+    Drops:
+      - Item: Emveretarcon
+        Rate: 25
+      - Item: Tentacle
+        Rate: 5500
+      - Item: Sticky_Mucus
+        Rate: 1500
+      - Item: Detrimindexta
+        Rate: 20
+      - Item: Panacea
+        Rate: 5
+      - Item: Meat
+        Rate: 700
+  - Id: 20165
+    AegisName: MD_TOUCAN
+    Name: Toucan
+    Level: 99
+    Hp: 12000
+    BaseExp: 233
+    JobExp: 263
+    Attack: 470
+    Attack2: 141
+    Defense: 20
+    MagicDefense: 32
+    Str: 10
+    Agi: 9
+    Vit: 14
+    Dex: 35
+    Luk: 2
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 1000
+    AttackDelay: 800
+    AttackMotion: 432
+    DamageMotion: 600
+    Ai: 10
+    Drops:
+      - Item: Emveretarcon
+        Rate: 25
+      - Item: Tentacle
+        Rate: 5500
+      - Item: Sticky_Mucus
+        Rate: 1500
+      - Item: Detrimindexta
+        Rate: 20
+      - Item: Panacea
+        Rate: 5
+      - Item: Meat
+        Rate: 700
   - Id: 22000
     AegisName: EmperiumSandbag
     Name: Emperium Sandbag

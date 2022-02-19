@@ -209,7 +209,7 @@ OnInit:
 	debugmes "OptionDrops: Finished...";
 }
 
-prontera,163,190,3	script	Rune Enchanter	826,{
+prontera,144,209,3	script	Rune Enchanter	826,{
 	setarray .@equip_locations$, "Head Top", "Left Hand", "Right Hand", "Armor", "Accessory Left", "Accessory Right", "Shoes", "Garment";
 	setarray .@equip_locations, EQI_HEAD_TOP, EQI_HAND_L, EQI_HAND_R, EQI_ARMOR, EQI_ACC_L, EQI_ACC_R, EQI_SHOES, EQI_GARMENT;
 	for(.@a = 0; .@a < getarraysize(.@equip_locations); .@a++) {
@@ -228,13 +228,13 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 
 	if(.@equip_menu$ == .@null_menu$) {
 		mes .npc_name$;
-		mes "Tu ne semble pas avoir d'objets équipés a enchant sur toi.";
-		mes "N'hésites pas a repasser me voir quand ça sera bon !.";
+		mes "You dont seem to have any equipements that i can enchant on you.";
+		mes "Please come back when you do !.";
 		close;
 	}
 
 	mes .npc_name$;
-	mes "Choisis l'équipement sur lequel tu souhaites appliquer des modifications.";
+	mes "Please choose the equipement on wich you want to add some modifications.";
 	next;
 
 	.@equip_index = .@equip_locations[select(.@equip_menu$)-1];
@@ -582,18 +582,18 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 			.VAR_CRITICALSUCCESSVALUE;
 	} else {
 		mes .npc_name$;
-		mes "Cet équipement ne fait pas partie des objets a enchanter.";
+		mes "This equipement cant be enchanted.";
 		close;
 	}
 
 	mes .npc_name$;
-	mes "Choisis un de mes services !.";
+	mes "Please choose one of my services !.";
 	next;
-	switch(select("- Ajouter un niveau de rareté ( 3 slot max ):- Reset un slot de stat:- Améliorer les stats sur un slot:- Max stat sur un slot:- Passer son équipement en légendaire")) {
+	switch(select("- Add 1 random option slot ( 3 slot max ):- Reset a random option stat slot:- Buff a random option stat slot:- Maximize a random option stat slot:- Add the 4th random option stat slot")) {
 		case 1:
 			if(countitem(.level_up_rune_id) < 1) {
 				mes .npc_name$;
-				mes "Tu as besoin de plus de "+getitemname(.level_up_rune_id)+".";
+				mes "You need more "+getitemname(.level_up_rune_id)+".";
 				close;
 			}
 			for(.@a = 0; .@a < 3; .@a++) {
@@ -620,20 +620,22 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 				);
 				.@roa_value = getequiprandomoption(.@equip_index,.@a,ROA_VALUE);
 				mes .npc_name$;
-				mes "Ton équipement a reçu un nouveau buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+				misceffect 154;
+				emotion ET_SMILE;
+				mes "You equipement got a new buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
 				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
 			} else {
 				mes .npc_name$;
-				mes "Cet équipement a déjà 3 slot, tu ne peux pas en ajouter un de plus.";
+				mes "This equipement already have 3 slots, you cant add more that way, please choose the Option Add the 4th Random Option Slot instead.";
 			}
 			break;
 		case 2:
 			mes .npc_name$;
-			mes "Choisis le buff a reset.";
+			mes "Please choose the slot to reset.";
 			next;
 			if(countitem(.reset_rune_id) < 1) {
 				mes .npc_name$;
-				mes "Tu as besoin de plus de "+getitemname(.reset_rune_id)+".";
+				mes "You need more "+getitemname(.reset_rune_id)+".";
 				close;
 			}
 			for(.@a = 0; .@a < 4; .@a++) {
@@ -663,16 +665,18 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 			);
 			delitem .reset_rune_id, 1;
 			mes .npc_name$;
-			mes "Ton slot a reçu un nouveau Buff ! ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+			misceffect 154;
+			emotion ET_SMILE;
+			mes "Your equipement got a new buff ! ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
 			//mes "La stat de l'équipement du slot "+(.@index+1)+" a été reset en ["+.option_names$[.@options[.@random_option]]+"]!";
 			break;
 		case 3:
 			mes .npc_name$;
-			mes "Choisis le buff a augmenter.";
+			mes "Please choose the slot to buff.";
 			next;
 			if(countitem(.rune_plus_id) < 1) {
 				mes .npc_name$;
-				mes "Tu as besoin de plus de "+getitemname(.rune_plus_id)+".";
+				mes "You need more "+getitemname(.rune_plus_id)+".";
 				close;
 			}
 			for(.@a = 0; .@a < 4; .@a++) {
@@ -689,7 +693,7 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 			.@roa_value_max = getd(".@values_"+.@roa_id+"[1]");
 			if(.@roa_value >= .@roa_value_max) {
 				mes .npc_name$;
-				mes "Les stats de ce slot sont déjà au maximum.";
+				mes "The stats of this slot are already maximized.";
 				close;
 			}
 			if(.@roa_value_max <= 10) {
@@ -711,16 +715,18 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 			delitem .rune_plus_id, 1;
 			setrandomoption(.@equip_index, .@index, .@roa_id, .@roa_value, -1);
 			mes .npc_name$;
-			mes "Ta stat a été améliorée ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
+			misceffect 154;
+			emotion ET_SMILE;
+			mes "Your slot stat got buffed ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
 			//mes "The items option in slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] has been enhanced to "+.@roa_value+"!";
 			break;
 		case 4:
 			mes .npc_name$;
-			mes "Choisis le buff a maximisé.";
+			mes "Please choose the slot to maximize.";
 			next;
 			if(countitem(.rune_max_id) < 1) {
 				mes .npc_name$;
-				mes "Tu as besoin de plus de "+getitemname(.rune_max_id)+".";
+				mes "You need more "+getitemname(.rune_max_id)+".";
 				close;
 			}
 			for(.@a = 0; .@a < 4; .@a++) {
@@ -737,25 +743,27 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 			.@roa_value_max = getd(".@values_"+.@roa_id+"[1]");
 			if(.@roa_value >= .@roa_value_max) {
 				mes .npc_name$;
-				mes "Ce slot a déjà sa stat montée au maximum.";
+				mes "That slot already have the stats maximized.";
 				close;
 			}
 			delitem .rune_max_id, 1;
 			setrandomoption(.@equip_index, .@index, .@roa_id, .@roa_value_max, -1);
 			.@roa_value = getequiprandomoption(.@equip_index,.@index,ROA_VALUE);
 			mes .npc_name$;
-			mes "Ta stat a été maximisée ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
+			misceffect 154;
+			emotion ET_SMILE;
+			mes "Your slot stat just got maximized, congratz ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
 			//mes "La stat du slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] a étée maximisée !";
 			break;
 		case 5:
 			if(countitem(.level_up_rune_id) < 3) {
 				mes .npc_name$;
-				mes "Tu as besoin de 3 "+getitemname(.level_up_rune_id)+".";
+				mes "You need 3 "+getitemname(.level_up_rune_id)+".";
 				close;
 			}
-			mes "Attention ! utilise uniquement ce choix si tu as un équipement avec 3 slots, sinon tu perdras 3 runes au lieu d'une !";
+			mes "Be carreful !, only use this if you have 3 slots on your equipement, because it will take 3 runes from you either way !";
 			next;
-			menu "Oui",Y_remove,"Non",N_remove;
+			menu "Yes",Y_remove,"No",N_remove;
 			N_remove:
 			close;
 			Y_remove:
@@ -783,11 +791,13 @@ prontera,163,190,3	script	Rune Enchanter	826,{
 				);
 				.@roa_value = getequiprandomoption(.@equip_index,.@a,ROA_VALUE);
 				mes .npc_name$;
-				mes "Ton équipement a reçu un nouveau buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+				misceffect 154;
+				emotion ET_SMILE;
+				mes "Your equipement got a new slot buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
 				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
 			} else {
 				mes .npc_name$;
-				mes "Cet équipement est déjà légendaire, tu ne peux pas en ajouter un slot de plus.";
+				mes "That equipement already have 4 slot Random Options, you cant add more !";
 			}
 			break;
 	}

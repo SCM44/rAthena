@@ -10533,6 +10533,30 @@ ACMD_FUNC(limitedsale){
 	return 0;
 }
 
+ACMD_FUNC(partybuff)
+{ // [Vykimo]
+	struct party_data* p = NULL;
+	nullpo_retr(-1, sd);
+
+	if( !sd->status.party_id ) {
+		clif_displaymessage(fd, msg_txt(sd,1071)); // You're not in a party.
+		return -1;
+	}
+
+	p = party_search(sd->status.party_id);
+
+	if( sd->state.spb ) {
+		sd->state.spb = 0;
+		clif_displaymessage(fd, msg_txt(sd,1072)); // Displaying party member's buffs disabled.
+	} else {
+		sd->state.spb = 1;
+		clif_displaymessage(fd, msg_txt(sd,1073)); // Displaying party member's buffs enabled.
+	}
+
+	clif_party_info(p,sd);
+	return 0;
+}
+
 /**
  * Displays camera information from the client.
  * Usage: @camerainfo or client command /viewpointvalue or /setcamera on supported clients
@@ -10673,6 +10697,8 @@ void atcommand_basecommands(void) {
 	AtCommandInfo atcommand_base[] = {
 #include "../custom/atcommand_def.inc"
 		ACMD_DEF2R("warp", mapmove, ATCMD_NOCONSOLE),
+		ACMD_DEF(partybuff), // [Vykimo]
+		ACMD_DEF2("spb", partybuff), // [Vykimo]
 		ACMD_DEF(where),
 		ACMD_DEF(jumpto),
 		ACMD_DEF(jump),

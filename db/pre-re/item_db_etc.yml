@@ -21580,7 +21580,6 @@ Body:
     Weight: 10
     Script: |
       bonus2 bHPDrainRate,1000,1;
-      bonus2 bMagicHPDrainRate,1000,1;
   - Id: 18019
     AegisName: ATK + 2
     Name: ATK + 2
@@ -21626,3 +21625,1751 @@ Body:
     Weight: 10
     Script: |
       bonus bMdef,2;
+  - Id: 25424
+    AegisName: Shimmering_Crystal
+    Name: Shimmering Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 25430
+    AegisName: Mythril
+    Name: Mythril
+    Type: Etc
+    Buy: 20
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25457
+    AegisName: Cursed_Emerald_
+    Name: Cursed Emerald 
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25458
+    AegisName: Shinee_Opal_
+    Name: Shiny Opal
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25459
+    AegisName: Sea_Sapphire_
+    Name: Sea Sapphire
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25460
+    AegisName: Bloody_Ruby_
+    Name: Bloody Ruby
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25465
+    AegisName: Jello_Shard_Poring
+    Name: Poring Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25466
+    AegisName: Jello_Shard_Poporing
+    Name: Poporing Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25467
+    AegisName: Jello_Shard_Drops
+    Name: Drops Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25468
+    AegisName: Jello_Shard_Devil
+    Name: Deviling Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25469
+    AegisName: Jello_Shard_Angel
+    Name: Angeling Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25470
+    AegisName: Red_Lotus_Gel_Stone
+    Name: Red Lotus Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25471
+    AegisName: Breeze_Gel_Stone
+    Name: Breeze Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25472
+    AegisName: Dusk_Gel_Stone
+    Name: Dusk Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25473
+    AegisName: Chaotic_Gel_Stone
+    Name: Chaotic Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25474
+    AegisName: Holy_Gel_Stone
+    Name: Holy Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25475
+    AegisName: Azure_Crystal
+    Name: Azure Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 25476
+    AegisName: Crimson_Crystal
+    Name: Crimson Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 29387
+    AegisName: Swordsman_Essence_1
+    Name: Swordsman Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "SM_MAGNUM", 10);
+      bonus(bAspdRate, getskilllv("SM_BASH") / 2);
+  - Id: 29388
+    AegisName: Merchant_Essence_1
+    Name: Merchant Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 2 * getskilllv("MC_DISCOUNT"));
+      bonus(bAspdRate, getskilllv("MC_OVERCHARGE"));
+  - Id: 29389
+    AegisName: Thief_Essence_1
+    Name: Thief Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "TF_STEAL");
+      bonus(bAspdRate, getskilllv("TF_STEAL") / 2);
+  - Id: 29390
+    AegisName: Mage_Essence_1
+    Name: Mage Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+      bonus(bCastrate, -getskilllv("MG_FIREWALL") / 2);
+  - Id: 29391
+    AegisName: Acolyte_Essence_1
+    Name: Acolyte Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSPrate, "AL_HEAL", -15);
+      bonus2(bSkillUseSPrate, "AL_INCAGI", -15);
+      bonus2(bSkillUseSPrate, "AL_BLESSING", -15);
+      bonus(bHealPower, getskilllv("AL_HEAL"));
+  - Id: 29392
+    AegisName: Archer_Essence_1
+    Name: Archer Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "AC_DOUBLE", 5);
+      bonus(bLongAtkRate, getskilllv("AC_VULTURE"));
+  - Id: 29393
+    AegisName: Swordsman_Essence_2
+    Name: Swordsman Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "SM_MAGNUM", 10);
+      bonus(bAspdRate, getskilllv("SM_BASH") / 2);
+      bonus2(bSkillAtk, "SM_MAGNUM", 15 * (getrefine() / 2));
+  - Id: 29394
+    AegisName: Merchant_Essence_2
+    Name: Merchant Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 2 * getskilllv("MC_DISCOUNT"));
+      bonus(bAspdRate, getskilllv("MC_OVERCHARGE"));
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+  - Id: 29395
+    AegisName: Thief_Essence_2
+    Name: Thief Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "TF_STEAL","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bAspdRate, getskilllv("TF_STEAL") / 2);
+      bonus(bFlee, 10 * (getrefine() / 2));
+  - Id: 29396
+    AegisName: Mage_Essence_2
+    Name: Mage Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+      bonus(bCastrate, -getskilllv("MG_FIREWALL") / 2); 
+      bonus(bMaxSP, 50 * (getrefine() / 2));
+  - Id: 29397
+    AegisName: Acolyte_Essence_2
+    Name: Acolyte Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSPrate, "AL_HEAL", -15);
+      bonus2(bSkillUseSPrate, "AL_INCAGI", -15);
+      bonus2(bSkillUseSPrate, "AL_BLESSING", -15);
+      bonus(bMaxHP, 70 * (getrefine() / 2));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+  - Id: 29398
+    AegisName: Archer_Essence_2
+    Name: Archer Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "AC_DOUBLE", 5);
+      bonus(bLongAtkRate, getskilllv("AC_VULTURE"));
+      bonus2(bSkillAtk, "AC_SHOWER", 5 * (getrefine() / 2));
+  - Id: 29399
+    AegisName: Knight_Essence_1
+    Name: Knight Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 3 * getskilllv("KN_CAVALIERMASTERY"));
+      bonus2(bSkillAtk, "KN_BOWLINGBASH", 20);
+      bonus(bAspdRate, getrefine());
+  - Id: 29400
+    AegisName: Blacksmith_Essence_1
+    Name: Blacksmith Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bCritical, 10); }", 1000, 60000, "BS_WEAPONPERFECT");
+      bonus2(bSkillAtk, "WS_CARTTERMINATION", 20);
+      bonus(bCritical, 3 * getskilllv("BS_MAXIMIZE"));
+      bonus(bAspdRate, getrefine());
+  - Id: 29401
+    AegisName: Assassin_Essence_1
+    Name: Assassin Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 3 * getskilllv("AS_GRIMTOOTH"));
+      bonus2(bSkillAtk, "AS_SONICBLOW", 20);
+      bonus(bCritAtkRate, getrefine());
+  - Id: 29402
+    AegisName: Wizard_Essence_1
+    Name: Wizard Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("WZ_HEAVENDRIVE"));
+      bonus2(bSkillAtk, "WZ_METEOR", 20);
+      bonus2(bSkillAtk, "WZ_VERMILION", 20);
+      bonus2(bSkillAtk, "WZ_STORMGUST", 20);
+      bonus(bMatkRate, getrefine() / 2);
+  - Id: 29403
+    AegisName: Priest_Essence_1
+    Name: Priest Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("PR_MAGNIFICAT"));
+      bonus2(bSkillAtk, "PR_MAGNUS", 30);
+  - Id: 29404
+    AegisName: Hunter_Essence_1
+    Name: Hunter Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAspdRate, 2 * getskilllv("HT_BLITZBEAT"));
+      bonus2(bSkillAtk, "HT_BLITZBEAT", 40);
+      bonus(bLuk, getrefine());
+  - Id: 29405
+    AegisName: Crusader_Essence_1
+    Name: Crusader Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("CR_TRUST"));
+      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 20);
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+  - Id: 29406
+    AegisName: Alchemist_Essence_1
+    Name: Alchemist Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bInt, 1 * (getskilllv("AM_LEARNINGPOTION")/2));
+      bonus(bAspdRate, 5);
+      bonus(bAgi, 1 * (getrefine() / 2));
+  - Id: 29407
+    AegisName: Rogue_Essence_1
+    Name: Rogue Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("RG_PLAGIARISM"));
+      bonus2(bSkillAtk, "RG_RAID", 150);
+      bonus(bAspdRate, getrefine());
+  - Id: 29408
+    AegisName: Sage_Essence_1
+    Name: Sage Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("SA_AUTOSPELL"));
+      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 20);
+      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 20);
+      bonus(bAspdRate, getrefine());
+  - Id: 29409
+    AegisName: Monk_Essence_1
+    Name: Monk Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_CHAINCOMBO", 20);
+      bonus2(bSkillAtk, "MO_COMBOFINISH", 20);
+  - Id: 29410
+    AegisName: Bard_Dancer_Essence_1
+    Name: Bard & Dancer Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillCooldown, "BD_ADAPTATION", -60000 - 1000*(getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+  - Id: 29411
+    AegisName: Knight_Essence_2
+    Name: Knight Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 5 * getskilllv("KN_CAVALIERMASTERY"));
+      bonus2(bSkillAtk, "KN_BOWLINGBASH", 35);
+      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","KN_BOWLINGBASH",10,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      autobonus3("{ bonus(bCritAtkRate, 7); }", 1000, 60000, "KN_TWOHANDQUICKEN","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29412
+    AegisName: Blacksmith_Essence_2
+    Name: Blacksmith Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bCritical, 10); }", 1000, 60000, "BS_WEAPONPERFECT","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bCritical, 5 * getskilllv("BS_MAXIMIZE"));
+      bonus2(bSkillAtk, "WS_CARTTERMINATION", 35);
+      bonus4 bAutoSpellOnSkill,"WS_CARTTERMINATION","BS_HAMMERFALL",5,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      bonus(bCritAtkRate, getskilllv("BS_WEAPONRESEARCH"));
+  - Id: 29413
+    AegisName: Assassin_Essence_2
+    Name: Assassin Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 5 * getskilllv("AS_GRIMTOOTH"));
+      bonus2(bSkillAtk, "AS_SONICBLOW", 35);
+      bonus(bCritAtkRate, getrefine());
+      bonus4 bAutoSpellOnSkill,"AS_SONICBLOW","AS_CLOAKING",10,40 * getrefine();
+      autobonus3("{ bonus(bAspdRate, 7); }", 1000, 60000, "AS_SONICBLOW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29414
+    AegisName: Wizard_Essence_2
+    Name: Wizard Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -5 * getskilllv("WZ_HEAVENDRIVE"));
+      bonus2(bSkillAtk, "WZ_METEOR", 35);
+      bonus2(bSkillAtk, "WZ_VERMILION", 35);
+      bonus2(bSkillAtk, "WZ_STORMGUST", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_STORMGUST","WZ_METEOR",10,20 * getrefine();
+      bonus(bMatkRate, getrefine() / 2);
+      autobonus3("{ bonus(bFlee, 30); }", 1000, 60000, "WZ_QUAGMIRE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29415
+    AegisName: Priest_Essence_2
+    Name: Priest Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -5 * getskilllv("PR_MAGNIFICAT"));
+      bonus2(bSkillAtk, "PR_MAGNUS", 60);
+      bonus4 bAutoSpellOnSkill,"PR_MAGNUS","PR_SUFFRAGIUM",3,30 * getrefine();
+      autobonus3("{ bonus(bMatkRate, 7); bonus(bHealPower, 50); }", 1000, 60000, "PR_GLORIA", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29416
+    AegisName: Hunter_Essence_2
+    Name: Hunter Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAspdRate, 3 * getskilllv("HT_BLITZBEAT"));
+      bonus2(bSkillAtk, "HT_BLITZBEAT", 40);
+      bonus2(bSkillAtk, "SN_FALCONASSAULT", 35);
+      bonus4 bAutoSpellOnSkill,"SN_FALCONASSAULT","HT_BLITZBEAT",10,20 * getrefine();
+      bonus(bInt, getrefine());
+      //autobonus3("{ bonus(bSkillAtk, "HT_BLITZBEAT", 40); }", 1000, 60000, "AC_CONCENTRATION", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29417
+    AegisName: Crusader_Essence_2
+    Name: Crusader Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("CR_TRUST"));
+      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 40);
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+      bonus4 bAutoSpellOnSkill,"PA_SHIELDCHAIN","PA_PRESSURE",5,20 * getrefine();
+      autobonus3("{ bonus(bDef, 10); }", 1000, 60000, "CR_AUTOGUARD", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29418
+    AegisName: Alchemist_Essence_2
+    Name: Alchemist Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bInt, 1 * getskilllv("AM_LEARNINGPOTION"));
+      bonus(bAspdRate, 10);
+      bonus(bAgi, 1 * (getrefine() / 2));
+      autobonus3("{ bonus(bInt, 5); bonus(bDex, 5); bonus(bLuk, 5); bonus2(bAddMonsterDropItem, Coating_Bottle, 30 *getrefine()); bonus2(bAddMonsterDropItem, MenEater_Plant_Bottle, 30 * getrefine()); }", 1000, 60000, "AM_POTIONPITCHER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29419
+    AegisName: Rogue_Essence_2
+    Name: Rogue Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("RG_PLAGIARISM"));
+      bonus2(bSkillAtk, "RG_RAID", 300);
+      bonus(bAspdRate, getrefine());
+      bonus4 bAutoSpellOnSkill,"RG_RAID","TF_HIDING",10,40 * getrefine();
+      bonus2(bSkillUseSPrate, "RG_RAID", 20);      
+  - Id: 29420
+    AegisName: Sage_Essence_2
+    Name: Sage Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("SA_AUTOSPELL"));
+      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 35);
+      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_EARTHSPIKE","WZ_HEAVENDRIVE",5,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"WZ_HEAVENDRIVE","WZ_EARTHSPIKE",5,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      autobonus3("{ bonus(bAspd, 5); bonus2(bMagicAtkEle, Ele_Earth, 15); }", 1000, 60000, "SA_AUTOSPELL", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29421
+    AegisName: Monk_Essence_2
+    Name: Monk Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bAspdRate, 10;
+      bonus(bAtk, 5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_CHAINCOMBO", 60);
+      bonus2(bSkillAtk, "MO_COMBOFINISH", 60);
+      bonus4 bAutoSpellOnSkill,"MO_CHAINCOMBO","PF_SPIDERWEB",1,30 * getrefine();
+      //bonus3({"bAutoSpell, "MO_CALLSPIRITS", 5, 100); }", 1000, 60000, "MO_EXPLOSIONSPIRITS", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus3(bAutoSpell, MO_CALLSPIRITS, 5, 100); }", 1000, 60000, MO_EXPLOSIONSPIRITS, "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,3 * getrefine();
+  - Id: 29422
+    AegisName: Bard_Dancer_Essence_2
+    Name: Bard & Dancer Essence Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bInt, 10;
+      bonus bDex, 10;
+      bonus bAspdRate, 10;
+      bonus2(bSkillCooldown, "BD_ADAPTATION", -60000 - 3000*(getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+      autobonus3("{ bonus(bSPrecovRate, 100); }", 1000, 60000, "BA_POEMBRAGI", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus(bSPrecovRate, 100); }", 1000, 60000, "DC_SERVICEFORYOU", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29525
+    AegisName: Ninja_Essence_1
+    Name: Ninja Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bAtk, 3 * getskilllv("NJ_TOBIDOUGU"));
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 5 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "NJ_HUUMA", 5 + (5 * getrefine()/2));
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+      bonus(bHit, 5 * (getrefine() / 2));
+  - Id: 29526
+    AegisName: Ninja_Essence_2
+    Name: Ninja Essence Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bAtk, 5 * getskilllv("NJ_TOBIDOUGU"));
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 20);
+      bonus2(bSkillAtk, "NJ_HUUMA", 20);
+      bonus2(bSkillAtk, "NJ_ISSEN", 20);
+      bonus4 bAutoSpellOnSkill,"NJ_ISSEN","AL_HEAL",10,50 * getrefine();
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+      bonus(bHit, 5 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "NJ_NEN", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29553
+    AegisName: Knight_Essence2_1
+    Name: Knight Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, getskilllv("KN_SPEARMASTERY"));
+      bonus2(bSkillAtk, "KN_PIERCE", 20);
+      bonus2(bSkillAtk, "KN_BRANDISHSPEAR", 20);
+      bonus2(bSkillAtk, "LK_SPIRALPIERCE", 20);
+      bonus(bAtk, 2 * getrefine());
+  - Id: 29554
+    AegisName: Blacksmith_Essence2_1
+    Name: Blacksmith Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bLuk, getskilllv("BS_SKINTEMPER") + (getrefine() / 2));
+      bonus(bDex, 2 * getskilllv("BS_SKINTEMPER"));
+  - Id: 29555
+    AegisName: Assassin_Essence2_1
+    Name: Assassin Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bFlee, 3 * getskilllv("AS_LEFT"));
+      bonus2(bSkillAtk, "AS_SPLASHER", 50);
+      bonus2(bSkillAtk, "ASC_BREAKER", 20);
+      bonus(bCastrate, -3 * (getrefine() / 2));
+  - Id: 29556
+    AegisName: Wizard_Essence2_1
+    Name: Wizard Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -2 * getskilllv("WZ_VERMILION"));
+      bonus2(bSkillAtk, "WZ_JUPITEL", 20);
+      bonus(bMatk, 2 * getrefine());
+  - Id: 29557
+    AegisName: Priest_Essence2_1
+    Name: Priest Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("PR_MACEMASTERY") + 2 * getrefine());
+      bonus(bCritAtkRate, 15);
+  - Id: 29558
+    AegisName: Hunter_Essence2_1
+    Name: Hunter Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("HT_BEASTBANE"));
+      bonus2(bSkillAtk, "AC_DOUBLE", 20);
+      bonus(bLongAtkRate, 3 * (getrefine() / 2));
+  - Id: 29559
+    AegisName: Ninja_Essence2_1
+    Name: Ninja Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bMatk, 3 * getskilllv("NJ_NINPOU"));
+      bonus2(bSkillAtk, "NJ_BAKUENRYU", 20);
+      bonus2(bSkillAtk, "NJ_HYOUSYOURAKU", 20);
+      bonus2(bSkillAtk, "NJ_KAMAITACHI", 20);
+      bonus2(bCastrate, "NJ_KOUENKA", -5 * (getrefine() / 2));
+      bonus2(bCastrate, "NJ_HYOUSENSOU", -5 * (getrefine() / 2));
+      bonus2(bCastrate, "NJ_HUUJIN", -5 * (getrefine() / 2));
+  - Id: 29560
+    AegisName: Crusader_Essence2_1
+    Name: Crusader Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("CR_TRUST") + 2 * getrefine());
+      bonus2(bSkillAtk, "CR_GRANDCROSS", 20);
+  - Id: 29561
+    AegisName: Alchemist_Essence2_1
+    Name: Alchemist Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("AM_PHARMACY") + 2 * getrefine());
+      bonus2(bSkillAtk, "MC_MAMMONITE", 100);
+  - Id: 29562
+    AegisName: Rogue_Essence2_1
+    Name: Rogue Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, getskilllv("RG_SNATCHER"));
+      bonus2(bSkillAtk, "RG_BACKSTAP", 50);
+      bonus(bAtk, 2 * getrefine());
+  - Id: 29563
+    AegisName: Sage_Essence2_1
+    Name: Sage Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("SA_ADVANCEDBOOK") + 2 * getrefine());
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+  - Id: 29564
+    AegisName: Monk_Essence2_1
+    Name: Monk Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bCastrate, "MO_INVESTIGATE", -3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_INVESTIGATE", 20);
+      bonus2(bCastrate, "MO_FINGEROFFENSIVE", -3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_FINGEROFFENSIVE", 20);
+  - Id: 29565
+    AegisName: Bard_Dancer_Essence2_1
+    Name: Bard & Dancer Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * (getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 20 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "DC_THROWARROW", 20 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "CG_ARROWVULCAN", 10 + (5 * getrefine()/2));
+      bonus(bLongAtkRate, getrefine() / 2);
+  - Id: 29566
+    AegisName: Knight_Essence2_2
+    Name: Knight Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, 2 * getskilllv("KN_SPEARMASTERY"));
+      bonus2(bSkillAtk, "KN_PIERCE", 35);
+      bonus2(bSkillAtk, "KN_BRANDISHSPEAR", 35);
+      bonus2(bSkillAtk, "LK_SPIRALPIERCE", 35);
+      bonus4 bAutoSpellOnSkill,"LK_SPIRALPIERCE","LK_JOINTBEAT",10,30 * getrefine();
+      bonus(bAtk, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "KN_PIERCE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29567
+    AegisName: Blacksmith_Essence2_2
+    Name: Blacksmith Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bLuk, 2 * getskilllv("BS_SKINTEMPER") + getrefine() / 2);
+      bonus(bDex, 10);
+      autobonus3("{ bonus(bLuk, 20); bonus(bDex, 20); }", 1000, 60000, "BS_ADRENALINE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29568
+    AegisName: Assassin_Essence2_2
+    Name: Assassin Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bFlee, 5 * getskilllv("AS_LEFT"));
+      bonus2(bSkillAtk, "AS_SPLASHER", 75);
+      bonus2(bSkillAtk, "ASC_BREAKER", 35);
+      bonus4 bAutoSpellOnSkill,"ASC_BREAKER","AS_CLOAKING",10,40 * getrefine();
+      bonus(bCastrate, -3 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "AS_CLOAKING", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29569
+    AegisName: Wizard_Essence2_2
+    Name: Wizard Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("WZ_VERMILION"));
+      bonus2(bSkillAtk, "WZ_JUPITEL", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_JUPITEL","HW_MAGICPOWER",10,20 * getrefine();
+      bonus(bMatk, 2 * getrefine());
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "WZ_JUPITEL", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29570
+    AegisName: Priest_Essence2_2
+    Name: Priest Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("PR_MACEMASTERY") + 2 * getrefine());
+      bonus(bCritAtkRate, 15);
+      bonus4 bAutoSpellOnSkill,"SM_BASH","KN_BOWLINGBASH",10,30 * getrefine();
+      bonus3 bAutoSpell,"SM_BASH",10, 3 * getrefine();
+      //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "PR_STRECOVERY","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29571
+    AegisName: Hunter_Essence2_2
+    Name: Hunter Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("HT_BEASTBANE"));
+      bonus2(bSkillAtk, "AC_DOUBLE", 35);
+      bonus2(bSkillAtk, "SN_SHARPSHOOTING", 20);
+      //bonus4 bAutoSpellOnSkill,"AC_DOUBLE","SN_SIGHT",10,200;
+      bonus2 bAddEff,Eff_Stun,500;
+      bonus2 bAddEff,Eff_Curse,500;
+      bonus2 bAddEff,Eff_Silence,500;
+      bonus(bLongAtkRate, 3 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "AC_DOUBLE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}"); 
+  - Id: 29572
+    AegisName: Ninja_Essence2_2
+    Name: Ninja Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bMatk, 5 * getskilllv("NJ_NINPOU"));
+      bonus2(bSkillAtk, "NJ_BAKUENRYU", 35);
+      bonus2(bSkillAtk, "NJ_HYOUSYOURAKU", 35);
+      bonus2(bSkillAtk, "NJ_KAMAITACHI", 35);
+      bonus2(bCastrate, "NJ_KOUENKA", -5 * getrefine());
+      bonus2(bCastrate, "NJ_HYOUSENSOU", -5 * getrefine());
+      bonus2(bCastrate, "NJ_HUUJIN", -5 * getrefine());
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "NJ_UTSUSEMI", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29573
+    AegisName: Crusader_Essence2_2
+    Name: Crusader Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("CR_TRUST") + 2 * getrefine());
+      bonus2(bSkillAtk, "CR_GRANDCROSS", 40);
+      bonus4 bAutoSpellOnSkill,"CR_GRANDCROSS","AL_HEAL",10,20 * getrefine();
+      autobonus3("{ bonus(bHealPower2, 50); }", 1000, 60000, "SM_ENDURE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29574
+    AegisName: Alchemist_Essence2_2
+    Name: Alchemist Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("AM_PHARMACY") + 2 * getrefine());
+      bonus2(bSkillAtk, "MC_MAMMONITE", 100);
+      bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","MC_MAMMONITE",10,20 * getrefine();
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "MC_MAMMONITE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "AM_POTIONPITCHER","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29575
+    AegisName: Rogue_Essence2_2
+    Name: Rogue Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, 2 * getskilllv("RG_SNATCHER"));
+      bonus2(bSkillAtk, "RG_BACKSTAP", 125);
+      bonus4 bAutoSpellOnSkill,"RG_BACKSTAP","TF_HIDING",10, 40 * getrefine();
+      bonus(bAtk, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "RG_BACKSTAP", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus2(bSkillAtk, "RG_BACKSTAP", 20); }", 1000, 60000, "TF_POISON","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29576
+    AegisName: Sage_Essence2_2
+    Name: Sage Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("SA_ADVANCEDBOOK") + 2 * getrefine());
+      bonus2(bSkillAtk, "MG_FIREBOLT", 35);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 35);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 35);
+      bonus2(bCastrate, "MG_LIGHTNINGBOLT", -5 * getrefine());
+      bonus4 bAutoSpellOnSkill,"PF_HPCONVERSION","AL_HEAL",10, 50 * getrefine();
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "MG_FIREBOLT", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus2(bSkillAtk, "MG_FIREBOLT", 20); bonus2(bSkillAtk, "MG_COLDBOLT", 20); bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20); }", 1000, 60000, "WZ_EARTHSPIKE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29577
+    AegisName: Monk_Essence2_2
+    Name: Monk Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bCastrate, "MO_INVESTIGATE", -5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_INVESTIGATE", 20 + 5 * (getrefine() / 2));
+      bonus2(bCastrate, "MO_FINGEROFFENSIVE", -5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_FINGEROFFENSIVE", 20 + 5 * (getrefine() / 2));
+      bonus4 bAutoSpellOnSkill,"MO_INVESTIGATE","MO_CALLSPIRITS",5,30 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MO_FINGEROFFENSIVE","CH_SOULCOLLECT",1,30 * getrefine();
+      //autobonus3("{ bonus5(bAutoSpellOnSkill, "MO_INVESTIGATE", "MO_CALLSPIRITS", 5, 500, 1); }", 1000, 60000, "AL_BLESSING","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29578
+    AegisName: Bard_Dancer_Essence2_2
+    Name: Bard & Dancer Essence II Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * (getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 50);
+      bonus2(bSkillAtk, "DC_THROWARROW", 50);
+      bonus2(bSkillAtk, "CG_ARROWVULCAN", 35);
+      bonus4 bAutoSpellOnSkill,"CG_ARROWVULCAN","CG_TAROTCARD",5,40 * getrefine();
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "DC_THROWARROW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "BA_MUSICALSTRIKE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bLongAtkRate, getrefine() / 2);
+      //autobonus3("{ bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 20); bonus2(bSkillAtk, "DC_THROWARROW", 20); }", 1000, 60000, "BD_ENCORE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+
+
+  - Id: 29579
+    AegisName: Gun_Essence1
+    Name: Gunslinger Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bAtk, 1 * getskilllv("GS_SNAKEEYE"));
+      bonus2(bSkillAtk, "GS_RAPIDSHOWER", 25);
+  - Id: 29580
+    AegisName: Gun_Essence2
+    Name: Gunslinger Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bAtk, 2 * getskilllv("GS_SNAKEEYE"));
+      bonus2(bSkillAtk, "GS_RAPIDSHOWER", 50);
+      bonus4 bAutoSpellOnSkill,"GS_RAPIDSHOWER","GS_DISARM",5, 20 * getrefine();
+      bonus(bAgi, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "GS_RAPIDSHOWER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29581
+    AegisName: SG_Essence1
+    Name: Star Gladiator Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus bAspdRate, 10;
+      bonus(bAtk, 1 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "TK_JUMPKICK", 50);
+  - Id: 29582
+    AegisName: SG_Essence2
+    Name: Star Gladiator Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus bAspdRate, 20;
+      bonus(bAtk, 2 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "TK_JUMPKICK", 100);
+
+
+
+
+
+
+
+
+

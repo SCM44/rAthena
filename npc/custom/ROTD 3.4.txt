@@ -75,6 +75,12 @@ close;
 OnInit:
 	// min gm level
 	set .gm_level,80;
+	// ROTD items drop
+	set .rotd_item_id,18010;	
+	set .rotd_item_amount,1;
+	set .rotd_item_rate,20;
+	set .rotd_zeny,1000;
+
 
 	// monster race list
 	setarray .rotd$[0],
@@ -101,7 +107,7 @@ OnInit:
 // daily reset
 OnClock0000:
 	set .today_rotd,rand( .rotd_size );
-	set .rotd_exp_bonus,rand( 1,100 );
+	set .rotd_exp_bonus,rand( 20,100 );
 	delwaitingroom;
 	waitingroom "[ROTD]:"+.rotd$[.today_rotd]+" ",0;
 	end;

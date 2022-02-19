@@ -458,7 +458,7 @@ OnInit:		//-- Config
 		for ( .@f = 0; .@f < .@size; .@f++ )
 			setmapflag .MapName$[.@i], .mapflag[.@f];
 		if(.MapMode[.@i]&4) setmapflag .MapName$[.@i], mf_partylock;
-		if(.MapMode[.@i]&2) setmapflag .MapName$[.@i], MF_NIGHTMAREDROP;
+		if(.MapMode[.@i]&2) setmapflag .MapName$[.@i], MF_PVP_NIGHTMAREDROP;
 		if(.MapMode[.@i]&1){
 			setmapflag .MapName$[.@i], MF_GUILDLOCK;
 			setmapflag .MapName$[.@i], MF_GVG;

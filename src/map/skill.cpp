@@ -1602,11 +1602,11 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 		sc_start(src,bl,SC_BLIND,(10+3*skill_lv),skill_lv,skill_get_time2(skill_id,skill_lv));
 #ifdef RENEWAL
 		sc_start(src, bl, SC_RAID, 100, skill_lv, 10000); // Hardcoded to 10 seconds since Duration1 and Duration2 are used
+#endif
 		break;
 
 	case RG_BACKSTAP:
 		sc_start(src,bl,SC_STUN,(5+2*skill_lv),skill_lv,skill_get_time(skill_id,skill_lv));
-#endif
 		break;
 
 	case BA_FROSTJOKER:
@@ -4164,11 +4164,13 @@ static int skill_check_unit_range_sub(struct block_list *bl, va_list ap)
 
 	switch (skill_id) {
 		case AL_PNEUMA: //Pneuma doesn't work even if just one cell overlaps with Land Protector
+		case MG_SAFETYWALL:
+		case WZ_FIREPILLAR:
 			if(g_skill_id == SA_LANDPROTECTOR)
 				break;
 			//Fall through
 		case MH_STEINWAND:
-		case MG_SAFETYWALL:
+		//case MG_SAFETYWALL:
 		case SC_MAELSTROM:
 			if(g_skill_id != MH_STEINWAND && g_skill_id != MG_SAFETYWALL && g_skill_id != AL_PNEUMA && g_skill_id != SC_MAELSTROM)
 				return 0;
@@ -5333,8 +5335,8 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 
 	case RG_BACKSTAP:
 		{
-			if (!check_distance_bl(src, bl, 0)) {
-#ifdef RENEWAL
+			if (!check_distance_bl(src, bl, 0)){
+//#ifdef RENEWAL
 				uint8 dir = map_calc_dir(src, bl->x, bl->y);
 				short x, y;
 
@@ -5353,17 +5355,17 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 					y = 0;
 
 				if (battle_check_target(src, bl, BCT_ENEMY) > 0 && unit_movepos(src, bl->x + x, bl->y + y, 2, true)) { // Display movement + animation.
-#else
-				uint8 dir = map_calc_dir(src, bl->x, bl->y), t_dir = unit_getdir(bl);
-
-				if (!map_check_dir(dir, t_dir) || bl->type == BL_SKILL) {
-#endif
+//#else
+//				uint8 dir = map_calc_dir(src, bl->x, bl->y), t_dir = unit_getdir(bl);
+//
+//				if (!map_check_dir(dir, t_dir) || bl->type == BL_SKILL) {
+//#endif
 					status_change_end(src, SC_HIDING, INVALID_TIMER);
 					dir = dir < 4 ? dir+4 : dir-4; // change direction [Celest]
 					unit_setdir(bl,dir);
-#ifdef RENEWAL
+//#ifdef RENEWAL
 					clif_blown(src);
-#endif
+//#endif
 					skill_attack(BF_WEAPON, src, src, bl, skill_id, skill_lv, tick, flag);
 				}
 				else if (sd)
@@ -7573,10 +7575,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		}
 	case PR_SLOWPOISON:
 	case PR_LEXAETERNA:
-#ifndef RENEWAL
-	case PR_IMPOSITIO:
-	case PR_SUFFRAGIUM:
-#endif
 	case LK_BERSERK:
 	case MS_BERSERK:
 	case KN_TWOHANDQUICKEN:
@@ -8477,10 +8475,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		status_damage(src, src, sstatus->max_hp,0,0,1, skill_id);
 		break;
 	case AL_ANGELUS:
-#ifdef RENEWAL
 	case PR_SUFFRAGIUM:
 	case PR_IMPOSITIO:
-#endif
 	case PR_MAGNIFICAT:
 	case PR_GLORIA:
 		if (sd == NULL || sd->status.party_id == 0 || (flag & 1)) {
@@ -12737,12 +12733,12 @@ static int8 skill_castend_id_check(struct block_list *src, struct block_list *ta
 			break;
 		case RG_BACKSTAP:
 			{
-#ifndef RENEWAL
+//#ifndef RENEWAL
 				uint8 dir = map_calc_dir(src,target->x,target->y), t_dir = unit_getdir(target);
 
 				if (map_check_dir(dir, t_dir))
 					return USESKILL_FAIL_MAX;
-#endif
+//#endif
 
 				if (check_distance_bl(src, target, 0))
 					return USESKILL_FAIL_MAX;
@@ -13470,6 +13466,13 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 			return 0; // Don't consume gems if cast on Land Protector
 		}
 	}
+	
+	case PF_FOGWALL:
+		if( map_getcell(src->m, x, y, CELL_CHKLANDPROTECTOR) ) {
+			clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+			break; 
+		}	
+
 	case MG_FIREWALL:
 	case MG_THUNDERSTORM:
 	case AL_PNEUMA:
@@ -13497,7 +13500,6 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 	case HT_CLAYMORETRAP:
 	case AS_VENOMDUST:
 	case AM_DEMONSTRATION:
-	case PF_FOGWALL:
 	case PF_SPIDERWEB:
 	case HT_TALKIEBOX:
 	case WE_CALLPARTNER:
@@ -13608,6 +13610,11 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 		break;
 
 	case WZ_ICEWALL:
+		if( map_getcell(src->m, x, y, CELL_CHKLANDPROTECTOR) ) {
+			clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+			break; 
+		}
+
 		flag|=1;
 		if(skill_unitsetting(src,skill_id,skill_lv,x,y,0))
 			clif_skill_poseffect(src,skill_id,skill_lv,x,y,tick);
@@ -15522,6 +15529,7 @@ int skill_unit_onplace_timer(struct skill_unit *unit, struct block_list *bl, t_t
 
 		if ((skill_id==CR_GRANDCROSS || skill_id==NPC_GRANDDARKNESS) && !battle_config.gx_allhit)
 			ts->tick += (t_tick)sg->interval*(map_count_oncell(bl->m,bl->x,bl->y,BL_CHAR,0)-1);
+			ts->tick -=100;
 	}
 
 	// Wall of Thorn damaged by Fire element unit [Cydh]
@@ -15682,10 +15690,10 @@ int skill_unit_onplace_timer(struct skill_unit *unit, struct block_list *bl, t_t
 			break;
 
 		case UNT_MAGNUS:
-#ifndef RENEWAL
-			if (!battle_check_undead(tstatus->race,tstatus->def_ele) && tstatus->race!=RC_DEMON)
-				break;
-#endif
+//#ifndef RENEWAL
+			//if (!battle_check_undead(tstatus->race,tstatus->def_ele) && tstatus->race!=RC_DEMON)
+			//	break;
+//#endif
 			skill_attack(BF_MAGIC,ss,&unit->bl,bl,sg->skill_id,sg->skill_lv,tick,0);
 			break;
 
@@ -19733,6 +19741,29 @@ static int skill_cell_overlap(struct block_list *bl, va_list ap)
 			if (skill_get_unit_flag(unit->group->skill_id, UF_CRAZYWEEDIMMUNE))
 				break;
 		case HW_GANBANTEIN:
+			switch (unit->group->skill_id) {
+			case WZ_METEOR:
+				if(map_getcell(bl->m, bl->x, bl->y, CELL_CHKLANDPROTECTOR)){
+					return 1;
+				}else{
+					skill_delunit(unit);
+					return 1;
+				}
+			case WZ_STORMGUST:
+				if(map_getcell(bl->m, bl->x, bl->y, CELL_CHKLANDPROTECTOR)){
+					return 1;
+				}else{
+					skill_delunit(unit);
+					return 1;
+				}	
+		case SA_LANDPROTECTOR:
+				skill_delunit(unit);
+				return 1;
+			 default:
+				skill_delunit(unit);
+				return 1;
+             }
+             break;
 		case LG_EARTHDRIVE:
 			// Officially songs/dances are removed
 			if (skill_get_unit_flag(unit->group->skill_id, UF_RANGEDSINGLEUNIT)) {
@@ -19815,8 +19846,8 @@ static int skill_cell_overlap(struct block_list *bl, va_list ap)
 	std::bitset<INF2_MAX> inf2 = skill_db.find(skill_id)->inf2;
 
 	if (unit->group->skill_id == SA_LANDPROTECTOR && !inf2[INF2_ISTRAP] && !inf2[INF2_IGNORELANDPROTECTOR] ) { //It deletes everything except traps and barriers
-		(*alive) = 0;
-		return 1;
+		//(*alive) = 0;
+		//return 1;
 	}
 
 	return 0;

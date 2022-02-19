@@ -8994,11 +8994,13 @@ void pc_close_npc(struct map_session_data *sd,int flag)
 /*==========================================
  * Invoked when a player has negative current hp
  *------------------------------------------*/
-int pc_dead(struct map_session_data *sd,struct block_list *src)
+//int pc_dead(struct map_session_data *sd,struct block_list *src)
+int pc_dead(struct map_session_data *sd,struct block_list *src, uint16 skill_id)
 {
 	int i=0,k=0;
 	t_tick tick = gettick();
 	struct map_data *mapdata = map_getmapdata(sd->bl.m);
+	char output[256];
 
 	// Activate Steel body if a super novice dies at 99+% exp [celest]
 	// Super Novices have no kill or die functions attached when saved by their angel
@@ -9169,6 +9171,17 @@ int pc_dead(struct map_session_data *sd,struct block_list *src)
 		struct map_session_data *ssd = (struct map_session_data *)src;
 		pc_setparam(ssd, SP_KILLEDRID, sd->bl.id);
 		npc_script_event(ssd, NPCE_KILLPC);
+
+		if (ssd->state.battleinfo) {
+			sprintf(output,"( You kill the %s [%s] using <%s> )", (char*)job_name(sd->status.class_), sd->status.name, (skill_id ? skill_get_desc(skill_id) : "Melee/Reflect/Effect"));
+			clif_displaymessage(ssd->fd, output);
+		}
+
+		if (sd->state.battleinfo) {
+			sprintf(output,"( The %s [%s] kill you using <%s> )", (char*)job_name(ssd->status.class_), ssd->status.name, (skill_id ? skill_get_desc(skill_id) : "Melee/Reflect/Effect"));
+			clif_displaymessage(sd->fd, output);
+		}
+
 
 		if (battle_config.pk_mode&2) {
 			ssd->status.manner -= 5;

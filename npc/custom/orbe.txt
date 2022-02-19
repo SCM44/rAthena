@@ -1,14 +1,14 @@
-prontera,194,188,4	script	Orbe Enchanter	712,{
+prontera,141,198,5	script	Orbe Enchanter	712,{
 	mes .npc$;
-	mes "Puff puff , Salut jeune aventurier !";
-	mes "Je peux placer tes runes XP et Drop sur tes équipements,";
-	mes "pour une somme maudique de "+.pric+"z.";
-	emotion e_no1,0; next;
+	mes "Puff puff , Hello young lad !";
+	mes "I'm able to put some Orbe Runes on your equipements,";
+	mes "for just a little something in return, just give me " +.pric+"z.";
+	emotion ET_BEST,0; next;
 	if(select("Yes:No")&2) { mes .npc$; mes "Alright, thanks anyways!"; close; }
-	if(Zeny<.pric) { mes .npc$; mes "Je suis désolé mais tu manques d'argent, reviens plus tard."; close; }
+	if(Zeny<.pric) { mes .npc$; mes "I'm sorry, you don't have enough zeny, please come back later !"; close; }
 	
 	mes .npc$;
-	mes "Quel équipement veux-tu enchant ?"; next;
+	mes "Wich equipement do you want to enchant ?"; next;
 	while(set(.@a,.@a+1)<=.e_len-2) {
 		if(getequipid(.@a)>-2)
 			set .@menu$, .@menu$+.eqp$[.@a]+"- [^0000FF"+getitemname(getequipid(.@a))+"^000000]:";
@@ -20,7 +20,7 @@ prontera,194,188,4	script	Orbe Enchanter	712,{
 	set .@eq_itm, getequipid(.@eq_loc);
 	if(.@eq_itm<0) {
 		mes .npc$;
-		mes "Hmm, tu n'as rien d'équipé içi.";
+		mes "Hmm, you don't have anything equiped on that.";
 		close;
 	}
 	
@@ -35,12 +35,12 @@ prontera,194,188,4	script	Orbe Enchanter	712,{
 			
 	if(.@menu$=="") {
 		mes .npc$;
-		mes "Hmm, tu n'as pas de runes sur toi.";
+		mes "Hmm, you don't have enough Orbes Runes on you.";
 		close;
 	}
 
 	mes .npc$;
-	mes "Choisis un enchant."; next;
+	mes "Please choose an enchant."; next;
 	select(.@menu$);
 	set .@itm, .@item[@menu];
 
@@ -54,13 +54,13 @@ prontera,194,188,4	script	Orbe Enchanter	712,{
 	setarray .@card, getequipcardid(.@eq_loc,0), getequipcardid(.@eq_loc,1), getequipcardid(.@eq_loc,2), getequipcardid(.@eq_loc,3);
 	
 	mes .npc$;
-	mes "Select a slot."; next;
+	mes "Please choose a slot."; next;
 	set .@men, select(.@menu$);
 	set .@eqrf,	getequiprefinerycnt(.@eq_loc);
 	if(getequipcardid(.@eq_loc,@menu)) {
 		mes .npc$;
-		mes "Veux tu enlever cette carte / rune ?"; next;
-		if(select("Yes:No")&2) { mes .npc$; mes "Ca marche, merci quand même !"; close; }
+		mes "Do you want to remove this card / rune ?"; next;
+		if(select("Yes:No")&2) { mes .npc$; mes "Okay, thanks anyway !"; close; }
 		getitem getequipcardid(.@eq_loc,.@men),1;
 		unequip(.@eq_loc);
 		delitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
@@ -82,8 +82,9 @@ prontera,194,188,4	script	Orbe Enchanter	712,{
 	set .@card[.@men], .@itm;
 	getitem2 .@eq_itm, 1, 1, .@eqrf, 0, .@card[0], .@card[1], .@card[2], .@card[3];
 	misceffect .efet;
-	emotion e_no1,0;
+	emotion ET_BEST,0;
 	mes .npc$;
+	misceffect 154;
 	mes "Et voilà !";
 	equip .@eq_itm;
 	close;

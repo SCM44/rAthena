@@ -1,0 +1,517 @@
+//===== rAthena Script =======================================
+//= Prontera Culvert Instance (kRo Zero)
+//============================================================
+
+// Warps
+1@prtc,19,175,0	warp2	#prtc1	4,2,1@prtc,60,28
+1@prtc,60,24,0	warp2	#prtc2	4,2,1@prtc,19,171
+1@prtc,100,176,0	warp2	#prtc3	4,2,1@prtc,140,28
+1@prtc,140,24,0	warp2	#prtc4	4,2,1@prtc,100,172
+
+//NPC
+//Entrance NPC
+prt_fild05,265,208,5	script	Culvert Manager#0	4_M_YURI,5,5,{
+
+	if(BaseLevel < 60){
+		mes "[Culvert Manager]";
+		mes "You are too weak for ^0000ffProntera Culvert^000000, the legendary Bug is lurking inside!";
+		mes "Come back when you reach level 60+";
+		close;
+	}
+	mes "^ff0000If you attempt to tame any monsters, it will not count as a kill. Please be careful.^000000";
+    next;
+	.@md_name$ = "Prontera Culvert";
+        switch(checkquest(12425,PLAYTIME)) {
+        case -1: break;
+        case 0:
+        case 1:
+			mes "[Culvert Manager]";
+            mes "Sorry, but the entry period to the "+.@md_name$+" has expired.";
+            mes "Take a rest while waiting for the dungeon to be available again.";
+			next;
+			switch(select("Reset cooldown (50,000z)","No thanks.")){
+				
+				case 1:
+					if(zeny < 50000){
+						mes "[Culvert Manager]";
+						mes "You want to reset the cooldown, it will cost you 50,000 zeny.";
+						close;
+					}
+					mes "[Culvert Manager]";
+					mes "You really don't have any patience...I'll be taking the zeny and reset the instance for you.";
+					mes "You may enter.";
+					set zeny,zeny-50000;
+					erasequest 12425;
+					close;
+				
+				case 2:
+					mes "[Culvert Manager]";
+					mes "Hm....alright. Let me know if you change your mind.";
+					close;
+			}
+			
+        case 2:
+            erasequest 12425;
+			mes "[Culvert Manager]";
+            mes "The cooldown has expired.";
+            mes "You may re-enter the Memorial Dungeon.";
+            close;
+        }
+		if(isbegin_quest(12424) == 0){
+			mes "[Culvert Manager]";
+			mes "I am the director of the management department in charge of sanitation of the underground waterway. Have you ever entered this Prontera culvert?";
+			next;
+			select("Never heard of it.","I have been inside.");
+			mes "[Culvert Manager]";
+			mes "Well, it's not that important.";
+			next;
+			mes "[Culvert Manager]";
+			mes "This is Prontera, the central capital of Rune Midgard Kingdom. It should always be neat and tidy.";
+			next;
+			mes "[Culvert Manager]";
+			mes "But isn't it a little funny that these dens of bugs remain unchecked next to the kingdom for decades?";
+			select("What does it have to do with me?");
+			next;
+			mes "[Culvert Manager]";
+			mes "Think about it, does it make sense that a castle with the manpower and civilization of Rune Midgarts can't purify a single facility around the capital?";
+			next;
+			mes "[Culvert Manager]";
+			mes "I've been cleaning up the basement of this area for a long time by recruiting subjugation groups with groundwater, but I haven't had much of a profit. But I recently learned something new.";
+			next;
+			select("What's new?");
+			mes "[Culvert Manager]";
+			mes "It's true that there were other waterways that branched out into this underground waterway. We tried to solve the case by subjugating only some of the waterways that have been revealed so far.";
+			next;
+			mes "[Culvert Manager]";
+			mes "There's one more problem. The bugs and eggs pouring out of the new canals were more powerful than before.";
+			next;
+			mes "[Culvert Manager]";
+			mes "I can't even support the remuneration, so I'm looking for adventurers who can volunteer to participate in the subjugation... Do you have any plans to participate in subjugation in the depths of your underground waterway?";
+			next;
+			switch(select("I'm sorry.","Sure, sounds like new adventure.")){
+			
+				case 1:
+					mes "[Culvert Manager]";
+					mes "That's what an adventurer is. I won't force it.";
+					close;
+					
+				case 2:
+					mes "[Culvert Manager]";
+					mes "Thank you. I will add your name to the subjugation roster.";
+					next;
+					select("My name is "+strcharinfo(0)+".");
+					mes "[Culvert Manager]";
+					mes ""+strcharinfo(0)+", from now on, you'll open the way to the depths of the Culvert at any time.";
+					setquest 12424;
+					close;
+			}
+		}
+		mes "[Culvert Manager]";
+		mes "So, are you going to enter right now?";
+		next;
+		switch(select("Create Prontera Culvert:Enter the Dungeon:Cancel")) {
+			case 1:
+				if (is_party_leader() == false) {
+					mes "[Culvert Manager]";
+					mes "Please tell your Party Leader to create the instance.";
+					close;
+				}
+				instance_create(.@md_name$);
+				mes "[Culvert Manager]";
+				mes "The Memorial Dungeon of Prontera Culvert has been created.";
+				mes "You may now enter.";
+				close;
+				
+			case 2:
+               switch( instance_enter(.@md_name$) ) {
+                    case IE_NOMEMBER:
+                        end;
+                    case IE_NOINSTANCE:
+                        mes "There is no Memorial Dungeon registered.";
+                        close;
+                    case IE_OTHER:
+                        mes "An unknown error has occurred.";
+                        close;
+                    case IE_OK:
+						mes "[Culvert Manager]";
+                        mes "I'll meet you there!";
+                        mapannounce "prt_fild05", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
+                        if(isbegin_quest(12425)<1) setquest 12425;
+                }
+				close;
+				
+			case 3:
+				mes "[Culvert Manager]";
+				mes "Changed your mind?";
+				close;
+	}
+
+OnTouch:
+	npctalk "Hey you, come, let's have a talk.",strnpcinfo(0),bc_self;
+end;
+
+OnInit:
+	questinfo QTYPE_QUEST,QMARK_YELLOW,"isbegin_quest(12424) == 0 && BaseLevel >= 60";
+end;
+
+}
+
+
+1@prtc,24,19,3	script	Culvert Manager#prtc2	4_M_YURI,{
+	if(is_party_leader() == false) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I wish to talk to your Party Leader.";
+		close;
+	}
+	if('CulvertStart == 0) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Oh, you've arrived. I don't have time, so I'll show you how to work.";
+		npctalk "Culvert Manager: Oh, you've arrived. I don't have time, so I'll show you how to work.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "All you have to do is go to the end of this area and eradicate all visible bugs and monsters.";
+		npctalk "Culvert Manager: All you have to do is go to the end of this area and eradicate all visible bugs and monsters.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "If you see bug eggs among them, you must destroy them. If the eggs are not destroyed, there is no point in exterminating bugs.";
+		npctalk "Culvert Manager: If you see insect eggs among them, you must destroy them. If the eggs are not destroyed, there is no point in exterminating bugs.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "The only thing I'm worried about is that if I crack the eggs, a mother thief will appear. Well, I guess you just have to be careful.";
+		npctalk "Culvert Manager: The only thing I'm worried about is that if I crack the eggs, a mother thief will appear. Well, I guess you just have to be careful.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "As you can see, I can't get into the Culvert because of my outfit.";
+		npctalk "Culvert Manager: As you can see, I can't get into the Culvert because of my outfit.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Thanks to you, Prontera is cleaner. On behalf of the inhabitants of Prontera, I thank you in advance.";
+		npctalk "Culvert Manager: Thanks to you, Prontera is cleaner. On behalf of the inhabitants of Prontera, I thank you in advance.";
+		close2;
+		'CulvertStart = 1;
+		donpcevent instance_npcname("Culvert Manager#prtc2") + "::OnStart"; 
+		end;
+	}
+	npctalk "Culvert Manager: Don't forget, the point of this work is to eradicate all pests and seawater in this area.";
+	sleep 3000;
+	npctalk "Culvert Manager: After you've cleared the Culvert all the way out, you can use any doorway to get out. Unless nothing else is going on.";
+	sleep 3000;
+	npctalk "Culvert Manager: It's not a very dangerous place, so please take good care of it.";
+	sleep 3000;
+	npctalk "Culvert Manager: Oh! If you see a crazy thief bug, be sure to run away! It's not good to run into them!";
+	end;
+
+OnInstanceInit:
+	'CulvertStart = 0;
+	'Boss = 0;
+	'BossActive = 0;
+	'EggCt = 0;
+	'EggKilled = 0;
+	'Buff = 0;
+	'Map$ = instance_mapname("1@prtc");
+	end;
+
+OnStart:
+	sleep 500;
+	//Eggs
+	for(.@i=1; .@i<23; .@i++)
+		donpcevent instance_npcname("#prtcegg"+.@i)+"::OnEnable";
+	
+	//Normal Mobs
+	areamonster 'Map$,15,38,158,175,"--ja--",1005,5;	//Familiar
+	areamonster 'Map$,15,38,158,175,"--ja--",1175,15;	//Tarou
+	areamonster 'Map$,15,38,158,175,"--ja--",1014,10;	//Spore
+	areamonster 'Map$,15,38,158,175,"--ja--",1161,1;	//Plankton
+	areamonster 'Map$,15,38,158,175,"--ja--",3972,30;	//Plankton
+	'BossActive = 0;
+	end;
+
+OnCulvertEggKill:
+	specialeffect EF_VENOMDUST;
+	'EggKilled++;
+	if('EggKilled < 'EggCt) {
+		instance_announce 0,"Remaining Eggs : "+('EggCt-'EggKilled)+"",bc_map,"0xFFFF00",FW_BOLD;
+		end;
+	}
+	if('EggKilled == 'EggCt && !'BossActive) {
+		hideonnpc instance_npcname(strnpcinfo(0));
+		killmonsterall 'Map$[0];
+		instance_announce 0,"Culvert Manager: Well, wait, I'll run the detectors to see if there are more eggs in the other area.",bc_map,"0x00FFFF",FW_BOLD;
+		sleep 3000;
+		instance_announce 0,"Culvert Manager: Ummm....",bc_map,"0x00FFFF",FW_BOLD;
+		sleep 2000;
+		instance_announce 0,"Culvert Manager: I think there's one very large one left in the canal. It's probably a Golden Thief Bug.",bc_map,"0x00FFFF",FW_BOLD;
+		viewpoint instance_mapname("1@prtc"),1,100,42,0,0x00FFFF;
+		sleep 3000;
+		instance_announce 0,"Culvert Manager: We need to clean this up before calling this complete. Let's go catch it.",bc_map,"0x00FFFF",FW_BOLD;
+		//Initialize Array
+		deletearray $@mobid[0],getarraysize($@mobid);
+		
+		if('Boss == 0) monster instance_mapname("1@prtc"),100,42,"--ja--",3975,1,instance_npcname("Culvert Manager#prtc2") + "::OnBossDead";
+		monster instance_mapname("1@prtc"),100,56,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),100,53,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),97,56,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),97,53,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),103,56,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),103,53,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),100,30,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),100,34,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),97,30,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),97,34,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),103,30,"--ja--",2536,1;
+		monster instance_mapname("1@prtc"),103,34,"--ja--",2536,1;
+
+		'Boss = $@mobid[0];
+		'BossActive = 1;
+		
+		//Apply Modifiers
+		getunitdata 'Boss,.@boss_data;
+		'boss_min_atk = .@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
+		'boss_max_atk = .@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
+		'boss_min_matk = .@boss_data[UMOB_MATKMIN] * 'boss_matk_mod;
+		'boss_max_matk = .@boss_data[UMOB_MATKMAX] * 'boss_matk_mod;
+		'boss_def = .@boss_data[UMOB_DEF] * 'boss_def_mod;
+		'boss_mdef = .@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
+		'boss_hit = .@boss_data[UMOB_HIT] * 'boss_hit_mod;
+		'boss_flee = .@boss_data[UMOB_FLEE] * 'boss_flee_mod;
+
+		//Set boss data
+		setunitdata 'Boss,UMOB_ATKMIN,'boss_min_atk;
+		setunitdata 'Boss,UMOB_ATKMAX,'boss_max_atk;
+		setunitdata 'Boss,UMOB_MATKMIN,'boss_min_matk;
+		setunitdata 'Boss,UMOB_MATKMAX,'boss_max_matk;
+		setunitdata 'Boss,UMOB_DEF,'boss_def;
+		setunitdata 'Boss,UMOB_MDEF,'boss_mdef;
+		setunitdata 'Boss,UMOB_HIT,'boss_hit ;
+		setunitdata 'Boss,UMOB_FLEE,'boss_flee;
+
+		
+		.@label$ = instance_npcname("Culvert Manager#prtc2") + "::OnEgg";
+		.@boss_x = .@boss_data[UMOB_X];
+		.@boss_y = .@boss_data[UMOB_Y];
+	
+		for(.@i = 1; .@i <=1; .@i++) {
+			//freeloop(1);
+			do {
+				.@egg_x = .@boss_x + F_Rand(-3,-2,-1,1,2,3);
+				.@egg_y = .@boss_y + F_Rand(-3,-2,-1,1,2,3);
+				//debugmes "[Prontera Culvert Instance] Attempting to checkcell for x="+.@egg_x+", y="+.@egg_y;
+			} while (!checkcell('Map$,.@egg_x,.@egg_y,cell_chkpass) || (.@egg_x == .@x_1 && .@egg_y == .@y_1) || (.@egg_x == .@x_2 && .@egg_y == .@y_2) || (.@egg_x == .@x_3 && .@egg_y == .@y_3) || (.@egg_x == .@x_4 && .@egg_y == .@y_4) );
+			//freeloop(0);
+			
+			switch(.@i){
+			case 1: .@x_1 = .@egg_x; .@y_1 = .@egg_y; break;
+			case 2: .@x_2 = .@egg_x; .@y_2 = .@egg_y; break;
+			case 3: .@x_3 = .@egg_x; .@y_3 = .@egg_y; break;
+			case 4: .@x_4 = .@egg_x; .@y_4 = .@egg_y; break;
+			default: break;
+			}
+				
+		monster 'Map$,.@egg_x,.@egg_y,"",3974,1, .@label$;
+		}
+		initnpctimer;
+	}
+	end;
+	
+OnEgg:
+	'Eggs = mobcount(instance_mapname('Map$[0]),instance_npcname(strnpcinfo(0))+"::OnEgg");
+	areamobuseskill instance_mapname("1@prtc"),200,200,200,3975,"AL_HEAL",10,0,0,ET_SMILE,0;
+	getunitdata 'Boss, .@arr;
+	if('Eggs == 0 && 'Buff > 0) {
+		setunitdata 'Boss,UMOB_ATKMIN, 'boss_min_atk;
+		setunitdata 'Boss,UMOB_ATKMAX, 'boss_max_atk;
+		setunitdata 'Boss,UMOB_MATKMIN, 'boss_min_matk;
+		setunitdata 'Boss,UMOB_MATKMAX, 'boss_max_matk;
+		setunitdata 'Boss,UMOB_DEF, 'boss_def;
+		setunitdata 'Boss,UMOB_MDEF, 'boss_mdef;
+		setunitdata 'Boss,UMOB_HIT, 'boss_hit;
+		setunitdata 'Boss,UMOB_FLEE, 'boss_flee;
+		'Buff = 0;
+	}
+	end;
+OnTimer10000:
+	if('Buff < 10) {
+		getunitdata 'Boss, .@arr;
+		.@label$ = instance_npcname("Culvert Manager#prtc2") + "::OnEgg";
+		.@boss_x = .@arr[UMOB_X];
+		.@boss_y = .@arr[UMOB_Y];
+
+		//Summon Eggs
+		freeloop(1);
+		do {
+			.@egg_x = .@boss_x + F_Rand(-3,-2,2,3);
+			.@egg_y = .@boss_y + F_Rand(-3,-2,2,3);
+			//debugmes "[Prontera Culvert Instance] Attempting to checkcell for x="+.@egg_x+", y="+.@egg_y;
+		} while (!checkcell('Map$[0],.@egg_x,.@egg_y,cell_chkpass));
+		freeloop(0);
+		
+		monster 'Map$[0],.@egg_x,.@egg_y,"",3974,1, .@label$;
+		'Slave_Egg = $@mobid[0];
+		getunitdata 'Slave_Egg,.@data;
+		setunitdata 'Slave_Egg,UMOB_HP,5;
+	}
+	end;
+	
+OnTimer15000:
+	if(!'BossActive) {
+		stopnpctimer;
+		end;
+	}
+	'Eggs = mobcount(instance_mapname('Map$[0]),instance_npcname(strnpcinfo(0))+"::OnEgg");
+	if('Eggs >= 1) {
+
+		.@label$ = instance_npcname("Culvert Manager#prtc2") + "::OnEgg";
+		getunitdata 'Boss, .@arr;
+		//Buff
+		if('Buff < 10) {
+			'Buff++;
+			setunitdata 'Boss,UMOB_ATKMIN, 'boss_min_atk + (50 * 'Buff);
+			setunitdata 'Boss,UMOB_ATKMAX, 'boss_max_atk + (50 * 'Buff);
+			setunitdata 'Boss,UMOB_MATKMIN, 'boss_min_matk + (50 * 'Buff);
+			setunitdata 'Boss,UMOB_MATKMAX, 'boss_max_matk + (50 * 'Buff);
+			setunitdata 'Boss,UMOB_DEF, 'boss_def + (15 * 'Buff);
+			setunitdata 'Boss,UMOB_MDEF, 'boss_mdef + (5 * 'Buff);
+			setunitdata 'Boss,UMOB_HIT, 'boss_hit + (15 * 'Buff);
+			setunitdata 'Boss,UMOB_FLEE, 'boss_flee + (15 * 'Buff);
+		}
+		movenpc instance_npcname(strnpcinfo(0)),.@arr[UMOB_X],.@arr[UMOB_Y];
+	}
+	initnpctimer;
+	end;
+
+OnBossDead:
+	stopnpctimer;
+	'BossActive = 0;
+	killmonsterall 'Map$[0];
+	enablenpc instance_npcname("Treasure Chest#prtc1");
+	enablenpc instance_npcname("Culvert Manager#prtc3");
+	end;
+}
+
+1@prtc,61,70,3	script	#prtcegg1	HIDDEN_WARP_NPC,{
+	end;
+OnEnable:
+	'EggCt++;
+    getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
+    monster .@map$,.@x,.@y,"Mature Thief Bug Egg",3974,1,instance_npcname(strnpcinfo(0))+"::OnMyMobDead";
+    end;
+OnMyMobDead:
+    getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
+    monster .@map$,.@x,.@y,"Tiny Thief Bug",3973,rand(1,2);
+	donpcevent instance_npcname("Culvert Manager#prtc2")+"::OnCulvertEggKill";
+    end;
+}
+
+1@prtc,67,100,0	duplicate(#prtcegg1)	#prtcegg2	HIDDEN_WARP_NPC
+1@prtc,100,87,0	duplicate(#prtcegg1)	#prtcegg3	HIDDEN_WARP_NPC
+1@prtc,100,58,0	duplicate(#prtcegg1)	#prtcegg4	HIDDEN_WARP_NPC
+1@prtc,100,27,0	duplicate(#prtcegg1)	#prtcegg5	HIDDEN_WARP_NPC
+1@prtc,100,123,0	duplicate(#prtcegg1)	#prtcegg6	HIDDEN_WARP_NPC
+1@prtc,99,151,0	duplicate(#prtcegg1)	#prtcegg7	HIDDEN_WARP_NPC
+1@prtc,139,33,0	duplicate(#prtcegg1)	#prtcegg8	HIDDEN_WARP_NPC
+1@prtc,139,62,0	duplicate(#prtcegg1)	#prtcegg9	HIDDEN_WARP_NPC
+1@prtc,139,114,0	duplicate(#prtcegg1)	#prtcegg10	HIDDEN_WARP_NPC
+1@prtc,140,172,0	duplicate(#prtcegg1)	#prtcegg11	HIDDEN_WARP_NPC
+1@prtc,156,150,0	duplicate(#prtcegg1)	#prtcegg12	HIDDEN_WARP_NPC
+1@prtc,155,124,0	duplicate(#prtcegg1)	#prtcegg13	HIDDEN_WARP_NPC
+1@prtc,156,87,0	duplicate(#prtcegg1)	#prtcegg14	HIDDEN_WARP_NPC
+1@prtc,156,54,0	duplicate(#prtcegg1)	#prtcegg15	HIDDEN_WARP_NPC
+1@prtc,156,29,0	duplicate(#prtcegg1)	#prtcegg16	HIDDEN_WARP_NPC
+1@prtc,156,175,0	duplicate(#prtcegg1)	#prtcegg17	HIDDEN_WARP_NPC
+1@prtc,179,110,0	duplicate(#prtcegg1)	#prtcegg18	HIDDEN_WARP_NPC
+1@prtc,180,140,0	duplicate(#prtcegg1)	#prtcegg19	HIDDEN_WARP_NPC
+1@prtc,180,169,0	duplicate(#prtcegg1)	#prtcegg20	HIDDEN_WARP_NPC
+1@prtc,179,72,0	duplicate(#prtcegg1)	#prtcegg21	HIDDEN_WARP_NPC
+1@prtc,179,38,0	duplicate(#prtcegg1)	#prtcegg22	HIDDEN_WARP_NPC
+
+
+1@prtc,100,42,4	script	Treasure Chest#prtc1	10005,{
+
+		setarray .@reward[1],
+		25424,100,	//
+		25424,100,
+		25424,50,
+		22150,100,
+		25424,50,	//
+		25424,25,
+		28539,100,
+		25424,25,	//
+		22150,50,	//
+		22150,50,	//
+		28539,50,	//
+		28539,50,	//
+		25458,100,
+		25458,50,
+		25458,10,
+		512,30,	//
+		512,80,	//
+		512,60,	//
+		512,40;	//
+
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
+	
+	specialeffect EF_ASSUMPTIO; 
+	specialeffect EF_FORESTLIGHT2; //Forest Light
+	specialeffect EF_COIN;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	.@limit = getarraysize(.@reward);
+	for(.@i = 1; .@i<=.@limit; .@i+=2) {
+		if(rand(100) < (.@reward[.@i+1] + .@bonus))
+			makeitem .@reward[.@i],1,'Map$,.@x+rand(3)-1,.@y+rand(3)-1;
+	}
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;	
+}
+
+1@prtc,104,28,6	script	Culvert Manager#prtc3	853,{
+	mes "["+strnpcinfo(1)+"]";
+	mes "Thank you very much!!";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Though, I'm sure this place will be infested with these bugs very soon...";
+	next;
+	if(isbegin_quest(12424) == 1){
+		mes "["+strnpcinfo(1)+"]";
+		mes "Since it's first time for you to do this, I'll give you something special.";
+		completequest 12424;
+		getitem F_Rand(28539,22150),1;
+		getexp 100000,50000;
+		next;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Do you want me to guide you out of here?";
+	next;
+	switch(select("I need double check.","Yes please.")){
+	
+		case 1:
+			mes "["+strnpcinfo(1)+"]";
+			mes "You are really beyond my expectation! Looking forward working with you again.";
+			close;
+		
+		case 2:
+			mes "["+strnpcinfo(1)+"]";
+			mes "Alright, this way please.";
+			close2;
+			getitem 25424,1;
+			warp "prt_fild05",271,208;
+			end;
+	}
+
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;	
+}
+
