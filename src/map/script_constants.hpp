@@ -479,6 +479,9 @@
 	export_constant(MF_LEAVES);
 	// Intentionally disabled mf_rain because Ind removed it source side
 	//export_constant(MF_RAIN);
+	export_constant(MF_ALLOW_BG_ITEMS);
+	export_constant(MF_ALLOW_WOE_ITEMS);
+	export_constant(MF_NOEMERGENCYCALL);
 	export_constant(MF_NOGO);
 	export_constant(MF_CLOUDS);
 	export_constant(MF_CLOUDS2);
@@ -1608,6 +1611,7 @@
 	export_constant(SC_GEFFEN_MAGIC1);
 	export_constant(SC_GEFFEN_MAGIC2);
 	export_constant(SC_GEFFEN_MAGIC3);
+	export_constant(SC_FULLINVINCIBLE);
 	export_constant(SC_MAXPAIN);
 	export_constant(SC_ARMOR_ELEMENT_EARTH);
 	export_constant(SC_ARMOR_ELEMENT_FIRE);
@@ -8474,6 +8478,10 @@
 	export_constant(BG_INFO_MAX_LEVEL);
 	export_constant(BG_INFO_MAPS);
 	export_constant(BG_INFO_DESERTER_TIME);
+	export_constant(BG_INFO_NAME);
+	export_constant(BG_INFO_VARIABLE);
+	export_constant(BG_INFO_COLOR);
+	export_constant(BG_TOTAL_ARENA);
 
 	/* item job classes */
 	export_constant(ITEMJ_NORMAL);

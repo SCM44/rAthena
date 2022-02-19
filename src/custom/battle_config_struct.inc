@@ -12,3 +12,6 @@
  *	 <datatype> name;
  **/
 
+	int bg_reserved_char_id;
+	int woe_reserved_char_id;
+	int bg_min_vote_leader;

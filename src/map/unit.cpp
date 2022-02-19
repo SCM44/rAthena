@@ -2763,6 +2763,10 @@ static int unit_attack_timer_sub(struct block_list* src, int tid, t_tick tick)
 	if( ud->skilltimer != INVALID_TIMER && !(sd && pc_checkskill(sd,SA_FREECAST) > 0) )
 		return 0; // Can't attack while casting
 
+	if( sd && map_getmapflag(src->m, MF_BATTLEGROUND) )
+		pc_update_last_action(sd,0,IDLE_ATTACK);
+
+
 	if( !battle_config.sdelay_attack_enable && DIFF_TICK(ud->canact_tick,tick) > 0 && !(sd && pc_checkskill(sd,SA_FREECAST) > 0) ) {
 		// Attacking when under cast delay has restrictions:
 		if( tid == INVALID_TIMER ) { // Requested attack.

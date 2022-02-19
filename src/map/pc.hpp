@@ -378,6 +378,10 @@ struct map_session_data {
 		uint8 isBoundTrading; // Player is currently add bound item to trade list [Cydh]
 		bool ignoretimeout; // Prevent the SECURE_NPCTIMEOUT function from closing current script.
 		unsigned int workinprogress : 2; // See clif.hpp::e_workinprogress
+		unsigned int view_mob_info : 1;
+		unsigned int bg_listen : 1;
+		unsigned int bg_afk : 1; // Moved here to reduce searchs
+		unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
 		bool pc_loaded; // Ensure inventory data and status data is loaded before we calculate player stats
 		bool keepshop; // Whether shop data should be removed when the player disconnects
 		bool mail_writing; // Whether the player is currently writing a mail in RODEX or not
@@ -751,6 +755,8 @@ struct map_session_data {
 	// Battlegrounds queue system [MasterOfMuppets]
 	int bg_id, bg_queue_id;
 	int tid_queue_active; ///< Timer ID associated with players joining an active BG
+	std::shared_ptr<s_battleground_data> bmaster_flag;
+	unsigned short bg_team;
 
 #ifdef SECURE_NPCTIMEOUT
 	/**
@@ -1523,6 +1529,8 @@ extern int day_timer_tid;
 extern int night_timer_tid;
 TIMER_FUNC(map_day_timer); // by [yor]
 TIMER_FUNC(map_night_timer); // by [yor]
+
+int pc_update_last_action(struct map_session_data *sd, int type, enum idletime_option idle_option);
 
 // Rental System
 void pc_inventory_rentals(struct map_session_data *sd);

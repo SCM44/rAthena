@@ -14,6 +14,8 @@
 
 #define MAX_BG_MEMBERS 30
 
+extern struct guild bg_guild[];
+
 struct s_battleground_member_data {
 	unsigned short x, y;
 	struct map_session_data *sd;
@@ -28,10 +30,25 @@ struct s_battleground_data {
 	std::string logout_event; ///< NPC Event to call on log out events
 	std::string die_event; ///< NPC Event to call on death events
 	std::string active_event; ///< NPC Event to call on players joining an active battleground
+	
+	// [Vykimo]
+	int palette; ///< Team Palette
+	time_t creation_tick; // Creation of this Team
+	// Team Leader and BG Skills features
+	int leader_char_id;
+	int skill_block_timer[MAX_GUILDSKILL];
+	unsigned int color;
+	// Fake Guild Link
+	struct guild *g;
+	bool reveal_pos, reveal_flag;
+	// Score Board
+	int team_score;
+	std::map<map_session_data*, map_session_data*> voteleader;
 };
 
 struct s_battleground_team {
 	int16 warp_x, warp_y; ///< Team respawn coordinates
+	int16 palette; ///< Team Palette [Vykimo]
 	std::string quit_event, ///< Team NPC Event to call on log out events
 		death_event, ///< Team NPC Event to call on death events
 		active_event, ///< Team NPC Event to call on players joining an active battleground
@@ -43,6 +60,7 @@ struct s_battleground_map {
 	uint16 mapindex; ///< Index of the map
 	s_battleground_team team1, team2; ///< Team data
 	std::string bgcallscript; ///< Script to be called when players join the battleground
+	std::string bgendcallscript; ///< Script to be called when premature end of the current battleground
 	bool isReserved; ///< Reserve BG maps that are used so that the system won't create multiple BG instances on the same map
 };
 
@@ -73,6 +91,11 @@ struct s_battleground_queue {
 struct s_battleground_type {
 	int id; ///< Battlegrounds database ID
 	std::string name; ///< Name of the battleground type
+	std::string variable; ///< Variable name for reward
+	unsigned int color; ///< Color for announce [Vykimo]
+	int reward_winner; ///< Reward for Winner
+	int reward_looser; ///< Reward for Looser
+	int reward_draw; ///< Reward for Draw
 	int required_players; ///< Amount of players required on each side to start
 	int max_players; ///< Maximum amount of players on each side
 	int min_lvl; ///< Minimum level to participate in this battleground type
@@ -99,6 +122,8 @@ enum e_bg_queue_apply_ack : uint16 {
 	BG_APPLY_RECONNECT, ///< Reconnect then apply
 	BG_APPLY_PARTYGUILD_LEADER, ///< Only party/guild leader can apply
 	BG_APPLY_PLAYER_CLASS, ///< Your class can't apply
+	BG_DUPLICATE_UNIQUE_ID, ///< Your unique id is already in the queue
+	BG_UNACTIVATED ///< BG is off
 };
 
 /// Enum of script command bg_info types
@@ -110,6 +135,10 @@ enum e_bg_info : uint16 {
 	BG_INFO_MAX_LEVEL,
 	BG_INFO_MAPS,
 	BG_INFO_DESERTER_TIME,
+	BG_INFO_NAME,
+	BG_INFO_VARIABLE,
+	BG_INFO_COLOR,
+	BG_TOTAL_ARENA,
 };
 
 class BattlegroundDatabase : public TypesafeYamlDatabase<uint32, s_battleground_type> {
@@ -126,8 +155,10 @@ extern BattlegroundDatabase battleground_db;
 extern std::unordered_map<int, std::shared_ptr<s_battleground_data>> bg_team_db;
 extern std::vector<std::shared_ptr<s_battleground_queue>> bg_queues;
 
-std::shared_ptr<s_battleground_type> bg_search_name(const char *name);
+std::shared_ptr<s_battleground_type> bg_search_name(const char* name);
+std::shared_ptr<s_battleground_type> bg_search_mapname(const char* name);
 std::shared_ptr<s_battleground_queue> bg_search_queue(int queue_id);
+struct guild* bg_guild_get(int bg_id);
 void bg_send_dot_remove(struct map_session_data *sd);
 int bg_team_get_id(struct block_list *bl);
 struct map_session_data *bg_getavailablesd(s_battleground_data *bg);
@@ -136,10 +167,10 @@ bool bg_queue_reservation(const char *name, bool state, bool ended);
 #define bg_queue_reserve(name, end) (bg_queue_reservation(name, true, end))
 #define bg_queue_unbook(name) (bg_queue_reservation(name, false, false))
 
-int bg_create(uint16 mapindex, s_battleground_team* team);
+int bg_create(uint16 mapindex, s_battleground_team* team, int guild_index);
 bool bg_team_join(int bg_id, struct map_session_data *sd, bool is_queue);
 bool bg_team_delete(int bg_id);
-int bg_team_leave(struct map_session_data *sd, bool quit, bool deserter);
+int bg_team_leave(struct map_session_data *sd, bool quit, bool deserter, int flag);
 bool bg_team_warp(int bg_id, unsigned short mapindex, short x, short y);
 bool bg_player_is_in_bg_map(struct map_session_data *sd);
 bool bg_queue_check_joinable(std::shared_ptr<s_battleground_type> bg, struct map_session_data *sd, const char *name);
@@ -154,6 +185,25 @@ void bg_queue_on_accept_invite(struct map_session_data *sd);
 void bg_queue_start_battleground(std::shared_ptr<s_battleground_queue> queue);
 bool bg_member_respawn(struct map_session_data *sd);
 void bg_send_message(struct map_session_data *sd, const char *mes, int len);
+
+int battleground_countlogin(struct map_session_data *sd, bool check_bat_room);
+
+int bg_get_mode();
+void bg_set_mode(int mode);
+
+void bg_team_getitem(int bg_id, int nameid, int amount);
+void bg_team_get_kafrapoints(int bg_id, int amount);
+void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena);
+void bg_team_rewards_all(const char* bg_map, int team_id1, int team_id2, int nameid, int amount, int bg_result);
+
+int bg_team_clean(int bg_id, bool remove);
+int bg_checkskill(std::shared_ptr<s_battleground_data> bg, int id);
+int bg_move_team_queue(const char * from_bg_name, const char * target_bg_name);
+
+void (bg_start) (void);
+void (bg_end) (void);
+
+void bg_reload(void);
 
 void do_init_battleground(void);
 void do_final_battleground(void);

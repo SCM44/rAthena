@@ -977,11 +977,16 @@ bool skill_isNotOk(uint16 skill_id, struct map_session_data *sd)
 			break;
 		case GD_EMERGENCYCALL:
 		case GD_ITEMEMERGENCYCALL:
-			if (
+			if( mapdata->flag[MF_NOEMERGENCYCALL])
+			{
+				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+				return true;
+			}
+			if ( !(mapdata->flag[MF_BATTLEGROUND]) && (
 				!(battle_config.emergency_call&((is_agit_start())?2:1)) ||
 				!(battle_config.emergency_call&(mapdata_flag_gvg2(mapdata)?8:4)) ||
 				(battle_config.emergency_call&16 && mapdata->flag[MF_NOWARPTO] && !(mapdata->flag[MF_GVG_CASTLE] || mapdata->flag[MF_GVG_TE_CASTLE]))
-			)	{
+			))	{
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return true;
 			}
@@ -7171,7 +7176,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 	case PR_REDEMPTIO:
 		if (sd && !(flag&1)) {
-			if (sd->status.party_id == 0) {
+			if ((sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND))) {
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				break;
 			}
@@ -8070,7 +8075,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case SP_SOULUNITY: {
 			int8 count = min(5 + skill_lv, MAX_UNITED_SOULS);
 
-			if (sd == nullptr || sd->status.party_id == 0 || (flag & 1)) {
+			if (sd == nullptr || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || (flag & 1)) {
 				if (!dstsd || !sd) { // Only put player's souls in unity.
 					if (sd)
 						clif_skill_fail(sd, skill_id, USESKILL_FAIL, 0);
@@ -8479,7 +8484,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case PR_IMPOSITIO:
 	case PR_MAGNIFICAT:
 	case PR_GLORIA:
-		if (sd == NULL || sd->status.party_id == 0 || (flag & 1)) {
+		if (sd == NULL || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || flag&1) {
 
 			// Animations don't play when outside visible range
 			if (check_distance_bl(src, bl, AREA_SIZE))
@@ -8501,7 +8506,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case NV_HELPANGEL:
 	case IG_GUARDIAN_SHIELD:
 	case IG_ULTIMATE_SACRIFICE:// Is the animation on this skill correct? Check if its on caster only or all affected. [Rytech]
-		if( sd == NULL || sd->status.party_id == 0 || (flag & 1) )
+		if( sd == NULL || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || (flag & 1) )
 			clif_skill_nodamage(bl, bl, skill_id, skill_lv, sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
 		else if (sd)
 		{
@@ -8526,7 +8531,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case BS_ADRENALINE2:
 	case BS_WEAPONPERFECT:
 	case BS_OVERTHRUST:
-		if (sd == NULL || sd->status.party_id == 0 || (flag & 1)) {
+		if (sd == NULL || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || (flag & 1)) {
 			int weapontype = skill_get_weapontype(skill_id);
 			if (!weapontype || !dstsd || pc_check_weapontype(dstsd, weapontype)) {
 				clif_skill_nodamage(bl, bl, skill_id, skill_lv,
@@ -10237,13 +10242,17 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case GD_RESTORE:
 	case GD_EMERGENCY_MOVE:
 		if(flag&1) {
-			if (status_get_guild_id(src) == status_get_guild_id(bl)) {				
-				if( skill_id == GD_RESTORE )
-					clif_skill_nodamage(src,bl,AL_HEAL,status_percent_heal(bl,90,90),1);
-				else
-					sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id, skill_lv));
+			if ( (map_getmapflag(src->m, MF_BATTLEGROUND) && bg_team_get_id(src) == bg_team_get_id(bl))
+			|| (!map_getmapflag(src->m, MF_BATTLEGROUND) && clif_visual_guild_id(src) == clif_visual_guild_id(bl))) {
+				if (clif_visual_guild_id(src) == clif_visual_guild_id(bl)) {
+					if( skill_id == GD_RESTORE )
+						clif_skill_nodamage(src,bl,AL_HEAL,status_percent_heal(bl,90,90),1);
+					else
+						sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id, skill_lv));
+				}
 			}
-		} else if (status_get_guild_id(src)) {
+		} else if ((map_getmapflag(src->m, MF_BATTLEGROUND) && bg_team_get_id(src)) 
+			|| (!map_getmapflag(src->m, MF_BATTLEGROUND) && clif_visual_guild_id(src))) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			map_foreachinallrange(skill_area_sub, src,
 				skill_get_splash(skill_id, skill_lv), BL_PC,
@@ -10264,32 +10273,62 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			int8 dy[9] = { 0, 0, 1,-1, 1,-1,-1, 1, 0};
 			uint8 j = 0, calls = 0, called = 0;
 			struct guild *g;
+			std::shared_ptr<s_battleground_data> bg;
+			
+			if( map_getmapflag(src->m, MF_BATTLEGROUND) )
+			{
+				if(sd && (bg = sd->bmaster_flag) != NULL ) {
+					
+					clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
+					for (const auto& member : bg->members) {
+						if (j > 8)
+							j = 0;
+
+						if ((dstsd = member.sd) != nullptr && sd != dstsd && !dstsd->state.autotrade && !pc_isdead(dstsd)) {
+							
+							if (!map_getmapflag(dstsd->bl.m, MF_BATTLEGROUND))
+								continue;
+							
+							if (!pc_job_can_entermap((enum e_job)dstsd->status.class_, src->m, dstsd->group_level))
+								continue;
+							
+							if(map_getcell(src->m,src->x+dx[j],src->y+dy[j],CELL_CHKNOREACH))
+								dx[j] = dy[j] = 0;
+							
+							if (!pc_setpos(dstsd, map_id2index(src->m), src->x+dx[j], src->y+dy[j], CLR_RESPAWN))
+								called++;
+						}
+					}
+				} else break;
+
+			} else {
 			// i don't know if it actually summons in a circle, but oh well. ;P
-			g = sd?sd->guild:guild_search(status_get_guild_id(src));
-			if (!g)
-				break;
+				g = sd?sd->guild:guild_search(clif_visual_guild_id(src));
+				if (!g)
+					break;
 
-			if (skill_id == GD_ITEMEMERGENCYCALL)
-				switch (skill_lv) {
-					case 1:	calls = 7; break;
-					case 2:	calls = 12; break;
-					case 3:	calls = 20; break;
-					default: calls = 0;	break;
-				}
+				if (skill_id == GD_ITEMEMERGENCYCALL)
+					switch (skill_lv) {
+						case 1:	calls = 7; break;
+						case 2:	calls = 12; break;
+						case 3:	calls = 20; break;
+						default: calls = 0;	break;
+					}
 
-			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
-			for (i = 0; i < g->max_member && (!calls || (calls && called < calls)); i++, j++) {
-				if (j > 8)
-					j = 0;
-				if ((dstsd = g->member[i].sd) != NULL && sd != dstsd && !dstsd->state.autotrade && !pc_isdead(dstsd)) {
-					if (map_getmapflag(dstsd->bl.m, MF_NOWARP) && !map_flag_gvg2(dstsd->bl.m))
-						continue;
-					if (!pc_job_can_entermap((enum e_job)dstsd->status.class_, src->m, dstsd->group_level))
-						continue;
-					if(map_getcell(src->m,src->x+dx[j],src->y+dy[j],CELL_CHKNOREACH))
-						dx[j] = dy[j] = 0;
-					if (!pc_setpos(dstsd, map_id2index(src->m), src->x+dx[j], src->y+dy[j], CLR_RESPAWN))
-						called++;
+				clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
+				for (i = 0; i < g->max_member && (!calls || (calls && called < calls)); i++, j++) {
+					if (j > 8)
+						j = 0;
+					if ((dstsd = g->member[i].sd) != NULL && sd != dstsd && !dstsd->state.autotrade && !pc_isdead(dstsd)) {
+						if (map_getmapflag(dstsd->bl.m, MF_NOWARP) && !map_flag_gvg2(dstsd->bl.m))
+							continue;
+						if (!pc_job_can_entermap((enum e_job)dstsd->status.class_, src->m, dstsd->group_level))
+							continue;
+						if(map_getcell(src->m,src->x+dx[j],src->y+dy[j],CELL_CHKNOREACH))
+							dx[j] = dy[j] = 0;
+						if (!pc_setpos(dstsd, map_id2index(src->m), src->x+dx[j], src->y+dy[j], CLR_RESPAWN))
+							called++;
+					}
 				}
 			}
 			if (sd)
@@ -10536,7 +10575,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 	case ALL_PARTYFLEE:
 		if( sd  && !(flag&1) ) {
-			if( !sd->status.party_id ) {
+			if( !sd->status.party_id && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND) ) {
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				break;
 			}
@@ -10731,20 +10770,32 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case AB_PRAEFATIO:
+	{
+		struct map_data *mapdata = map_getmapdata(sd->bl.m);
+		if (!sd || (sd->status.party_id == 0 && !mapdata->flag[MF_BATTLEGROUND]) || flag & 1)
+			clif_skill_nodamage(bl, bl, skill_id, skill_lv, sc_start4(src, bl, type, 100, skill_lv, 0, 0, (sd && (sd->status.party_id || mapdata->flag[MF_BATTLEGROUND]) ? party_foreachsamemap(party_sub_count, sd, 0) : 1), skill_get_time(skill_id, skill_lv)));
+
+		break;
+	}
 	case AB_RENOVATIO:
-		if( !sd || sd->status.party_id == 0 || flag&1 ) {
+	{
+		struct map_data* mapdata = map_getmapdata(sd->bl.m);
+		if (!sd || (sd->status.party_id == 0 && !mapdata->flag[MF_BATTLEGROUND]) || flag & 1) {
 			if (skill_id == AB_PRAEFATIO)
-				clif_skill_nodamage(bl, bl, skill_id, skill_lv, sc_start4(src, bl, type, 100, skill_lv, 0, 0, (sd && sd->status.party_id ? party_foreachsamemap(party_sub_count, sd, 0) : 1 ), skill_get_time(skill_id, skill_lv)));
+				clif_skill_nodamage(bl, bl, skill_id, skill_lv, sc_start4(src, bl, type, 100, skill_lv, 0, 0, (sd && sd->status.party_id ? party_foreachsamemap(party_sub_count, sd, 0) : 1), skill_get_time(skill_id, skill_lv)));
 			else
 				clif_skill_nodamage(bl, bl, skill_id, skill_lv, sc_start(src, bl, type, 100, skill_lv, skill_get_time(skill_id, skill_lv)));
-		} else if( sd )
-			party_foreachsamemap(skill_area_sub, sd, skill_get_splash(skill_id, skill_lv), src, skill_id, skill_lv, tick, flag|BCT_PARTY|1, skill_castend_nodamage_id);
+		}
+		else if (sd)
+			party_foreachsamemap(skill_area_sub, sd, skill_get_splash(skill_id, skill_lv), src, skill_id, skill_lv, tick, flag | BCT_PARTY | 1, skill_castend_nodamage_id);
+
 		break;
+	}
 
 	case AB_CHEAL:
-		if( !sd || sd->status.party_id == 0 || flag&1 ) {
+		if( !sd || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || flag&1 ) {
 			if( sd && tstatus && !battle_check_undead(tstatus->race, tstatus->def_ele) && !tsc->data[SC_BERSERK] ) {
-				int partycount = (sd->status.party_id ? party_foreachsamemap(party_sub_count, sd, 0) : 0);
+				int partycount = (sd->status.party_id || map_getmapflag(sd->bl.m, MF_BATTLEGROUND) ? party_foreachsamemap(party_sub_count, sd, 0) : 0);
 
 				i = skill_calc_heal(src, bl, AL_HEAL, pc_checkskill(sd, AL_HEAL), true);
 
@@ -10792,7 +10843,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case AB_LAUDAAGNUS:
-		if( flag&1 || !sd || !sd->status.party_id ) {
+		if( flag&1 || !sd || (!sd->status.party_id && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND))) {
 			if( tsc && (tsc->data[SC_FREEZE] || tsc->data[SC_STONE] || tsc->data[SC_BLIND] ||
 				tsc->data[SC_BURNING] || tsc->data[SC_FREEZING] || tsc->data[SC_CRYSTALIZE])) {
 				// Success Chance: (60 + 10 * Skill Level) %
@@ -10812,7 +10863,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case AB_LAUDARAMUS:
-		if( flag&1 || !sd || !sd->status.party_id ) {
+		if( flag&1 || !sd || (!sd->status.party_id && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND))) {
 			if( tsc && (tsc->data[SC_SLEEP] || tsc->data[SC_STUN] || tsc->data[SC_MANDRAGORA] || tsc->data[SC_SILENCE] || tsc->data[SC_DEEPSLEEP]) ){
 				// Success Chance: (60 + 10 * Skill Level) %
 				if( rnd()%100 > 60+10*skill_lv )  break;
@@ -11490,7 +11541,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case WA_SYMPHONY_OF_LOVER:
 	case MI_RUSH_WINDMILL:
 	case MI_ECHOSONG:
-		if( !sd || !sd->status.party_id || (flag & 1) ) {
+		if( !sd || (!sd->status.party_id && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || (flag & 1) ) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			sc_start2(src,bl,type,100,skill_lv,((sd) ? pc_checkskill(sd,WM_LESSON) : skill_get_max(WM_LESSON)),skill_get_time(skill_id,skill_lv));
 		} else if( sd ) {
@@ -12292,7 +12343,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case SO_ELEMENTAL_SHIELD:
-		if (!sd || sd->status.party_id == 0 || flag&1) {
+		if (!sd || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || flag&1) {
 			if (sd && sd->status.party_id == 0) {
 				clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 				if (sd->ed && skill_get_state(skill_id) == ST_ELEMENTALSPIRIT2)
@@ -12359,7 +12410,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case SU_HISS:
 	case SU_PURRING:
 	case SU_MEOWMEOW:
-		if (sd == NULL || sd->status.party_id == 0 || flag&1) {
+		if (sd == NULL || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || flag&1) {
 			int duration = skill_get_time(skill_id, skill_lv);
 
 			if (skill_id == SU_BUNCHOFSHRIMP && pc_checkskill(sd, SU_SPIRITOFSEA))
@@ -12371,7 +12422,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case SU_SHRIMPARTY:
-		if (sd == NULL || sd->status.party_id == 0 || flag&1) {
+		if (sd == NULL || (sd->status.party_id == 0 && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) || flag&1) {
 			sc_start(src, bl, type, 100, skill_lv, skill_get_time(skill_id, skill_lv));
 			if (sd && (i = pc_checkskill(sd, SU_FRESHSHRIMP)) > 0) {
 				clif_skill_nodamage(bl, bl, SU_FRESHSHRIMP, i, 1);
@@ -12436,7 +12487,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			// Do the teleport part
 			for (i = 0; i < MAX_PARTY; ++i) {
 				map_session_data *pl_sd = p->data[i].sd;
-
+				
 				if (pl_sd == nullptr || pl_sd == sd || pl_sd->status.party_id != p->party.party_id || pc_isdead(pl_sd) ||
 					sd->bl.m != pl_sd->bl.m)
 					continue;
@@ -17271,15 +17322,23 @@ bool skill_check_condition_castbegin(struct map_session_data* sd, uint16 skill_i
 		case GD_CHARGESHOUT_FLAG:
 		case GD_CHARGESHOUT_BEATING:
 		case GD_EMERGENCY_MOVE:
-			if (!map_flag_gvg2(sd->bl.m)) {
+			if( !map_flag_gvg2(sd->bl.m) && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND) ) {
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return false;
 			}
 		case GD_EMERGENCYCALL:
 		case GD_ITEMEMERGENCYCALL:
 			// other checks were already done in skill_isNotOk()
-			if (!sd->status.guild_id || (sd->state.gmaster_flag == 0 && skill_id != GD_CHARGESHOUT_BEATING))
-				return false;
+			if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) )
+			{
+				if( !(sd->bg_id && sd->bmaster_flag) )
+					return false; // Not Team Leader on Battleground
+			}
+			else
+			{
+				if (!sd->status.guild_id || (sd->state.gmaster_flag == 0 && skill_id != GD_CHARGESHOUT_BEATING))
+					return false; // Not Guild Leader
+			}
 			break;
 
 		case GS_GLITTERING:
@@ -18076,6 +18135,18 @@ bool skill_check_condition_castend(struct map_session_data* sd, uint16 skill_id,
 			clif_messagecolor(&sd->bl,color_table[COLOR_RED],e_msg,false,SELF);
 			return false;
 		}
+		else if (sd->inventory.u.items_inventory[i].card[0] == CARD0_CREATE) {
+			int char_id = MakeDWord(sd->inventory.u.items_inventory[i].card[2], sd->inventory.u.items_inventory[i].card[3]);
+			if (!map_bg_items(sd->bl.m) && battle_config.bg_reserved_char_id && char_id == battle_config.bg_reserved_char_id) {
+				clif_arrow_fail(sd, 0);
+				return false;
+			}
+			if (!map_gvg_items(sd->bl.m) && battle_config.woe_reserved_char_id && char_id == battle_config.woe_reserved_char_id) {
+				clif_arrow_fail(sd, 0);
+				return false;
+			}
+		}
+
 		if (!(require.ammo&1<<sd->inventory_data[i]->subtype)) { //Ammo type check. Send the "wrong weapon type" message
 			//which is the closest we have to wrong ammo type. [Skotlex]
 			clif_arrow_fail(sd,0); //Haplo suggested we just send the equip-arrows message instead. [Skotlex]
@@ -20442,7 +20513,7 @@ std::shared_ptr<s_skill_unit_group> skill_initunitgroup(struct block_list* src, 
 
 	group->src_id     = src->id;
 	group->party_id   = status_get_party_id(src);
-	group->guild_id   = status_get_guild_id(src);
+	group->guild_id   = clif_visual_guild_id(src);
 	group->bg_id      = bg_team_get_id(src);
 	group->group_id   = skill_get_new_group_id();
 	group->link_group_id = 0;

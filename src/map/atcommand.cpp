@@ -25,6 +25,7 @@
 #include "../common/utils.hpp"
 
 #include "achievement.hpp"
+#include "battleground.hpp"
 #include "battle.hpp"
 #include "channel.hpp"
 #include "chat.hpp"
@@ -4221,9 +4222,9 @@ ACMD_FUNC(reload) {
 
 		for (auto &bg : bg_queues) {
 				for (auto &bg_sd : bg->teama_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team A from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team A from battlegrounds
 				for (auto &bg_sd : bg->teamb_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team B from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team B from battlegrounds
 				bg_queue_clear(bg, true);
 		}
 
@@ -4433,6 +4434,10 @@ ACMD_FUNC(mapinfo) {
 		strcat(atcmd_output, " NoGo |"); //
 	if (map_getmapflag(m_id, MF_NOMEMO))
 		strcat(atcmd_output, "  NoMemo |");
+	if (map_getmapflag(m_id, MF_ALLOW_BG_ITEMS))
+		strcat(atcmd_output, "  Allow_bg_items |");
+	if (map_getmapflag(m_id, MF_ALLOW_WOE_ITEMS))
+		strcat(atcmd_output, "  Allow_woe_items |");
 	clif_displaymessage(fd, atcmd_output);
 
 	sprintf(atcmd_output, msg_txt(sd,1065),  // No Exp Penalty: %s | No Zeny Penalty: %s

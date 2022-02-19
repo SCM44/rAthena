@@ -1166,7 +1166,8 @@ enum sc_type : int16 {
 	SC_DEEP_POISONING_OPTION,
 	SC_POISON_SHIELD,
 	SC_POISON_SHIELD_OPTION,
-
+	
+	SC_FULLINVINCIBLE,
 #ifdef RENEWAL
 	SC_EXTREMITYFIST2, //! NOTE: This SC should be right before SC_MAX, so it doesn't disturb if RENEWAL is disabled
 #endif
@@ -2307,6 +2308,8 @@ enum efst_types : short{
 
 	EFST_PRESSURE = 1180,
 
+
+	EFST_FULLINVINCIBLE = 1181,
 	EFST_CLIMAX_EARTH = 1182,
 	EFST_CLIMAX_BLOOM,
 	EFST_CLIMAX_CRYIMP,

@@ -1426,6 +1426,9 @@ int64 battle_calc_damage(struct block_list *src,struct block_list *bl,struct Dam
 
 	sc = status_get_sc(bl); //check target status
 
+	if (sc && sc->data[SC_FULLINVINCIBLE])
+		return 0;
+
 	if( sc && sc->data[SC_INVINCIBLE] && !sc->data[SC_INVINCIBLEOFF] )
 		return 1;
 
@@ -1939,7 +1942,7 @@ bool battle_can_hit_gvg_target(struct block_list *src,struct block_list *bl,uint
 		if ((status_bl_has_mode(bl,MD_SKILLIMMUNE) || (class_ == MOBID_EMPERIUM && !skill_get_inf2(skill_id, INF2_TARGETEMPERIUM))) && flag&BF_SKILL) //Skill immunity.
 			return false;
 		if( src->type != BL_MOB || mob_is_clone( ((struct mob_data*)src)->mob_id ) ){
-			struct guild *g = src->type == BL_PC ? ((TBL_PC *)src)->guild : guild_search(status_get_guild_id(src));
+			struct guild *g = src->type == BL_PC ? ((TBL_PC *)src)->guild : guild_search(clif_visual_guild_id(src));
 
 			if (class_ == MOBID_EMPERIUM && (!g || guild_checkskill(g,GD_APPROVAL) <= 0 ))
 				return false;
@@ -2583,7 +2586,7 @@ int battle_calc_chorusbonus(struct map_session_data *sd) {
 
 	int members = 0;
 
-	if (!sd || !sd->status.party_id)
+	if (!sd || (!sd->status.party_id && !map_getmapflag(sd->bl.m, MF_BATTLEGROUND)))
 		return 0;
 
 	members = party_foreachsamemap(party_sub_count_class, sd, 0, MAPID_THIRDMASK, MAPID_MINSTRELWANDERER);
@@ -3705,7 +3708,7 @@ static void battle_calc_skill_base_damage(struct Damage* wd, struct block_list *
 					ATK_ADDRATE(wd->damage, wd->damage2, sd->bonus.crit_atk_rate);
 				}
 #endif
-				if(sd->status.party_id && (skill=pc_checkskill(sd,TK_POWER)) > 0) {
+				if((sd->status.party_id || map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) && (skill=pc_checkskill(sd,TK_POWER)) > 0) {
 					if( (i = party_foreachsamemap(party_sub_count, sd, 0)) > 1 ) { // exclude the player himself [Inkfish]
 						// Reduce count by one (self) [Tydus1]
 						i -= 1; 
@@ -9162,6 +9165,8 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 				if( sc && sc->count ) {
 					if( sc->data[SC_VOICEOFSIREN] && sc->data[SC_VOICEOFSIREN]->val2 == target->id )
 						return -1;
+					if (sc->data[SC_FULLINVINCIBLE])
+						status_change_end(src, SC_FULLINVINCIBLE, INVALID_TIMER);
 				}
 			}
 			break;
@@ -9257,6 +9262,8 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 
 			if( ((sd->state.block_action & PCBLOCK_IMMUNE) || (sc->data[SC_KINGS_GRACE] && s_bl->type != BL_PC)) && flag&BCT_ENEMY )
 				return 0; // Global immunity only to Attacks
+			if (sc->data[SC_FULLINVINCIBLE])
+				return 0;
 			if( sd->status.karma && s_bl->type == BL_PC && ((TBL_PC*)s_bl)->status.karma )
 				state |= BCT_ENEMY; // Characters with bad karma may fight amongst them
 			if( sd->state.killable ) {
@@ -9399,16 +9406,20 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 		if( flag&(BCT_PARTY|BCT_ENEMY) )
 		{
 			int s_party = status_get_party_id(s_bl);
-			if( s_party && s_party == status_get_party_id(t_bl) && !(mapdata->flag[MF_PVP] && mapdata->flag[MF_PVP_NOPARTY]) && !(mapdata_flag_gvg(mapdata) && mapdata->flag[MF_GVG_NOPARTY]) && (!mapdata->flag[MF_BATTLEGROUND] || sbg_id == tbg_id) )
+			if( !mapdata->flag[MF_BATTLEGROUND] && s_party && s_party == status_get_party_id(t_bl) && !(mapdata->flag[MF_PVP] && mapdata->flag[MF_PVP_NOPARTY]) && !(mapdata_flag_gvg(mapdata) && mapdata->flag[MF_GVG_NOPARTY]) )
+				state |= BCT_PARTY;
+			else if(mapdata->flag[MF_BATTLEGROUND] && sbg_id == tbg_id)
 				state |= BCT_PARTY;
 			else
 				state |= BCT_ENEMY;
 		}
 		if( flag&(BCT_GUILD|BCT_ENEMY) )
 		{
-			int s_guild = status_get_guild_id(s_bl);
-			int t_guild = status_get_guild_id(t_bl);
-			if( !(mapdata->flag[MF_PVP] && mapdata->flag[MF_PVP_NOGUILD]) && s_guild && t_guild && (s_guild == t_guild || (!(flag&BCT_SAMEGUILD) && guild_isallied(s_guild, t_guild))) && (!mapdata->flag[MF_BATTLEGROUND] || sbg_id == tbg_id) )
+			int s_guild = clif_visual_guild_id(s_bl);
+			int t_guild = clif_visual_guild_id(t_bl);
+			if( !mapdata->flag[MF_BATTLEGROUND] && !(mapdata->flag[MF_PVP] && mapdata->flag[MF_PVP_NOGUILD]) && s_guild && t_guild && (s_guild == t_guild || (!(flag&BCT_SAMEGUILD) && guild_isallied(s_guild, t_guild))) )
+				state |= BCT_GUILD;
+			else if(mapdata->flag[MF_BATTLEGROUND] && sbg_id == tbg_id)
 				state |= BCT_GUILD;
 			else
 				state |= BCT_ENEMY;
@@ -9439,8 +9450,8 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 		}
 		if( flag&BCT_GUILD || state&BCT_ENEMY )
 		{
-			int s_guild = status_get_guild_id(s_bl);
-			int t_guild = status_get_guild_id(t_bl);
+			int s_guild = clif_visual_guild_id(s_bl);
+			int t_guild = clif_visual_guild_id(t_bl);
 			if(s_guild && t_guild && (s_guild == t_guild || (!(flag&BCT_SAMEGUILD) && guild_isallied(s_guild, t_guild))))
 				state |= BCT_GUILD;
 		}

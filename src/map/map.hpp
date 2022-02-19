@@ -592,7 +592,7 @@ enum e_mapflag : int16 {
 	MF_FOG,
 	MF_SAKURA,
 	MF_LEAVES,
-	//MF_RAIN,	//20 - No longer available, keeping here just in case it's back someday. [Ind]
+// used by map_setcell()
 	// 21 free
 	MF_NOGO = 22,
 	MF_CLOUDS,
@@ -644,6 +644,9 @@ enum e_mapflag : int16 {
 	MF_SKILL_DURATION,
 	MF_NOCASHSHOP,
 	MF_NORODEX,
+	MF_NOEMERGENCYCALL,
+	MF_ALLOW_BG_ITEMS,
+	MF_ALLOW_WOE_ITEMS,
 	MF_MAX
 };
 
@@ -833,6 +836,7 @@ extern int enable_spy; //Determines if @spy commands are active.
 extern uint32 start_status_points;
 
 // Agit Flags
+extern bool bg_flag;
 extern bool agit_flag;
 extern bool agit2_flag;
 extern bool agit3_flag;
@@ -945,6 +949,26 @@ inline bool mapdata_flag_gvg2_no_te(struct map_data *mapdata) {
 	return false;
 }
 
+inline bool mapdata_gvg_items(struct map_data *mapdata) {
+	if (mapdata == nullptr)
+		return false;
+
+	if (mapdata->flag[MF_GVG] || ((agit_flag || agit2_flag || agit3_flag) && mapdata->flag[MF_GVG_CASTLE]) || mapdata->flag[MF_ALLOW_WOE_ITEMS])
+		return true;
+
+	return false;
+}
+
+inline bool mapdata_bg_items(struct map_data *mapdata) {
+	if (mapdata == nullptr)
+		return false;
+
+	if (mapdata->flag[MF_BATTLEGROUND] || mapdata->flag[MF_ALLOW_BG_ITEMS])
+		return true;
+
+	return false;
+}
+
 /// Backwards compatibility
 inline bool map_flag_vs(int16 m) {
 	if (m < 0)
@@ -1007,6 +1031,24 @@ inline bool map_flag_gvg2_no_te(int16 m) {
 	struct map_data *mapdata = &map[m];
 
 	return mapdata_flag_gvg2_no_te(mapdata);
+}
+
+inline bool map_gvg_items(int16 m) {
+	if (m < 0)
+		return false;
+
+	struct map_data *mapdata = &map[m];
+
+	return mapdata_gvg_items(mapdata);
+}
+
+inline bool map_bg_items(int16 m) {
+	if (m < 0)
+		return false;
+
+	struct map_data *mapdata = &map[m];
+
+	return mapdata_bg_items(mapdata);
 }
 
 extern char motd_txt[];
