@@ -662,6 +662,8 @@ Body:
         Requires:
           - Name: BS_ADRENALINE
             Level: 5
+      - Name: ITM_TOMAHAWK
+        MaxLevel: 1
   - Job: Hunter
     Inherit:
       Novice: true
@@ -3221,11 +3223,11 @@ Body:
             Level: 7
           - Name: SL_STUN
             Level: 7
-      #- Name: SL_SWOO 
-       # MaxLevel: 7
-        #Requires:
-         # - Name: SL_PRIEST
-         #   Level: 1
+      - Name: SL_SWOO 
+        MaxLevel: 7
+        Requires:
+          - Name: SL_PRIEST
+            Level: 1
       - Name: SL_SKE
         MaxLevel: 3
         Requires:

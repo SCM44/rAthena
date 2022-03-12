@@ -2382,6 +2382,58 @@ Body:
     Weight: 100
     Script: |
       itemheal 0,10;
+  - Id: 11565
+    AegisName: Event_White_Potion
+    Name: White Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      itemheal(rand(325, 405), 0);
+  - Id: 11566
+    AegisName: Event_Yellow_Potion
+    Name: Yellow Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      itemheal(rand(175, 235), 0);
+  - Id: 11569
+    AegisName: Event_Orange_Potion
+    Name: Orange Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      itemheal(rand(105, 145), 0);
+  - Id: 11570
+    AegisName: Event_Red_Potion
+    Name: Red Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      itemheal(rand(45, 65), 0);
+  - Id: 11571
+    AegisName: Event_Green_Potion
+    Name: Green Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      sc_end SC_POISON;
+      sc_end SC_SILENCE;
+      sc_end SC_BLIND;
+      sc_end SC_CONFUSION;
+      sc_end SC_ILLUSION;
+  - Id: 11572
+    AegisName: Event_Blue_Potion
+    Name: Blue Potion
+    Type: Healing
+    Buy: 10
+    Weight: 100
+    Script: |
+      itemheal(0, rand(40, 60));
   - Id: 11701
     AegisName: Girl_Bunch_Of_Flower
     Name: Girl's Bouquet
@@ -4858,15 +4910,6 @@ Body:
     Delay:
       Duration: 60000
       Status: Reuse_Limit_C
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       sc_start SC_EXPBOOST,1800000,50;
   - Id: 12209
@@ -4892,18 +4935,11 @@ Body:
     Type: Usable
     Buy: 2
     Weight: 10
+    Flags:
+      BuyingStore: true
     Delay:
       Duration: 60000
       Status: Reuse_Limit_D
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       sc_start SC_ITEMBOOST,1800000,100;
   - Id: 12211
@@ -9791,6 +9827,24 @@ Body:
          if (!checkoption(Option_Wug) && !checkoption(Option_Wugrider))
             setfalcon (!checkfalcon());
       }
+  - Id: 12887
+    AegisName: C_Wing_Of_Fly
+    Name: Infinite Flywing
+    Type: Usable
+    Flags:
+      NoConsume: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemskill "AL_TELEPORT",1;
   - Id: 12900
     AegisName: Battle_Manual_Box
     Name: Battle Manual Box
@@ -16399,15 +16453,6 @@ Body:
     Type: Cash
     Buy: 20
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       getitem 14592,10;
   - Id: 13991
@@ -19253,15 +19298,6 @@ Body:
     Type: Cash
     Buy: 20
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       getitem 12208,10;
   - Id: 14157
@@ -20140,15 +20176,6 @@ Body:
     Type: Cash
     Buy: 20
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       getitem 12208,5;
   - Id: 14209
@@ -21752,15 +21779,8 @@ Body:
     Type: Usable
     Buy: 2
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
+    Flags:
+      BuyingStore: true
     Script: |
       sc_start SC_EXPBOOST,1800000,100;
   - Id: 14534
@@ -22438,15 +22458,6 @@ Body:
     NoUse:
       Override: 100
       Sitting: true
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
     Script: |
       sc_start SC_JEXPBOOST,1800000,50;
   - Id: 14593
@@ -22653,15 +22664,6 @@ Body:
     NoUse:
       Override: 100
       Sitting: true
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 14607
     AegisName: Luxurious_Dinner_W
     Name: Luxurious Western Food
@@ -22996,6 +22998,25 @@ Body:
     Weight: 10
     Script: |
       getitem 6241,50;
+  - Id: 17251
+    AegisName: C_Wing_Of_Fly_3Day_Box
+    Name: C Wing Of Fly 3Day Box
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_C_Wing_Of_Fly_3Day_Box);
   - Id: 22777
     AegisName: Gift_Buff_Set
     Name: Gift Buff Set
@@ -23077,7 +23098,62 @@ Body:
     Buy: 20
     Weight: 10
     Script: |
-      getitem(callfunc("F_Rand", 25465, 25466, 25467, 25468, 25469), rand(1, 2));
+      getitem(callfunc("F_Rand", 25465, 25466, 25467, 25468, 25469), rand(1, 3));
       if (rand(2) == 0)
-      	getitem(callfunc("F_Rand", 25465, 25466, 25467, 25468, 25469), rand(1, 2));
+        getitem(callfunc("F_Rand", 25465, 25466, 25467, 25468, 25469), rand(1, 3));
+  - Id: 29584
+    AegisName: Rune_Box
+    Name: Rune Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem(callfunc("F_Rand", 18006, 18007, 18008, 18005, 18005, 18005, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
+      if (rand(2) == 0)
+        getitem(callfunc("F_Rand", 18006, 18007, 18008, 18006, 18007,18005, 18005,18005, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
+  - Id: 29585
+    AegisName: PVM_Box
+    Name: PVM Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem(callfunc("F_Rand", 14533, 12263, 14545, 14532, 12263), rand(1, 2));
+      if (rand(2) == 0)
+        getitem(callfunc("F_Rand", 12210, 12210, 12210, 12210, 12210, 12210, 12210, 12210, 12210, 13607, 12210, 12210, 12210, 12210, 12210, 12210, 12210, 12210, 12210, 12210), rand(1, 2));
+  - Id: 29586
+    AegisName: Refine_Box
+    Name: Refine Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem(callfunc("F_Rand", 13889, 13610, 13890, 13611), rand(1, 2));
+      if (rand(2) == 0)
+        getitem(callfunc("F_Rand", 13889, 13610, 13890, 13611), rand(1, 2));
+  - Id: 29587
+    AegisName: Shimmering_Crystal_Box
+    Name: Shimmering Crystal Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 25424, 10;
+  - Id: 29588
+    AegisName: Azure_Crystal_Box
+    Name: Azure Crystal Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 25475, 10;
+  - Id: 29589
+    AegisName: Crimson_Crystal_Box
+    Name: Crimson Crystal Box
+    Type: Cash
+    Buy: 20
+    Weight: 10
+    Script: |
+      getitem 25476, 10;
+
 

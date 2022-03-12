@@ -704,7 +704,7 @@ BUILDIN_FUNC(bg_reward)
 	add_value = script_getnum(st,8);
 	bg_arena = script_getnum(st,9);
 
-	bg_team_rewards(team_id, nameid, amount, kafrapoints, quest_id, var, add_value, bg_arena);
+	bg_team_rewards(team_id, nameid, amount, kafrapoints, quest_id, var, add_value, bg_arena, 0);
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -862,4 +862,217 @@ BUILDIN_FUNC(bg_premature_end)
 	}
 
 	return SCRIPT_CMD_SUCCESS;
+}
+
+/*==========================================
+ * Ranking Reset
+ *------------------------------------------*/
+BUILDIN_FUNC(bg_rankpoints)
+{
+	struct map_session_data *sd;
+	std::shared_ptr<s_battleground_data> bg;
+	const char *type;
+	int i, add_value;
+
+	if( script_hasdata(st,4) )
+		sd = map_id2sd(script_getnum(st,4));
+	else
+		script_rid2sd(sd);
+
+	if( sd == NULL )
+		return 0;
+
+	if( !sd->bg_id || !(bg = util::umap_find(bg_team_db, sd->bg_id)) )
+		return 0;
+	ARR_FIND(0,MAX_BG_MEMBERS,i,bg->members[i].sd == sd);
+	if( i >= MAX_BG_MEMBERS )
+		return 0;
+
+	type = script_getstr(st,2);
+	add_value = script_getnum(st,3);
+
+	// Just +1 Fame Point
+	if( !strcmpi(type,"fame") )
+		pc_addfame(sd,add_value,3);
+	// Normal Ranking actions
+	else if( !strcmpi(type,"eos_flags") )
+	{
+		add2limit(sd->status.bgstats.eos_flags,add_value,USHRT_MAX);
+		pc_addfame(sd,5,3);
+	}
+	else if( !strcmpi(type,"sc_stole") )
+	{
+		add2limit(sd->status.bgstats.sc_stole,add_value,USHRT_MAX);
+		pc_addfame(sd,1,3);
+	}
+	else if( !strcmpi(type,"sc_captured") )
+	{
+		add2limit(sd->status.bgstats.sc_captured,add_value,USHRT_MAX);
+		pc_addfame(sd,5,3);
+	}
+	else if( !strcmpi(type,"sc_droped") )
+	{
+		add2limit(sd->status.bgstats.sc_droped,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"ctf_taken") )
+	{
+		add2limit(sd->status.bgstats.ctf_taken,add_value,USHRT_MAX);
+		pc_addfame(sd,1,3);
+	}
+	else if( !strcmpi(type,"ctf_captured") )
+	{
+		add2limit(sd->status.bgstats.ctf_captured,add_value,USHRT_MAX);
+		pc_addfame(sd,25,3);
+	}
+	else if( !strcmpi(type,"ctf_droped") )
+	{
+		add2limit(sd->status.bgstats.ctf_droped,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"dom_off_kills") )
+	{
+		add2limit(sd->status.bgstats.dom_off_kills,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"dom_def_kills") )
+	{
+		add2limit(sd->status.bgstats.dom_def_kills,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"pb_kills") )
+	{
+		add2limit(sd->status.bgstats.pb_kills,add_value,USHRT_MAX);
+		pc_addfame(sd,3,3);
+	}
+	else if( !strcmpi(type,"pb_kill_surface") )
+	{
+		add2limit(sd->status.bgstats.pb_kill_surface,add_value,USHRT_MAX);
+		pc_addfame(sd,15,3);
+	}
+	else if( !strcmpi(type,"pb_scored") )
+	{
+		add2limit(sd->status.bgstats.pb_scored,add_value,USHRT_MAX);
+		pc_addfame(sd,25,3);
+	}
+	else if( !strcmpi(type,"pb_score_own") )
+	{
+		add2limit(sd->status.bgstats.pb_score_own,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"pb_score_penalty") )
+	{
+		add2limit(sd->status.bgstats.pb_score_penalty,add_value,USHRT_MAX);
+		pc_addfame(sd,20,3);
+	}
+	else if( !strcmpi(type,"pb_deaths") )
+	{
+		add2limit(sd->status.bgstats.pb_deaths,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"pb_death_surface") )
+	{
+		add2limit(sd->status.bgstats.pb_death_surface,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"td_death_wfumbi") )
+	{
+		add2limit(sd->status.bgstats.td_death_wfumbi,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"td_death_fumbi") )
+	{
+		add2limit(sd->status.bgstats.td_death_fumbi,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"td_deaths") )
+	{
+		add2limit(sd->status.bgstats.td_deaths,add_value,USHRT_MAX);
+	}
+	else if( !strcmpi(type,"td_scored") )
+	{
+		add2limit(sd->status.bgstats.td_scored,add_value,USHRT_MAX);
+		pc_addfame(sd,25,3);
+	}
+	else if( !strcmpi(type,"td_taken") )
+	{
+		add2limit(sd->status.bgstats.td_taken,add_value,USHRT_MAX);
+		pc_addfame(sd,1,3);
+	}
+	else if( !strcmpi(type,"td_kill_wfumbi") )
+	{
+		add2limit(sd->status.bgstats.td_kill_wfumbi,add_value,USHRT_MAX);
+		pc_addfame(sd,6,3);
+	}
+	else if( !strcmpi(type,"td_kill_fumbi") )
+	{
+		add2limit(sd->status.bgstats.td_kill_fumbi,add_value,USHRT_MAX);
+		pc_addfame(sd,5,3);
+	}
+	else if( !strcmpi(type,"td_kills") )
+	{
+		add2limit(sd->status.bgstats.td_kills,add_value,USHRT_MAX);
+		pc_addfame(sd,1,3);
+	}
+
+	return 0;
+}
+
+BUILDIN_FUNC(bg_rankpoints_area)
+{
+	const char *str, *type;
+	int m, x0, y0, x1, y1, bg_id;
+	int i = 0, add_value;
+	int type_val;
+	std::shared_ptr<s_battleground_data> bg;
+	struct map_session_data *sd;
+
+	bg_id = script_getnum(st,2);
+	str = script_getstr(st,3);
+
+	if( !(bg = util::umap_find(bg_team_db, bg_id)) || (m = map_mapname2mapid(str)) < 0 )
+	{
+		script_pushint(st,0);
+		return 0;
+	}
+
+	x0 = script_getnum(st,4);
+	y0 = script_getnum(st,5);
+	x1 = script_getnum(st,6);
+	y1 = script_getnum(st,7);
+	type = script_getstr(st,8);
+
+	if( !strcmpi(type,"eos_bases") )
+		type_val = 1;
+	else if( !strcmpi(type,"dom_bases") )
+		type_val = 2;
+	else if( !strcmpi(type,"pb_sixyard") )
+		type_val = 3;
+	else if( !strcmpi(type,"pb_penalty") )
+		type_val = 4;
+	else return 0; // Invalid Type
+
+	add_value = script_getnum(st,9);
+	
+	for (const auto& pl_sd : bg->members) {
+		sd = pl_sd.sd;
+
+		if( sd == NULL )
+			continue;
+		if( sd->bl.m != m || sd->bl.x < x0 || sd->bl.y < y0 || sd->bl.x > x1 || sd->bl.y > y1 )
+			continue;
+
+		switch( type_val )
+		{
+		case 1:
+			add2limit(sd->status.bgstats.eos_bases,add_value,USHRT_MAX);
+			pc_addfame(sd,10,3);
+			break;
+		case 2:
+			add2limit(sd->status.bgstats.dom_bases,add_value,USHRT_MAX);
+			pc_addfame(sd,10,3);
+			break;
+		case 3:
+			add2limit(sd->status.bgstats.pb_sixyard,add_value,USHRT_MAX);
+			pc_addfame(sd,10,3);
+			break;
+		case 4:
+			add2limit(sd->status.bgstats.pb_penalty,add_value,USHRT_MAX);
+			pc_addfame(sd,10,3);
+			break;
+		}
+	}
+
+	return 0;
 }

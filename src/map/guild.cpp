@@ -229,6 +229,8 @@ static TBL_PC* guild_sd_check(int guild_id, uint32 account_id, uint32 char_id) {
 	return sd;
 }
 
+int guild_score_saved(int guild_id, int index) { return 0; }
+
 // Modified [Komurka]
 uint16 guild_skill_get_max( uint16 id ){
 	std::shared_ptr<s_guild_skill_tree> skill = guild_skill_tree_db.find( id );
@@ -2125,6 +2127,20 @@ int guild_castledatasave(int castle_id, int index, int value) {
 	case CD_GUILD_ID: // The castle's owner has changed? Update or remove Guardians too. [Skotlex]
 	{
 		int i;
+		struct guild *g;
+		int m = map_mapindex2mapid(gc->mapindex);
+		if( map_allowed_woe(m) && gc->guild_id && (g = guild_search(gc->guild_id)) != NULL )
+		{ // Current WoE
+			int i = gc->castle_id;
+			int addtime = (int)DIFF_TICK(gettick(), gc->capture_tick);
+			int score = (addtime / 300) * (1 + (gc->economy / 25));
+
+			g->castle[i].posesion_time += addtime;
+			g->castle[i].defensive_score += score;
+			g->castle[i].changed = true;
+		}
+
+		gc->capture_tick = gettick();
 		gc->guild_id = value;
 		for (i = 0; i < MAX_GUARDIANS; i++){
 			struct mob_data *gd;
@@ -2133,11 +2149,44 @@ int guild_castledatasave(int castle_id, int index, int value) {
 		}
 		break;
 	}
+	
 	case CD_CURRENT_ECONOMY:
-		gc->economy = value; break;
+	{
+		struct guild *g = gc->guild_id ? guild_search(gc->guild_id) : NULL;
+		if( g && gc->economy < value )
+		{
+			int eco = value - gc->economy;
+			add2limit(g->castle[gc->castle_id].invest_eco, eco, USHRT_MAX);
+			if( g->castle[gc->castle_id].top_eco < value )
+				g->castle[gc->castle_id].top_eco = value;
+			g->castle[gc->castle_id].changed = true;
+			if( !agit_flag )
+			{
+				intif_guild_save_score(g->guild_id, gc->castle_id, &g->castle[gc->castle_id]);
+				g->castle[gc->castle_id].changed = false;
+			}
+		}
+		gc->economy = value; 
+		break;
+	}
+	
 	case CD_CURRENT_DEFENSE: // defense invest change -> recalculate guardian hp
 	{
 		int i;
+		struct guild *g = gc->guild_id ? guild_search(gc->guild_id) : NULL;
+		if( g && gc->defense < value )
+		{
+			int def = value - gc->defense;
+			add2limit(g->castle[gc->castle_id].invest_def, def, USHRT_MAX);
+			if( g->castle[gc->castle_id].top_def < value )
+				g->castle[gc->castle_id].top_def = value;
+			g->castle[gc->castle_id].changed = true;
+			if( !agit_flag )
+			{
+				intif_guild_save_score(g->guild_id, gc->castle_id, &g->castle[gc->castle_id]);
+				g->castle[gc->castle_id].changed = false;
+			}
+		}
 		gc->defense = value;
 		for (i = 0; i < MAX_GUARDIANS; i++){
 			struct mob_data *gd;
@@ -2251,11 +2300,69 @@ int guild_castledataloadack(int len, struct guild_castle *gc) {
 	ShowStatus("Received '" CL_WHITE "%d" CL_RESET "' guild castles from char-server.\n", n);
 	return 0;
 }
+/*------------------------------------------
+ * Guild Ranking System
+ *------------------------------------------*/
+int guild_ranking_save(int flag)
+{
+	struct guild *g;
+	struct map_session_data *sd;
+	int i, j, index;
+	int64 cc;
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		if( gc->guild_id == 0 )
+			continue;
+		
+		index = gc->castle_id;
+
+		if( index >= RANK_CASTLES || (flag == 1 && index >= 24) || (flag == 2 && index < 24) )
+			continue;
+
+		if( (g = guild_search(gc->guild_id)) != NULL )
+		{
+			int addtime = (int)DIFF_TICK(gettick(), gc->capture_tick);
+			int score = (addtime / 300) * (1 + (gc->economy / 25));
+
+			g->castle[index].capture++;
+			g->castle[index].posesion_time += addtime;
+			g->castle[index].defensive_score += score;
+			g->castle[index].changed = true;
+
+			// Capture counter for members
+			for( j = 0; j < MAX_GUILD; j++ )
+			{
+				if( (sd = g->member[j].sd) == NULL )
+					continue;
+
+				cc = pc_readaccountreg(sd, add_str("#GC_CAPTURES"));
+				pc_setaccountreg(sd, add_str("#GC_CAPTURES"),++cc);
+			}
+		}
+	}
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		for( i = 0; i < RANK_CASTLES; i++ )
+		{
+			if( i >= RANK_CASTLES || !g->castle[i].changed )
+				continue;
+
+			intif_guild_save_score(g->guild_id, i, &g->castle[i]);
+			g->castle[i].changed = false;
+		}
+	}
+	return 0;
+}
 
 /**
  * Start WoE:FE and triggers all npc OnAgitStart
  */
-bool guild_agit_start(void){
+bool guild_agit_start(void){	
+
 	if( agit_flag ){
 		return false;
 	}
@@ -2263,6 +2370,17 @@ bool guild_agit_start(void){
 	agit_flag = true;
 
 	npc_event_runall( script_config.agit_start_event_name );
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		if( gc->castle_id >= 24 )
+			continue; // WoE SE Castle
+		if( !gc->guild_id )
+			continue; // No owner
+
+		gc->capture_tick = gettick();
+	}
 
 	return true;
 }
@@ -2278,7 +2396,8 @@ bool guild_agit_end(void){
 	agit_flag = false;
 
 	npc_event_runall( script_config.agit_end_event_name );
-
+	guild_ranking_save(1);
+	
 	return true;
 }
 
@@ -2293,7 +2412,16 @@ bool guild_agit2_start(void){
 	agit2_flag = true;
 
 	npc_event_runall( script_config.agit_start2_event_name );
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
 
+		if( gc->castle_id < 24 )
+			continue; // Non WoE SE Castle
+		if( !gc->guild_id )
+			continue; // No owner
+
+		gc->capture_tick = gettick();
+	}
 	return true;
 }
 
@@ -2308,7 +2436,7 @@ bool guild_agit2_end(void){
 	agit2_flag = false;
 
 	npc_event_runall( script_config.agit_end2_event_name );
-
+	guild_ranking_save(2);
 	return true;
 }
 

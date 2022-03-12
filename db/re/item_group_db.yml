@@ -6386,12 +6386,12 @@ Body:
           - Item: Incant_Samurai_Card
             Rate: 1
             Announced: true
-  - Group: C_WING_OF_FLY_3DAY_BOX
+  - Group: C_WING_OF_FLY_7DAY_BOX
     SubGroups:
       - SubGroup: 0
         List:
           - Item: C_Wing_Of_Fly
-            Duration: 4320
+            Duration: 10080
             UniqueId: true
   - Group: DECUSSATE_RING_BOX
     SubGroups:

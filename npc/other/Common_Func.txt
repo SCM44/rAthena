@@ -191,8 +191,8 @@ function	script	F_ChkFirstAidKit	{
 function	script	F_GetUniqueID	{
 	.@aid = getarg(0,0);
 	if(.@aid == 0) .@aid = getcharid(3);
-	
-	query_sql("SELECT `last_unique_id` FROM `login` WHERE `account_id` = "+ .@aid +"", .@unique_id);
+	.@unique_id = .@aid;
+	//query_sql("SELECT `last_unique_id` FROM `login` WHERE `account_id` = "+ .@aid +"", .@unique_id);
 
 	return .@unique_id;
 }

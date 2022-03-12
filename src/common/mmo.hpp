@@ -67,6 +67,9 @@ typedef uint32 t_itemid;
 #define DEFAULT_WALK_SPEED 150 ///Default walk speed
 #define MIN_WALK_SPEED 20 ///Min walk speed
 #define MAX_WALK_SPEED 1000 ///Max walk speed
+//Update this max as necessary. 55 is the value needed for Super Baby currently
+//Raised to 105 since Expanded Super Baby needs it.
+#define MAX_SKILL_TREE 105
 #define MAX_STORAGE 600 ///Max number of storage slots a player can have
 #define MAX_GUILD_STORAGE 600 ///Max number of storage slots a guild
 #define MAX_PARTY 12 ///Max party member
@@ -508,6 +511,128 @@ struct hotkey {
 };
 #endif
 
+struct s_battleground_stats {
+	unsigned int
+		top_damage,
+		damage_done,
+		damage_received;
+	unsigned short
+		// Capture The Flag
+		ctf_taken,
+		ctf_captured,
+		ctf_droped,
+		ctf_wins, ctf_lost, ctf_tie,
+		// Team Death Match
+		tdm_kills,
+		tdm_deaths,
+		tdm_wins, tdm_lost, tdm_tie,
+		// Eye of Storm
+		eos_flags,
+		eos_bases,
+		eos_wins, eos_lost, eos_tie,
+		// Conquest
+		emperium_kill,
+		barricade_kill,
+		gstone_kill,
+		cq_wins, cq_lost,
+		// KVM
+		kvm_kills,
+		kvm_deaths,
+		kvm_wins, kvm_lost, kvm_tie,
+		// Stone Control
+		sc_stole,
+		sc_captured,
+		sc_droped,
+		sc_wins, sc_lost, sc_tie,
+		// Domination
+		dom_bases,
+		dom_off_kills,
+		dom_def_kills,
+		dom_wins, dom_lost, dom_tie,
+		// Rush
+		ru_captures,
+		ru_wins, ru_lost,
+		// Poring Ball
+		pb_kills, pb_deaths, pb_kill_surface, pb_death_surface,
+		pb_scored, pb_score_penalty, pb_score_own,
+		pb_penalty, pb_sixyard,
+		pb_wins, pb_lost, pb_tie,
+		// Touch Down
+		td_taken,
+		td_scored,
+		td_kills, td_kill_fumbi, td_kill_wfumbi,
+		td_deaths, td_death_fumbi, td_death_wfumbi,
+		td_wins, td_lost, td_tie;
+
+	unsigned int // Ammo
+		sp_heal_potions,
+		hp_heal_potions,
+		yellow_gemstones,
+		red_gemstones,
+		blue_gemstones,
+		poison_bottles,
+		acid_demostration,
+		acid_demostration_fail,
+		support_skills_used,
+		healing_done,
+		wrong_support_skills_used,
+		wrong_healing_done,
+		sp_used,
+		zeny_used,
+		spiritb_used,
+		ammo_used;
+	unsigned short
+		kill_count,
+		death_count,
+		win, lost, tie,
+		leader_win, leader_lost, leader_tie,
+		deserter;
+
+	int score, points;
+};
+
+struct s_woestats {
+	int score;
+	unsigned short
+		kill_count,
+		death_count;
+	unsigned int
+		top_damage,
+		damage_done,
+		damage_received;
+	unsigned int
+		emperium_damage,
+		guardian_damage,
+		barricade_damage,
+		gstone_damage;
+	unsigned short
+		emperium_kill,
+		guardian_kill,
+		barricade_kill,
+		gstone_kill;
+	unsigned int // Ammo
+		sp_heal_potions,
+		hp_heal_potions,
+		yellow_gemstones,
+		red_gemstones,
+		blue_gemstones,
+		poison_bottles,
+		acid_demostration,
+		acid_demostration_fail,
+		support_skills_used,
+		healing_done,
+		wrong_support_skills_used,
+		wrong_healing_done,
+		sp_used,
+		zeny_used,
+		spiritb_used,
+		ammo_used;
+};
+
+struct s_skillcount {
+	unsigned short id,count;
+};
+
 struct mmo_charstatus {
 	uint32 char_id;
 	uint32 account_id;
@@ -548,6 +673,12 @@ struct mmo_charstatus {
 	uint32 mapip;
 	uint16 mapport;
 
+	// Ranking Data
+	struct s_battleground_stats bgstats;
+	struct s_skillcount bg_skillcount[MAX_SKILL_TREE]; // BG Limited
+	struct s_woestats wstats;
+	struct s_skillcount skillcount[MAX_SKILL_TREE]; // WoE Limited
+	
 	struct point last_point,save_point,memo_point[MAX_MEMOPOINTS];
 	struct s_skill skill[MAX_SKILL];
 
@@ -691,6 +822,35 @@ struct guild_expulsion {
 struct guild_skill {
 	int id,lv;
 };
+ 
+#define RANK_CASTLES 34
+struct guild_rank_data {
+	unsigned short
+		capture, // Number of times you have captured this castle
+		emperium, // Number of times you have break an emperium on this castle
+		treasure, // Number of opened treasures
+		top_eco, // Max economy reach on this castle
+		top_def, // Max defense reach on this castle
+		invest_eco, // Total of Economy points
+		invest_def, // Total of Defense points
+		offensive_score,
+		defensive_score;
+	unsigned int
+		posesion_time,
+		zeny_eco,
+		zeny_def;
+	unsigned short
+		skill_battleorder,
+		skill_regeneration,
+		skill_restore,
+		skill_emergencycall;
+	struct {
+		unsigned int
+			kill_count,
+			death_count;
+	} off, def, ext, ali;
+	bool changed;
+};
 
 struct Channel;
 struct guild {
@@ -699,6 +859,7 @@ struct guild {
 	t_exp exp;
 	t_exp next_exp;
 	int skill_point;
+	struct guild_rank_data castle[RANK_CASTLES];
 	char name[NAME_LENGTH],master[NAME_LENGTH];
 	struct guild_member member[MAX_GUILD];
 	struct guild_position position[MAX_GUILDPOSITION];
@@ -732,6 +893,7 @@ struct guild_castle {
 	int payTime;
 	int createTime;
 	int visibleC;
+	time_t capture_tick; // [WoE Ranking] 
 	struct {
 		unsigned visible : 1;
 		int id; // object id
@@ -1070,7 +1232,8 @@ enum e_rank {
 	RANK_BLACKSMITH = 0,
 	RANK_ALCHEMIST = 1,
 	RANK_TAEKWON = 2,
-	RANK_KILLER = 3
+	RANK_KILLER = 3,
+	RANK_BG = 4
 };
 
 struct clan_alliance {

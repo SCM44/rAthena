@@ -9,4 +9,17 @@
  **/
 
 //ACMD_DEF(newcommand),
+ACMD_DEFR(battlestats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
+ACMD_DEFR(enemystats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 ACMD_DEF(battleinfo),
+
+// Battleground Extended by Vykimo
+ACMD_DEF(bgstart),
+ACMD_DEF(bgend),
+ACMD_DEF(guildskill),
+ACMD_DEF(listenbg),
+ACMD_DEF(order),
+ACMD_DEF(leader),
+ACMD_DEF(voteleader),
+ACMD_DEF(reportafk),
+ACMD_DEF2("votekick", reportafk),

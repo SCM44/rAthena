@@ -5940,6 +5940,9 @@
 20079,Andre@NPC_GROUNDATTACK,attack,185,2,500,500,5000,no,target,always,0,,,,,,,
 20080,Piere@NPC_EMOTION,loot,197,1,2000,0,5000,yes,self,always,0,19,,,,,,
 20080,Piere@NPC_GROUNDATTACK,attack,185,2,500,500,5000,no,target,always,0,,,,,,6,
+
+2536,PoisonSmoke@MH_POISON_MIST,idle,8020,5,10000,0,0,no,self,always,0,,,,,,0,
+
 3038,Hidden Mob@CR_GRANDCROSS,attack,254,1,10000,0,300,yes,self,always,0,,,,,,0,
 3038,Hidden Mob@NPC_DARKCROSS,attack,338,1,10000,0,300,yes,self,always,0,,,,,,0,
 3038,Hidden Mob@NPC_GRANDDARKNESS,attack,339,1,10000,50,300,no,self,always,0,,,,,,0,

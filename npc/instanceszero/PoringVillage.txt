@@ -21,8 +21,8 @@ OnStartTimer:
 	initnpctimer;
 	end;
 OnStopTimer:
-	callfunc("F_InstanceTimer","pv",getnpctimer(0),'Mode);
-	callfunc("F_UpdateInsRecord");
+	//callfunc("F_InstanceTimer","pv",getnpctimer(0),'Mode);
+	//callfunc("F_UpdateInsRecord");
 	end;
 OnTimer3600000:
 	stopnpctimer;
@@ -35,15 +35,6 @@ OnInstanceInit:
 //Entrance NPC
 prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 
-	//Give all 1st timers
-	if(Ins_PV_FirstRun == 0) {
-		mes "["+strnpcinfo(1)+"]";
-		mes "Here's something I think you deserve.";
-		mes "A little something to commemorate defeating the porings!";
-		Ins_PV_FirstRun = 1;
-		getitem F_Rand(19238,19239),1;			
-		close;
-	}
 	
 	.@party_id = getcharid(1);
 	.@ins_mas = getpartyleader(.@party_id,2);
@@ -90,29 +81,32 @@ prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 		callfunc("F_ChkInsLv",.@min_level,.@max_level);
 		
 		//Create Instance
-		if (instance_create(.@md_name$) < 0) {
+		.@inst_id = instance_create(.@md_name$);
+		if (.@inst_id < 0) {
 			mes "Party Name: "+ getpartyname(.@party_id);
 			mes "Party Leader: "+strcharinfo(0);
 			mes "^0000ff"+.@md_name$+" ^000000 - Reservation Failed.";
 			close;
 		}
-		'Mode = .@select;
+
+		setinstancevar('Mode,.@select,.@inst_id);
 		
-		callfunc("F_InsertDiarySQL","Instance Creation","Poring Village",strcharinfo(0));
+		//debugmes "Instance Creation";
 
 		mes "["+strnpcinfo(1)+"]";
 		mes "Would you like to enter now?";
 		if(select("Yes, I'd like to:Later")==2) close;
 	case 2:
 		if(instance_id() != 0) {
+			.@mode = getinstancevar('Mode,instance_id(IM_PARTY));
 			//Load Config Settings
 			.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
 			explode(.@config$,.@arr$,"-");
 			for(.@i = 0; .@i<getarraysize(.@config$); .@i+=11) {
 				if(.@config$[.@i+1] == .@md_name$) {
-					.@quest = atoi(.@config$[.@i+4 + 3*('Mode-1)]);
-					.@min_level = atoi(.@config$[.@i+2 + 3*('Mode-1)]);
-					.@max_level = atoi(.@config$[.@i+3 + 3*('Mode-1)]);
+					.@quest = atoi(.@config$[.@i+4 + 3*(.@mode-1)]);
+					.@min_level = atoi(.@config$[.@i+2 + 3*(.@mode-1)]);
+					.@max_level = atoi(.@config$[.@i+3 + 3*(.@mode-1)]);
 					break;
 				}
 			}
@@ -138,7 +132,7 @@ prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 			setquest .@quest;
 			break;
 		}
-		callfunc("F_InsertDiarySQL","Instance Entrance","Poring Village",strcharinfo(0));
+		//debugmes "Instance Entrance Poring Village "+strcharinfo(0)+".";
 		close;
 	case 3: close;
 	}
@@ -198,7 +192,7 @@ OnInit:
 OnSummon: //Define monster list based on mode
 	//Poring, Drops, Poporing, Marin, Goldring, Amering, King Poring
 	switch('Mode) {
-		case 1: setarray 'List,3815,3813,3814,3816,3811,3812,3810; break;
+		case 1: setarray 'List,1002,1113,1031,1242,3811,3812,3810; break;
 		case 2: setarray 'List,3815,3813,3814,3816,3811,3812,3810; break; 
 		case 3: setarray 'List,1810,1808,1809,1811,1806,1807,1805; break;
 	}
@@ -318,12 +312,19 @@ OnGuardianDied:
 			break;			
 		case 3:
 			donpcevent instance_npcname("#begi_timer") + "::OnStopTimer";
-			enablenpc instance_npcname("Treasure Chest#begi");
-		
+			if ('Mode == 1) {
+				enablenpc instance_npcname("Treasure Chest#begi1");
+			} else {
+				'unique_members = min(MAX_PARTY, callfunc("F_GetUniquePartyMemberCountInMap", getcharid(1), 'Map$)); // Cap to MAX_PARTY
+				'RewardUniqueIDLogs$ = "";
+				for (.@i = 1; .@i <= 'unique_members; ++.@i) {
+					enablenpc instance_npcname("Treasure Chest#begi" + .@i);
+				}
+			}
 			instance_announce instance_id(), "[Almighty King of Porings] Though I have been defeated..", bc_map, 0xFF0000;
-			sleep2 1500;
+			sleep 1500;
 			instance_announce instance_id(), "[Almighty King of Porings] Don't be conceited. I will be avenged.", bc_map, 0xFF0000;
-			sleep2 1500;
+			sleep 1500;
 			instance_announce instance_id(), "[Almighty King of Porings] I shall send an army of Porings to hunt you down!!", bc_map, 0xFF0000;
 			enablenpc instance_npcname( "alapovivig", instance_id() );
 			end;
@@ -343,7 +344,7 @@ OnGuardianDied:
 OnInstanceInit:
 OnEnable:
 	setcell instance_mapname( "1@begi", instance_id() ),145,35,145,41,cell_walkable,0;
-	enablenpc instance_npcname(strnpcinfo(3));
+	enablenpc;
 	end;
 }
 
@@ -376,12 +377,18 @@ OnTouch_:
 1@begi,175,200,5	duplicate(Strange Light#begi1)	Strange Light#begi3	10043,3,3
 
 
-1@begi,173,193,4	script	Treasure Chest#begi	10005,{
+1@begi,173,193,4	script	Treasure Chest#begi1	10005,{
 	//Check if Party Leader
-	callfunc "F_ChkInstancePT","";
+	//callfunc "F_ChkInstancePT","";
 	//Log Event
-	callfunc("F_InsertDiarySQL","Instance Completion","Poring Village",strcharinfo(0));
-	
+	//debugmes "Instance Completion Poring Village";
+	.@unique_id = callfunc("F_GetUniqueID", getcharid(3));
+	if ('Mode >= 2) {
+		if (strpos('RewardUniqueIDLogs$, ""+.@unique_id) != -1) {
+			end;
+		}
+		'RewardUniqueIDLogs$ = 'RewardUniqueIDLogs$ + "||" + .@unique_id;
+	}
 	.@ins_map$ = strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -408,9 +415,10 @@ OnTouch_:
 		'Mode == 3
 	) .@frag = 23649;
 	
-	
+	if('Mode <= 2) {
 		setarray .@reward[1],
-		
+		19238,50,	//carrot
+		19239,50,	//asperge
 		11565,100,	//White_Potion_B
 		11565,100,	//White_Potion_B
 		11565,100,	//White_Potion_B
@@ -471,18 +479,54 @@ OnTouch_:
 		11572,10,	//Blue_Potion_B
 		11572,10,	//Blue_Potion_B
 		11572,10,	//Blue_Potion_B
+		18010,100,	//Rare_Coin
+		18010,100,	//Rare_Coin
+		18010,100,	//Rare_Coin
+		18010,100,	//Rare_Coin
+		18010,100,	//Rare_Coin
+		18005,5,	//Mixed_Rune_Fragment
+		18005,3,	//Mixed_Rune_Fragment
+		18005,1,	//Mixed_Rune_Fragment
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,10,	//Day-Based Ore
 		.@frag,10,	//Day-Based Ore
-		.@frag,10,	//Day-Based Ore
-		.@frag,10,	//Day-Based Ore
-		.@frag,10,	//Day-Based Ore
-		.@frag,10,	//Day-Based Ore
-		.@frag,10;	//Day-Based Ore
+		.@frag,5,	//Day-Based Ore
+		.@frag,5,	//Day-Based Ore
+		.@frag,5,	//Day-Based Ore
+		.@frag,5,	//Day-Based Ore
+		.@frag,5;	//Day-Based Ore
+	} else if ('Mode == 3) {
+		setarray .@reward[1],
+		18010,100,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,250,	//Rare_Coin
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		18005,100,	//Mixed_Rune_Fragment
+		18005,10,	//Mixed_Rune_Fragment
+		18005,10,	//Mixed_Rune_Fragment
+		29584,100,	//Rune_Box
+		29585,100,	//PVM_Box
+		29586,100,	//Refine_Box
+		29584,1,	//Rune_Box
+		29585,2,	//PVM_Box
+		29586,5,	//Refine_Box
+		6635,100;	//Blacksmith Blessing
+	}
 
-	getmapxy('Map$,.@x,.@y,1,instance_npcname(strnpcinfo(0)));
+	getmapxy('Map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
@@ -501,17 +545,40 @@ OnInstanceInit:
 	end;	
 }
 
+1@begi,170,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi2	10005
+1@begi,167,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi3	10005
+1@begi,176,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi4	10005
+1@begi,179,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi5	10005
+1@begi,173,196,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi6	10005
+1@begi,170,196,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi7	10005
+1@begi,167,196,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi8	10005
+1@begi,176,196,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi9	10005
+1@begi,179,196,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi10	10005
+1@begi,173,190,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi11	10005
+1@begi,176,190,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi12	10005
+
 1@begi,184,196,4	script	Curious Adventurer::alapovivig	671,{
+
+	//Give all 1st timers
+	if(Ins_PV_FirstRun == 0) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Here's something I think you deserve.";
+		mes "A little something to commemorate defeating the porings!";
+		Ins_PV_FirstRun = 1;
+		getitem F_Rand(19238,19239),1;			
+		close;
+	}
+
 	mes "[Curious Adventurer]";
 	mes "Thank you for your help!";
 	mes "I can send you back if needed.";
 	next;
 	if(select("Stay:Leave")==1) close;
-	switch('Mode)	{
-		case 1: callfunc("DWM_Counter",1); break;
-		case 2: callfunc("DWM_Counter",2); break;
-		case 3: callfunc("DWM_Counter",3); break;
-	}
+	// switch('Mode)	{
+	// 	case 1: callfunc("DWM_Counter",1); break;
+	// 	case 2: callfunc("DWM_Counter",2); break;
+	// 	case 3: callfunc("DWM_Counter",3); break;
+	// }
 	warp "prt_fild05", 144, 238;
 	close;
 

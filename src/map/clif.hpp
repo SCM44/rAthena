@@ -589,6 +589,8 @@ uint32 clif_getip(void);
 uint32 clif_refresh_ip(void);
 uint16 clif_getport(void);
 
+void clif_rank_info(struct map_session_data *sd, int points, int total, int flag);
+
 void clif_authok(struct map_session_data *sd);
 void clif_authrefuse(int fd, uint8 error_code);
 void clif_authfail_fd(int fd, int type);

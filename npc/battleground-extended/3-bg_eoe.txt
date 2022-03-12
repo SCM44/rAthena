@@ -31,7 +31,7 @@ OnTeam1Die:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral_Flag", .@x, .@y;
 		mapannounce "bg_eoe",bg_get_data($@BG_Team1,2) + " have droped the Flag",1,0xFFFFFF;
-		//bg_rankpoints "fame",1,@killer_bg_src;
+		bg_rankpoints "fame",1,@killer_bg_src;
 		set getvariableofnpc(.Flag_Status,"Neutral_Flag"), 0; // OnFloor
 		set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 		initnpctimer "Neutral_Flag";
@@ -51,7 +51,7 @@ OnTeam2Die:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral_Flag", .@x, .@y;
 		mapannounce "bg_eoe",bg_get_data($@BG_Team2,2) + " have droped the Flag",1,0xFFFFFF;
-		//bg_rankpoints "fame",1,@killer_bg_src;
+		bg_rankpoints "fame",1,@killer_bg_src;
 		set getvariableofnpc(.Flag_Status,"Neutral_Flag"), 0; // OnFloor
 		set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 		initnpctimer "Neutral_Flag";
@@ -283,7 +283,7 @@ OnTouch:
 
 	set .Flag_Status, 1;
 	set .Flag_Carrier, getcharid(0);
-	//bg_rankpoints "fame",1;
+	bg_rankpoints "fame",1;
 
 	sc_end SC_HIDING;
 	sc_end SC_CLOAKING;
@@ -344,7 +344,7 @@ OnTouch:
 	if( $@BG_Status != 1 || bg_current_mode() != bg_info("bg_eoe", BG_INFO_ID) || .Owner == 0 || .Owner != getcharid(4) || getvariableofnpc(.Flag_Carrier,"Neutral_Flag") != getcharid(0) )
 		end;
 
-	//bg_rankpoints "eos_flags",1;
+	bg_rankpoints "eos_flags",1;
 	set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 	pcblock 1,0; // UnBlock Skills/Items
 	if( .Owner == $@BG_Team1 )
@@ -383,7 +383,7 @@ OnTimer1000:
 			set .Owner, $@BG_Team1; // Team 1
 			setnpcdisplay "North_Base",bg_get_data($@BG_Team1,2) + " Base",1912;
 			mapannounce "bg_eoe","North Base captured by " + bg_get_data($@BG_Team1,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team1,"bg_eoe",143,120,151,127,"eos_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bg_eoe",143,120,151,127,"eos_bases",1;
 			donpcevent "GEoSNBW::OnEnable";
 		}
 		else if( .Balance == -20 )
@@ -392,7 +392,7 @@ OnTimer1000:
 			set .Owner, $@BG_Team2; // Team 2
 			setnpcdisplay "North_Base",bg_get_data($@BG_Team2,2) + " Base",1913;
 			mapannounce "bg_eoe","North Base captured by " + bg_get_data($@BG_Team2,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team2,"bg_eoe",143,120,151,127,"eos_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bg_eoe",143,120,151,127,"eos_bases",1;
 			donpcevent "CEoSNBW::OnEnable";
 		}
 	}
@@ -454,7 +454,7 @@ OnTouch:
 	if( $@BG_Status != 1 || bg_current_mode() != bg_info("bg_eoe", BG_INFO_ID) || .Owner == 0 || .Owner != getcharid(4) || getvariableofnpc(.Flag_Carrier,"Neutral_Flag") != getcharid(0) )
 		end;
 
-	//bg_rankpoints "eos_flags",1;
+	bg_rankpoints "eos_flags",1;
 	set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 	pcblock 1,0; // UnBlock Skills/Items
 	if( .Owner == $@BG_Team1 )
@@ -493,7 +493,7 @@ OnTimer1000:
 			set .Owner, $@BG_Team1; // Team 1
 			setnpcdisplay "South_Base",bg_get_data($@BG_Team1,2) + " Base",1912;
 			mapannounce "bg_eoe","South Base captured by " + bg_get_data($@BG_Team1,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team1,"bg_eoe",55,52,64,60,"eos_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bg_eoe",55,52,64,60,"eos_bases",1;
 			donpcevent "GEoSSBW::OnEnable";
 		}
 		else if( .Balance == -20 )
@@ -502,7 +502,7 @@ OnTimer1000:
 			set .Owner, $@BG_Team2; // Team 2
 			setnpcdisplay "South_Base",bg_get_data($@BG_Team2,2) + " Base",1913;
 			mapannounce "bg_eoe","South Base captured by " + bg_get_data($@BG_Team2,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team2,"bg_eoe",55,52,64,60,"eos_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bg_eoe",55,52,64,60,"eos_bases",1;
 			donpcevent "CEoSSBW::OnEnable";
 		}
 	}

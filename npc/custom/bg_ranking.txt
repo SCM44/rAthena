@@ -1,0 +1,9 @@
+
+bat_room,162,146,3	script	Top 10 Ladder BG 	708,{
+	mes "[Top 10 Ladder BG]";
+	.@nb = query_sql("SELECT ch.name AS char_name, bg.score FROM `char` AS ch  JOIN rank_bg AS bg ON bg.char_id = ch.char_id LEFT JOIN guild ON guild.guild_id = ch.guild_id LEFT JOIN login ON login.account_id = ch.account_id WHERE 1=1 AND login.state != 5 AND (login.unban_time IS NULL OR login.unban_time = 0) AND login.group_id IN (0) ORDER BY bg.score DESC, bg.points DESC, bg.win DESC, ch.base_level DESC, ch.base_exp DESC, ch.job_level DESC, ch.job_exp DESC, ch.char_id ASC LIMIT 10", .@name$, .@points);
+	for(.@i=0;.@i<.@nb;.@i++)
+		mes (.@i+1)+"." + .@name$[0] + " - " + .@points[0] + " pts";
+	close;
+
+}

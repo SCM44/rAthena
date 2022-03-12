@@ -1387,7 +1387,7 @@ comodo,163,280,4	script	Magatu#cmd	55,{
 	close;
 }
 
-cmd_in02,189,99,4	script	Manzi#cmd	85,{
+cmd_in02,185,96,4	script	Manzi#cmd	85,{
 	switch (dmdswrd_Q) {
 	case 9:
 		mes "["+strcharinfo(0)+"]";

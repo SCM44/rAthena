@@ -21,8 +21,8 @@ OnStartTimer:
 	initnpctimer;
 	end;
 OnStopTimer:
-	callfunc("F_InstanceTimer","iz",getnpctimer(0),'Mode);
-	callfunc("F_UpdateInsRecord");
+	//callfunc("F_InstanceTimer","iz",getnpctimer(0),'Mode);
+	//callfunc("F_UpdateInsRecord");
 	end;
 OnTimer3600000:
 	stopnpctimer;
@@ -56,9 +56,9 @@ OnInstanceInit:
 	mes "Good luck in searching for the deep sea creature!";
 	npctalk "Good luck in searching for the deep sea creature!";
 	close2;
-		hideonnpc instance_npcname(strnpcinfo(0));
-		donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnStart"; 
-		donpcevent instance_npcname("#izu_timer") + "::OnStartTimer"; 
+	hideonnpc instance_npcname(strnpcinfo(0));
+	donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnStart"; 
+	donpcevent instance_npcname("#izu_timer") + "::OnStartTimer"; 
 	end;
 
 OnTouch_:
@@ -107,14 +107,16 @@ OnStart:
 		areamonster 'Map$,51,43,350,332,"--ja--",.@m_info[.@m],.@amt,.@label$;
 		
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
-			setd(".@"+.@mob$+.@i), $@mobid[.@i];
-			getunitdata getd("'"+.@mob$+.@i),.@data;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
-			setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+			setd("'"+.@mob$+.@i), $@mobid[.@i];
+			if(unitexists(getd("'"+.@mob$+.@i))) {
+				getunitdata getd("'"+.@mob$+.@i),.@data;
+				setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
+				setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
+				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+			}
 		}
-		if(strpos("20083,20084",.@m_info[.@m]) != -1) setarray 'buff_mobs,.@m_info[.@m],.@amt;
+		if(strpos("20083,20084",""+.@m_info[.@m]) != -1) setarray 'buff_mobs,.@m_info[.@m],.@amt;
 	}
 	//NPCs
 	for(.@i = 1; .@i <= 4; .@i++) {
@@ -133,11 +135,13 @@ OnMobBuff:
 		for(.@i = 1; .@i <= 'buff_mobs[.@m+1]; .@i++) {
 			//if(getd("'Merman"+.@i) == 0) continue;
 			if(unitexists(getd("'Merman"+.@i))) {
-				getunitdata getd("'"+.@mob$+.@i),.@data;
-				setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] + 1000;
-				setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] + 1000;	
-				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] + 150;
-				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] + 150;
+				if(unitexists(getd("'"+.@mob$+.@i))) {
+					getunitdata getd("'"+.@mob$+.@i),.@data;
+					setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] + 1000;
+					setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] + 1000;	
+					setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] + 150;
+					setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] + 150;
+				}
 			}
 		}
 	}
@@ -152,88 +156,94 @@ OnBoss:
 		
 	if('Boss == 0) monster instance_mapname("1@izu"),236,214,"--ja--",20081,1,instance_npcname("Memorial Society Member#izu2") + "::OnBossDead";
 	'Boss = $@mobid[0];
-	unittalk 'Boss,"Earthdwellers, before the might of the sea!!";
-	
-	//Apply Modifiers
-	getunitdata 'Boss,.@boss_data;
-	setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
-	setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
-	setunitdata 'Boss,UMOB_ATKMIN,.@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_ATKMAX,.@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_MATKMIN,.@boss_data[UMOB_MATKMIN] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_MATKMAX,.@boss_data[UMOB_MATKMAX] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_DEF,.@boss_data[UMOB_DEF] * 'boss_def_mod;
-	setunitdata 'Boss,UMOB_MDEF,.@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
-	setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
-	setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
+	if(unitexists('Boss)) {
+		unittalk 'Boss,"Earthdwellers, before the might of the sea!!";
+		
+		//Apply Modifiers
+		getunitdata 'Boss,.@boss_data;
+		setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
+		setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
+		setunitdata 'Boss,UMOB_ATKMIN,.@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_ATKMAX,.@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_MATKMIN,.@boss_data[UMOB_MATKMIN] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_MATKMAX,.@boss_data[UMOB_MATKMAX] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_DEF,.@boss_data[UMOB_DEF] * 'boss_def_mod;
+		setunitdata 'Boss,UMOB_MDEF,.@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
+		setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
+		setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
+	}
 	
 	initnpctimer;
 	end;
 	
 OnTimer5000:
 	'Bones = 0;
-	getunitdata 'Boss, .@arr;
-	.@label$ = instance_npcname("Memorial Society Member#izu2") + "::OnThorn";
-	.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
-	.@mobx = .@arr[UMOB_X];
-	.@moby = .@arr[UMOB_Y];
+	if(unitexists('Boss)) {
+		getunitdata 'Boss, .@arr;
+		.@label$ = instance_npcname("Memorial Society Member#izu2") + "::OnThorn";
+		.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
+		.@mobx = .@arr[UMOB_X];
+		.@moby = .@arr[UMOB_Y];
 
-	// event type every 10%
-	.@x1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	.@y1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	
-	.@x2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	.@y2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	
-	.@x3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	.@y3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	
-	.@x4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	.@y4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	
-	.@x5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-	.@y5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		// event type every 10%
+		.@x1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		.@y1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		
+		.@x2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		.@y2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		
+		.@x3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		.@y3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		
+		.@x4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		.@y4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		
+		.@x5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
+		.@y5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 
-	switch( .@percent_hp / 10 ) {
-	case 10: 
-	case 9:
-	case 8:
-		'Bones = 1;
-		monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
-		break;	
-	case 7:
-	case 6:
-	case 5:
-		'Bones = 2;
-		monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
-		break;		
-	case 4:
-	case 3:	
-		'Bones = 3;
-		monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x3,.@moby+.@y2,"",1961,1, .@label$;
-		break;	
-	case 2:
-	case 1:
-	case 0:
-		'Bones = 5;
-		monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x3,.@moby+.@y3,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x4,.@moby+.@y4,"",1960,1, .@label$;
-		monster 'Map$[0],.@mobx+.@x5,.@moby+.@y5,"",1961,1, .@label$;
-		break;	
+		switch( .@percent_hp / 10 ) {
+		case 10: 
+		case 9:
+		case 8:
+			'Bones = 1;
+			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
+			break;	
+		case 7:
+		case 6:
+		case 5:
+			'Bones = 2;
+			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
+			break;		
+		case 4:
+		case 3:	
+			'Bones = 3;
+			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x3,.@moby+.@y2,"",1961,1, .@label$;
+			break;	
+		case 2:
+		case 1:
+		case 0:
+			'Bones = 5;
+			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x3,.@moby+.@y3,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x4,.@moby+.@y4,"",1960,1, .@label$;
+			monster 'Map$[0],.@mobx+.@x5,.@moby+.@y5,"",1961,1, .@label$;
+			break;	
+		}
 	}
 	end;
 	
 OnTimer65000:
 	.@label$ = instance_npcname("Memorial Society Member#izu2") + "::OnThorn";
 	killmonster 'Map$[0], .@label$;
-	instance_announce 0,"The Coelacanth has feasted on "+'Bones+" bones, recovering "+('Bones * 9999)+" HP in total.",bc_map,"0xFFFFFF",FW_BOLD;	
-	getunitdata 'Boss, .@arr;
-	setunitdata 'Boss,UMOB_HP,.@arr[UMOB_HP] + ('Bones * 9999);
+	instance_announce 0,"The Coelacanth has feasted on "+'Bones+" bones, recovering "+('Bones * 9999)+" HP in total.",bc_map,"0xFFFFFF",FW_BOLD;
+	if(unitexists('Boss)) {
+		getunitdata 'Boss, .@arr;
+		setunitdata 'Boss,UMOB_HP,.@arr[UMOB_HP] + ('Bones * 9999);
+	}	
 	movenpc instance_npcname(strnpcinfo(0)),.@arr[UMOB_X],.@arr[UMOB_Y];
 	specialeffect EF_HEAL,AREA,instance_npcname(strnpcinfo(0));
 	initnpctimer;
@@ -389,17 +399,45 @@ OnInstanceInit:
 		25424,100,	//Shimmering_Crystal
 		25424,70,	//Shimmering_Crystal
 		25424,40,	//Shimmering_Crystal
+		29587,50,	//Shimmering_Crystal_Box
+		29587,25,	//Shimmering_Crystal_Box
+		18005,10,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+		18005,1,	//Mixed_Rune_Fragment
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,1,	//Rune_Box
+		29584,1,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29585,3,	//Pvm_Box
 		23649,100,	//Gel_Fragment_Box
 		23649,70,	//Gel_Fragment_Box
 		23649,40,	//Gel_Fragment_Box
+		29589,50,	//Crimson_Crystal_Box
+		29589,25,	//Crimson_Crystal_Box
 		25476,100,	//Crimson_Magic_Crystal
 		25476,70,	//Crimson_Magic_Crystal
-		25476,40;	//Crimson_Magic_Crystal
+		25476,40,	//Crimson_Magic_Crystal
+		6635,1;		//Blacksmith Blessing
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
-		25459,100,	//Aqua_Sapphire
-		25459,50,	//Aqua_Sapphire
-		25459,10,	//Aqua_Sapphire
+		//25459,100,	//Aqua_Sapphire
+		//25459,50,	//Aqua_Sapphire
+		//25459,10,	//Aqua_Sapphire
+		25424,100,	//Shimmering_Crystal
+		25424,70,	//Shimmering_Crystal
+		25424,40,	//Shimmering_Crystal
+		29586,20,	//Refine_Box
+		29586,10,	//Refine_Box
+		29584,2,	//Rune_Box
+		29585,20,	//Pvm_Box
+		29586,10,	//Refine_Box
+		29584,5,	//Rune_Box
+		29585,10,	//Pvm_Box
+		29587,100,	//Shimmering_Crystal_Box
+		29587,50,	//Shimmering_Crystal_Box
+		29589,100,	//Crimson_Crystal_Box
+		29589,50,	//Crimson_Crystal_Box
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -418,18 +456,18 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
@@ -437,9 +475,11 @@ OnInstanceInit:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
-		993,20;		//Yellow_Live
+		993,20,		//Yellow_Live
+		6635,10;	//Blacksmith Blessing
+
 	}
-	getmapxy(.@map$,.@x,.@y,1,instance_npcname(strnpcinfo(0)));
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
@@ -486,11 +526,11 @@ OnInstanceInit:
 	mes "["+strnpcinfo(1)+"]";
 	mes "Wanna get out of here?";
 	if(select("No:Yes")==1) close;
-	switch('Mode)	{
-		case 1: callfunc("DWM_Counter",13); break;
-		case 2: callfunc("DWM_Counter",14); break;
-		case 3: callfunc("DWM_Counter",15); break;
-	}
+	// switch('Mode)	{
+	// 	case 1: callfunc("DWM_Counter",13); break;
+	// 	case 2: callfunc("DWM_Counter",14); break;
+	// 	case 3: callfunc("DWM_Counter",15); break;
+	// }
 	warp "prt_fild06",47,198;
 	end;
 

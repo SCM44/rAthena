@@ -22,8 +22,8 @@ OnStartTimer:
 	initnpctimer;
 	end;
 OnStopTimer:
-	callfunc("F_InstanceTimer","ah",getnpctimer(0),'Mode);
-	callfunc("F_UpdateInsRecord");
+	//callfunc("F_InstanceTimer","ah",getnpctimer(0),'Mode);
+	//callfunc("F_UpdateInsRecord");
 	end;
 OnTimer3600000:
 	stopnpctimer;
@@ -111,11 +111,13 @@ OnStart:
 	
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
 			setd(".@"+.@mob$+.@i), $@mobid[.@i];
-			getunitdata getd(".@"+.@mob$+.@i),.@data;
-			setunitdata getd(".@"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-			setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
-			setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
-			setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+			if(unitexists(getd(".@"+.@mob$+.@i))) {
+				getunitdata getd(".@"+.@mob$+.@i),.@data;
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+			}
 		}
 	}
 	//Normal Mobs
@@ -137,11 +139,13 @@ OnBoss:
 		
 	if('Boss == 0) monster 'Map$,253,31,"--ja--",20076,1,instance_npcname("Memorial Society Member#ant2") + "::OnBossDead";
 	'Boss = $@mobid[0];
-	unittalk 'Boss,"Trespasser, I will protect my kingdom from the likes of you!!";
-	getunitdata 'Boss,.@boss_data;
-		
-	setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
-	setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
+	if(unitexists('Boss)) {
+		unittalk 'Boss,"Trespasser, I will protect my kingdom from the likes of you!!";
+		getunitdata 'Boss,.@boss_data;
+			
+		setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
+		setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
+	}
 	
 	//Save Stats
 	'atk1_nm = .@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
@@ -168,46 +172,50 @@ OnBoss:
 	end;
 
 OnTimer2500:
-	getunitdata 'Boss, .@arr;
-	.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
-	.@label$ = instance_npcname("Memorial Society Member#ant2") + "::OnDarkCross";
-	if(.@percent_hp / 10 >= 4) end;
+	if(unitexists('Boss)) {
+		getunitdata 'Boss, .@arr;
+		.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
+		.@label$ = instance_npcname("Memorial Society Member#ant2") + "::OnDarkCross";
+		if(.@percent_hp / 10 >= 4) end;
+	} else end;
 OnTimer15000:
-	getunitdata 'Boss, .@arr;
-	.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
-	.@label$ = instance_npcname("Memorial Society Member#ant2") + "::OnDarkCross";
-	switch( .@percent_hp / 10 ) {
-	case 10: 
-	case 9:
-	case 8:
-	case 7:
-	case 6:
-		break;
-	case 5:
-	case 4:
-	case 3:
-		monster 'Map$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]+4, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]+4, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]-4, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]-4, "#darkcross",3038,1, .@label$;
-		sleep 3500;
-		killmonster 'Map$, .@label$;
-		break;
-	case 2:
-	case 1:
-	case 0:
-		monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;		
-		monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X], .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
-		monster 'Map$, .@arr[UMOB_X], .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
-		sleep 5000;
-		killmonster 'Map$, .@label$;
-		break;
-		break;	
+	if(unitexists('Boss)) {
+		getunitdata 'Boss, .@arr;
+		.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
+		.@label$ = instance_npcname("Memorial Society Member#ant2") + "::OnDarkCross";
+		switch( .@percent_hp / 10 ) {
+		case 10: 
+		case 9:
+		case 8:
+		case 7:
+		case 6:
+			break;
+		case 5:
+		case 4:
+		case 3:
+			monster 'Map$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]+4, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]+4, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]-4, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]-4, "#darkcross",3038,1, .@label$;
+			sleep 3500;
+			killmonster 'Map$, .@label$;
+			break;
+		case 2:
+		case 1:
+		case 0:
+			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;		
+			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X], .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
+			monster 'Map$, .@arr[UMOB_X], .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
+			sleep 5000;
+			killmonster 'Map$, .@label$;
+			break;
+			break;	
+		}
 	}
 	end;
 	
@@ -217,7 +225,8 @@ OnTimer20000:
 		donpcevent instance_npcname(strnpcinfo(0))+"::OnWeaken";
 		instance_announce 0,"Memorial Society Member: The toxic fumes has intensified. Maya seems to have been severely weakened.",bc_map,"0xFFFFFF",FW_BOLD;	
 		instance_announce 0,"Memorial Society Member: Take this opportunity to damage Maya!!.",bc_map,"0xFFFFFF",FW_BOLD;	
-		unittalk 'Boss,"What sorcery is this? Why do I feel bad about this...?";
+		if(unitexists('Boss))
+			unittalk 'Boss,"What sorcery is this? Why do I feel bad about this...?";
 	}
 	end;
 OnTimer35000:
@@ -225,30 +234,35 @@ OnTimer35000:
 		'Weaken = 0;	
 		donpcevent instance_npcname(strnpcinfo(0))+"::OnRestore";
 		instance_announce 0,"The toxic fumes has dissipated. Maya has recovered from the toxic fumes.",bc_map,"0xFFFFFF",FW_BOLD;
-		unittalk 'Boss,"I won't let myself be brought down by this!";
+		if(unitexists('Boss))
+			unittalk 'Boss,"I won't let myself be brought down by this!";
 	}
 	initnpctimer;
 	end;	
 	
 OnWeaken:
-	setunitdata 'Boss,UMOB_ATKMIN,'atk1_wk;
-	setunitdata 'Boss,UMOB_ATKMAX,'atk2_wk;
-	setunitdata 'Boss,UMOB_MATKMIN,'matk1_wk;
-	setunitdata 'Boss,UMOB_MATKMAX,'matk1_wk;
-	setunitdata 'Boss,UMOB_DEF,'def_wk;
-	setunitdata 'Boss,UMOB_MDEF,'mdef_wk;
-	setunitdata 'Boss,UMOB_HIT,'hit_wk;
-	setunitdata 'Boss,UMOB_FLEE,'flee_wk;
+	if(unitexists('Boss)) {
+		setunitdata 'Boss,UMOB_ATKMIN,'atk1_wk;
+		setunitdata 'Boss,UMOB_ATKMAX,'atk2_wk;
+		setunitdata 'Boss,UMOB_MATKMIN,'matk1_wk;
+		setunitdata 'Boss,UMOB_MATKMAX,'matk1_wk;
+		setunitdata 'Boss,UMOB_DEF,'def_wk;
+		setunitdata 'Boss,UMOB_MDEF,'mdef_wk;
+		setunitdata 'Boss,UMOB_HIT,'hit_wk;
+		setunitdata 'Boss,UMOB_FLEE,'flee_wk;
+	}
 	end;
 OnRestore:
-	setunitdata 'Boss,UMOB_ATKMIN,'atk1_nm;
-	setunitdata 'Boss,UMOB_ATKMAX,'atk2_nm;
-	setunitdata 'Boss,UMOB_MATKMIN,'matk1_nm;
-	setunitdata 'Boss,UMOB_MATKMAX,'matk1_nm;
-	setunitdata 'Boss,UMOB_DEF,'def_nm;
-	setunitdata 'Boss,UMOB_MDEF,'mdef_nm;
-	setunitdata 'Boss,UMOB_HIT,'hit_nm;
-	setunitdata 'Boss,UMOB_FLEE,'flee_nm;
+	if(unitexists('Boss)) {
+		setunitdata 'Boss,UMOB_ATKMIN,'atk1_nm;
+		setunitdata 'Boss,UMOB_ATKMAX,'atk2_nm;
+		setunitdata 'Boss,UMOB_MATKMIN,'matk1_nm;
+		setunitdata 'Boss,UMOB_MATKMAX,'matk1_nm;
+		setunitdata 'Boss,UMOB_DEF,'def_nm;
+		setunitdata 'Boss,UMOB_MDEF,'mdef_nm;
+		setunitdata 'Boss,UMOB_HIT,'hit_nm;
+		setunitdata 'Boss,UMOB_FLEE,'flee_nm;
+	}
 	end;		
 		
 OnDarkCross:
@@ -281,7 +295,7 @@ OnTimer100:
 	}
 OnTimer2000:	
 	.@label$ = instance_npcname(strnpcinfo(0))+"::OnFumes";
-	areamonster 'Map$,127,24,218,300,"#toxicfumes",2536,150,.@label$;	//Toxic Fumes
+	areamonster 'Map$,127,24,218,300,"#toxicfumes",2536,150,.@label$;	//Toxic Fumes 2536
 	end;
 OnTimer4000:
 	.@label$ = instance_npcname(strnpcinfo(0))+"::OnFumes";
@@ -421,17 +435,47 @@ OnInstanceInit:
 		25424,100,	//Shimmering_Crystal
 		25424,70,	//Shimmering_Crystal
 		25424,40,	//Shimmering_Crystal
+		29587,50,	//Shimmering_Crystal_Box
+		29587,25,	//Shimmering_Crystal_Box
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,1,	//Rune_Box
+		29584,1,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29585,3,	//Pvm_Box
+		18005,10,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+		18005,1,	//Mixed_Rune_Fragment
 		23649,100,	//Gel_Fragment_Box
 		23649,70,	//Gel_Fragment_Box
 		23649,40,	//Gel_Fragment_Box
+		29588,50,	//Azure_Crystal_Box
+		29588,25,	//Azure_Crystal_Box
+		29588,10,	//Azure_Crystal_Box
 		25475,100,	//Azure_Crystal
 		25475,70,	//Azure_Crystal
-		25475,40;	//Azure_Crystal
+		25475,40,	//Azure_Crystal
+		6635,1;		//Blacksmith Blessing
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
-		25460,100,	//Bloody_Ruby
-		25460,50,	//Bloody_Ruby
-		25460,10,	//Bloody_Ruby
+		//25460,100,	//Bloody_Ruby
+		//25460,50,	//Bloody_Ruby
+		//25460,10,	//Bloody_Ruby
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,2,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,2,	//Rune_Box
+		29585,5,	//Pvm_Box
+		18005,100,	//Mixed_Rune_Fragment
+		18005,50,	//Mixed_Rune_Fragment
+		18005,25,	//Mixed_Rune_Fragment
+		29588,100,	//Azure_Crystal_Box
+		29588,50,	//Azure_Crystal_Box
+		29587,100,	//Shimmering_Crystal_Box
+		29587,50,	//Shimmering_Crystal_Box
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -450,18 +494,18 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
@@ -469,9 +513,10 @@ OnInstanceInit:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
-		993,20;		//Yellow_Live
+		993,20,		//Yellow_Live
+		6635,10;	//Blacksmith Blessing
 	}
-	getmapxy(.@map$,.@x,.@y,1,instance_npcname(strnpcinfo(0)));
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
@@ -518,11 +563,11 @@ OnInstanceInit:
 	mes "["+strnpcinfo(1)+"]";
 	mes "Wanna get out of here?";
 	if(select("No:Yes")==1) close;
-	switch('Mode)	{
-		case 1: callfunc("DWM_Counter",10); break;
-		case 2: callfunc("DWM_Counter",11); break;
-		case 3: callfunc("DWM_Counter",12); break;
-	}
+	// switch('Mode)	{
+	// 	case 1: callfunc("DWM_Counter",10); break;
+	// 	case 2: callfunc("DWM_Counter",11); break;
+	// 	case 3: callfunc("DWM_Counter",12); break;
+	// }
 	warp "prt_fild06",47,198;
 	end;
 

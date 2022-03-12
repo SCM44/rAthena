@@ -38,3 +38,6 @@
 	BUILDIN_DEF(bg_modeselection, ""),
 	BUILDIN_DEF(bg_leavebg, "s"),
 	BUILDIN_DEF(bg_premature_end, "i"),
+
+	BUILDIN_DEF(bg_rankpoints,"si?"),
+	BUILDIN_DEF(bg_rankpoints_area,"isiiiisi"),

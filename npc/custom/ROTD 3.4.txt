@@ -78,8 +78,8 @@ OnInit:
 	// ROTD items drop
 	set .rotd_item_id,18010;	
 	set .rotd_item_amount,1;
-	set .rotd_item_rate,20;
-	set .rotd_zeny,1000;
+	set .rotd_item_rate,3;
+	set .rotd_zeny,100;
 
 
 	// monster race list

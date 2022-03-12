@@ -244,10 +244,10 @@ OnBossDead:
 
 
 OnInstanceInit:
-	monster 'Map$,97,207,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,100,210,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,101,203,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,106,204,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,97,207,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,100,210,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,101,203,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,106,204,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
 	end;
 
 OnMobDead:
@@ -272,12 +272,12 @@ OnMobDead:
 	end;
 
 OnInstanceInit:
-	monster 'Map$,70,76,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,63,78,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,62,74,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,68,71,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,67,67,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,60,67,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,70,76,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,63,78,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,62,74,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,68,71,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,67,67,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,60,67,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
 	end;
 
 OnMobDead:
@@ -302,12 +302,12 @@ OnMobDead:
 	end;
 
 OnInstanceInit:
-	monster 'Map$,177,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,182,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,187,134,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,177,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,182,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,187,139,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,177,134,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,182,134,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,187,134,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,177,139,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,182,139,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,187,139,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
 	end;
 
 OnMobDead:
@@ -330,10 +330,10 @@ OnMobDead:
 	end;
 
 OnInstanceInit:
-	monster 'Map$,257,218,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,258,213,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,256,209,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
-	monster 'Map$,258,204,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,257,218,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,258,213,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,256,209,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,258,204,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
 	end;
 
 OnMobDead:
@@ -357,7 +357,7 @@ OnMobDead:
 	end;
 
 OnInstanceInit:
-	monster 'Map$,251,32,"",2536,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
+	monster 'Map$,251,32,"",20077,1,instance_npcname(strnpcinfo(0))+"::OnMobDead";	//Poison Mist
 	end;
 
 OnMobDead:
@@ -391,6 +391,24 @@ OnMobDead:
 		25475,10,
 		25460,70,
 		25460,40,
+		29586,20,
+		29586,10,
+		29586,5,
+		29586,1,
+		29584,5,
+		29584,3,
+		29584,1,
+		29584,1,
+		18005,20,
+		18005,10,
+		18005,1,
+		18005,3,
+		18005,5,
+		29588,100,
+		29588,50,
+		29588,20,
+		29588,10,
+		29588,5,
 		25460,10;
 
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
@@ -436,7 +454,7 @@ OnInstanceInit:
 			mes "["+strnpcinfo(1)+"]";
 			mes "Sending you outside now...";
 			close2;
-			getitem 25475,1;
+			//getitem 25475,1;
 			warp "prt_fild06",37,192;
 			end;
 	}

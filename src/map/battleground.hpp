@@ -193,7 +193,7 @@ void bg_set_mode(int mode);
 
 void bg_team_getitem(int bg_id, int nameid, int amount);
 void bg_team_get_kafrapoints(int bg_id, int amount);
-void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena);
+void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena, int bg_result);
 void bg_team_rewards_all(const char* bg_map, int team_id1, int team_id2, int nameid, int amount, int bg_result);
 
 int bg_team_clean(int bg_id, bool remove);

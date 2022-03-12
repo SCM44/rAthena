@@ -21172,7 +21172,7 @@ Body:
     AegisName: Gold_Ring
     Name: Gold Ring
     Type: Armor
-    Buy: 30000
+    Buy: 10000
     Weight: 100
     Locations:
       Both_Accessory: true
@@ -21199,7 +21199,7 @@ Body:
     AegisName: Diamond_Ring
     Name: Diamond Ring
     Type: Armor
-    Buy: 45000
+    Buy: 20000
     Weight: 100
     Locations:
       Both_Accessory: true
@@ -21333,7 +21333,7 @@ Body:
     AegisName: Ring_
     Name: Ring
     Type: Armor
-    Buy: 30000
+    Buy: 15000
     Weight: 200
     Slots: 1
     Jobs:
@@ -37604,7 +37604,7 @@ Body:
     Name: Khukri
     Type: Weapon
     SubType: Dagger
-    Buy: 240000
+    Buy: 40000
     Weight: 600
     Attack: 150
     Range: 1

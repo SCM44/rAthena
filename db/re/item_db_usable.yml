@@ -42153,8 +42153,8 @@ Body:
     Script: |
       getitem 6240,30;
   - Id: 17251
-    AegisName: C_Wing_Of_Fly_3Day_Box
-    Name: C Wing Of Fly 3Day Box
+    AegisName: C_Wing_Of_Fly_7Day_Box
+    Name: C Wing Of Fly 7Day Box
     Type: Usable
     Buy: 20
     Weight: 10
@@ -42170,7 +42170,7 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
-      getgroupitem(IG_C_Wing_Of_Fly_3Day_Box);
+      getgroupitem(IG_C_Wing_Of_Fly_7Day_Box);
   - Id: 17252
     AegisName: RWC_2012_Set_Box
     Name: RWC 2012 Set Box

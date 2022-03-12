@@ -2412,8 +2412,13 @@ void battle_consume_ammo(struct map_session_data*sd, int skill, int lv)
 	}
 
 	if (sd->equip_index[EQI_AMMO] >= 0) //Qty check should have been done in skill_check_condition
+	{
 		pc_delitem(sd,sd->equip_index[EQI_AMMO],qty,0,1,LOG_TYPE_CONSUME);
-
+		if( sd->status.guild_id && map_allowed_woe(sd->bl.m) )
+			add2limit(sd->status.wstats.ammo_used, qty, UINT_MAX);
+		else if( sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND))
+			add2limit(sd->status.bgstats.ammo_used, qty, UINT_MAX);
+	}
 	sd->state.arrow_atk = 0;
 }
 
@@ -4373,10 +4378,11 @@ static int battle_calc_attack_skill_ratio(struct Damage* wd, struct block_list *
 		case NJ_SYURIKEN:
 			skillratio += 5 * skill_lv;
 			break;
+#endif
 		case NJ_KUNAI:
 			skillratio += -100 + 100 * skill_lv;
 			break;
-#endif
+
 		case KN_CHARGEATK: { // +100% every 3 cells of distance but hard-limited to 500%
 				int k = (wd->miscflag-1)/3;
 				if (k < 0)
@@ -6489,11 +6495,11 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src, struct bl
 #endif
 
 	switch (skill_id) {
-#ifndef RENEWAL
-		case NJ_KUNAI:
-			ATK_ADD(wd.damage, wd.damage2, 90);
-			break;
-#endif
+//#ifndef RENEWAL
+//		case NJ_KUNAI:
+//			ATK_ADD(wd.damage, wd.damage2, 90);
+//			break;
+//#endif
 		case TK_DOWNKICK:
 		case TK_STORMKICK:
 		case TK_TURNKICK:
@@ -7814,7 +7820,7 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 			md.damage = 50;
 			md.flag |= BF_WEAPON;
 			break;
-#ifdef RENEWAL
+#ifndef RENEWAL
 		case HT_LANDMINE:
 		case MA_LANDMINE:
 		case HT_BLASTMINE:
@@ -7843,7 +7849,7 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 				//Blitz-beat Damage
 				if(!sd || !(skill = pc_checkskill(sd,HT_STEELCROW)))
 					skill = 0;
-#ifdef RENEWAL
+#ifndef RENEWAL
 				md.damage = (sstatus->dex / 10 + sstatus->agi / 2 + skill * 3 + 40) * 2;
 				RE_LVL_MDMOD(100);
 #else

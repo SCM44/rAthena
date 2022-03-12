@@ -36,13 +36,12 @@ prt_fild06,36,197,5	script	Memorial Society Member#ant	702,{
 	case 1: 	
 		//Load Config Settings
 		.@select = select(getvariableofnpc(.menu_config$,"#Instance_Config"));
-		.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
-		explode(.@config$,.@arr$,"-");
-		for(.@i = 0; .@i<getarraysize(.@config$); .@i+=11) {
-			if(.@config$[.@i+1] == .@md_name$) {
-				.@quest = atoi(.@config$[.@i+4 + 3*(.@select-1)]);
-				.@min_level = atoi(.@config$[.@i+2 + 3*(.@select-1)]);
-				.@max_level = atoi(.@config$[.@i+3 + 3*(.@select-1)]);
+		copyarray .@arr$[0],getvariableofnpc(.level_arr$[0],"#Instance_Config"),255;
+		for(.@i = 0; .@i<getarraysize(.@arr$); .@i+=11) {
+			if(.@arr$[.@i+1] == .@md_name$) {
+				.@quest = atoi(.@arr$[.@i+4 + 3*(.@select-1)]);
+				.@min_level = atoi(.@arr$[.@i+2 + 3*(.@select-1)]);
+				.@max_level = atoi(.@arr$[.@i+3 + 3*(.@select-1)]);
 				break;
 			}
 		}
@@ -51,16 +50,18 @@ prt_fild06,36,197,5	script	Memorial Society Member#ant	702,{
 		//Check Level
 		callfunc("F_ChkInsLv",.@min_level,.@max_level);
 		
+		.@inst_id = instance_create(.@md_name$);
 		//Create Instance
-		if (instance_create(.@md_name$) < 0) {
+		if (.@inst_id < 0) {
 			mes "Party Name: "+ getpartyname(.@party_id);
 			mes "Party Leader: "+strcharinfo(0);
 			mes "^0000ff"+.@md_name$+" ^000000 - Reservation Failed.";
 			close;
 		}
-		'Mode = .@select;
 
-		callfunc("F_InsertDiarySQL","Instance Creation",.@md_name$,strcharinfo(0));
+		setinstancevar('Mode,.@select,.@inst_id);
+
+		//debugmes "Instance Creation "+.@md_name$+" "+strcharinfo(0);
 		break;
 	case 2: break;
 	}
@@ -72,7 +73,6 @@ OnInit:
 }
 
 prt_fild06,41,196,3	script	Transport Device#ins	PORTAL,{
-	
 	mes "["+strnpcinfo(1)+"]";
 	mes "- Select Instance that you wish to enter -";
 	next;
@@ -89,15 +89,25 @@ prt_fild06,41,196,3	script	Transport Device#ins	PORTAL,{
 	case 4: close;
 	}
 	
-	if(instance_id() != 0) {
+	if(instance_id(IM_PARTY) != 0) {
+		.@mode = getinstancevar('Mode,instance_id(IM_PARTY));
 		//Load Config Settings
-		.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
-		explode(.@config$,.@arr$,"-");
-		for(.@i = 0; .@i<getarraysize(.@config$); .@i+=11) {
-			if(.@config$[.@i+1] == .@md_name$) {
-				.@quest = atoi(.@config$[.@i+4 + 3*('Mode-1)]);
-				.@min_level = atoi(.@config$[.@i+2 + 3*('Mode-1)]);
-				.@max_level = atoi(.@config$[.@i+3 + 3*('Mode-1)]);
+		//.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
+		copyarray .@arr$[0],getvariableofnpc(.level_arr$[0],"#Instance_Config"),255;
+		//explode(.@config$,.@arr$,"-");
+		//dispbottom "Config = "+.@config$;
+		dispbottom "arraysize "+getarraysize(.@arr$);
+		for(.@i = 0; .@i<getarraysize(.@arr$); .@i+=11) {
+			dispbottom .@arr$[.@i+1];
+			if(.@arr$[.@i+1] == .@md_name$) {
+				dispbottom "Whole: "+.@arr$[.@i+4 + 3*(.@mode-1)];
+				dispbottom "Math: "+(.@i+4 + 3*(.@mode-1));
+				dispbottom "Add: "+(.@i+4);
+				dispbottom "Multi: "+(3*(.@mode-1));
+				dispbottom "Mode: "+(.@mode-1);
+				.@quest = atoi(.@arr$[.@i+4 + 3*(.@mode-1)]);
+				.@min_level = atoi(.@arr$[.@i+2 + 3*(.@mode-1)]);
+				.@max_level = atoi(.@arr$[.@i+3 + 3*(.@mode-1)]);
 				break;
 			}
 		}
@@ -123,6 +133,6 @@ prt_fild06,41,196,3	script	Transport Device#ins	PORTAL,{
 		setquest .@quest;
 		break;
 	}
-	callfunc("F_InsertDiarySQL","Instance Entry",.@md_name$,strcharinfo(0));
+	//debugmes "Instance Entry";
 	
 }

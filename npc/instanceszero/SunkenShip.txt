@@ -3,54 +3,54 @@
 //============================================================
 
 //Mapflag
-1@tre02	mapflag	nomemo
-1@tre02	mapflag	nosave	SavePoint
-1@tre02	mapflag	nowarp
-1@tre02	mapflag	nowarpto
-1@tre02	mapflag	noreturn
-1@tre02	mapflag	nobranch
-1@tre02	mapflag	noicewall
-1@tre02	mapflag	partylock
-1@tre02	mapflag	noteleport
-1@tre02	mapflag	monster_noteleport
+1@sks	mapflag	nomemo
+1@sks	mapflag	nosave	SavePoint
+1@sks	mapflag	nowarp
+1@sks	mapflag	nowarpto
+1@sks	mapflag	noreturn
+1@sks	mapflag	nobranch
+1@sks	mapflag	noicewall
+1@sks	mapflag	partylock
+1@sks	mapflag	noteleport
+1@sks	mapflag	monster_noteleport
 
 
 //Warps
-1@tre02,69,75,0	script	#sks07	45,2,2,{
+1@sks,69,75,0	script	#sks07	45,2,2,{
 end;
 OnTouch:
-	warp instance_mapname("1@tre02"),69,106;
+	warp instance_mapname("1@sks"),69,106;
 	end;
 }
-1@tre02,58,37,0	script	#sks06-1	45,2,2,{
+1@sks,58,37,0	script	#sks06-1	45,2,2,{
 end;
 OnTouch:
-	warp instance_mapname("1@tre02"),39,37;
+	warp instance_mapname("1@sks"),39,37;
 	end;
 }
-1@tre02,112,164,0	warp	#sks01	1,4,1@tre02,97,164
-1@tre02,99,164,0	warp	#sks02	1,4,1@tre02,114,164
-1@tre02,142,161,0	warp	#sks02-1	1,3,1@tre02,123,161
-1@tre02,164,114,0	warp	#sks03	3,1,1@tre02,164,88
-1@tre02,164,91,0	warp	#sks03-1	5,1,1@tre02,164,116
-1@tre02,76,111,0	warp	#sks10	1,3,1@tre02,100,111
-1@tre02,38,164,0	warp	#sks04-1	1,4,1@tre02,25,164
-1@tre02,40,111,0	warp	#sks05	1,3,1@tre02,67,112
-1@tre02,62,111,0	warp	#sks05-1	1,3,1@tre02,38,111
-1@tre02,27,164,0	warp	#sks04	1,4,1@tre02,40,164
-1@tre02,69,125,0	warp	#sks08	4,1,1@tre02,69,142
-1@tre02,69,140,0	warp	#sks08-1	4,1,1@tre02,69,123
-1@tre02,98,111,0	warp	#sks10-1	1,3,1@tre02,74,111
-1@tre02,41,37,0	warp	#sks06	1,3,1@tre02,61,37
-1@tre02,69,102,0	warp	#sks07-1	2,1,1@tre02,69,70
-1@tre02,79,37,0	warp	#sks09	1,3,1@tre02,98,37
-1@tre02,96,37,0	warp	#sks09-1	1,3,1@tre02,77,37
+1@sks,112,164,0	warp	#sks01	1,4,1@sks,97,164
+1@sks,99,164,0	warp	#sks02	1,4,1@sks,114,164
+1@sks,142,161,0	warp	#sks02-1	1,3,1@sks,123,161
+1@sks,164,114,0	warp	#sks03	3,1,1@sks,164,88
+1@sks,164,91,0	warp	#sks03-1	5,1,1@sks,164,116
+1@sks,76,111,0	warp	#sks10	1,3,1@sks,100,111
+1@sks,38,164,0	warp	#sks04-1	1,4,1@sks,25,164
+1@sks,40,111,0	warp	#sks05	1,3,1@sks,67,112
+1@sks,62,111,0	warp	#sks05-1	1,3,1@sks,38,111
+1@sks,27,164,0	warp	#sks04	1,4,1@sks,40,164
+1@sks,69,125,0	warp	#sks08	4,1,1@sks,69,142
+1@sks,69,140,0	warp	#sks08-1	4,1,1@sks,69,123
+1@sks,98,111,0	warp	#sks10-1	1,3,1@sks,74,111
+1@sks,41,37,0	warp	#sks06	1,3,1@sks,61,37
+1@sks,69,102,0	warp	#sks07-1	2,1,1@sks,69,70
+1@sks,79,37,0	warp	#sks09	1,3,1@sks,98,37
+1@sks,96,37,0	warp	#sks09-1	1,3,1@sks,77,37
 //MvP Room Warp
-1@tre02,125,161,0	warp	#bosswarp	1,3,1@tre02,144,161
+1@sks,125,161,0	warp	#bosswarp	1,3,1@sks,144,161
 
 
 // Instance Timer (custom)
-//1@tre02,3,1,5	script	#sks_timer	CLEAR_NPC,{
+//1@sks,3,1,5	script	#sks_timer	CLEAR_NPC,{
 //	end;
 //OnStartTimer:
 //	initnpctimer;
@@ -68,7 +68,7 @@ OnTouch:
 //}
 
 
-1@tre02,104,33,3	script	Memorial Society Member#sks2	702,9,9,{
+1@sks,104,33,3	script	Memorial Society Member#sks2	702,9,9,{
 	if(getcharid(0) != getpartyleader(getcharid(1),2)) {
 		mes "["+strnpcinfo(1)+"]";
 		mes "I wish to talk to your Party Leader.";
@@ -87,11 +87,11 @@ OnTouch:
 	mes "Good luck in treasure hunting!";
 	npctalk "Good luck in treasure hunting!";
 	close2;
-		hideonnpc instance_npcname(strnpcinfo(0));
-		donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart"; 
-		enablenpc instance_npcname("#sks07");
-		enablenpc instance_npcname("#sks06-1");
-		//donpcevent instance_npcname("#sks_timer") + "::OnStartTimer"; 
+	hideonnpc instance_npcname(strnpcinfo(0));
+	donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart"; 
+	enablenpc instance_npcname("#sks07");
+	enablenpc instance_npcname("#sks06-1");
+	//donpcevent instance_npcname("#sks_timer") + "::OnStartTimer"; 
 	end;
 
 OnTouch_:
@@ -102,7 +102,7 @@ OnInstanceInit:
 	'Mode = 0;
 	'Special = 0;
 	'Boss = 0;
-	'Map$ = instance_mapname("1@tre02");
+	'Map$ = instance_mapname("1@sks");
 	disablenpc instance_npcname("#bosswarp");
 	disablenpc instance_npcname("#sks07");
 	disablenpc instance_npcname("#sks06-1");
@@ -141,14 +141,16 @@ OnStart:
 		.@mob$ = .@m_info[.@m]+"_";
 		.@amt = .@m_info[.@m+1] * .@amt_mod;
 		areamonster 'Map$,25,35,120,168,"--ja--",.@m_info[.@m],.@amt;
-		
-		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
-			setd("'"+.@mob$+.@i), $@mobid[.@i];
-			getunitdata getd("'"+.@mob$+.@i),.@data;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
-			setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
-			setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+		copyarray 'mobid[0], $@mobid[0], getarraysize($@mobid);
+
+		for(.@i = 0; .@i < getarraysize('mobid); .@i++) {
+			if(unitexists('mobid[.@i])) {
+				getunitdata 'mobid[.@i],.@data;
+				setunitdata 'mobid[.@i],UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
+				setunitdata 'mobid[.@i],UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata 'mobid[.@i],UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
+				setunitdata 'mobid[.@i],UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
+			}
 		}
 	}
 	//Manhole
@@ -172,22 +174,24 @@ OnBoss:
 	//Initialize Array
 	deletearray $@mobid[0],getarraysize($@mobid);
 		
-	if('Boss == 0) monster instance_mapname("1@tre02"),163,57,"--ja--",20111,1,instance_npcname(strnpcinfo(0)) + "::OnBossDead";
+	if('Boss == 0) monster instance_mapname("1@sks"),163,57,"--ja--",20111,1,instance_npcname(strnpcinfo(0)) + "::OnBossDead";
 	'Boss = $@mobid[0];
-	unittalk 'Boss,"A bunch of foolish thiefs are about to meet their doom!";
 	
 	//Apply Modifiers
-	getunitdata 'Boss,.@boss_data;
-	setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
-	setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
-	setunitdata 'Boss,UMOB_ATKMIN,.@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_ATKMAX,.@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_MATKMIN,.@boss_data[UMOB_MATKMIN] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_MATKMAX,.@boss_data[UMOB_MATKMAX] * 'boss_atk_mod;
-	setunitdata 'Boss,UMOB_DEF,.@boss_data[UMOB_DEF] * 'boss_def_mod;
-	setunitdata 'Boss,UMOB_MDEF,.@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
-	setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
-	setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
+	if(unitexists('Boss)) {
+		unittalk 'Boss,"A bunch of foolish thiefs are about to meet their doom!";
+		getunitdata 'Boss,.@boss_data;
+		setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
+		setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
+		setunitdata 'Boss,UMOB_ATKMIN,.@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_ATKMAX,.@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_MATKMIN,.@boss_data[UMOB_MATKMIN] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_MATKMAX,.@boss_data[UMOB_MATKMAX] * 'boss_atk_mod;
+		setunitdata 'Boss,UMOB_DEF,.@boss_data[UMOB_DEF] * 'boss_def_mod;
+		setunitdata 'Boss,UMOB_MDEF,.@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
+		setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
+		setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
+	}
 	
 	//Summon Hydra buffers
 	setarray .@arr,168,40,168,47,159,40,159,40,152,49,152,66,175,49,175,66,160,68,167,68,161,82,161,82;
@@ -198,22 +202,24 @@ OnBoss:
 OnMinion:
 	end;
 OnBakuretsu:
-	getunitdata 'Boss, .@arr;
-	//Buff
-	if('Rage <= 15) {
-		instance_announce 0,"Stormy Drake has absorbed power from the fallen Hydra!!",bc_map;
-		'Rage++;
-		setunitdata 'Boss,UMOB_ATKMIN, .@arr[UMOB_ATKMIN] + 200;
-		setunitdata 'Boss,UMOB_ATKMAX, .@arr[UMOB_ATKMAX] + 200;
-		setunitdata 'Boss,UMOB_MATKMIN, .@arr[UMOB_MATKMIN] + 200;
-		setunitdata 'Boss,UMOB_MATKMAX, .@arr[UMOB_MATKMAX] + 200;
-		setunitdata 'Boss,UMOB_DEF, .@arr[UMOB_DEF] + 20;
-		setunitdata 'Boss,UMOB_MDEF, .@arr[UMOB_MDEF] + 20;
-		setunitdata 'Boss,UMOB_HIT, .@arr[UMOB_HIT] + 10;
-		setunitdata 'Boss,UMOB_FLEE, .@arr[UMOB_FLEE] + 10;
-	}
+	if(unitexists('Boss)) {
+		getunitdata 'Boss, .@arr;
+		//Buff
+		if('Rage <= 15) {
+			instance_announce 0,"Stormy Drake has absorbed power from the fallen Hydra!!",bc_map;
+			'Rage++;
+			setunitdata 'Boss,UMOB_ATKMIN, .@arr[UMOB_ATKMIN] + 200;
+			setunitdata 'Boss,UMOB_ATKMAX, .@arr[UMOB_ATKMAX] + 200;
+			setunitdata 'Boss,UMOB_MATKMIN, .@arr[UMOB_MATKMIN] + 200;
+			setunitdata 'Boss,UMOB_MATKMAX, .@arr[UMOB_MATKMAX] + 200;
+			setunitdata 'Boss,UMOB_DEF, .@arr[UMOB_DEF] + 5;
+			setunitdata 'Boss,UMOB_MDEF, .@arr[UMOB_MDEF] + 5;
+			setunitdata 'Boss,UMOB_HIT, .@arr[UMOB_HIT] + 5;
+			setunitdata 'Boss,UMOB_FLEE, .@arr[UMOB_FLEE] + 5;
+		}
 
-	if('Rage > 5) unitskilluseid 'Boss,"NPC_EARTHQUAKE",1,0,0;	
+		if('Rage > 5) unitskilluseid 'Boss,"NPC_EARTHQUAKE",1,0,0;
+	}
 	end;
 OnBossDead:
 	if ('Mode == 1) {
@@ -225,7 +231,7 @@ OnBossDead:
 			enablenpc instance_npcname("Treasure Chest#sks" + .@i);
 		}
 	}
-	donpcevent instance_npcname("#sks_timer") + "::OnStopTimer";
+	//donpcevent instance_npcname("#sks_timer") + "::OnStopTimer";
 	end;
 
 OnSpecial:
@@ -240,14 +246,17 @@ OnSpecial:
 	end;
 }
 
-1@tre02,1,1,4	script	Mimic's Chest#sks	4_TREASURE_BOX,{
+1@sks,1,1,4	script	Mimic's Chest#sks	4_TREASURE_BOX,{
 	//Check if Party Leader
 	callfunc "F_ChkInstancePT","";
 	
 	setarray .@reward[1],
-	25424,100;	//Shimmering_Crystal
+	25424,100,	//Shimmering_Crystal
+	29584,2,	//Rune_Box
+	29585,5,	//Pvm_Box
+	29586,5;	//Refine_Box
 	
-	getmapxy(.@map$,.@x,.@y,1,instance_npcname(strnpcinfo(0)));
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
@@ -262,7 +271,7 @@ OnSpecial:
 OnMimic:
 	instance_announce 0,"Stormy Mimic: No!! My treasure..",bc_map,"0xFFFFFF",FW_BOLD;	
 	hideoffnpc instance_npcname(strnpcinfo(0));
-	getmapxy(.@map$,.@x,.@y,0);
+	getmapxy(.@map$,.@x,.@y,BL_PC);
 	movenpc instance_npcname(strnpcinfo(0)),.@x,.@y;
 	end;
 OnInstanceInit:
@@ -270,7 +279,7 @@ OnInstanceInit:
 	end;	
 }
 
-1@tre02,164,57,4	script	Treasure Chest#sks1	4_TREASURE_BOX,{
+1@sks,164,57,4	script	Treasure Chest#sks1	4_TREASURE_BOX,{
 	.@unique_id = callfunc("F_GetUniqueID", getcharid(3));
 	if ('Mode >= 2) {
 		if (strpos('RewardUniqueIDLogs$, ""+.@unique_id) != -1) {
@@ -304,10 +313,23 @@ OnInstanceInit:
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
-		25424,10,	//Shimmering_Crystal		
+		25424,10,	//Shimmering_Crystal
+		18005,10,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+		29587,50,	//Shimmering_Crystal_Box
+		29587,25,	//Shimmering_Crystal_Box
+		29588,50,	//Azure_Crystal_Box
+		29588,25,	//Azure_Crystal_Box	
 		25475,100,	//Azure_Crystal
 		25475,50,	//Azure_Crystal
 		25475,10,	//Azure_Crystal
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,1,	//Rune_Box
+		29584,1,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29585,3,	//Pvm_Box
 		23649,100,	//Gel_Fragment_Box
 		23649,100,	//Gel_Fragment_Box
 		23649,100,	//Gel_Fragment_Box
@@ -324,15 +346,39 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-		25429,100,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,10;	//Mythril_Ore	
+		6635,5;		//Blacksmith Blessing
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10;	//Mythril_Ore	
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
-		25460,100,	//Bloody_Ruby
-		25460,50,	//Bloody_Ruby
-		25460,10,	//Bloody_Ruby
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,10,	//Shimmering_Crystal
+		25424,10,	//Shimmering_Crystal
+		25424,10,	//Shimmering_Crystal
+		25424,10,	//Shimmering_Crystal
+		18005,100,	//Mixed_Rune_Fragment
+		18005,100,	//Mixed_Rune_Fragment
+		18005,50,	//Mixed_Rune_Fragment
+		//25460,100,	//Bloody_Ruby
+		//25460,50,	//Bloody_Ruby
+		//25460,10,	//Bloody_Ruby
+		29586,30,	//Refine_Box
+		29586,20,	//Refine_Box
+		29584,5,	//Rune_Box
+		29584,5,	//Rune_Box
+		29585,20,	//Pvm_Box
+		29585,20,	//Pvm_Box
+		29588,100,	//Azure_Crystal_Box
+		29588,50,	//Azure_Crystal_Box
+		29587,100,	//Shimmering_Crystal_Box
+		29587,50,	//Shimmering_Crystal_Box
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -361,18 +407,18 @@ OnInstanceInit:
 		23649,50,	//Gel_Fragment_Box
 		23649,10,	//Gel_Fragment_Box
 		23649,10,	//Gel_Fragment_Box
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
@@ -380,9 +426,10 @@ OnInstanceInit:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
-		993,20;		//Yellow_Live
+		993,20,		//Yellow_Live
+		6635,10;	//Blacksmith Blessing
 	}
-	getmapxy(.@map$,.@x,.@y,1,instance_npcname(strnpcinfo(0)));
+	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
@@ -410,19 +457,19 @@ OnInstanceInit:
 	end;	
 }
 
-1@tre02,160,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks2	10005
-1@tre02,164,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks3	10005
-1@tre02,168,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks4	10005
-1@tre02,172,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks5	10005
-1@tre02,163,63,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks6	10005
-1@tre02,166,63,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks7	10005
-1@tre02,170,65,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks8	10005
-1@tre02,160,66,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks9	10005
-1@tre02,156,58,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks10	10005
-1@tre02,155,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks11	10005
-1@tre02,154,68,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks12	10005
+1@sks,160,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks2	10005
+1@sks,164,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks3	10005
+1@sks,168,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks4	10005
+1@sks,172,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks5	10005
+1@sks,163,63,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks6	10005
+1@sks,166,63,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks7	10005
+1@sks,170,65,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks8	10005
+1@sks,160,66,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks9	10005
+1@sks,156,58,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks10	10005
+1@sks,155,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks11	10005
+1@sks,154,68,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks12	10005
 
-1@tre02,159,61,4	script	Memorial Society Member#sks3	702,{
+1@sks,159,61,4	script	Memorial Society Member#sks3	702,{
 	mes "["+strnpcinfo(1)+"]";
 	mes "You have completed your objective!";
 	mes "I think that we will meet again.";
@@ -430,11 +477,11 @@ OnInstanceInit:
 	mes "["+strnpcinfo(1)+"]";
 	mes "Wanna get out of here?";
 	if(select("No:Yes")==1) close;
-	switch('Mode)	{
-		case 1: callfunc("DWM_Counter",16); break;
-		case 2: callfunc("DWM_Counter",17); break;
-		case 3: callfunc("DWM_Counter",18); break;
-	}
+	// switch('Mode)	{
+	// 	case 1: callfunc("DWM_Counter",16); break;
+	// 	case 2: callfunc("DWM_Counter",17); break;
+	// 	case 3: callfunc("DWM_Counter",18); break;
+	// }
 	warp "prt_fild06",47,198;
 	end;
 

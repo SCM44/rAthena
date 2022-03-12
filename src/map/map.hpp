@@ -949,6 +949,16 @@ inline bool mapdata_flag_gvg2_no_te(struct map_data *mapdata) {
 	return false;
 }
 
+inline bool mapdata_allowed_woe(struct map_data *mapdata) {
+	if (mapdata == nullptr)
+		return false;
+	
+	if((agit_flag || agit2_flag) && mapdata->flag[MF_GVG] && mapdata->flag[MF_GVG_CASTLE])
+		return true;
+
+	return false;
+}
+
 inline bool mapdata_gvg_items(struct map_data *mapdata) {
 	if (mapdata == nullptr)
 		return false;
@@ -1031,6 +1041,15 @@ inline bool map_flag_gvg2_no_te(int16 m) {
 	struct map_data *mapdata = &map[m];
 
 	return mapdata_flag_gvg2_no_te(mapdata);
+}
+
+inline bool map_allowed_woe(int16 m) {
+	if (m < 0)
+		return false;
+
+	struct map_data *mapdata = &map[m];
+
+	return mapdata_allowed_woe(mapdata);
 }
 
 inline bool map_gvg_items(int16 m) {

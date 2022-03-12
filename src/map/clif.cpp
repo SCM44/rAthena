@@ -5127,6 +5127,8 @@ int clif_damage(struct block_list* src, struct block_list* dst, t_tick tick, int
 	nullpo_ret(src);
 	nullpo_ret(dst);
 
+	pc_record_maxdamage(src, dst, damage + damage2);
+
 	if (type != DMG_MULTI_HIT_CRITICAL)
 		type = clif_calc_delay(type,div,damage+damage2,ddelay);
 	sc = status_get_sc(dst);
@@ -5935,9 +5937,31 @@ int clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tick,
 	unsigned char buf[64];
 	struct status_change *sc;
 	int damage = (int)cap_value(sdamage,INT_MIN,INT_MAX);
+	struct map_session_data *sd;
 
 	nullpo_ret(src);
 	nullpo_ret(dst);
+	
+	/* WoE Stats */
+	pc_record_maxdamage(src, dst, damage);
+	sd = BL_CAST(BL_PC, src);
+	if( sd && skill_id == CR_ACIDDEMONSTRATION )
+	{
+		if( damage > 0 )
+		{
+			if( sd->status.guild_id && map_allowed_woe(src->m) )
+				add2limit(sd->status.wstats.acid_demostration, 1, UINT32_MAX);
+			else if( map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id )
+				add2limit(sd->status.bgstats.acid_demostration, 1, UINT32_MAX);
+		}
+		else
+		{
+			if( sd->status.guild_id && map_allowed_woe(src->m) )
+				add2limit(sd->status.wstats.acid_demostration_fail, 1, UINT32_MAX);
+			else if( map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id )
+				add2limit(sd->status.bgstats.acid_demostration_fail, 1, UINT32_MAX);
+		}
+	}
 
 	type = clif_calc_delay(type,div,damage,ddelay);
 
@@ -20107,6 +20131,17 @@ void clif_parse_Taekwon( int fd, struct map_session_data *sd ){
 	clif_ranklist(sd,RANK_TAEKWON);
 }
 
+void clif_rank_info(struct map_session_data *sd, int points, int total, int flag)
+{
+	char message[100];
+	if( points <= 0 )
+		return;
+
+	if( flag ) {
+		sprintf(message, "[Your Battleground Rank +%d = %d points]", points, total);
+		clif_displaymessage(sd->fd, message);
+	}
+}
 /// Request for the killer ranklist.
 /// /pk command sends this packet to the server.
 /// 0237 (CZ_KILLER_RANK)

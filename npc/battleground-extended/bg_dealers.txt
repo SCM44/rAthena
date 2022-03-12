@@ -56,7 +56,7 @@ bat_room,159,150,3	script	KVM Logistic Officer#a	10187,{
 		mes "the items, please refer to the";
 		mes "^3131FFCatalogue^000000.";
 		next;
-		switch(select("Weapon:Armor/Accessory:Mass-Production Armor/Accessory:Popularized Armor/Accessory")) {
+		switch(select("Weapon:")) {
 		case 1:
 			mes "[Logistics]";
 			mes "You have selected the Weapon Category.";
@@ -321,12 +321,12 @@ bat_room,159,146,3	script	Telma	10121,{
 	{
 	case 1: // WoE Items
 		{
-			switch( select("^0000FFWoE Exclusive^000000:Other Items (All):Other Items (Genetic):Other Items (Guillotine Cross):Other Items (Warlock):Other Items (Mechanics):Other Items (Sorcerer):Other Items (Rune Knight)") )
+			switch( select("^0000FFWoE Exclusive^000000:Other Items (All):Other Items (Creator):Other Items (Assassin Cross):Other Items (High Wizard):Other Items (Professor)") )
 			{
 			case 1: // WoE Supply Items
-				setarray .@Items[0],   547, 505, 12016, 12030, 12029, 12031, 6217, 12262;
-				setarray .@Amount[0],  100, 100,    20,    10,    10,    10,   10,    10;
-				setarray .@Value[0],   100, 100,    80,    25,    25,    25,   30,    20;
+				setarray .@Items[0],   547, 505, 12016, 12030, 12029, 12031, 12262;
+				setarray .@Amount[0],  100, 100,    20,    10,    10,    10,    10;
+				setarray .@Value[0],   100, 100,    80,    25,    25,    25,    20;
 				set .@cID, getbattleflag("woe_reserved_char_id");
 				set .@Tarjet$, "War of Emperium or GvG";
 				break;				
@@ -337,45 +337,45 @@ bat_room,159,146,3	script	Telma	10121,{
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
 				break;				
-			case 3: // Other Items (Genetic)
-				setarray .@Items[0],   7136,  7137,  6217,  6210,  7139,  7135,  6211,  7138,  6212, 13260, 13261, 13262, 13263, 13264;
-				setarray .@Amount[0],     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1;
-				setarray .@Value[0],     75,    20,    30,    15,    20,    20,    20,    30,    30,    30,    30,    30,    30,    30;
+			case 3: // Other Items (Creator)
+				setarray .@Items[0],   7136,  7137,  7139,  7135, 7138;
+				setarray .@Amount[0],     1,     1,     1,     1,    1;
+				setarray .@Value[0],     75,    20,    20,    20,   30;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
 				break;				
-			case 4: // Other Items (Guillotine Cross)
-				setarray .@Items[0],    678, 12717, 12722, 12720, 12718,  6128, 12724, 12723, 12721, 12719;
-				setarray .@Amount[0],     1,     1,     1,     1,     1,     1,     1,     1,     1,     1;
-				setarray .@Value[0],     75,   300,   300,   300,   300,   300,   300,   300,   300,   300;
+			case 4: // Other Items (Assassin Cross)
+				setarray .@Items[0],    678;
+				setarray .@Amount[0],     1;
+				setarray .@Value[0],     75;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
 				break;				
-			case 5: // Other Items (Warlock)
-				setarray .@Items[0],  6195, 6196;
-				setarray .@Amount[0],    1,    1;
-				setarray .@Value[0],  1500, 1500;
-				set .@cID, 0;
-				set .@Tarjet$, "Everywhere";
-				break;				
-			case 6: // Other Items (Mecanics)
-				setarray .@Items[0],  1549;
+			case 5: // Other Items (High Wizard)
+				setarray .@Items[0],  7321;
 				setarray .@Amount[0],    1;
-				setarray .@Value[0],  1500;
+				setarray .@Value[0],  5;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
 				break;				
-			case 7: // Other Items (Sorcerer)
-				setarray .@Items[0],  1025, 997, 996, 995, 994;
-				setarray .@Amount[0],   10,   5,   5,   5,   5;
-				setarray .@Value[0],    10,  25,  25,  25,  25;
-				set .@cID, 0;
-				set .@Tarjet$, "Everywhere";
-				break;				
-			case 8: // Other Items (RK)
-				setarray .@Items[0],  12731, 12728, 12732, 12733, 12729, 12730, 12726, 12725, 12727;
-				setarray .@Amount[0],     1,     1,     1,     1,     1,     1,     1,     1,     1;
-				setarray .@Value[0],     35,    35,    35,    35,    35,    35,    35,    35,    35;
+			//case 6: // Other Items (Mecanics)
+			//	setarray .@Items[0],  1549;
+			//	setarray .@Amount[0],    1;
+			//	setarray .@Value[0],  1500;
+			//	set .@cID, 0;
+			//	set .@Tarjet$, "Everywhere";
+			//	break;				
+			//case 7: // Other Items (Professor)
+			//	setarray .@Items[0],  1025, 997, 996, 995, 994;
+			//	setarray .@Amount[0],   10,   5,   5,   5,   5;
+			//	setarray .@Value[0],    10,  25,  25,  25,  25;
+			//	set .@cID, 0;
+			//	set .@Tarjet$, "Everywhere";
+			//	break;				
+			case 6: // Other Items (Professor)
+				setarray .@Items[0],  1025, 997, 996, 995, 994, 715, 716, 717;
+				setarray .@Amount[0],   10,   5,   5,   5,   5,  50,  50,  50;
+				setarray .@Value[0],    10,  25,  25,  25,  25,  25,  25,  25;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
 				break;
@@ -385,7 +385,7 @@ bat_room,159,146,3	script	Telma	10121,{
 		
 	case 2: 
 		{
-			switch( select("BG Exclusive (All):BG Exclusive (Genetic):BG Exclusive (Guillotine Cross):BG Exclusive (Warlock):BG Exclusive (Sorcerer):BG Exclusive (Archbishop):BG Exclusive (Rune Knight)") )
+			switch( select("^0000FFBG Exclusive (All)^000000:BG Exclusive (Creator):BG Exclusive (Assassin Cross):BG Exclusive (High wizard):BG Exclusive (Professor)") )
 			{
 			case 1: // BG Supply (all)
 				setarray .@Items[0],   12016, 547, 505, 12072, 12077, 12082, 12087, 12092, 12097, 12429, 12430, 12431, 12432, 12433, 12434, 12029, 12030, 12031, 12262;
@@ -394,48 +394,48 @@ bat_room,159,146,3	script	Telma	10121,{
 				set .@cID, getbattleflag("bg_reserved_char_id");
 				set .@Tarjet$, "Battleground";
 				break;
-			case 2: // BG Supply (Genetic)
-				setarray .@Items[0],   7136, 7137, 6217, 6210, 7139, 7135, 6211, 7138, 6212, 13260, 13261, 13262, 13263, 13264;
-				setarray .@Amount[0],    25,   20,   10,   10,   15,   25,   10,   10,   10,     5,     5,     5,     5,     5;
-				setarray .@Value[0],      1,    1,    1,    1,    1,    1,    1,    1,    1,     1,     1,     1,     1,     1;
+			case 2: // BG Supply (Creator)
+				setarray .@Items[0],   7136, 7137, 7139, 7135, 6211, 7138;
+				setarray .@Amount[0],    25,   20,   15,   25,   10,   10;
+				setarray .@Value[0],      1,    1,    1,    1,    1,    1;
 				set .@cID, getbattleflag("bg_reserved_char_id");
 				set .@Tarjet$, "Battleground";
 				break;
-			case 3: // BG Supply (Guillotine Cross)
-				setarray .@Items[0],   678, 12717, 12722, 12720, 12718, 6128, 12724, 12723, 12721, 12719;
-				setarray .@Amount[0],   25,     5,     5,     5,     5,   10,     5,     5,     5,     5;
-				setarray .@Value[0],     1,     1,     1,     1,     1,    1,     1,     1,     1,     1;
-				set .@cID, getbattleflag("bg_reserved_char_id");
-				set .@Tarjet$, "Battleground";
-				break;
-			case 4: // BG Supply (Warlock)
-				setarray .@Items[0],   715, 716;
-				setarray .@Amount[0],   25,  25;
-				setarray .@Value[0],     1,   1;
-				set .@cID, getbattleflag("bg_reserved_char_id");
-				set .@Tarjet$, "Battleground";
-				break;
-			case 5: // BG Supply (Sorcerer)
-				setarray .@Items[0],   715, 716, 1025, 997, 996, 995, 994;
-				setarray .@Amount[0],   25,  25,   10,   5,   5,   5,   5;
-				setarray .@Value[0],     1,   1,    1,   1,   1,   1,   1;
-				set .@cID, getbattleflag("bg_reserved_char_id");
-				set .@Tarjet$, "Battleground";
-				break;
-			case 6: // BG Supply (Archbishop)
-				setarray .@Items[0],   523;
+			case 3: // BG Supply (Assassin Cross)
+				setarray .@Items[0],   678;
 				setarray .@Amount[0],   25;
 				setarray .@Value[0],     1;
 				set .@cID, getbattleflag("bg_reserved_char_id");
 				set .@Tarjet$, "Battleground";
 				break;
-			case 7: // BG Supply (Rune Knight)
-				setarray .@Items[0],   12731, 12728, 12732, 12733, 12729, 12730, 12726, 12725, 12727;
-				setarray .@Amount[0],      2,     2,     2,     2,     2,     2,     2,     2,     2;
-				setarray .@Value[0],       1,     1,     1,     1,     1,     1,     1,     1,     1;
+			case 4: // BG Supply (High Wizard)
+				setarray .@Items[0],   7321;
+				setarray .@Amount[0],    25;
+				setarray .@Value[0],      1;
 				set .@cID, getbattleflag("bg_reserved_char_id");
 				set .@Tarjet$, "Battleground";
 				break;
+			case 5: // BG Supply (Professor)
+				setarray .@Items[0],   715, 717, 716, 1025, 997, 996, 995, 994;
+				setarray .@Amount[0],   25,  25,  25,   10,   5,   5,   5,   5;
+				setarray .@Value[0],     1,   1,   1,    1,   1,   1,   1,   1;
+				set .@cID, getbattleflag("bg_reserved_char_id");
+				set .@Tarjet$, "Battleground";
+				break;
+			//case 6: // BG Supply (Archbishop)
+			//	setarray .@Items[0],   523;
+			//	setarray .@Amount[0],   25;
+			//	setarray .@Value[0],     1;
+			//	set .@cID, getbattleflag("bg_reserved_char_id");
+			//	set .@Tarjet$, "Battleground";
+			//	break;
+			//case 7: // BG Supply (Rune Knight)
+			//	setarray .@Items[0],   12731, 12728, 12732, 12733, 12729, 12730, 12726, 12725, 12727;
+			//	setarray .@Amount[0],      2,     2,     2,     2,     2,     2,     2,     2,     2;
+			//	setarray .@Value[0],       1,     1,     1,     1,     1,     1,     1,     1,     1;
+			//	set .@cID, getbattleflag("bg_reserved_char_id");
+			//	set .@Tarjet$, "Battleground";
+			//	break;
 			}
 		}
 		break;
@@ -669,9 +669,9 @@ OnInit:
 	end;
 }
 
-bat_room,1,1,3	itemshop	BraveryExchanger	111,7828,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
-bat_room,1,1,3	itemshop	ValorExchanger	111,7829,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
-bat_room,1,1,3	itemshop	HeroismExchanger	111,7773,1187:2000,1281:2000,1282:2000,1310:2000,1382:2000,1426:2000,1486:2000,1546:2000,1576:2000,1577:2000,1640:2000,1641:2000,1743:2000,1826:2000,1827:2000,1927:2000,1981:2000,2002:2000,13042:2000,13110:2000,13176:2000,13177:2000,13178:2000,13179:2000,13307:2000,13416:2000,13417:2000,13418:2000,2394:840,2395:170,2396:25,2444:580,2445:70,2446:15,2549:630,2772:1200,2773:280,2774:40
+bat_room,1,1,3	itemshop	BraveryExchanger	111,7828,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
+bat_room,1,1,3	itemshop	ValorExchanger	111,7829,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
+bat_room,1,1,3	itemshop	HeroismExchanger	111,7773,1187:2000,1281:2000,1282:2000,1310:2000,1382:2000,1426:2000,1486:2000,1546:2000,1576:2000,1577:2000,1640:2000,1641:2000,1743:2000,1826:2000,1827:2000,1927:2000,1981:2000,2002:2000,13042:2000,13110:2000,13176:2000,13177:2000,13178:2000,13179:2000,13307:2000,13416:2000,13417:2000,13418:2000,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
 
 bat_room,159,154,3	script	Erundek	10132,{
 	mes "[Erundek]";
@@ -734,7 +734,8 @@ bat_room,163,152,2	script	Exchange Machine#bg	564,{
 	// 7773 : War Badges
 	// 7829 : Valor Badges
 	// 7828 : Bravery Badges
-	switch(select("War Badges:Valor Badges:Bravery Badges")) {
+	// 18010: Rare Coin
+	switch(select("War Badges:Valor Badges:Bravery Badges:Rare Coin")) {
 		case 1:
 			if(countitem(7804) >= .@cb) {
 				delitem 7804, .@cb; 
@@ -753,6 +754,13 @@ bat_room,163,152,2	script	Exchange Machine#bg	564,{
 			if(countitem(7804) >= .@cb) {
 				delitem 7804, .@cb; 
 				getitem 7828, .@cb;
+				.@ok = 1;
+			}
+			break;
+		case 4:
+			if(countitem(7804) >= .@cb) {
+				delitem 7804, .@cb; 
+				getitem 18010, .@cb;
 				.@ok = 1;
 			}
 			break;

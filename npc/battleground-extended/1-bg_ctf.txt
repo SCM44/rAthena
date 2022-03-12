@@ -39,7 +39,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_ctf","Alpha Crystal Taken by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "ctf_taken",1;
+		bg_rankpoints "ctf_taken",1;
 		disablenpc "Team1_Flag";
 		addtimer 2000, "Flavius_CTF::OnAlphaFlash";
 		stopnpctimer;
@@ -51,7 +51,7 @@ OnTouch:
 			set getvariableofnpc(.Flag_Carrier,"Team2_Flag"),0;
 			set .Flag_Carrier, 0;
 			mapannounce "bg_ctf","Omega Crystal Captured by [ " + strcharinfo(0) + " ]!!",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints "ctf_captured",1;
+			bg_rankpoints "ctf_captured",1;
 			pcblock 1,0; // UnBlock Skills/Items
 			stopnpctimer;
 			donpcevent "Flavius_CTF::OnTeam1Score";
@@ -59,7 +59,7 @@ OnTouch:
 		else if( .Flag_Status == 1 )
 		{
 			mapannounce "bg_ctf","Alpha Crystal Returned by [ " + strcharinfo(0) + " ]!!",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints "fame",1;
+			bg_rankpoints "fame",1;
 			disablenpc "Team1_Flag";
 			sleep 2000;
 			movenpc "Team1_Flag",196,91; // Back to Base
@@ -113,7 +113,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_ctf","Omega Crystal Taken by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "ctf_taken",1;
+		bg_rankpoints "ctf_taken",1;
 		disablenpc "Team2_Flag";
 		addtimer 2000, "Flavius_CTF::OnOmegaFlash";
 		stopnpctimer;
@@ -125,7 +125,7 @@ OnTouch:
 			set getvariableofnpc(.Flag_Carrier,"Team1_Flag"),0;
 			set .Flag_Carrier, 0;
 			mapannounce "bg_ctf","Alpha Crystal Captured by [ " + strcharinfo(0) + " ]!!",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints "ctf_captured",1;
+			bg_rankpoints "ctf_captured",1;
 			pcblock 1,0; // UnBlock Skills/Items
 			stopnpctimer;
 			donpcevent "Flavius_CTF::OnTeam2Score";
@@ -133,7 +133,7 @@ OnTouch:
 		else if( .Flag_Status == 1 )
 		{
 			mapannounce "bg_ctf","Omega Crystal Returned by [ " + strcharinfo(0) + " ]!!",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints "fame",1;
+			bg_rankpoints "fame",1;
 			disablenpc "Team2_Flag";
 			sleep 2000;
 			movenpc "Team2_Flag",63,91; // Back to Base
@@ -212,8 +212,8 @@ OnTeam1Die:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team2_Flag", .@x, .@y;
 		mapannounce "bg_ctf","Omega Flag Droped by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "ctf_droped",1;
-		//bg_rankpoints "fame",1,@killer_bg_src;
+		bg_rankpoints "ctf_droped",1;
+		bg_rankpoints "fame",1,@killer_bg_src;
 		set getvariableofnpc(.Flag_Status,"Team2_Flag"), 1; // OnFloor
 		initnpctimer "Team2_Flag";
 		enablenpc "Team2_Flag";
@@ -233,8 +233,8 @@ OnTeam2Die:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team1_Flag", .@x, .@y;
 		mapannounce "bg_ctf","Alpha Flag Droped by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "ctf_droped",1;
-		//bg_rankpoints "fame",1,@killer_bg_src;
+		bg_rankpoints "ctf_droped",1;
+		bg_rankpoints "fame",1,@killer_bg_src;
 		set getvariableofnpc(.Flag_Status,"Team1_Flag"), 1; // OnFloor
 		initnpctimer "Team1_Flag";
 		enablenpc "Team1_Flag";

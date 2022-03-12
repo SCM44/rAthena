@@ -415,6 +415,21 @@ OnBossDead:
 		20867,50,
 		25457,100,
 		25457,50,
+		29586,10,
+		29586,20,
+		29586,5,
+		29586,5,
+		29584,1,
+		29584,2,
+		18005,100,
+		18005,50,
+		18005,20,
+		18005,10,
+		29587,100,
+		29587,50,
+		29587,10,
+		29587,20,
+		29587,5,
 		25457,25;
 
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
@@ -455,6 +470,8 @@ OnInstanceInit:
 		mes "Oh well, before you go, I picked this up. I don't need it, so take it.";
 		completequest 12419;
 		getitem F_Rand(15220,20867),1;
+		//getitem(callfunc("F_Rand", 15220, 20867),1;
+		getitem 25424,2;
 		getexp 100000,50000;
 		next;
 	}
@@ -478,7 +495,7 @@ OnInstanceInit:
 			mes "Alright, I will warp you out of here.";
 			close2;
 			//getitem F_Rand(28539,22150),1;
-			getitem 25424, F_Rand(1,2,3,4);
+			//getitem 25424, F_Rand(1,2,3,4);
 			warp "gef_fild10",236,208;
 			end;
 	}

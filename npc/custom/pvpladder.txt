@@ -343,7 +343,7 @@ OnHour00:	//-- Monthly Rewards
 //==================================
 OnInit:		//-- Config
 //==================================
-	.chance = 10; // chance to get something
+	.chance = 1; // chance to get something
 	// Gets NPC Name
 	// Lets you change NPC name without breaking anything
 	.NPC$ = strnpcinfo(0);
@@ -426,7 +426,8 @@ OnInit:		//-- Config
 	.MaxRank = 10;
 
 	// Map Names
-	setarray .MapName$,"sh_fild16","pvp_n_1-2","pvp_n_1-1","pvp_n_1-4","pvp_n_1-3","pvp_n_1-5";
+	setarray .MapName$,"pvp_n_1-5";
+	//setarray .MapName$,"sh_fild16","pvp_n_1-2","pvp_n_1-1","pvp_n_1-4","pvp_n_1-3","pvp_n_1-5";
 
 	// Pvp Mode
 	// Modes are Addative
@@ -438,11 +439,12 @@ OnInit:		//-- Config
 	//	16 = No 3rds
 	//	32 = No Trans
 	//	64 = Show Map Name
-	setarray .MapMode,0,1,2,4,56,64;
+	setarray .MapMode,0,0,64;
 
 	// Max Players Per Map
 	// 0 = No Limit
-	setarray .MaxPlayers,200,50,10,36,50,50;
+	//setarray .MaxPlayers,200,50,10,36,50,50;
+	setarray .MaxPlayers,200,100;
 
 	// Mapflags for all PvP maps
 	// regardless of Mode

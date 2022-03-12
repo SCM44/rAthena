@@ -44,21 +44,20 @@ OnTeamDie:
 		set .@Base, getvariableofnpc(.Owner,"Dom_S_Base"); // South
 	else end; // Not Killed on Base territory
 
-	/*
 	if( .@Base == 1 )
 	{ // Team 1
 		if( getcharid(4) == $@BG_Team1 )
-			//bg_rankpoints "dom_off_kills",1,@killer_bg_src;
+			bg_rankpoints "dom_off_kills",1,@killer_bg_src;
 		else
-			//bg_rankpoints "dom_def_kills",1,@killer_bg_src;
+			bg_rankpoints "dom_def_kills",1,@killer_bg_src;
 	}
 	else if( .@Base == 2 )
 	{ // Team 2
 		if( getcharid(4) == $@BG_Team2 )
-			//bg_rankpoints "dom_off_kills",1,@killer_bg_src;
+			bg_rankpoints "dom_off_kills",1,@killer_bg_src;
 		else
-			//bg_rankpoints "dom_def_kills",1,@killer_bg_src;
-	}*/
+			bg_rankpoints "dom_def_kills",1,@killer_bg_src;
+	}
 	end;
 
 OnReady:
@@ -210,7 +209,7 @@ OnTimer1000:
 			set .Owner, 1; // Team 1
 			setnpcdisplay "Dom_N_Base",bg_get_data($@BG_Team1,2) + " Base",1912;
 			mapannounce "bg_dom","North Base captured by " + bg_get_data($@BG_Team1,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team1,"bg_dom",126,112,149,131,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bg_dom",126,112,149,131,"dom_bases",1;
 		}
 		else if( .Balance == -50 )
 		{
@@ -218,7 +217,7 @@ OnTimer1000:
 			set .Owner, 2; // Team 2
 			setnpcdisplay "Dom_N_Base",bg_get_data($@BG_Team2,2) + " Base",1913;
 			mapannounce "bg_dom","North Base captured by " + bg_get_data($@BG_Team2,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team2,"bg_dom",126,112,149,131,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bg_dom",126,112,149,131,"dom_bases",1;
 		}
 		break;
 	case 1:
@@ -303,7 +302,7 @@ OnTimer1000:
 			set .Owner, 1; // Team 1
 			setnpcdisplay "Dom_C_Base",bg_get_data($@BG_Team1,2) + " Base",1912;
 			mapannounce "bg_dom","Center Base captured by " + bg_get_data($@BG_Team1,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team1,"bg_dom",86,82,113,101,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bg_dom",86,82,113,101,"dom_bases",1;
 		}
 		else if( .Balance == -50 )
 		{
@@ -311,7 +310,7 @@ OnTimer1000:
 			set .Owner, 2; // Team 2
 			setnpcdisplay "Dom_C_Base",bg_get_data($@BG_Team2,2) + " Base",1913;
 			mapannounce "bg_dom","Center Base captured by Croix Team",1,0xFF0000;
-			//bg_rankpoints_area $@BG_Team2,"bg_dom",86,82,113,101,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bg_dom",86,82,113,101,"dom_bases",1;
 		}
 		break;
 	case 1:
@@ -396,7 +395,7 @@ OnTimer1000:
 			set .Owner, 1; // Team 1
 			setnpcdisplay "Dom_S_Base",bg_get_data($@BG_Team1,2) + " Base",1912;
 			mapannounce "bg_dom","South Base captured by " + bg_get_data($@BG_Team1,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team1,"bg_dom",50,52,69,69,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team1,"bg_dom",50,52,69,69,"dom_bases",1;
 		}
 		else if( .Balance == -50 )
 		{
@@ -404,7 +403,7 @@ OnTimer1000:
 			set .Owner, 2; // Team 2
 			setnpcdisplay "Dom_S_Base",bg_get_data($@BG_Team2,2) + " Base",1913;
 			mapannounce "bg_dom","South Base captured by " + bg_get_data($@BG_Team2,2),1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-			//bg_rankpoints_area $@BG_Team2,"bg_dom",50,52,69,69,"dom_bases",1;
+			bg_rankpoints_area $@BG_Team2,"bg_dom",50,52,69,69,"dom_bases",1;
 		}
 		break;
 	case 1:

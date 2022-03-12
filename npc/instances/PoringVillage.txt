@@ -46,7 +46,7 @@ izlude,175,185,5	script	Emily#begi	671,5,5,{
 
         case 2:
             erasequest 12417;
-			mes "[Emily]";
+            mes "[Emily]";
             mes "The cooldown has expired.";
             mes "You may re-enter the Memorial Dungeon.";
             close;
@@ -528,30 +528,30 @@ OnTouch_:
 		18010,100,	
 		18010,100,	
 		18010,10,	
-		18015,1,
-		18015,1,	
+		18005,2,
+		18005,1,	
 		18010,100,	
 		18010,100,	
 		18010,10,	
 		18010,10,	
 		18010,100,	
-		18010,100,	
-		18015,1,	
+		18010,100,		
 		18010,10,	
-		18010,100,	
-		18010,100,	
-		18010,10,	
-		18010,10,
 		18010,100,	
 		18010,100,	
 		18010,10,	
 		18010,10,
-		18015,1,	
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18010,10,	
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
+		.@frag,100,
+		.@frag,100,
 		.@frag,80,	//Day-Based Ore
 		.@frag,80,	//Day-Based Ore
 		.@frag,60,	//Day-Based Ore
@@ -603,13 +603,14 @@ OnInstanceInit:
 		getexp 10000,5000;
 		//getitem 14532,1;
 		getitem F_Rand(19238,19239),1;
+		//getitem(callfunc("F_Rand", 19238, 19239),1;
 		next;
 	}
 	mes "[Emily]";
-	mes "Oh, before I go, I'll give you this. Shall we go out now? Hold on tight to the boat.";
+	mes "Shall we go out now? Hold on tight to the boat.";
 	close2;
 	//getitem F_Rand(18010,18010,18010,18010,18010,18010,18010,18010,19238,19239),1;
-	getitem .@frag,1;
+	//getitem .@frag,1;
 	warp "izlude",173,180;
 	end;
 

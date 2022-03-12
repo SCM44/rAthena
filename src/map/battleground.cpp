@@ -872,6 +872,8 @@ int bg_team_leave(struct map_session_data *sd, bool quit, bool deserter, int fla
 		if (deserter) {
 			std::shared_ptr<s_battleground_type> bg = battleground_db.find(bg_id);
 
+			sd->status.bgstats.deserter++;
+
 			if (bg)
 				sc_start(nullptr, &sd->bl, SC_ENTRY_QUEUE_NOTIFY_ADMISSION_TIME_OUT, 100, 1, static_cast<t_tick>(bg->deserter_time) * 1000); // Deserter timer
 		}
@@ -2130,16 +2132,16 @@ void bg_team_rewards_all(const char* bg_map, int team_id1, int team_id2, int nam
 		return;
 
 	if (bg_result == 1) {
-		bg_team_rewards(team_id1, nameid, bgdata->reward_winner + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
-		bg_team_rewards(team_id2, nameid, bgdata->reward_looser + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
+		bg_team_rewards(team_id1, nameid, bgdata->reward_winner + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 0);
+		bg_team_rewards(team_id2, nameid, bgdata->reward_looser + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 2);
 	}
 	else if (bg_result == 2) {
-		bg_team_rewards(team_id1, nameid, bgdata->reward_looser + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
-		bg_team_rewards(team_id2, nameid, bgdata->reward_winner + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
+		bg_team_rewards(team_id1, nameid, bgdata->reward_looser + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 2);
+		bg_team_rewards(team_id2, nameid, bgdata->reward_winner + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 0);
 	}
 	else {
-		bg_team_rewards(team_id1, nameid, bgdata->reward_draw + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
-		bg_team_rewards(team_id2, nameid, bgdata->reward_draw + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id);
+		bg_team_rewards(team_id1, nameid, bgdata->reward_draw + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 1);
+		bg_team_rewards(team_id2, nameid, bgdata->reward_draw + amount, 0, 0, bgdata->variable.c_str(), 1, bgdata->id, 1);
 	}
 
 }
@@ -2147,17 +2149,17 @@ void bg_team_rewards_all(const char* bg_map, int team_id1, int team_id2, int nam
    bg_arena (0 EoS | 1 Boss | 2 TI | 3 CTF | 4 TD | 5 SC | 6 CON | 7 RUSH | 8 DOM)
    bg_result (0 Draw | 1 Team1 win | 2 Team2 win)
    ============================================================== */
-void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena)
+void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int quest_id, const char *var, int add_value, int bg_arena, int bg_result)
 {
 	struct map_session_data *sd;
 	struct item_data *id;
 	struct item it;
-	int flag, get_amount, rank = 0;
+	int flag, get_amount, rank = 0, fame;
 
 	std::shared_ptr<s_battleground_data> bg = util::umap_find(bg_team_db, bg_id);
 	std::shared_ptr<s_battleground_type> bgdata = battleground_db.find(bg_arena);
 
-	if( amount < 1 || !bg || !bgdata || (id = itemdb_exists(nameid)) == NULL )
+	if( !bg || !bgdata || (id = itemdb_exists(nameid)) == NULL )
 		return;
 
 	if( battle_config.bg_reward_rates != 100 )
@@ -2206,6 +2208,75 @@ void bg_team_rewards(int bg_id, int nameid, int amount, int kafrapoints, int que
 				{
 					clif_additem(sd, 0, 0, flag);
 				}
+			}
+			
+			switch( bg_result ) {
+				
+				case 0: // Won
+					add2limit(sd->status.bgstats.win,1,USHRT_MAX);
+					fame = 100;
+					if( sd->bmaster_flag ) {
+						add2limit(sd->status.bgstats.leader_win,1,USHRT_MAX);
+						fame += 25;
+					}
+					pc_addfame(sd,fame,3);
+					switch( bg_arena )
+					{
+						case 0:	add2limit(sd->status.bgstats.ctf_wins,1,USHRT_MAX);	break;
+						case 1: add2limit(sd->status.bgstats.tdm_wins,1,USHRT_MAX); break;
+						case 2: add2limit(sd->status.bgstats.eos_wins,1,USHRT_MAX); break;
+						case 3: add2limit(sd->status.bgstats.cq_wins,1,USHRT_MAX); break;
+						case 4: add2limit(sd->status.bgstats.kvm_wins,1,USHRT_MAX); break;
+						case 5: add2limit(sd->status.bgstats.sc_wins,1,USHRT_MAX); break;
+						case 6: add2limit(sd->status.bgstats.dom_wins,1,USHRT_MAX); break;
+						case 7: add2limit(sd->status.bgstats.ru_wins,1,USHRT_MAX); break;
+						case 8: add2limit(sd->status.bgstats.pb_wins,1,USHRT_MAX); break;
+						case 9: add2limit(sd->status.bgstats.td_wins,1,USHRT_MAX); break;
+					}
+					break;
+					
+				case 1: // Tie
+					add2limit(sd->status.bgstats.tie,1,USHRT_MAX);
+					fame = 75;
+					if( sd->bmaster_flag ) {
+						add2limit(sd->status.bgstats.leader_tie,1,USHRT_MAX);
+						fame += 10;
+					}
+					pc_addfame(sd,fame,3);
+					switch( bg_arena )
+					{
+						case 0:	add2limit(sd->status.bgstats.ctf_tie,1,USHRT_MAX);	break;
+						case 1: add2limit(sd->status.bgstats.tdm_tie,1,USHRT_MAX); break;
+						case 2: add2limit(sd->status.bgstats.eos_tie,1,USHRT_MAX); break;
+						case 4: add2limit(sd->status.bgstats.kvm_tie,1,USHRT_MAX); break;
+						case 5: add2limit(sd->status.bgstats.sc_tie,1,USHRT_MAX); break;
+						case 6: add2limit(sd->status.bgstats.dom_tie,1,USHRT_MAX); break;
+						case 8: add2limit(sd->status.bgstats.pb_tie,1,USHRT_MAX); break;
+						case 9: add2limit(sd->status.bgstats.td_tie,1,USHRT_MAX); break;
+					}
+					break;
+					
+				case 2: // Lost
+					add2limit(sd->status.bgstats.lost,1,USHRT_MAX);
+					fame = 50;
+					if( sd->bmaster_flag ) {
+						add2limit(sd->status.bgstats.leader_lost,1,USHRT_MAX);
+					}
+					pc_addfame(sd,fame,3);
+					switch( bg_arena )
+					{
+						case 0:	add2limit(sd->status.bgstats.ctf_lost,1,USHRT_MAX);	break;
+						case 1: add2limit(sd->status.bgstats.tdm_lost,1,USHRT_MAX); break;
+						case 2: add2limit(sd->status.bgstats.eos_lost,1,USHRT_MAX); break;
+						case 3: add2limit(sd->status.bgstats.cq_lost,1,USHRT_MAX); break;
+						case 4: add2limit(sd->status.bgstats.kvm_lost,1,USHRT_MAX); break;
+						case 5: add2limit(sd->status.bgstats.sc_lost,1,USHRT_MAX); break;
+						case 6: add2limit(sd->status.bgstats.dom_lost,1,USHRT_MAX); break;
+						case 7: add2limit(sd->status.bgstats.ru_lost,1,USHRT_MAX); break;
+						case 8: add2limit(sd->status.bgstats.pb_lost,1,USHRT_MAX); break;
+						case 9: add2limit(sd->status.bgstats.td_lost,1,USHRT_MAX); break;
+					}
+					break;
 			}
 		}
 	}

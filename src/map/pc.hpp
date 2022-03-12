@@ -757,6 +757,7 @@ struct map_session_data {
 	int tid_queue_active; ///< Timer ID associated with players joining an active BG
 	std::shared_ptr<s_battleground_data> bmaster_flag;
 	unsigned short bg_team;
+	unsigned short bg_kills;
 
 #ifdef SECURE_NPCTIMEOUT
 	/**
@@ -1512,13 +1513,14 @@ void pc_delservantball( struct map_session_data& sd, int count = 1 );
 void pc_addabyssball( struct map_session_data& sd, int count = 1 );
 void pc_delabyssball( struct map_session_data& sd, int count = 1 );
 
-void pc_addfame(struct map_session_data *sd,int count);
+void pc_addfame(struct map_session_data *sd,int count,short flag);
 unsigned char pc_famerank(uint32 char_id, int job);
 bool pc_set_hate_mob(struct map_session_data *sd, int pos, struct block_list *bl);
 
 extern struct fame_list smith_fame_list[MAX_FAME_LIST];
 extern struct fame_list chemist_fame_list[MAX_FAME_LIST];
 extern struct fame_list taekwon_fame_list[MAX_FAME_LIST];
+extern struct fame_list bg_fame_list[MAX_FAME_LIST];
 
 void pc_readdb(void);
 void do_init_pc(void);
@@ -1536,6 +1538,11 @@ int pc_update_last_action(struct map_session_data *sd, int type, enum idletime_o
 void pc_inventory_rentals(struct map_session_data *sd);
 void pc_inventory_rental_clear(struct map_session_data *sd);
 void pc_inventory_rental_add(struct map_session_data *sd, unsigned int seconds);
+
+// WoE Ranking Stats
+void pc_record_damage(struct block_list *src, struct block_list *dst, int damage);
+void pc_record_maxdamage(struct block_list *src, struct block_list *dst, int damage);
+void pc_record_mobkills(struct map_session_data *sd, struct mob_data *md);
 
 int pc_read_motd(void); // [Valaris]
 int pc_disguise(struct map_session_data *sd, int class_);

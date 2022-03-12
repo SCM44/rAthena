@@ -86,8 +86,6 @@ int chmapif_send(int fd, unsigned char *buf, unsigned int len){
 	return 0;
 }
 
-
-
 /**
  * Send map-servers fames ranking lists
  *  Defaut fame list are 32B, (id+point+names)
@@ -1093,57 +1091,57 @@ int chmapif_parse_updmapip(int fd, int id){
  * @return : 0 not enough data received, 1 success
  */
 int chmapif_parse_updfamelist(int fd){
-    if (RFIFOREST(fd) < 11)
-        return 0;
-    {
-            int cid = RFIFOL(fd, 2);
-            int fame = RFIFOL(fd, 6);
-            char type = RFIFOB(fd, 10);
-            int size;
-            struct fame_list* list;
-            int player_pos;
-            int fame_pos;
+	if (RFIFOREST(fd) < 11)
+		return 0;
+	{
+		int cid = RFIFOL(fd, 2);
+		int fame = RFIFOL(fd, 6);
+		char type = RFIFOB(fd, 10);
+		int size;
+		struct fame_list* list;
+		int player_pos;
+		int fame_pos;
 
-            switch(type)
-            {
-				case RANK_BLACKSMITH:	size = fame_list_size_smith;	list = smith_fame_list;		break;
-				case RANK_ALCHEMIST:	size = fame_list_size_chemist;	list = chemist_fame_list;	break;
-				case RANK_TAEKWON:		size = fame_list_size_taekwon;	list = taekwon_fame_list;	break;
-				default:				size = 0;						list = NULL;				break;
-            }
+		switch (type)
+		{
+		case RANK_BLACKSMITH:	size = fame_list_size_smith;	list = smith_fame_list;		break;
+		case RANK_ALCHEMIST:	size = fame_list_size_chemist;	list = chemist_fame_list;	break;
+		case RANK_TAEKWON:		size = fame_list_size_taekwon;	list = taekwon_fame_list;	break;
+		default:				size = 0;						list = NULL;				break;
+		}
 
-            ARR_FIND(0, size, player_pos, list[player_pos].id == cid);// position of the player
-            ARR_FIND(0, size, fame_pos, list[fame_pos].fame <= fame);// where the player should be
+		ARR_FIND(0, size, player_pos, list[player_pos].id == cid);// position of the player
+		ARR_FIND(0, size, fame_pos, list[fame_pos].fame <= fame);// where the player should be
 
-            if( player_pos == size && fame_pos == size )
-                    ;// not on list and not enough fame to get on it
-            else if( fame_pos == player_pos )
-            {// same position
-                    list[player_pos].fame = fame;
-                    chmapif_update_fame_list(type, player_pos, fame);
-            }
-            else
-            {// move in the list
-                    if( player_pos == size )
-                    {// new ranker - not in the list
-                            ARR_MOVE(size - 1, fame_pos, list, struct fame_list);
-                            list[fame_pos].id = cid;
-                            list[fame_pos].fame = fame;
-                            char_loadName(cid, list[fame_pos].name);
-                    }
-                    else
-                    {// already in the list
-                            if( fame_pos == size )
-                                    --fame_pos;// move to the end of the list
-                            ARR_MOVE(player_pos, fame_pos, list, struct fame_list);
-                            list[fame_pos].fame = fame;
-                    }
-                    chmapif_send_fame_list(-1);
-            }
+		if (player_pos == size && fame_pos == size)
+			;// not on list and not enough fame to get on it
+		else if (fame_pos == player_pos)
+		{// same position
+			list[player_pos].fame = fame;
+			chmapif_update_fame_list(type, player_pos, fame);
+		}
+		else
+		{// move in the list
+			if (player_pos == size)
+			{// new ranker - not in the list
+				ARR_MOVE(size - 1, fame_pos, list, struct fame_list);
+				list[fame_pos].id = cid;
+				list[fame_pos].fame = fame;
+				char_loadName(cid, list[fame_pos].name);
+			}
+			else
+			{// already in the list
+				if (fame_pos == size)
+					--fame_pos;// move to the end of the list
+				ARR_MOVE(player_pos, fame_pos, list, struct fame_list);
+				list[fame_pos].fame = fame;
+			}
+			chmapif_send_fame_list(-1);
+		}
 
-            RFIFOSKIP(fd,11);
-    }
-    return 1;
+		RFIFOSKIP(fd, 11);
+	}
+	return 1;
 }
 
 /*

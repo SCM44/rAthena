@@ -69,15 +69,15 @@ cmd_in02,187,107,4	script	Slot Machine 1#1SM	563,{ .@name$ = "[^4D5656 Slot Mach
 
 		// Give Items instead of X amount of "coins"? If TRUE please check the .ItemRewardIDArray variable to define which and how many Items is going to be given when X combination is made.
 		// IF TRUE: THIS OPTION DISABLES THE "BET MORE THAN 1 COIN IN A SINGLE GAME" FEATURE MAKING THE SLOT ACCEPT ONLY 1 CREDIT PER GAME.
-			.GiveItems = false;
+			.GiveItems = true;
 			setarray .ItemRewardIDArray[0],
-				547,1, // x3 Chest			| x1 Condensed White Potion
-				546,1, // x3 Coin				| x1 Condensed Yellow Potion
-				545,1, // x3 Bell				| x1 Condensed Red Potion
-				504,1, // x3 Yggdrasil	| x1 White Potion
-				503,1, // x3 Apple			| x1 Yellow Potion
-				502,1, // A A Apple			| x1 Orange Potion
-				501,1; // A B Apple			| x1 Red Potion
+				12246,1, // x3 Chest			| x1 Magic Card album
+				29584,1, // x3 Coin				| x1 Rune Box
+				616,1, // x3 Bell				| x1 Old card album
+				29585,1, // x3 Yggdrasil	| x1 PVM Box
+				603,1, // x3 Apple			| x1 Old Blue Box
+				644,1, // A A Apple			| x1 Gift Box
+				18010,1; // A B Apple			| x1 Rare Coin
 
 		// Other Info (Does not affect script functionality, this is just for statistics)
       $SlotCoinPrice = 100000; // How much Zeny 1 credit cost? (If you want to see the Zeny to Coin relation in the stats page, this doesn't affect the script functionality)
@@ -87,7 +87,7 @@ cmd_in02,187,107,4	script	Slot Machine 1#1SM	563,{ .@name$ = "[^4D5656 Slot Mach
 		  setarray .ObjectNames$[0],"Apple","Chest","Yggdrasil","Apple","Apple","Bell","Coin"; // DO NOT TOUCH THIS
 
     // Balance your winning/lose probabilities with help of the Excel table
-		  setarray .SlotObjects[0],9,12,19,25,42;
+		  setarray .SlotObjects[0],9,15,19,24,50;
 
 	// ================================================================================================================================================
 

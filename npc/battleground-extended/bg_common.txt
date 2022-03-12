@@ -117,7 +117,7 @@ OnClock2200:
 		
 		if( gettime(DT_HOUR) == 22 )
 		{
-			bgannounce "-- Battleground Happy Hour is over --",0x00BFFF;
+			bgannounce " Battleground Happy Hour is over ",0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			end;
 		}
@@ -127,14 +127,14 @@ OnClock2200:
 	case SATURDAY:
 		if( gettime(DT_HOUR) >= 16 && gettime(DT_HOUR) < 18 )
 		{
-			bgannounce "-- Battleground Happy Hour has begun --",0x00FF00;
+			bgannounce " Battleground Happy Hour has begun ",0x00FF00;
 			setbattleflag "bg_reward_rates",120; // +20% Reward Rates
 			end;
 		}
 		
 		if( gettime(DT_HOUR) == 18 )
 		{
-			bgannounce "-- Battleground Happy Hour is over --",0x00BFFF;
+			bgannounce " Battleground Happy Hour is over ",0x00BFFF;
 			setbattleflag "bg_reward_rates",100; // Normal Rates
 			end;
 		}
@@ -198,13 +198,16 @@ OnInit:
 	// Rewards when premature end (0 players in one team) ?
 	$PREMATURE_REWARDS = 1;
 	// Rewards variation depending on number of users
-	$REWARDS_VARIATIONS = 0;
+	$REWARDS_VARIATIONS = 1;
 	// Reward item id
 	// 7804 : Battleground Badges
 	// 7773 : War Badges
 	// 7829 : Valor Badges
 	// 7828 : Bravery Badges
+	//$BGREWARD_ITID = 7829;
+	//$BGREWARD_ITID = 7828;
 	$BGREWARD_ITID = 7804;
+
 	// ================================================
 	// Min level to enter BG lobby
 	$@BG_MinLevel = 80;
@@ -269,7 +272,7 @@ OnTimer180000:
 		initnpctimer; // Rotation start
 	}
 	
-	set .@msg$, "[ Battleground ] ~ " + bg_info(bg_current_mode(), BG_INFO_NAME) + " -- Ready to accept new challengers -- @joinbg to join the battle.";
+	set .@msg$, "[ Battleground ] ~ " + bg_info(bg_current_mode(), BG_INFO_NAME) + "  Ready to accept new challengers @joinbg to join the battle.";
 	bgannounce .@msg$,0x00FFFF;
 	end;
 	

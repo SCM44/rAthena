@@ -1,35 +1,36 @@
 // BG + PVP warper
+
 // By Vykimo
 
 1@pop3,49,73,0	script	Lightalzen Sanctuary	10042,{
-warp "x_lhz",0,0;
+warp "sh_fild16",0,0;
 	OnInit:
 	OnTimer1000:
 	delwaitingroom;
-	waitingroom "("+ (getmapusers("x_lhz")) +" players) Lightalzen Sanctuary",0;
+	waitingroom "("+ (getmapusers("sh_fild16")) +" players) Lightalzen Sanctuary",0;
 	initnpctimer;
 end;
 }
 1@pop3,66,73,0	script	Prontera Sanctuary	10043,{
-warp "x_prt",0,0;
+warp "pvp_n_1-5",0,0;
 	OnInit:
 	OnTimer1000:
 	delwaitingroom;
-	waitingroom "("+ (getmapusers("x_prt")) +" players) Prontera Sanctuary ",0;
+	waitingroom "("+ (getmapusers("pvp_n_1-5")) +" players) Prontera Sanctuary ",0;
 	initnpctimer;
 end;
 }
-1@pop3,58,77,0	script	Rachel Sanctuary	10044,{
-warp "x_ra",0,0;
-	OnInit:
-	OnTimer1000:
-	delwaitingroom;
-	waitingroom "("+ (getmapusers("x_ra")) +" players) Rachel Sanctuary",0;
-	initnpctimer;
-end;
-}
+//1@pop3,58,77,0	script	Rachel Sanctuary	10044,{
+//warp "x_ra",0,0;
+//	OnInit:
+//	OnTimer1000:
+//	delwaitingroom;
+//	waitingroom "("+ (getmapusers("x_ra")) +" players) Rachel Sanctuary",0;
+//	initnpctimer;
+//end;
+//}
 
-prontera,148,174,6	script	PVP & Battleground#j	734,{
+prontera,148,174,6	script	Battleground Warper#j	734,{
 	if(bgcheck())
 	{
 		mes "^404040[^808080" + strnpcinfo(1) + "^404040]^000000";
@@ -37,7 +38,7 @@ prontera,148,174,6	script	PVP & Battleground#j	734,{
 		next;
 		menu
 		"Participate in the Battleground (^FF0000" + (bg_get_data($@BG_Team1,0)+bg_get_data($@BG_Team2,0)) + " players^000000)",L_BG,
-		"Free PVP Arena (^FF0000" + (getmapusers("x_lhz")+getmapusers("x_prt")+getmapusers("x_ra")) + " players^000000)",L_PVP,
+		//"Free PVP Arena (^FF0000" + (getmapusers("x_lhz")+getmapusers("x_prt")+getmapusers("x_ra")) + " players^000000)",L_PVP,
 		"Cancel",-;
 		close;
 	}
@@ -50,20 +51,20 @@ prontera,148,174,6	script	PVP & Battleground#j	734,{
 		"Cancel",-;
 		close;
 
-L_PVP:
-	mes "^404040[^808080" + strnpcinfo(1) + "^404040]^000000";
-	mes "PVP Rules :";
-	mes " ";
-	mes "- It is forbidden to Kill Deco (that is kill a player, then immediately disconnect to avoid being killed).";
-	mes " ";
-	mes "- It is forbidden to Kill Raise (kill and revive the same player without his consent).";
-	mes " ";
-	mes "- It is strictly forbidden to Double Account to booster for the PVP / WOE and BG.";
-	close2;
-	getmapxy(@pvp_lmap$,@pvp_lx,@pvp_ly,BL_PC);
-	warp "1@pop3",57,68;
-	sc_end SC_ALL;
-	end;
+//L_PVP:
+//	mes "^404040[^808080" + strnpcinfo(1) + "^404040]^000000";
+//	mes "PVP Rules :";
+//	mes " ";
+//	mes "- It is forbidden to Kill Deco (that is kill a player, then immediately disconnect to avoid being killed).";
+//	mes " ";
+//	mes "- It is forbidden to Kill Raise (kill and revive the same player without his consent).";
+//	mes " ";
+//	mes "- It is strictly forbidden to Double Account to booster for the PVP / WOE and BG.";
+//	close2;
+//	getmapxy(@pvp_lmap$,@pvp_lx,@pvp_ly,BL_PC);
+//	warp "1@pop3",57,68;
+//	sc_end SC_ALL;
+//	end;
 
 L_BG:
 	if( BaseLevel < 79 )

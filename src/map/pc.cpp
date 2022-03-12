@@ -84,6 +84,7 @@ int pc_expiration_tid = INVALID_TIMER;
 struct fame_list smith_fame_list[MAX_FAME_LIST];
 struct fame_list chemist_fame_list[MAX_FAME_LIST];
 struct fame_list taekwon_fame_list[MAX_FAME_LIST];
+struct fame_list bg_fame_list[MAX_FAME_LIST];
 
 const std::string AttendanceDatabase::getDefaultLocation(){
 	return std::string(db_path) + "/attendance.yml";
@@ -786,10 +787,23 @@ void pc_delabyssball( struct map_session_data& sd, int count ){
 * @param sd Player
 * @param count Fame point
 */
-void pc_addfame(struct map_session_data *sd,int count)
+void pc_addfame(struct map_session_data *sd,int count,short flag)
 {
 	enum e_rank ranktype;
 	nullpo_retv(sd);
+	switch( flag )
+	{
+	case 3: // Bg Normal Matchs
+		sd->status.bgstats.points += count;
+		if( sd->status.bgstats.points > MAX_FAME )
+			sd->status.bgstats.points = MAX_FAME;
+
+		clif_rank_info(sd,count,sd->status.bgstats.points,0);
+		chrif_updatefamelist(sd,1);
+		return;
+	}
+
+	// Normal Rankings
 	sd->status.fame += count;
 	if(sd->status.fame > MAX_FAME)
 		sd->status.fame = MAX_FAME;
@@ -804,7 +818,7 @@ void pc_addfame(struct map_session_data *sd,int count)
 	}
 
 	clif_update_rankingpoint(sd,ranktype,count);
-	chrif_updatefamelist(sd);
+	chrif_updatefamelist(sd,0);
 }
 
 /**
@@ -9078,6 +9092,286 @@ void pc_close_npc(struct map_session_data *sd,int flag)
 		}
 	}
 }
+void pc_record_mobkills(struct map_session_data *sd, struct mob_data *md)
+{
+	struct guild *g;
+	std::shared_ptr<guild_castle> gc;
+	std::shared_ptr<s_battleground_data> bg;
+
+	if( !sd ) return;
+	if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+	{
+		int i;
+		bg = util::umap_find(bg_team_db, sd->bg_id);
+		if( !bg )
+			return;
+		ARR_FIND(0,MAX_BG_MEMBERS,i,bg->members[i].sd == sd);
+		if( i >= MAX_BG_MEMBERS )
+			return;
+	}
+
+	if( map_allowed_woe(sd->bl.m) )
+	{
+		switch( md->mob_id )
+		{
+		case 1288:
+			add2limit(sd->status.wstats.emperium_kill, 1, USHRT_MAX);
+			if( (g = guild_search(sd->status.guild_id)) && (gc = castle_db.mapindex2gc(map[sd->bl.m].index)) )
+			{
+				add2limit(g->castle[gc->castle_id].emperium, 1, USHRT_MAX);
+				g->castle[gc->castle_id].changed = true;
+			}
+			break;
+		case 1905:
+			add2limit(sd->status.wstats.barricade_kill, 1, USHRT_MAX);
+			break;
+		case 1907:
+		case 1908:
+			add2limit(sd->status.wstats.gstone_kill, 1, USHRT_MAX);
+			break;
+		case 1285:
+		case 1286:
+		case 1287:
+		case 1899:
+		case 1900:
+			add2limit(sd->status.wstats.guardian_kill, 1, USHRT_MAX);
+			break;
+		}
+	}
+	else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) )
+	{
+		switch( md->mob_id )
+		{
+		case 1907:
+		case 1908:
+			add2limit(sd->status.bgstats.gstone_kill, 1, USHRT_MAX);
+			pc_addfame(sd,10,3);
+			break;
+		case 1288:
+			if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) == 2 )
+				add2limit(sd->status.bgstats.ru_captures, 1, USHRT_MAX);
+			else
+				add2limit(sd->status.bgstats.emperium_kill, 1, USHRT_MAX);
+			pc_addfame(sd,30,3);
+			break;
+		case 1905:
+			add2limit(sd->status.bgstats.barricade_kill, 1, USHRT_MAX);
+			pc_addfame(sd,1,3);
+			break;
+		}
+	}
+
+	if( map_getmapflag(sd->bl.m, MF_GVG_CASTLE) && ((md->mob_id >= 1324 && md->mob_id <= 1363) || (md->mob_id >= 1938 && md->mob_id <= 1946)) && (g = guild_search(sd->status.guild_id)) && (gc = castle_db.mapindex2gc(map[sd->bl.m].index)) )
+	{
+		add2limit(g->castle[gc->castle_id].treasure, 1, USHRT_MAX); // Treasure opened on Castle
+		g->castle[gc->castle_id].changed = true;
+		if( !(agit_flag || agit2_flag) )
+		{
+			intif_guild_save_score(g->guild_id, gc->castle_id, &g->castle[gc->castle_id]);
+			g->castle[gc->castle_id].changed = false;
+		}
+	}
+}
+
+void pc_record_maxdamage(struct block_list *src, struct block_list *dst, int damage)
+{
+	struct block_list *s_bl;
+	struct map_session_data *sd;
+
+	if( !src || !dst || src == dst || dst->type != BL_PC || damage <= 0 )
+		return;
+
+	if( (s_bl = battle_get_master(src)) == NULL )
+		s_bl = src;
+
+	if( s_bl->type != BL_PC )
+		return;
+
+	if( (sd = BL_CAST(BL_PC, s_bl)) != NULL )
+	{
+		if( map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id && sd->status.bgstats.top_damage < damage )
+			sd->status.bgstats.top_damage = damage;
+		else if( map_allowed_woe(src->m) && sd->status.wstats.top_damage < damage )
+			sd->status.wstats.top_damage = damage;
+	}
+}
+
+void pc_record_damage(struct block_list *src, struct block_list *dst, int damage)
+{
+	struct block_list *s_bl;
+	struct map_session_data *sd;
+
+	if( !src || !dst || src == dst || damage <= 0 )
+		return;
+
+	if( (s_bl = battle_get_master(src)) == NULL )
+		s_bl = src;
+
+	if( s_bl->type != BL_PC )
+		return;
+
+	sd = BL_CAST(BL_PC, s_bl);
+
+	switch( dst->type )
+	{
+		case BL_PC:
+			if( map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id )
+			{
+				add2limit(sd->status.bgstats.damage_done, damage, UINT_MAX);
+				add2limit(((TBL_PC*)dst)->status.bgstats.damage_received, damage, UINT_MAX);
+			}
+			else if( map_allowed_woe(src->m) )
+			{
+				add2limit(sd->status.wstats.damage_done, damage, UINT_MAX);
+				add2limit(((TBL_PC*)dst)->status.wstats.damage_received, damage, UINT_MAX);
+			}
+			break;
+		case BL_MOB:
+		{
+			struct mob_data *md = BL_CAST(BL_MOB, dst);
+			if( map_allowed_woe(src->m) && md->guardian_data )
+			{
+				switch( md->mob_id )
+				{
+					case 1288:
+						add2limit(sd->status.wstats.emperium_damage, damage, UINT_MAX);
+						break;
+					case 1905:
+					case 1906:
+						add2limit(sd->status.wstats.barricade_damage, damage, UINT_MAX);
+						break;
+					case 1907:
+					case 1908:
+						add2limit(sd->status.wstats.gstone_damage, damage, UINT_MAX);
+						break;
+					default:
+						add2limit(sd->status.wstats.guardian_damage, damage, UINT_MAX);
+						break;
+				}
+			}
+			break;
+		}
+	}
+}
+
+void pc_calc_ranking(struct map_session_data *tsd, struct map_session_data *ssd, uint16 skill_id)
+{
+	int m, i, Elo;
+
+	if( !tsd || !ssd || tsd == ssd )
+		return;
+
+	m = ssd->bl.m;
+
+	if( map_allowed_woe(m) )
+	{
+		/*==========================================
+		 * Guild Ranking - War of Emperium
+		 *------------------------------------------*/
+		struct guild *tg, *sg;
+		std::shared_ptr<guild_castle> gc = castle_db.mapindex2gc(map[m].index);
+
+		if( gc == NULL || gc->guild_id <= 0 )
+			return;
+
+		if( (tg = guild_search(tsd->status.guild_id)) == NULL || (sg = guild_search(ssd->status.guild_id)) == NULL )
+			return;
+
+		i = gc->castle_id;
+		Elo = (int)(10. / (1 + pow(10., (int)(sg->castle[i].offensive_score - tg->castle[i].offensive_score) / 2000.)));
+		add2limit(sg->castle[i].offensive_score, Elo, 4000);
+		sub2limit(tg->castle[i].offensive_score, Elo, 0);
+
+		// Single Player Ranking WoE
+		Elo = (int)(50. / (1 + pow(10., (int)(ssd->status.wstats.score - tsd->status.wstats.score) / 2000.)));
+		add2limit(ssd->status.wstats.score, Elo, 4000);
+		sub2limit(tsd->status.wstats.score, Elo, 0);
+		add2limit(ssd->status.wstats.kill_count, 1, USHRT_MAX);
+		add2limit(tsd->status.wstats.death_count, 1, USHRT_MAX);
+
+		log_woe_kill(ssd,tsd,skill_id);
+
+		if( tsd->status.guild_id == gc->guild_id )
+		{ // Offensive Ranking - Killing Castle Owners
+			add2limit(sg->castle[i].off.kill_count, 1, UINT_MAX);
+			add2limit(tg->castle[i].def.death_count, 1, UINT_MAX);
+		}
+		else if( guild_isallied(gc->guild_id, tsd->status.guild_id) )
+		{ // Offensive Ranking - Killing Castle Allied
+			add2limit(sg->castle[i].off.kill_count, 1, UINT_MAX);
+			add2limit(tg->castle[i].ali.death_count, 1, UINT_MAX);
+		}
+		else if( ssd->status.guild_id == gc->guild_id )
+		{ // Defensive Ranking - Killing Castle Invaders
+			add2limit(sg->castle[i].def.kill_count, 1, UINT_MAX);
+			add2limit(tg->castle[i].off.death_count, 1, UINT_MAX);
+		}
+		else if( guild_isallied(gc->guild_id, ssd->status.guild_id) )
+		{ // Defensive Ranking - Allied killing Invaders
+			add2limit(sg->castle[i].ali.kill_count, 1, UINT_MAX);
+			add2limit(tg->castle[i].off.death_count, 1, UINT_MAX);
+		}
+		else
+		{ // Killing other guilds invaders
+			add2limit(sg->castle[i].ext.kill_count, 1, UINT_MAX);
+			add2limit(tg->castle[i].ext.death_count, 1, UINT_MAX);
+		}
+
+		tg->castle[i].changed = true;
+		sg->castle[i].changed = true;
+	}
+	else if( ssd->bg_id && map_getmapflag(m, MF_BATTLEGROUND) && tsd->bg_id )
+	{
+		/*==========================================
+ 		* BattleGround Ranking
+ 		*------------------------------------------*/
+		struct map_session_data* s_pl[MAX_BG_MEMBERS], * t_pl[MAX_BG_MEMBERS];
+		unsigned int s_rate = 0, t_rate = 0;
+		int sc = 0, tc = 0, s_Elo, t_Elo;
+
+		std::shared_ptr<s_battleground_data> s_bg = util::umap_find(bg_team_db, ssd->bg_id);
+		std::shared_ptr<s_battleground_data> t_bg = util::umap_find(bg_team_db, tsd->bg_id);
+
+		if (!s_bg || !t_bg)
+			return;
+
+		// Source
+		for (const auto& pl_sd : s_bg->members) {
+			if ((s_pl[sc] = pl_sd.sd) == NULL || s_pl[sc]->bl.m != m)
+				continue;
+			s_rate += s_pl[sc]->status.bgstats.score;
+			sc++;
+		}
+		if (sc < 1) return;
+		else s_rate /= sc; // Avergate Source Rate
+
+		// Target
+		for (const auto& pl_sd : t_bg->members) {
+			if ((t_pl[tc] = pl_sd.sd) == NULL || t_pl[tc]->bl.m != m)
+				continue;
+			t_rate += t_pl[tc]->status.bgstats.score;
+			tc++;
+		}
+		if (tc < 1) return;
+		else t_rate /= tc; // Avergate Target Rate
+
+		Elo = (int)(50. / (1 + pow(10., (int)(s_rate - t_rate) / 2000.)));
+		s_Elo = Elo / sc;
+		for (i = 0; i < sc; i++)
+			add2limit(s_pl[i]->status.bgstats.score, s_Elo, 4000);
+
+		t_Elo = Elo / tc;
+		for (i = 0; i < tc; i++)
+			sub2limit(t_pl[i]->status.bgstats.score, t_Elo, 0);
+
+		log_bg_kill(ssd, tsd, skill_id);
+
+		add2limit(ssd->status.bgstats.kill_count, 1, USHRT_MAX);
+		add2limit(tsd->status.bgstats.death_count, 1, USHRT_MAX);
+		ssd->bg_kills++; // This BG Kills
+	}
+
+}
 
 /*==========================================
  * Invoked when a player has negative current hp
@@ -9257,6 +9551,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src, uint16 skill_id)
 
 	if (src && src->type == BL_PC) {
 		struct map_session_data *ssd = (struct map_session_data *)src;
+		pc_calc_ranking(sd, ssd, skill_id); // Ranking System
 		pc_setparam(ssd, SP_KILLEDRID, sd->bl.id);
 		npc_script_event(ssd, NPCE_KILLPC);
 
@@ -10037,6 +10332,12 @@ int pc_itemheal(struct map_session_data *sd, t_itemid itemid, int hp, int sp)
 		tmp = hp * bonus / 100; // Overflow check
 		if (bonus != 100 && tmp > hp)
 			hp = tmp;
+		
+		if( sd->status.guild_id && map_allowed_woe(sd->bl.m) )
+			add2limit(sd->status.wstats.hp_heal_potions, 1, UINT_MAX);
+		else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+			add2limit(sd->status.bgstats.hp_heal_potions, 1, UINT_MAX);
+
 	}
 	if (sp) {
 		bonus = 100 + (sd->battle_status.int_ << 1) + pc_checkskill(sd, MG_SRECOVERY) * 10 + pc_checkskill(sd, AM_LEARNINGPOTION) * 5;
@@ -10059,6 +10360,11 @@ int pc_itemheal(struct map_session_data *sd, t_itemid itemid, int hp, int sp)
 		tmp = sp * bonus / 100; // Overflow check
 		if (bonus != 100 && tmp > sp)
 			sp = tmp;
+
+		if( sd->status.guild_id && map_allowed_woe(sd->bl.m) )
+			add2limit(sd->status.wstats.sp_heal_potions, 1, UINT_MAX);
+		else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+			add2limit(sd->status.bgstats.sp_heal_potions, 1, UINT_MAX);
 	}
 	if (sd->sc.count) {
 		// Critical Wound and Death Hurt stack

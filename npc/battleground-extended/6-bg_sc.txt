@@ -33,8 +33,8 @@ OnTeam2Die:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral Stone#" + .@Stone, .@x, .@y;
 		mapannounce "bg_sc","Neutral Stone Droped by [ " + strcharinfo(0) + " ]",1,0xFFFFFF;
-		//bg_rankpoints "sc_droped",1;
-		//bg_rankpoints "fame",1,@killer_bg_src;
+		bg_rankpoints "sc_droped",1;
+		bg_rankpoints "fame",1,@killer_bg_src;
 		initnpctimer "Neutral Stone#" + .@Stone;
 		deltimer "Flavius_SC::OnFlash";
 		pcblock 1,0;
@@ -259,7 +259,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -273,7 +273,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -321,7 +321,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -335,7 +335,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -383,7 +383,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -397,7 +397,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -445,7 +445,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -459,7 +459,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -507,7 +507,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -521,7 +521,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -569,7 +569,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -583,7 +583,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team2,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team2,2) + " Stone",1905;
@@ -634,7 +634,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -648,7 +648,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;
@@ -696,7 +696,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -710,7 +710,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;
@@ -758,7 +758,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -772,7 +772,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;
@@ -820,7 +820,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -834,7 +834,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;
@@ -882,7 +882,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -896,7 +896,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;
@@ -944,7 +944,7 @@ OnTouch:
 		pcblock 1,1; // Block Skills/Items
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone has been stole by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_stole",1;
+		bg_rankpoints "sc_stole",1;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -958,7 +958,7 @@ OnTouch:
 		deltimer "Flavius_SC::OnFlash";
 
 		mapannounce "bg_sc",bg_get_data($@BG_Team1,2) + " Stone captured by [ " + strcharinfo(0) + " ]",1,bg_info(bg_current_mode(), BG_INFO_COLOR);
-		//bg_rankpoints "sc_captured",1;
+		bg_rankpoints "sc_captured",1;
 		pcblock 1,0; // UnBlock Skills/Items
 
 		setnpcdisplay strnpcinfo(3),bg_get_data($@BG_Team1,2) + " Stone",1905;

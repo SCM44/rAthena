@@ -7430,3 +7430,10 @@ Body:
             Rate: 1
           - Item: Gold_Tiara_
             Rate: 1
+  - Group: C_WING_OF_FLY_3DAY_BOX
+    SubGroups:
+      - SubGroup: 0
+        List:
+          - Item: C_Wing_Of_Fly
+            Duration: 10080
+            UniqueId: true

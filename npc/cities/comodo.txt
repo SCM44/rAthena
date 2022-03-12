@@ -118,7 +118,7 @@ cmd_in02,178,86,4	script	Stonae#cmd	98,{
 	close;
 }
 
-cmd_in02,172,105,4	script	G . J#cmd	86,{
+cmd_in02,172,96,4	script	G . J#cmd	86,{
 	mes "[G . J]";
 	mes "The more I think about it,";
 	mes "it seems easier to become";

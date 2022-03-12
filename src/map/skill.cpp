@@ -7147,12 +7147,28 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if( tsc && tsc->data[SC_AKAITSUKI] && heal && skill_id != HLIF_HEAL )
 				heal = ~heal + 1;
 			t_exp heal_get_jobexp = status_heal(bl,heal,0,0);
-
-			if(sd && dstsd && heal > 0 && sd != dstsd && battle_config.heal_exp > 0){
-				heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
-				if (heal_get_jobexp <= 0)
-					heal_get_jobexp = 1;
-				pc_gainexp (sd, bl, 0, heal_get_jobexp, 0);
+				
+			if(sd && dstsd && heal > 0 && sd != dstsd) {
+				if( sd->status.guild_id && map_allowed_woe(src->m) )
+				{
+					if( sd->status.guild_id == dstsd->status.guild_id)
+						add2limit(sd->status.wstats.healing_done, (unsigned int)heal_get_jobexp, UINT_MAX);
+					else
+						add2limit(sd->status.wstats.wrong_healing_done, (unsigned int)heal_get_jobexp, UINT_MAX);
+				}
+				else if(map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id && dstsd->bg_id )
+				{
+					if( sd->bg_id == dstsd->bg_id )
+						add2limit(sd->status.bgstats.healing_done, (unsigned int)heal_get_jobexp, UINT_MAX);
+					else
+						add2limit(sd->status.bgstats.wrong_healing_done, (unsigned int)heal_get_jobexp, UINT_MAX);
+				}
+				if(battle_config.heal_exp > 0){
+					heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
+					if (heal_get_jobexp <= 0)
+						heal_get_jobexp = 1;
+					pc_gainexp (sd, bl, 0, heal_get_jobexp, 0);
+				}
 			}
 		}
 		break;
@@ -7433,7 +7449,19 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		}
 		break;
 
+	//case CR_PROVIDENCE:
+	//	clif_skill_nodamage(src,bl,skill_id,skill_lv,
+	//		sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+	//	break;
+
 	case CR_PROVIDENCE:
+		if(sd && dstsd){ //Check they are not another crusader [Skotlex]
+			if ((dstsd->class_&MAPID_UPPERMASK) == MAPID_CRUSADER) {
+				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+				map_freeblock_unlock();
+				return 1;
+			}
+		}
 		clif_skill_nodamage(src,bl,skill_id,skill_lv,
 			sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
 		break;
@@ -10251,8 +10279,12 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 						sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id, skill_lv));
 				}
 			}
-		} else if ((map_getmapflag(src->m, MF_BATTLEGROUND) && bg_team_get_id(src)) 
-			|| (!map_getmapflag(src->m, MF_BATTLEGROUND) && clif_visual_guild_id(src))) {
+		} else if ((map_getmapflag(src->m, MF_BATTLEGROUND) && (i = bg_team_get_id(src))) 
+			|| (!map_getmapflag(src->m, MF_BATTLEGROUND) && (i = status_get_guild_id(src)))) {
+
+			struct guild *g = guild_search(i);
+			std::shared_ptr<guild_castle> gc;
+
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			map_foreachinallrange(skill_area_sub, src,
 				skill_get_splash(skill_id, skill_lv), BL_PC,
@@ -10264,6 +10296,17 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 #else
 				guild_block_skill(sd, skill_get_time2(skill_id, skill_lv));
 #endif
+			if( !map_getmapflag(src->m, MF_BATTLEGROUND) && (i = status_get_guild_id(src)) && g && (gc = castle_db.mapindex2gc(map[src->m].index)) != NULL )
+			{
+				switch( skill_id )
+				{
+				case GD_BATTLEORDER:  add2limit(g->castle[gc->castle_id].skill_battleorder, 1, USHRT_MAX); break;
+				case GD_REGENERATION: add2limit(g->castle[gc->castle_id].skill_regeneration, 1, USHRT_MAX); break;
+				case GD_RESTORE:      add2limit(g->castle[gc->castle_id].skill_restore, 1, USHRT_MAX); break;
+				}
+				g->castle[gc->castle_id].changed = true;
+			}
+
 		}
 		break;
 	case GD_EMERGENCYCALL:
@@ -10274,6 +10317,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			uint8 j = 0, calls = 0, called = 0;
 			struct guild *g;
 			std::shared_ptr<s_battleground_data> bg;
+			std::shared_ptr<guild_castle> gc;
 			
 			if( map_getmapflag(src->m, MF_BATTLEGROUND) )
 			{
@@ -10314,7 +10358,11 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 						case 3:	calls = 20; break;
 						default: calls = 0;	break;
 					}
-
+				if( (gc = castle_db.mapindex2gc(map[src->m].index)) != NULL )
+				{
+					add2limit(g->castle[gc->castle_id].skill_emergencycall, 1, USHRT_MAX);
+					g->castle[gc->castle_id].changed = true;
+				}
 				clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 				for (i = 0; i < g->max_member && (!calls || (calls && called < calls)); i++, j++) {
 					if (j > 8)
@@ -12727,6 +12775,24 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		return 1;
 	}
 
+	if( skill_get_inf(skill_id)&INF_SUPPORT_SKILL && sd && dstsd && sd != dstsd )
+	{
+		if( sd->status.guild_id )
+		{
+			if( sd->status.guild_id == dstsd->status.guild_id )
+				add2limit(sd->status.wstats.support_skills_used, 1, UINT_MAX);
+			else
+				add2limit(sd->status.wstats.wrong_support_skills_used, 1, UINT_MAX);
+		}
+		else if( map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id && dstsd->bg_id )
+		{
+			if( sd->bg_id == dstsd->bg_id )
+				add2limit(sd->status.bgstats.support_skills_used, 1, UINT_MAX);
+			else
+				add2limit(sd->status.bgstats.wrong_support_skills_used, 1, UINT_MAX);
+		}
+	}
+
 	if (skill_id != SR_CURSEDCIRCLE && skill_id != NPC_SR_CURSEDCIRCLE) {
 		struct status_change *sc = status_get_sc(src);
 
@@ -13118,6 +13184,28 @@ TIMER_FUNC(skill_castend_id){
 		}
 		if( battle_config.display_status_timers && sd )
 			clif_status_change(src, EFST_POSTDELAY, 1, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
+		if( sd && sd->skillitem != ud->skill_id )
+		{ // Skill Usage Counter
+			int i;
+			if( map_allowed_woe(sd->bl.m) )
+			{
+				ARR_FIND(0,MAX_SKILL_TREE,i,sd->status.skillcount[i].id == ud->skill_id || !sd->status.skillcount[i].id);
+				if( i < MAX_SKILL_TREE )
+				{
+					sd->status.skillcount[i].id = ud->skill_id;
+					sd->status.skillcount[i].count++;
+				}
+			}
+			else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+			{
+				ARR_FIND(0,MAX_SKILL_TREE,i,sd->status.bg_skillcount[i].id == ud->skill_id || !sd->status.bg_skillcount[i].id);
+				if( i < MAX_SKILL_TREE )
+				{
+					sd->status.bg_skillcount[i].id = ud->skill_id;
+					sd->status.bg_skillcount[i].count++;
+				}
+			}
+		}
 		if( sd )
 		{
 			switch( ud->skill_id )
@@ -13353,6 +13441,28 @@ TIMER_FUNC(skill_castend_pos){
 		}
 		if( battle_config.display_status_timers && sd )
 			clif_status_change(src, EFST_POSTDELAY, 1, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
+		if( sd && sd->skillitem != ud->skill_id )
+		{ // Skill Usage Counter
+			int i;
+			if( map_allowed_woe(sd->bl.m) )
+			{
+				ARR_FIND(0,MAX_SKILL_TREE,i,sd->status.skillcount[i].id == ud->skill_id || !sd->status.skillcount[i].id);
+				if( i < MAX_SKILL_TREE )
+				{
+					sd->status.skillcount[i].id = ud->skill_id;
+					sd->status.skillcount[i].count++;
+				}
+			}
+			else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+			{
+				ARR_FIND(0,MAX_SKILL_TREE,i,sd->status.bg_skillcount[i].id == ud->skill_id || !sd->status.bg_skillcount[i].id);
+				if( i < MAX_SKILL_TREE )
+				{
+					sd->status.bg_skillcount[i].id = ud->skill_id;
+					sd->status.bg_skillcount[i].count++;
+				}
+			}
+		}
 //		if( sd )
 //		{
 //			switch( ud->skill_id )
@@ -18202,8 +18312,14 @@ bool skill_check_condition_castend(struct map_session_data* sd, uint16 skill_id,
 void skill_consume_requirement(struct map_session_data *sd, uint16 skill_id, uint16 skill_lv, short type)
 {
 	struct s_skill_condition require;
+	int rankFlag = 0;
 
 	nullpo_retv(sd);
+
+	if( map_allowed_woe(sd->bl.m) && sd->status.guild_id )
+		rankFlag = 1;
+	else if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && sd->bg_id )
+		rankFlag = 2;
 
 	require = skill_get_requirement(sd,skill_id,skill_lv);
 
@@ -18224,6 +18340,14 @@ void skill_consume_requirement(struct map_session_data *sd, uint16 skill_id, uin
 		}
 		if(require.hp || require.sp || require.ap)
 			status_zap(&sd->bl, require.hp, require.sp, require.ap);
+
+		if( require.sp )
+		{
+			if( rankFlag == 1 )
+				add2limit(sd->status.wstats.sp_used, require.sp, UINT_MAX);
+			else if( rankFlag == 2 )
+				add2limit(sd->status.bgstats.sp_used, require.sp, UINT_MAX);
+		}
 
 		if(require.spiritball > 0) { // Skills that require certain types of spheres to use
 			switch (skill_id) { // Skills that require soul spheres.
@@ -18257,10 +18381,18 @@ void skill_consume_requirement(struct map_session_data *sd, uint16 skill_id, uin
 					pc_delspiritball(sd, require.spiritball, 0);
 					break;
 			}
+			if( rankFlag == 1 )
+				add2limit(sd->status.wstats.spiritb_used, require.spiritball, UINT_MAX);
+			else if( rankFlag == 2 )
+				add2limit(sd->status.bgstats.spiritb_used, require.spiritball, UINT_MAX);
 		}
 		else if(require.spiritball == -1) {
 			sd->spiritball_old = sd->spiritball;
 			pc_delspiritball(sd,sd->spiritball,0);
+			if( sd->spiritball > 0 && rankFlag == 1 )
+				add2limit(sd->status.wstats.spiritb_used, sd->spiritball, UINT_MAX);
+			else if( sd->spiritball > 0 &&  rankFlag == 2 )
+				add2limit(sd->status.bgstats.spiritb_used, sd->spiritball, UINT_MAX);
 		}
 
 		if(require.zeny > 0)
@@ -18269,6 +18401,12 @@ void skill_consume_requirement(struct map_session_data *sd, uint16 skill_id, uin
 				require.zeny = 0; //Zeny is reduced on skill_attack.
 			if( sd->status.zeny < require.zeny )
 				require.zeny = sd->status.zeny;
+			
+			if( rankFlag == 1 )
+				add2limit(sd->status.wstats.zeny_used, require.zeny, UINT_MAX);
+			else if( rankFlag == 2 )
+				add2limit(sd->status.bgstats.zeny_used, require.zeny, UINT_MAX);
+			
 			pc_payzeny(sd,require.zeny,LOG_TYPE_CONSUME,NULL);
 		}
 	}
@@ -18312,6 +18450,36 @@ void skill_consume_requirement(struct map_session_data *sd, uint16 skill_id, uin
 
 			if( (n = pc_search_inventory(sd,require.itemid[i])) >= 0 )
 				pc_delitem(sd,n,require.amount[i],0,1,LOG_TYPE_CONSUME);
+			
+			if( rankFlag ) {
+				switch( require.itemid[i] )
+				{
+				case ITEMID_POISON_BOTTLE:
+					if( rankFlag == 1 )
+						add2limit(sd->status.wstats.poison_bottles, require.amount[i], UINT_MAX);
+					else
+						add2limit(sd->status.bgstats.poison_bottles, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_YELLOW_GEMSTONE:
+					if( rankFlag == 1 )
+						add2limit(sd->status.wstats.yellow_gemstones, require.amount[i], UINT_MAX);
+					else
+						add2limit(sd->status.bgstats.yellow_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_RED_GEMSTONE:
+					if( rankFlag == 1 )
+						add2limit(sd->status.wstats.red_gemstones, require.amount[i], UINT_MAX);
+					else
+						add2limit(sd->status.bgstats.red_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_BLUE_GEMSTONE:
+					if( rankFlag == 1 )
+						add2limit(sd->status.wstats.blue_gemstones, require.amount[i], UINT_MAX);
+					else
+						add2limit(sd->status.bgstats.blue_gemstones, require.amount[i], UINT_MAX);
+					break;
+				}
+			}
 		}
 	}
 }
@@ -19248,13 +19416,13 @@ void skill_weaponrefine(struct map_session_data *sd, int idx)
 				{ // Fame point system [DracoRPG]
 					switch(ditem->weapon_level){
 						case 1:
-							pc_addfame(sd, battle_config.fame_refine_lv1); // Success to refine to +10 a lv1 weapon you forged = +1 fame point
+							pc_addfame(sd, battle_config.fame_refine_lv1,0); // Success to refine to +10 a lv1 weapon you forged = +1 fame point
 							break;
 						case 2:
-							pc_addfame(sd, battle_config.fame_refine_lv2); // Success to refine to +10 a lv2 weapon you forged = +25 fame point
+							pc_addfame(sd, battle_config.fame_refine_lv2,0); // Success to refine to +10 a lv2 weapon you forged = +25 fame point
 							break;
 						case 3:
-							pc_addfame(sd, battle_config.fame_refine_lv3); // Success to refine to +10 a lv3 weapon you forged = +1000 fame point
+							pc_addfame(sd, battle_config.fame_refine_lv3,0); // Success to refine to +10 a lv3 weapon you forged = +1000 fame point
 							break;
 					}
 				}
@@ -21881,7 +22049,7 @@ bool skill_produce_mix(struct map_session_data *sd, uint16 skill_id, t_itemid na
 			clif_produceeffect(sd,0,nameid);
 			clif_misceffect(&sd->bl,3);
 			if (wlv >= 3 && ((ele? 1 : 0) + sc) >= 3) // Fame point system [DracoRPG]
-				pc_addfame(sd, battle_config.fame_forge); // Success to forge a lv3 weapon with 3 additional ingredients = +10 fame point
+				pc_addfame(sd, battle_config.fame_forge,0); // Success to forge a lv3 weapon with 3 additional ingredients = +10 fame point
 		} else {
 			int fame = 0;
 			tmp_item.amount = 0;
@@ -21921,7 +22089,7 @@ bool skill_produce_mix(struct map_session_data *sd, uint16 skill_id, t_itemid na
 			}
 
 			if (fame)
-				pc_addfame(sd,fame);
+				pc_addfame(sd,fame,0);
 			//Visual effects and the like.
 			switch (skill_id) {
 				case AM_PHARMACY:

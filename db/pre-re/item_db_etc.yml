@@ -508,7 +508,7 @@ Body:
     AegisName: Crystal_Mirror
     Name: Crystal Mirror
     Type: Etc
-    Buy: 15000
+    Buy: 10000
     Weight: 50
     Flags:
       BuyingStore: true
@@ -516,7 +516,7 @@ Body:
     AegisName: Witherless_Rose
     Name: Witherless Rose
     Type: Etc
-    Buy: 55000
+    Buy: 20000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -12604,6 +12604,13 @@ Body:
     Weight: 1
     Flags:
       BuyingStore: true
+  - Id: 6635
+    AegisName: Blacksmith_Blessing
+    Name: Blacksmith Blessing
+    Type: Etc
+    Buy: 20
+    Flags:
+      BuyingStore: true
   - Id: 7001
     AegisName: Mould_Powder
     Name: Mould Powder
@@ -17615,30 +17622,12 @@ Body:
     Type: Etc
     Buy: 2
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 7620
     AegisName: Enriched_Oridecon
     Name: Enriched Oridecon
     Type: Etc
     Buy: 2
     Weight: 10
-    Trade:
-      Override: 100
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 7621
     AegisName: Token_Of_Siegfried
     Name: Token Of Siegfried
@@ -18457,6 +18446,14 @@ Body:
     Name: Beginner's Field Manual
     Type: Etc
     Weight: 10
+  - Id: 7804
+    AegisName: Battleground_Badge
+    Name: Battleground Badge
+    Type: Etc
+    Buy: 20
+    Weight: 0
+    Flags:
+      BuyingStore: true
   - Id: 7805
     AegisName: Brown_Ring
     Name: Brown Jenoss's Family Ring
@@ -20765,6 +20762,112 @@ Body:
     EquipLevelMin: 1
     Script: |
       bonus bAtkEle,Ele_Water;
+  - Id: 13219
+    AegisName: Earth_Bullet
+    Name: Earth Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Earth;
+  - Id: 13228
+    AegisName: Fire_Bullet
+    Name: Fire Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Fire;
+  - Id: 13229
+    AegisName: Wind_Bullet
+    Name: Wind Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Wind;
+  - Id: 13230
+    AegisName: Water_Bullet
+    Name: Water Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Water;
+  - Id: 13231
+    AegisName: Poison_Bullet
+    Name: Poison Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Poison;
+      bonus2 bAddEff,Eff_Poison,500;
+  - Id: 13232
+    AegisName: Shadow_Bullet
+    Name: Shadow Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Dark;
+  - Id: 13233
+    AegisName: Ghost_Bullet
+    Name: Ghost Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Ghost;
   - Id: 13250
     AegisName: Shuriken
     Name: Shuriken
@@ -21581,23 +21684,23 @@ Body:
     Script: |
       bonus2 bHPDrainRate,1000,1;
   - Id: 18019
-    AegisName: ATK + 2
-    Name: ATK + 2
+    AegisName: ATK + 1
+    Name: ATK + 1
     Type: Card
     SubType: Enchant
     Buy: 0
     Weight: 10
     Script: |
-      bonus bBaseAtk,2;
+      bonus bBaseAtk,1;
   - Id: 18020
-    AegisName: MATK + 2
-    Name: MATK + 2
+    AegisName: MATK + 1
+    Name: MATK + 1
     Type: Card
     SubType: Enchant
     Buy: 0
     Weight: 10
     Script: |
-      bonus bMatk,2;
+      bonus bMatk,1;
   - Id: 18021
     AegisName: HP + 1%
     Name: HP + 1%
@@ -21631,6 +21734,14 @@ Body:
     Type: Etc
     Buy: 0
     Weight: 0
+  - Id: 25429
+    AegisName: Mythril_Ore
+    Name: Mythril Ore
+    Type: Etc
+    Buy: 20
+    Weight: 1
+    Flags:
+      BuyingStore: true
   - Id: 25430
     AegisName: Mythril
     Name: Mythril
@@ -22316,7 +22427,7 @@ Body:
     Script: |
       bonus(bCritical, 5 * getskilllv("KN_CAVALIERMASTERY"));
       bonus2(bSkillAtk, "KN_BOWLINGBASH", 35);
-      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","KN_BOWLINGBASH",10,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","SM_BASH",10,20 * getrefine();
       bonus(bAspdRate, getrefine());
       autobonus3("{ bonus(bCritAtkRate, 7); }", 1000, 60000, "KN_TWOHANDQUICKEN","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29412
@@ -22613,8 +22724,9 @@ Body:
     Script: |
       bonus bMaxHP, 1000;
       bonus(bAtk, 3 * getskilllv("NJ_TOBIDOUGU"));
-      bonus2(bSkillAtk, "NJ_KIRIKAGE", 5 + (5 * getrefine()/2));
-      bonus2(bSkillAtk, "NJ_HUUMA", 5 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 30);
+      bonus2(bSkillAtk, "NJ_HUUMA", 30);
+      bonus2(bSkillAtk, "NJ_ISSEN", 10);
       bonus(bMaxHP, 100 * (getrefine() / 2));
       bonus(bHit, 5 * (getrefine() / 2));
   - Id: 29526
@@ -22638,13 +22750,14 @@ Body:
     Script: |
       bonus bMaxHP, 2000;
       bonus(bAtk, 5 * getskilllv("NJ_TOBIDOUGU"));
-      bonus2(bSkillAtk, "NJ_KIRIKAGE", 20);
-      bonus2(bSkillAtk, "NJ_HUUMA", 20);
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 50);
+      bonus2(bSkillAtk, "NJ_HUUMA", 50);
       bonus2(bSkillAtk, "NJ_ISSEN", 20);
-      bonus4 bAutoSpellOnSkill,"NJ_ISSEN","AL_HEAL",10,50 * getrefine();
-      bonus(bMaxHP, 100 * (getrefine() / 2));
-      bonus(bHit, 5 * (getrefine() / 2));
+      //bonus5 bAutoSpellOnSkill,"NJ_ISSEN","AL_HEAL",10,1000,1;
+      bonus(bMaxHP, 200 * (getrefine() / 2));
+      bonus(bHit, 10 * (getrefine() / 2));
       autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "NJ_NEN", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus2(bHPRegenRate, 250,100); }", 1000, 1000, "NJ_ISSEN", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29553
     AegisName: Knight_Essence2_1
     Name: Knight Essence II Lv1 
@@ -22846,7 +22959,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus(bAtk, 3 * getskilllv("AM_PHARMACY") + 2 * getrefine());
-      bonus2(bSkillAtk, "MC_MAMMONITE", 100);
+      bonus2(bSkillAtk, "MC_MAMMONITE", 50);
   - Id: 29562
     AegisName: Rogue_Essence2_1
     Name: Rogue Essence II Lv1 
@@ -23057,8 +23170,9 @@ Body:
     Script: |
       bonus(bAtk, 5 * getskilllv("PR_MACEMASTERY") + 2 * getrefine());
       bonus(bCritAtkRate, 15);
-      bonus4 bAutoSpellOnSkill,"SM_BASH","KN_BOWLINGBASH",10,30 * getrefine();
-      bonus3 bAutoSpell,"SM_BASH",10, 3 * getrefine();
+      //bonus4 bAutoSpellOnSkill,"SM_BASH","KN_BOWLINGBASH",10,30 * getrefine();
+      bonus3 bAutoSpell,"SM_BASH",10, 30 * getrefine();
+      bonus3 bAutoSpell,"KN_BOWLINGBASH",10, 30 * getrefine();
       //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "PR_STRECOVERY","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29571
     AegisName: Hunter_Essence2_2
@@ -23160,7 +23274,7 @@ Body:
     Script: |
       bonus(bAtk, 5 * getskilllv("AM_PHARMACY") + 2 * getrefine());
       bonus2(bSkillAtk, "MC_MAMMONITE", 100);
-      bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","MC_MAMMONITE",10,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","SM_BASH",10,20 * getrefine();
       autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "MC_MAMMONITE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
       //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "AM_POTIONPITCHER","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29575
@@ -23264,7 +23378,7 @@ Body:
       bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 50);
       bonus2(bSkillAtk, "DC_THROWARROW", 50);
       bonus2(bSkillAtk, "CG_ARROWVULCAN", 35);
-      bonus4 bAutoSpellOnSkill,"CG_ARROWVULCAN","CG_TAROTCARD",5,40 * getrefine();
+      bonus4 bAutoSpellOnSkill,"CG_ARROWVULCAN","CG_TAROTCARD",5,100 * getrefine();
       autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "DC_THROWARROW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
       autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "BA_MUSICALSTRIKE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
       bonus(bLongAtkRate, getrefine() / 2);
@@ -23364,6 +23478,14 @@ Body:
       bonus bAspdRate, 20;
       bonus(bAtk, 2 * getskilllv("TK_RUN"));
       bonus2(bSkillAtk, "TK_JUMPKICK", 100);
+  - Id: 29583
+    AegisName: Battleground_Badge2
+    Name: Battleground Badge2
+    Type: Etc
+    Buy: 20
+    Weight: 0
+    Flags:
+      BuyingStore: true
 
 
 

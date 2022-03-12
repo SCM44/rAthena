@@ -733,7 +733,6 @@ Body:
       Baby_Bard: true
       Baby_Dancer: true
       Baby_Crusader2: true
-      Soul_Linker: true
       Death_Knight: true
       Dark_Collector: true
     MaxJobLevel: 50
@@ -1132,6 +1131,7 @@ Body:
   - Jobs:
       Gunslinger: true
       Ninja: true
+      Soul_Linker: true
     MaxJobLevel: 70
     JobExp:
       - Level: 1

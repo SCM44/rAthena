@@ -241,7 +241,7 @@ OnCulvertEggKill:
 		instance_announce 0,"Culvert Manager: Ummm....",bc_map,"0x00FFFF",FW_BOLD;
 		sleep 2000;
 		instance_announce 0,"Culvert Manager: I think there's one very large one left in the canal. It's probably a Golden Thief Bug.",bc_map,"0x00FFFF",FW_BOLD;
-		viewpoint instance_mapname("1@prtc"),1,100,42,0,0x00FFFF;
+		//viewpoint instance_mapname("1@prtc"),1,100,42,0,0x00FFFF;
 		sleep 3000;
 		instance_announce 0,"Culvert Manager: We need to clean this up before calling this complete. Let's go catch it.",bc_map,"0x00FFFF",FW_BOLD;
 		//Initialize Array
@@ -443,10 +443,18 @@ OnMyMobDead:
 		25458,100,
 		25458,50,
 		25458,10,
-		512,30,	//
-		512,80,	//
-		512,60,	//
-		512,40;	//
+		29586,1,	//
+		29586,1,	//
+		29586,5,	//
+		29586,1,	//
+		18005,3,
+		18005,5,
+		18005,1,
+		29587,100,
+		29587,50,
+		29587,10,
+		29587,5,
+		29584,1;
 
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
@@ -487,6 +495,7 @@ OnInstanceInit:
 		mes "Since it's first time for you to do this, I'll give you something special.";
 		completequest 12424;
 		getitem F_Rand(28539,22150),1;
+		//getitem(callfunc("F_Rand", 28539, 22150),1;
 		getexp 100000,50000;
 		next;
 	}
@@ -504,7 +513,7 @@ OnInstanceInit:
 			mes "["+strnpcinfo(1)+"]";
 			mes "Alright, this way please.";
 			close2;
-			getitem 25424,1;
+			//getitem 25424,1;
 			warp "prt_fild05",271,208;
 			end;
 	}

@@ -2726,6 +2726,8 @@ int status_damage(struct block_list *src,struct block_list *target,int64 dhp, in
 		unit_stop_walking( target, 1 );
 	}
 
+	pc_record_damage(src, target, hp);
+
 	if( status->hp || (flag&8) ) { // Still lives or has been dead before this damage.
 		if (walkdelay)
 			unit_set_walkdelay(target, gettick(), walkdelay, 0);
@@ -2827,12 +2829,43 @@ int status_damage(struct block_list *src,struct block_list *target,int64 dhp, in
 	//FIXME those ain't always run if a player die if he was resurrect meanwhile
 	//cf SC_REBIRTH, SC_KAIZEL, pc_dead...
 	if(target->type == BL_PC) {
-		TBL_PC *sd = BL_CAST(BL_PC,target);
+		TBL_PC *ssd, *sd = BL_CAST(BL_PC,target);
+		// Real Killer
+		struct block_list *master = NULL;
+		if( src ) master = battle_get_master(src);
+		ssd = BL_CAST(BL_PC,master);
+		
 		if( sd->bg_id ) {
+
 			std::shared_ptr<s_battleground_data> bg = util::umap_find(bg_team_db, sd->bg_id);
 
-			if( bg && !(bg->die_event.empty()) )
+			if( map_getmapflag(sd->bl.m, MF_BATTLEGROUND) && bg && !(bg->die_event.empty()) ) {
 				npc_event(sd, bg->die_event.c_str(), 0);
+				pc_setreg(sd,add_str("@killer_bg_src"),ssd && ssd->bg_id ? ssd->bl.id : 0);
+				if( ssd && ssd->bg_id != sd->bg_id && (!strcmpi(map[sd->bl.m].name,"bg_tdm") || !strcmpi(map[sd->bl.m].name,"bg_kvm")))
+				{
+					// Team DeathMatch / KVM
+					if(!strcmpi(map[sd->bl.m].name,"bg_kvm"))
+						add2limit(sd->status.bgstats.kvm_deaths, 1, USHRT_MAX);
+					else
+						add2limit(sd->status.bgstats.tdm_deaths, 1, USHRT_MAX);
+					
+					if( ssd->bg_id)
+					{
+						bg = util::umap_find(bg_team_db, ssd->bg_id);
+						if ( bg ) {
+							int i;						
+							if(!strcmpi(map[sd->bl.m].name,"bg_kvm"))
+								add2limit(ssd->status.bgstats.kvm_kills, 1, USHRT_MAX);
+							else
+								add2limit(ssd->status.bgstats.tdm_kills, 1, USHRT_MAX);
+							ARR_FIND(0,MAX_BG_MEMBERS,i,bg->members[i].sd == ssd);
+							if( i < MAX_BG_MEMBERS )
+								pc_addfame(ssd,1,3);
+						}
+					}
+				}
+			}
 		}
 
 		npc_script_event(sd,NPCE_DIE);
