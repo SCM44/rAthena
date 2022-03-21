@@ -1143,6 +1143,31 @@ que_thr
 tur_d04ia
 tur_d04ib
 wolfvill
+sh_fild16
+1@prtc
+1@izu
+1@tre02
+1@ant
+1@sks
+//---bg
+bg_con01
+bg_con02
+bg_con03
+bg_con04
+bg_con05
+bg_con06
+bg_ctf
+bg_dom
+bg_eoe
+bg_kvm
+bg_rush01
+bg_rush02
+bg_rush03
+bg_rush04
+bg_sc
+bg_tdm
+
+
 
 //======================================================================================
 // - Other/Extra maps -

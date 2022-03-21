@@ -1,0 +1,24 @@
+OnInit:
+	.s_idle = 0; //	ban hourly rewards from idle players ? 0 no / 1 yes {if player didn't move for x time he wont get hourly reward}  , DEFAULT = 0
+	.s_idle_time = 1800; //	this the time for idle in secend  , DEFAULT = 1800 (30 min)
+	.s_vip = 0; //	1 = only for VIP / 0 = for everyone  , DEFAULT = 0
+	.s_time = 3600000; //	1000 = 1 secend | 60000 = 1 min | 3600000 = 1 houre  , DEFAULT = 3600000 (1 hr)
+	.s_hourly_level = 0; //	Minimam level to get the Houerly rewards / 0 = no minimem level  , DEFAULT 0
+	.s_GePard_ip = 0; //	0 = no Gepard / 1 = Gepard / 2 = IP  , DEFAULT 0
+	.s_vinding = 7; //	DEFAULT 7 / 0 = will give the reward even if vending / 1 = no normal vending / 2 = no @autotrade / 4 = no buyingstore | Example: if you want to ban normal vend and buying store you add the numbers 1+4=5
+	query_logsql("CREATE TABLE IF NOT EXISTS `sader_variables_log` (`unique_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0',`ip` VARCHAR(100) NOT NULL,`variable` VARCHAR(32) NOT NULL, `index` INT NOT NULL, `value` INT NOT NULL,`account_id` INT NOT NULL,`char_id` INT NOT NULL,`char_name` VARCHAR(30) NOT NULL) ENGINE=MyISAM");
+	bindatcmd("UnHourlyBan",strnpcinfo(3)+"::OnUnHourlyBan",99,99);
+	bindatcmd("HourlyBan",strnpcinfo(3)+"::OnHourlyBan",0,99);
+end;
+
+Hourly_Rewads:
+	//put the Hourly Rewards here
+	#HourlyRewards += 1;
+	//getitem 905,1; //	if you want to add items as reward you can add them here like that
+	//getexp 10000,5000; //	if you wanna add exp as reward add them here like that
+	//if(#Hourly_Rewads_Check == 5){getitem 905,1;} //	like this you can add reward for Xhr and this reward will be given for that X in this example 5 mean that the player did pass 5hr
+	//if(#Hourly_Rewads_Check >= 5){getitem 905,1;} //	like this you can add reward for Xhr and this reward will be given for that X in this example 5 mean that the player did pass 5hr or more
+return;
+}
+prontera,151,171,5	pointshop	Hourly Rewards Shop	667,#HourlyRewards,901:1,902:10,903:15,904:1,905:200
+//<ITEM_ID>:<PRICE>,<ITEM_ID>:<PRICE>,<ITEM_ID>:<PRICE>,<ITEM_ID>:<PRICE>

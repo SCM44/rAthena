@@ -106,10 +106,10 @@ public:
 
 	}
 
-	void clear() override;
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode( const YAML::Node& node ) override;
-	void loadingFinished() override;
+	void clear();
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode( const YAML::Node& node );
+	void loadingFinished();
 
 	// Additional
 	bool mobexists(uint32 mob_id);
@@ -128,8 +128,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode( const YAML::Node& node ) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode( const YAML::Node& node );
 };
 
 extern AchievementLevelDatabase achievement_level_db;

@@ -25,6 +25,7 @@
 #include "../common/utils.hpp"
 
 #include "achievement.hpp"
+#include "battleground.hpp"
 #include "battle.hpp"
 #include "channel.hpp"
 #include "chat.hpp"
@@ -101,11 +102,9 @@ public:
 
 	}
 
-	void clear() override;
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode( const YAML::Node& node ) override;
-
-	// Additional
+	void clear();
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode( const YAML::Node& node );
 	const char* checkAlias( const char* alias );
 };
 
@@ -4223,9 +4222,9 @@ ACMD_FUNC(reload) {
 
 		for (auto &bg : bg_queues) {
 				for (auto &bg_sd : bg->teama_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team A from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team A from battlegrounds
 				for (auto &bg_sd : bg->teamb_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team B from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team B from battlegrounds
 				bg_queue_clear(bg, true);
 		}
 
@@ -4435,6 +4434,10 @@ ACMD_FUNC(mapinfo) {
 		strcat(atcmd_output, " NoGo |"); //
 	if (map_getmapflag(m_id, MF_NOMEMO))
 		strcat(atcmd_output, "  NoMemo |");
+	if (map_getmapflag(m_id, MF_ALLOW_BG_ITEMS))
+		strcat(atcmd_output, "  Allow_bg_items |");
+	if (map_getmapflag(m_id, MF_ALLOW_WOE_ITEMS))
+		strcat(atcmd_output, "  Allow_woe_items |");
 	clif_displaymessage(fd, atcmd_output);
 
 	sprintf(atcmd_output, msg_txt(sd,1065),  // No Exp Penalty: %s | No Zeny Penalty: %s
@@ -10535,6 +10538,30 @@ ACMD_FUNC(limitedsale){
 	return 0;
 }
 
+ACMD_FUNC(partybuff)
+{ // [Vykimo]
+	struct party_data* p = NULL;
+	nullpo_retr(-1, sd);
+
+	if( !sd->status.party_id ) {
+		clif_displaymessage(fd, msg_txt(sd,1071)); // You're not in a party.
+		return -1;
+	}
+
+	p = party_search(sd->status.party_id);
+
+	if( sd->state.spb ) {
+		sd->state.spb = 0;
+		clif_displaymessage(fd, msg_txt(sd,1072)); // Displaying party member's buffs disabled.
+	} else {
+		sd->state.spb = 1;
+		clif_displaymessage(fd, msg_txt(sd,1073)); // Displaying party member's buffs enabled.
+	}
+
+	clif_party_info(p,sd);
+	return 0;
+}
+
 /**
  * Displays camera information from the client.
  * Usage: @camerainfo or client command /viewpointvalue or /setcamera on supported clients
@@ -10657,54 +10684,6 @@ ACMD_FUNC(refineui)
 #endif
 }
 
-ACMD_FUNC( stylist ){
-	nullpo_retr(-1, sd);
-
-#if PACKETVER < 20151104
-	clif_displaymessage( fd, msg_txt( sd, 798 ) ); // This command requires packet version 2015-11-04 or newer.
-	return -1;
-#else
-
-	if( sd->state.stylist_open ){
-		clif_displaymessage( fd, msg_txt( sd, 799 ) ); // You have already opened the stylist UI.
-		return -1;
-	}
-
-	clif_ui_open( sd, OUT_UI_STYLIST, 0 );
-	return 0;
-#endif
-}
-
-/**
- * Add fame point(s) to a player
- * Usage: @addfame <amount>
- */
-ACMD_FUNC(addfame)
-{
-	nullpo_retr(-1, sd);
-
-	int famepoint = 0;
-
-	memset(atcmd_output, '\0', sizeof(atcmd_output));
-
-	if (!message || !*message || sscanf(message, "%11d", &famepoint) < 1 || famepoint == 0) {
-		sprintf(atcmd_output, msg_txt(sd, 1516), command); // Usage: %s <fame points>.
-		clif_displaymessage(fd, atcmd_output);
-		return -1;
-	}
-
-	if (!pc_addfame(*sd, famepoint)) {
-		sprintf(atcmd_output, msg_txt(sd, 1517), job_name(sd->status.class_)); // Cannot add fame to class '%s'.
-		clif_displaymessage(fd, atcmd_output);
-		return -1;
-	}
-
-	sprintf(atcmd_output, msg_txt(sd, 1518), famepoint, sd->status.name); // %d points were added to '%s'.
-	clif_displaymessage(fd, atcmd_output);
-
-	return 0;
-}
-
 #include "../custom/atcommand.inc"
 
 /**
@@ -10723,6 +10702,8 @@ void atcommand_basecommands(void) {
 	AtCommandInfo atcommand_base[] = {
 #include "../custom/atcommand_def.inc"
 		ACMD_DEF2R("warp", mapmove, ATCMD_NOCONSOLE),
+		ACMD_DEF(partybuff), // [Vykimo]
+		ACMD_DEF2("spb", partybuff), // [Vykimo]
 		ACMD_DEF(where),
 		ACMD_DEF(jumpto),
 		ACMD_DEF(jump),
@@ -11025,8 +11006,6 @@ void atcommand_basecommands(void) {
 		ACMD_DEF2("completequest", quest),
 		ACMD_DEF2("checkquest", quest),
 		ACMD_DEF(refineui),
-		ACMD_DEFR(stylist, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
-		ACMD_DEF(addfame),
 	};
 	AtCommandInfo* atcommand;
 	int i;

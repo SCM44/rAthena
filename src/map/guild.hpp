@@ -40,7 +40,7 @@ struct guild *guild_searchname(char *str);
 
 struct map_session_data *guild_getavailablesd(struct guild *g);
 int guild_getindex(struct guild *g,uint32 account_id,uint32 char_id);
-int guild_getposition(struct map_session_data *sd);
+int guild_getposition(struct guild *g, struct map_session_data *sd);
 t_exp guild_payexp(struct map_session_data *sd,t_exp exp);
 t_exp guild_getexp(struct map_session_data *sd,t_exp exp); // [Celest]
 
@@ -69,6 +69,7 @@ int guild_allianceack(int guild_id1,int guild_id2,uint32 account_id1,uint32 acco
 int guild_delalliance(struct map_session_data *sd,int guild_id,int flag);
 int guild_opposition(struct map_session_data *sd,struct map_session_data *tsd);
 int guild_check_alliance(int guild_id1, int guild_id2, int flag);
+int guild_score_saved(int guild_id, int index);
 
 int guild_send_memberinfoshort(struct map_session_data *sd,int online);
 int guild_recv_memberinfoshort(int guild_id,uint32 account_id,uint32 char_id,int online,int lv,int class_);
@@ -122,10 +123,9 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
 
-	// Additional
 	std::shared_ptr<guild_castle> mapname2gc(const char* mapname);
 	std::shared_ptr<guild_castle> mapindex2gc(int16 mapindex);
 };

@@ -291,7 +291,7 @@ struct s_bonus_script_entry {
 	StringBuf *script_buf; //Used for comparing and storing on table
 	t_tick tick;
 	uint16 flag;
-	enum efst_type icon;
+	enum efst_types icon;
 	uint8 type; //0 - Ignore; 1 - Buff; 2 - Debuff
 	int tid;
 };
@@ -365,6 +365,7 @@ struct map_session_data {
 		unsigned short autoloot;
 		t_itemid autolootid[AUTOLOOTITEM_SIZE]; // [Zephyrus]
 		unsigned short autoloottype;
+		unsigned int spb : 1; // @spb / @partybuff
 		unsigned int autolooting : 1; //performance-saver, autolooting state for @alootid
 		unsigned int gmaster_flag : 1;
 		unsigned int prevend : 1;//used to flag wheather you've spent 40sp to open the vending or not.
@@ -377,20 +378,18 @@ struct map_session_data {
 		uint8 isBoundTrading; // Player is currently add bound item to trade list [Cydh]
 		bool ignoretimeout; // Prevent the SECURE_NPCTIMEOUT function from closing current script.
 		unsigned int workinprogress : 2; // See clif.hpp::e_workinprogress
+		unsigned int view_mob_info : 1;
+		unsigned int bg_listen : 1;
+		unsigned int bg_afk : 1; // Moved here to reduce searchs
+		unsigned int only_walk : 1; // [Zephyrus] Block Skills and Item usage to a player
 		bool pc_loaded; // Ensure inventory data and status data is loaded before we calculate player stats
 		bool keepshop; // Whether shop data should be removed when the player disconnects
 		bool mail_writing; // Whether the player is currently writing a mail in RODEX or not
 		bool cashshop_open;
 		bool sale_open;
-		bool stylist_open;
-		bool barter_open;
-		bool barter_extended_open;
 		unsigned int block_action : 10;
+		unsigned int battleinfo : 1;
 		bool refineui_open;
-		t_itemid inventory_expansion_confirmation;
-		uint16 inventory_expansion_amount;
-		t_itemid laphine_synthesis;
-		t_itemid laphine_upgrade;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -756,6 +755,9 @@ struct map_session_data {
 	// Battlegrounds queue system [MasterOfMuppets]
 	int bg_id, bg_queue_id;
 	int tid_queue_active; ///< Timer ID associated with players joining an active BG
+	std::shared_ptr<s_battleground_data> bmaster_flag;
+	unsigned short bg_team;
+	unsigned short bg_kills;
 
 #ifdef SECURE_NPCTIMEOUT
 	/**
@@ -991,9 +993,9 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
-	void loadingFinished() override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
+	void loadingFinished();
 };
 
 struct s_job_info {
@@ -1016,11 +1018,11 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
-	void loadingFinished() override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
+	void loadingFinished();
 
-	// Additional
+	// Extras
 	uint32 get_maxBaseLv(uint16 job_id);
 	uint32 get_maxJobLv(uint16 job_id);
 	t_exp get_baseExp(uint16 job_id, uint32 level);
@@ -1056,17 +1058,9 @@ extern JobDatabase job_db;
 #define pc_isidle_hom(sd)     ( (sd)->hd && ( (sd)->chatID || (sd)->state.vending || (sd)->state.buyingstore || DIFF_TICK(last_tick, (sd)->idletime_hom) >= battle_config.hom_idle_no_share ) )
 #define pc_isidle_mer(sd)     ( (sd)->md && ( (sd)->chatID || (sd)->state.vending || (sd)->state.buyingstore || DIFF_TICK(last_tick, (sd)->idletime_mer) >= battle_config.mer_idle_no_share ) )
 #define pc_istrading(sd)      ( (sd)->npc_id || (sd)->state.vending || (sd)->state.buyingstore || (sd)->state.trading )
-static bool pc_cant_act2( struct map_session_data* sd ){
-	return sd->state.vending || sd->state.buyingstore || (sd->sc.opt1 && sd->sc.opt1 != OPT1_BURNING)
-		|| sd->state.trading || sd->state.storage_flag || sd->state.prevend || sd->state.refineui_open
-		|| sd->state.stylist_open || sd->state.inventory_expansion_confirmation || sd->npc_shopid
-		|| sd->state.barter_open || sd->state.barter_extended_open
-		|| sd->state.laphine_synthesis || sd->state.laphine_upgrade;
-}
 // equals pc_cant_act2 and additionally checks for chat rooms and npcs
-static bool pc_cant_act( struct map_session_data* sd ){
-	return sd->npc_id || sd->chatID || pc_cant_act2( sd );
-}
+#define pc_cant_act(sd)       ( (sd)->npc_id || (sd)->chatID || pc_cant_act2( (sd) ) )
+#define pc_cant_act2(sd)      ( (sd)->state.vending || (sd)->state.buyingstore || ((sd)->sc.opt1 && (sd)->sc.opt1 != OPT1_BURNING) || (sd)->state.trading || (sd)->state.storage_flag || (sd)->state.prevend || (sd)->state.refineui_open )
 
 #define pc_setdir(sd,b,h)     ( (sd)->ud.dir = (b) ,(sd)->head_dir = (h) )
 #define pc_setchatid(sd,n)    ( (sd)->chatID = n )
@@ -1189,8 +1183,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
 };
 
 extern AttendanceDatabase attendance_db;
@@ -1207,11 +1201,10 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
-	void loadingFinished() override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
+	void loadingFinished();
 
-	// Additional
 	uint32 pc_gets_status_point(uint16 level);
 	uint32 get_table_point(uint16 level);
 	uint32 pc_gets_trait_point(uint16 level);
@@ -1395,7 +1388,8 @@ int pc_skillheal_bonus(struct map_session_data *sd, uint16 skill_id);
 int pc_skillheal2_bonus(struct map_session_data *sd, uint16 skill_id);
 
 void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int hp, unsigned int sp, unsigned int ap);
-int pc_dead(struct map_session_data *sd,struct block_list *src);
+//int pc_dead(struct map_session_data *sd,struct block_list *src);
+int pc_dead(struct map_session_data *sd,struct block_list *src, uint16 skill_id);
 void pc_revive(struct map_session_data *sd,unsigned int hp, unsigned int sp, unsigned int ap = 0);
 bool pc_revive_item(struct map_session_data *sd);
 void pc_heal(struct map_session_data *sd,unsigned int hp,unsigned int sp, unsigned int ap, int type);
@@ -1459,6 +1453,7 @@ void pc_regen (struct map_session_data *sd, t_tick diff_tick);
 
 bool pc_setstand(struct map_session_data *sd, bool force);
 bool pc_candrop(struct map_session_data *sd,struct item *item);
+bool pc_can_attack(struct map_session_data *sd, int target_id);
 
 uint64 pc_jobid2mapid(unsigned short b_class);	// Skotlex
 int pc_mapid2jobid(uint64 class_, int sex);	// Skotlex
@@ -1483,9 +1478,9 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
-	void loadingFinished() override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
+	void loadingFinished();
 
 	// Additional
 	std::shared_ptr<s_skill_tree_entry> get_skill_data(int class_, uint16 skill_id);
@@ -1518,13 +1513,14 @@ void pc_delservantball( struct map_session_data& sd, int count = 1 );
 void pc_addabyssball( struct map_session_data& sd, int count = 1 );
 void pc_delabyssball( struct map_session_data& sd, int count = 1 );
 
-bool pc_addfame(map_session_data &sd, int count);
+void pc_addfame(struct map_session_data *sd,int count,short flag);
 unsigned char pc_famerank(uint32 char_id, int job);
 bool pc_set_hate_mob(struct map_session_data *sd, int pos, struct block_list *bl);
 
 extern struct fame_list smith_fame_list[MAX_FAME_LIST];
 extern struct fame_list chemist_fame_list[MAX_FAME_LIST];
 extern struct fame_list taekwon_fame_list[MAX_FAME_LIST];
+extern struct fame_list bg_fame_list[MAX_FAME_LIST];
 
 void pc_readdb(void);
 void do_init_pc(void);
@@ -1536,10 +1532,17 @@ extern int night_timer_tid;
 TIMER_FUNC(map_day_timer); // by [yor]
 TIMER_FUNC(map_night_timer); // by [yor]
 
+int pc_update_last_action(struct map_session_data *sd, int type, enum idletime_option idle_option);
+
 // Rental System
 void pc_inventory_rentals(struct map_session_data *sd);
 void pc_inventory_rental_clear(struct map_session_data *sd);
 void pc_inventory_rental_add(struct map_session_data *sd, unsigned int seconds);
+
+// WoE Ranking Stats
+void pc_record_damage(struct block_list *src, struct block_list *dst, int damage);
+void pc_record_maxdamage(struct block_list *src, struct block_list *dst, int damage);
+void pc_record_mobkills(struct map_session_data *sd, struct mob_data *md);
 
 int pc_read_motd(void); // [Valaris]
 int pc_disguise(struct map_session_data *sd, int class_);
@@ -1572,8 +1575,8 @@ void pc_show_version(struct map_session_data *sd);
 
 TIMER_FUNC(pc_bonus_script_timer);
 void pc_bonus_script(struct map_session_data *sd);
-struct s_bonus_script_entry *pc_bonus_script_add(struct map_session_data *sd, const char *script_str, t_tick dur, enum efst_type icon, uint16 flag, uint8 type);
-void pc_bonus_script_clear(struct map_session_data *sd, uint32 flag);
+struct s_bonus_script_entry *pc_bonus_script_add(struct map_session_data *sd, const char *script_str, t_tick dur, enum efst_types icon, uint16 flag, uint8 type);
+void pc_bonus_script_clear(struct map_session_data *sd, uint16 flag);
 
 void pc_cell_basilica(struct map_session_data *sd);
 

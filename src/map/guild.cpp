@@ -73,8 +73,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode( const YAML::Node& node ) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode( const YAML::Node& node );
 };
 
 const std::string GuildSkillTreeDatabase::getDefaultLocation(){
@@ -228,6 +228,8 @@ static TBL_PC* guild_sd_check(int guild_id, uint32 account_id, uint32 char_id) {
 
 	return sd;
 }
+
+int guild_score_saved(int guild_id, int index) { return 0; }
 
 // Modified [Komurka]
 uint16 guild_skill_get_max( uint16 id ){
@@ -390,11 +392,11 @@ int guild_getindex(struct guild *g,uint32 account_id,uint32 char_id) {
 }
 
 /// lookup: player sd -> member position
-int guild_getposition(struct map_session_data* sd) {
+int guild_getposition(struct guild* g, struct map_session_data* sd) {
 	int i;
-	struct guild *g;
 
-	nullpo_retr( -1, g = sd->guild );
+	if( g == NULL && (g=sd->guild) == NULL )
+		return -1;
 
 	ARR_FIND( 0, g->max_member, i, g->member[i].account_id == sd->status.account_id && g->member[i].char_id == sd->status.char_id );
 	return( i < g->max_member ) ? g->member[i].position : -1;
@@ -704,7 +706,7 @@ int guild_recv_info(struct guild *sg) {
 			clif_guild_skillinfo(sd); //Submit information skills
 
 		if (guild_new) { // Send information and affiliation if unsent
-			clif_guild_belonginfo(sd);
+			clif_guild_belonginfo(sd,g);
 			clif_guild_notice(sd);
 			sd->guild_emblem_id = g->emblem_id;
 		}
@@ -740,7 +742,7 @@ int guild_invite(struct map_session_data *sd, struct map_session_data *tsd) {
 	if(tsd==NULL || g==NULL)
 		return 0;
 
-	if( (i=guild_getposition(sd))<0 || !(g->position[i].mode&GUILD_PERM_INVITE) )
+	if( (i=guild_getposition(g,sd))<0 || !(g->position[i].mode&GUILD_PERM_INVITE) )
 		return 0; //Invite permission.
 
 	if(!battle_config.invite_request_check) {
@@ -896,7 +898,7 @@ int guild_member_added(int guild_id,uint32 account_id,uint32 char_id,int flag) {
 	sd->guild_emblem_id = g->emblem_id;
 	sd->guild = g;
 	//Packets which were sent in the previous 'guild_sent' implementation.
-	clif_guild_belonginfo(sd);
+	clif_guild_belonginfo(sd,g);
 	clif_guild_notice(sd);
 
 	//TODO: send new emblem info to others
@@ -954,7 +956,7 @@ int guild_expulsion(struct map_session_data* sd, int guild_id, uint32 account_id
 	if(sd->status.guild_id!=guild_id)
 		return 0;
 
-	if( (ps=guild_getposition(sd))<0 || !(g->position[ps].mode&GUILD_PERM_EXPEL) )
+	if( (ps=guild_getposition(g,sd))<0 || !(g->position[ps].mode&GUILD_PERM_EXPEL) )
 		return 0;	//Expulsion permission
 
 	//Can't leave inside guild castles.
@@ -1120,7 +1122,7 @@ int guild_send_memberinfoshort(struct map_session_data *sd,int online) { // clea
 	}
 
 	if(sd->state.connect_new) {	//Note that this works because it is invoked in parse_LoadEndAck before connect_new is cleared.
-		clif_guild_belonginfo(sd);
+		clif_guild_belonginfo(sd,g);
 		sd->guild_emblem_id = g->emblem_id;
 	}
 	return 0;
@@ -1361,7 +1363,7 @@ int guild_emblem_changed(int len,int guild_id,int emblem_id,const char *data) {
 	for(i=0;i<g->max_member;i++){
 		if((sd=g->member[i].sd)!=NULL){
 			sd->guild_emblem_id=emblem_id;
-			clif_guild_belonginfo(sd);
+			clif_guild_belonginfo(sd,g);
 			clif_guild_emblem(sd,g);
 			clif_guild_emblem_area(&sd->bl);
 		}
@@ -1429,7 +1431,7 @@ t_exp guild_payexp(struct map_session_data *sd,t_exp exp) {
 
 	if (sd->status.guild_id == 0 ||
 		(g = sd->guild) == NULL ||
-		(per = guild_getposition(sd)) < 0 ||
+		(per = guild_getposition(g,sd)) < 0 ||
 		(per = g->position[per].exp_mode) < 1)
 		return 0;
 
@@ -1529,15 +1531,14 @@ void guild_guildaura_refresh(struct map_session_data *sd, uint16 skill_id, uint1
 	if( !skill_lv )
 		return;
 
-	sc_type type = skill_get_sc(skill_id);
+	std::shared_ptr<s_skill_unit_group> group;
+	sc_type type = status_skill2sc(skill_id);
 
-	if (type == SC_NONE)
-		return;
-
-	status_change_end(&sd->bl, type, INVALID_TIMER);
-
-	std::shared_ptr<s_skill_unit_group> group = skill_unitsetting(&sd->bl,skill_id,skill_lv,sd->bl.x,sd->bl.y,0);
-
+	if( sd->sc.data[type] && (group = skill_id2group(sd->sc.data[type]->val4)) ) {
+		skill_delunitgroup(group);
+		status_change_end(&sd->bl,type,INVALID_TIMER);
+	}
+	group = skill_unitsetting(&sd->bl,skill_id,skill_lv,sd->bl.x,sd->bl.y,0);
 	if( group )
 		sc_start4(NULL,&sd->bl,type,100,(battle_config.guild_aura&16)?0:skill_lv,0,0,group->group_id,600000);//duration doesn't matter these status never end with val4
 	return;
@@ -2014,7 +2015,7 @@ int guild_gm_changed(int guild_id, uint32 account_id, uint32 char_id, time_t tim
 		if( g->member[i].sd && g->member[i].sd->fd ) {
 			clif_guild_basicinfo(g->member[i].sd);
 			clif_guild_memberlist(g->member[i].sd);
-			clif_guild_belonginfo(g->member[i].sd); // Update clientside guildmaster flag
+			clif_guild_belonginfo(g->member[i].sd,g); // Update clientside guildmaster flag
 		}
 	}
 
@@ -2126,6 +2127,20 @@ int guild_castledatasave(int castle_id, int index, int value) {
 	case CD_GUILD_ID: // The castle's owner has changed? Update or remove Guardians too. [Skotlex]
 	{
 		int i;
+		struct guild *g;
+		int m = map_mapindex2mapid(gc->mapindex);
+		if( map_allowed_woe(m) && gc->guild_id && (g = guild_search(gc->guild_id)) != NULL )
+		{ // Current WoE
+			int i = gc->castle_id;
+			int addtime = (int)DIFF_TICK(gettick(), gc->capture_tick);
+			int score = (addtime / 300) * (1 + (gc->economy / 25));
+
+			g->castle[i].posesion_time += addtime;
+			g->castle[i].defensive_score += score;
+			g->castle[i].changed = true;
+		}
+
+		gc->capture_tick = gettick();
 		gc->guild_id = value;
 		for (i = 0; i < MAX_GUARDIANS; i++){
 			struct mob_data *gd;
@@ -2134,11 +2149,44 @@ int guild_castledatasave(int castle_id, int index, int value) {
 		}
 		break;
 	}
+	
 	case CD_CURRENT_ECONOMY:
-		gc->economy = value; break;
+	{
+		struct guild *g = gc->guild_id ? guild_search(gc->guild_id) : NULL;
+		if( g && gc->economy < value )
+		{
+			int eco = value - gc->economy;
+			add2limit(g->castle[gc->castle_id].invest_eco, eco, USHRT_MAX);
+			if( g->castle[gc->castle_id].top_eco < value )
+				g->castle[gc->castle_id].top_eco = value;
+			g->castle[gc->castle_id].changed = true;
+			if( !agit_flag )
+			{
+				intif_guild_save_score(g->guild_id, gc->castle_id, &g->castle[gc->castle_id]);
+				g->castle[gc->castle_id].changed = false;
+			}
+		}
+		gc->economy = value; 
+		break;
+	}
+	
 	case CD_CURRENT_DEFENSE: // defense invest change -> recalculate guardian hp
 	{
 		int i;
+		struct guild *g = gc->guild_id ? guild_search(gc->guild_id) : NULL;
+		if( g && gc->defense < value )
+		{
+			int def = value - gc->defense;
+			add2limit(g->castle[gc->castle_id].invest_def, def, USHRT_MAX);
+			if( g->castle[gc->castle_id].top_def < value )
+				g->castle[gc->castle_id].top_def = value;
+			g->castle[gc->castle_id].changed = true;
+			if( !agit_flag )
+			{
+				intif_guild_save_score(g->guild_id, gc->castle_id, &g->castle[gc->castle_id]);
+				g->castle[gc->castle_id].changed = false;
+			}
+		}
 		gc->defense = value;
 		for (i = 0; i < MAX_GUARDIANS; i++){
 			struct mob_data *gd;
@@ -2252,11 +2300,69 @@ int guild_castledataloadack(int len, struct guild_castle *gc) {
 	ShowStatus("Received '" CL_WHITE "%d" CL_RESET "' guild castles from char-server.\n", n);
 	return 0;
 }
+/*------------------------------------------
+ * Guild Ranking System
+ *------------------------------------------*/
+int guild_ranking_save(int flag)
+{
+	struct guild *g;
+	struct map_session_data *sd;
+	int i, j, index;
+	int64 cc;
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		if( gc->guild_id == 0 )
+			continue;
+		
+		index = gc->castle_id;
+
+		if( index >= RANK_CASTLES || (flag == 1 && index >= 24) || (flag == 2 && index < 24) )
+			continue;
+
+		if( (g = guild_search(gc->guild_id)) != NULL )
+		{
+			int addtime = (int)DIFF_TICK(gettick(), gc->capture_tick);
+			int score = (addtime / 300) * (1 + (gc->economy / 25));
+
+			g->castle[index].capture++;
+			g->castle[index].posesion_time += addtime;
+			g->castle[index].defensive_score += score;
+			g->castle[index].changed = true;
+
+			// Capture counter for members
+			for( j = 0; j < MAX_GUILD; j++ )
+			{
+				if( (sd = g->member[j].sd) == NULL )
+					continue;
+
+				cc = pc_readaccountreg(sd, add_str("#GC_CAPTURES"));
+				pc_setaccountreg(sd, add_str("#GC_CAPTURES"),++cc);
+			}
+		}
+	}
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		for( i = 0; i < RANK_CASTLES; i++ )
+		{
+			if( i >= RANK_CASTLES || !g->castle[i].changed )
+				continue;
+
+			intif_guild_save_score(g->guild_id, i, &g->castle[i]);
+			g->castle[i].changed = false;
+		}
+	}
+	return 0;
+}
 
 /**
  * Start WoE:FE and triggers all npc OnAgitStart
  */
-bool guild_agit_start(void){
+bool guild_agit_start(void){	
+
 	if( agit_flag ){
 		return false;
 	}
@@ -2264,6 +2370,17 @@ bool guild_agit_start(void){
 	agit_flag = true;
 
 	npc_event_runall( script_config.agit_start_event_name );
+
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
+
+		if( gc->castle_id >= 24 )
+			continue; // WoE SE Castle
+		if( !gc->guild_id )
+			continue; // No owner
+
+		gc->capture_tick = gettick();
+	}
 
 	return true;
 }
@@ -2279,7 +2396,8 @@ bool guild_agit_end(void){
 	agit_flag = false;
 
 	npc_event_runall( script_config.agit_end_event_name );
-
+	guild_ranking_save(1);
+	
 	return true;
 }
 
@@ -2294,7 +2412,16 @@ bool guild_agit2_start(void){
 	agit2_flag = true;
 
 	npc_event_runall( script_config.agit_start2_event_name );
+	for (const auto& it : castle_db) {
+		std::shared_ptr<guild_castle> gc = it.second;
 
+		if( gc->castle_id < 24 )
+			continue; // Non WoE SE Castle
+		if( !gc->guild_id )
+			continue; // No owner
+
+		gc->capture_tick = gettick();
+	}
 	return true;
 }
 
@@ -2309,7 +2436,7 @@ bool guild_agit2_end(void){
 	agit2_flag = false;
 
 	npc_event_runall( script_config.agit_end2_event_name );
-
+	guild_ranking_save(2);
 	return true;
 }
 

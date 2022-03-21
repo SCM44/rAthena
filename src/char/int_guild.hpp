@@ -20,6 +20,7 @@ enum e_guild_action : uint32 {
 	GS_LEVEL = 0x0100,
 	GS_MES = 0x0200,
 	GS_MASK = 0x03FF,
+	GS_RANKING = 0x0400,
 	GS_BASIC_MASK = (GS_BASIC | GS_EMBLEM | GS_CONNECT | GS_LEVEL | GS_MES),
 	GS_REMOVE = 0x8000,
 };
@@ -38,12 +39,10 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
-	void loadingFinished() override;
-
-	// Additional
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
 	t_exp get_nextexp(uint16 level);
+	void loadingFinished();
 };
 
 int inter_guild_parse_frommap(int fd);

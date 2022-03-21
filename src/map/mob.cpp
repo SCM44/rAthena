@@ -920,7 +920,7 @@ int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobnam
 /*==========================================
  * Summoning BattleGround [Zephyrus]
  *------------------------------------------*/
-int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int mob_id, const char* event, unsigned int bg_id)
+int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int mob_id, const char* event, unsigned int bg_id, unsigned int size)
 {
 	struct mob_data *md = nullptr;
 	struct spawn_data data;
@@ -958,6 +958,10 @@ int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int
 	md = mob_spawn_dataset(&data);
 	mob_spawn(md);
 	md->bg_id = bg_id; // BG Team ID
+
+	md->special_state.ai = AI_ATTACK;
+	md->special_state.size = size;
+	sc_start4(NULL,&md->bl, SC_MODECHANGE, 100, 1, 0, MD_AGGRESSIVE, 0, 60000);
 
 	return md->bl.id;
 }
@@ -1698,7 +1702,8 @@ static bool mob_ai_sub_hard(struct mob_data *md, t_tick tick)
 		return false;
 
 	// Abnormalities
-	if(( md->sc.opt1 && md->sc.opt1 != OPT1_STONEWAIT && md->sc.opt1 != OPT1_BURNING ) || status_db.hasSCF(&md->sc, SCF_MOBLOSETARGET)) {//Should reset targets.
+	if(( md->sc.opt1 > 0 && md->sc.opt1 != OPT1_STONEWAIT && md->sc.opt1 != OPT1_BURNING )
+	   || md->sc.data[SC_BLADESTOP] || md->sc.data[SC__MANHOLE] || md->sc.data[SC_CURSEDCIRCLE_TARGET]) {//Should reset targets.
 		md->target_id = md->attacked_id = md->norm_attacked_id = 0;
 		return false;
 	}
@@ -2102,6 +2107,17 @@ static TIMER_FUNC(mob_ai_hard){
 }
 
 /**
+ * Assign random option values to an item
+ * @param item_option: Random option on the item
+ * @param option: Options to assign
+ */
+void mob_setitem_option(s_item_randomoption &item_option, const std::shared_ptr<s_random_opt_group_entry> &option) {
+	item_option.id = option->id;
+	item_option.value = rnd_value(option->min_value, option->max_value);
+	item_option.param = option->param;
+}
+
+/**
  * Set random option for item when dropped from monster
  * @param item: Item data
  * @param mobdrop: Drop data
@@ -2114,7 +2130,51 @@ void mob_setdropitem_option(item *item, s_mob_drop *mobdrop) {
 	std::shared_ptr<s_random_opt_group> group = random_option_group.find(mobdrop->randomopt_group);
 
 	if (group != nullptr) {
-		group->apply( *item );
+		// Apply Must options
+		for (size_t i = 0; i < group->slots.size(); i++) {
+			// Try to apply an entry
+			for (size_t j = 0, max = group->slots[static_cast<uint16>(i)].size() * 3; j < max; j++) {
+				std::shared_ptr<s_random_opt_group_entry> option = util::vector_random(group->slots[static_cast<uint16>(i)]);
+
+				if (rnd() % 10000 < option->chance) {
+					bool skip = false;
+					for (size_t a = 0; a < group->slots.size(); a++) {
+						if (item->option[a].id == option->id)
+							skip = true;
+					}
+					if (skip)
+						continue;
+
+					mob_setitem_option(item->option[i], option);
+					break;
+				}
+			}
+
+			// If no entry was applied, assign one
+			if (item->option[i].id == 0) {
+				std::shared_ptr<s_random_opt_group_entry> option = util::vector_random(group->slots[static_cast<uint16>(i)]);
+
+				// Apply an entry without checking the chance
+				if (option->param != -1)
+					mob_setitem_option(item->option[i], option);
+				else
+					break;
+			}
+		}
+
+		// Apply Random options (if available)
+		if (group->max_random > 0) {
+			for (size_t i = 0; i < min(group->max_random, MAX_ITEM_RDM_OPT); i++) {
+				// If item already has an option in this slot, skip it
+				if (item->option[i].id > 0)
+					continue;
+
+				std::shared_ptr<s_random_opt_group_entry> option = util::vector_random(group->random_options);
+
+				if (rnd() % 10000 < option->chance)
+					mob_setitem_option(item->option[i], option);
+			}
+		}
 	}
 }
 
@@ -2428,9 +2488,6 @@ void mob_damage(struct mob_data *md, struct block_list *src, int damage)
 #if PACKETVER >= 20120404
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->bl.m, MF_HIDEMOBHPBAR)) {
 		int i;
-		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
-			clif_summon_hp_bar(*md);
-		}
 		for(i = 0; i < DAMAGELOG_SIZE; i++){ // must show hp bar to all char who already hit the mob.
 			struct map_session_data *sd = map_charid2sd(md->dmglog[i].id);
 			if( sd && check_distance_bl(&md->bl, &sd->bl, AREA_SIZE) ) // check if in range
@@ -3036,7 +3093,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			{ //TK_MISSION [Skotlex]
 				if (++(sd->mission_count) >= 100 && (temp = mob_get_random_id(MOBG_BRANCH_OF_DEAD_TREE, static_cast<e_random_monster_flags>(RMF_CHECK_MOB_LV|RMF_MOB_NOT_BOSS|RMF_MOB_NOT_SPAWN), sd->status.base_level)))
 				{
-					pc_addfame(*sd, battle_config.fame_taekwon_mission);
+					pc_addfame(sd, battle_config.fame_taekwon_mission,0);
 					sd->mission_mobid = temp;
 					pc_setglobalreg(sd, add_str(TKMISSIONID_VAR), temp);
 					sd->mission_count = 0;
@@ -3060,6 +3117,8 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			// The master or Mercenary can increase the kill count
 			if (sd->md && src && (src->type == BL_PC || src->type == BL_MER) && mob->lv > sd->status.base_level / 2)
 				mercenary_kills(sd->md);
+
+			pc_record_mobkills(sd,md);
 		}
 
 		if( md->npc_event[0] && !md->state.npc_killmonster ) {
@@ -3354,9 +3413,6 @@ void mob_heal(struct mob_data *md,unsigned int heal)
 #if PACKETVER >= 20120404
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->bl.m, MF_HIDEMOBHPBAR)) {
 		int i;
-		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
-			clif_summon_hp_bar(*md);
-		}
 		for(i = 0; i < DAMAGELOG_SIZE; i++)// must show hp bar to all char who already hit the mob.
 			if( md->dmglog[i].id ) {
 				struct map_session_data *sd = map_charid2sd(md->dmglog[i].id);
@@ -5150,7 +5206,7 @@ static int mob_read_sqldb(void)
 	for( uint8 fi = 0; fi < ARRAYLENGTH(mob_db_name); ++fi ) {
 		// retrieve all rows from the mob database
 		if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `id`,`name_aegis`,`name_english`,`name_japanese`,`level`,`hp`,`sp`,`base_exp`,`job_exp`,`mvp_exp`,`attack`,`attack2`,`defense`,`magic_defense`,`str`,`agi`,`vit`,`int`,`dex`,`luk`,`attack_range`,`skill_range`,`chase_range`,`size`,`race`,"
-			"`racegroup_goblin`,`racegroup_kobold`,`racegroup_orc`,`racegroup_golem`,`racegroup_guardian`,`racegroup_ninja`,`racegroup_gvg`,`racegroup_battlefield`,`racegroup_treasure`,`racegroup_biolab`,`racegroup_manuk`,`racegroup_splendide`,`racegroup_scaraba`,`racegroup_ogh_atk_def`,`racegroup_ogh_hidden`,`racegroup_bio5_swordman_thief`,`racegroup_bio5_acolyte_merchant`,`racegroup_bio5_mage_archer`,`racegroup_bio5_mvp`,`racegroup_clocktower`,`racegroup_thanatos`,`racegroup_faceworm`,`racegroup_hearthunter`,`racegroup_rockridge`,`racegroup_werner_lab`,`racegroup_temple_demon`,`racegroup_illusion_vampire`,`racegroup_malangdo`,"
+			"`racegroup_goblin`,`racegroup_kobold`,`racegroup_orc`,`racegroup_golem`,`racegroup_guardian`,`racegroup_ninja`,`racegroup_gvg`,`racegroup_battlefield`,`racegroup_treasure`,`racegroup_biolab`,`racegroup_manuk`,`racegroup_splendide`,`racegroup_scaraba`,`racegroup_ogh_atk_def`,`racegroup_ogh_hidden`,`racegroup_bio5_swordman_thief`,`racegroup_bio5_acolyte_merchant`,`racegroup_bio5_mage_archer`,`racegroup_bio5_mvp`,`racegroup_clocktower`,`racegroup_thanatos`,`racegroup_faceworm`,`racegroup_hearthunter`,`racegroup_rockridge`,`racegroup_werner_lab`,`racegroup_temple_demon`,`racegroup_illusion_vampire`,"
 			"`element`,`element_level`,`walk_speed`,`attack_delay`,`attack_motion`,`damage_motion`,`damage_taken`,`ai`,`class`,"
 			"`mode_canmove`,`mode_looter`,`mode_aggressive`,`mode_assist`,`mode_castsensoridle`,`mode_norandomwalk`,`mode_nocast`,`mode_canattack`,`mode_castsensorchase`,`mode_changechase`,`mode_angry`,`mode_changetargetmelee`,`mode_changetargetchase`,`mode_targetweak`,`mode_randomtarget`,`mode_ignoremelee`,`mode_ignoremagic`,`mode_ignoreranged`,`mode_mvp`,`mode_ignoremisc`,`mode_knockbackimmune`,`mode_teleportblock`,`mode_fixeditemdrop`,`mode_detector`,`mode_statusimmune`,`mode_skillimmune`,"
 			"`mvpdrop1_item`,`mvpdrop1_rate`,`mvpdrop1_option`,`mvpdrop1_index`,`mvpdrop2_item`,`mvpdrop2_rate`,`mvpdrop2_option`,`mvpdrop2_index`,`mvpdrop3_item`,`mvpdrop3_rate`,`mvpdrop3_option`,`mvpdrop3_index`,"

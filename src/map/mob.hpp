@@ -210,8 +210,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
 };
 
 struct s_mob_item_drop_ratio {
@@ -226,8 +226,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
 };
 
 struct spawn_info {
@@ -277,9 +277,9 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
-	void loadingFinished() override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
+	void loadingFinished();
 };
 
 extern MobDatabase mob_db;
@@ -361,9 +361,9 @@ public:
 
 	}
 
-	void clear() override{ };
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
+	void clear() { };
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
 };
 
 struct s_randomsummon_entry {
@@ -383,8 +383,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node &node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node &node);
 };
 
 enum e_mob_skill_target {
@@ -462,7 +462,7 @@ int mob_once_spawn_area(struct map_session_data* sd, int16 m,
 bool mob_ksprotected (struct block_list *src, struct block_list *target);
 
 int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobname, int mob_id, const char* event, int guardian, bool has_index);	// Spawning Guardians [Valaris]
-int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int mob_id, const char* event, unsigned int bg_id);
+int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int mob_id, const char* event, unsigned int bg_id, unsigned int size);
 int mob_guardian_guildchange(struct mob_data *md); //Change Guardian's ownership. [Skotlex]
 
 int mob_randomwalk(struct mob_data *md,t_tick tick);

@@ -39,7 +39,7 @@ static struct eri *auth_db_ers; //For reutilizing player login structures.
 static DBMap* auth_db; // int id -> struct auth_node*
 static bool char_init_done = false; //server already initialized? Used for InterInitOnce and vending loadings
 
-static const int packet_len_table[0x3d] = { // U - used, F - free
+static const int packet_len_table[0x50] = { // U - used, F - free
 	60, 3,-1,-1,10,-1, 6,-1,	// 2af8-2aff: U->2af8, U->2af9, U->2afa, U->2afb, U->2afc, U->2afd, U->2afe, U->2aff
 	 6,-1,18, 7,-1,39,30, 10,	// 2b00-2b07: U->2b00, U->2b01, U->2b02, U->2b03, U->2b04, U->2b05, U->2b06, U->2b07
 	 6,30, 10, -1,86, 7,44,34,	// 2b08-2b0f: U->2b08, U->2b09, U->2b0a, U->2b0b, U->2b0c, U->2b0d, U->2b0e, U->2b0f
@@ -47,6 +47,7 @@ static const int packet_len_table[0x3d] = { // U - used, F - free
 	 2,10, 2,-1,-1,-1, 2, 7,	// 2b18-2b1f: U->2b18, U->2b19, U->2b1a, U->2b1b, U->2b1c, U->2b1d, U->2b1e, U->2b1f
 	-1,10, 8, 2, 2,14,19,19,	// 2b20-2b27: U->2b20, U->2b21, U->2b22, U->2b23, U->2b24, U->2b25, U->2b26, U->2b27
 	-1, 0, 6,15, 0, 6,-1,-1,	// 2b28-2b2f: U->2b28, F->2b29, U->2b2a, U->2b2b, F->2b2c, U->2b2d, U->2b2e, U->2b2f
+	 4, 4, 4, 4,-1, 6, 0, 0,    // 2b30-2b37: U->2b30, U->2b31, U->2b32, U->2b33, U->2b34, F->2b35, F->2b36, F->2b37
  };
 
 //Used Packets:
@@ -105,6 +106,9 @@ static const int packet_len_table[0x3d] = { // U - used, F - free
 //2b2d: Outgoing, chrif_bsdata_request -> request bonus_script for pc_authok'ed char.
 //2b2e: Outgoing, chrif_bsdata_save -> Send bonus_script of player for saving.
 //2b2f: Incoming, chrif_bsdata_received -> received bonus_script of player for loading.
+//2b30: Outgoing, chrif_ranking_reset -> '...'
+//2b31: Incoming, chrif_ranking_reset_ack -> '...'
+//2b34: Incoming, chrif_recvfamelist_single -> '...'
 
 int chrif_connected = 0;
 int char_fd = -1;
@@ -1222,14 +1226,33 @@ int chrif_disconnectplayer(int fd) {
 /*==========================================
  * Request/Receive top 10 Fame character list
  *------------------------------------------*/
-int chrif_updatefamelist(map_session_data &sd, e_rank ranktype) {
+int chrif_updatefamelist(struct map_session_data* sd, short flag) {
+	char type;
+
 	chrif_check(-1);
+
+	if( !flag )
+	{
+		switch(sd->class_ & MAPID_UPPERMASK) 
+		{
+			case MAPID_BLACKSMITH: type = RANK_BLACKSMITH; break;
+			case MAPID_ALCHEMIST:  type = RANK_ALCHEMIST; break;
+			case MAPID_TAEKWON:    type = RANK_TAEKWON; break;
+			default:
+				return 0;
+		}
+	}
+	else type = 3 + flag; // 4 = BG
 
 	WFIFOHEAD(char_fd, 11);
 	WFIFOW(char_fd,0) = 0x2b10;
-	WFIFOL(char_fd,2) = sd.status.char_id;
-	WFIFOL(char_fd,6) = sd.status.fame;
-	WFIFOB(char_fd,10) = ranktype;
+	WFIFOL(char_fd,2) = sd->status.char_id;
+	switch( flag )
+	{
+	case 1:  WFIFOL(char_fd,6) = sd->status.bgstats.points; break;
+	default: WFIFOL(char_fd,6) = sd->status.fame; break;
+	}
+	WFIFOB(char_fd,10) = type;
 	WFIFOSET(char_fd,11);
 
 	return 0;
@@ -1252,9 +1275,9 @@ int chrif_recvfamelist(int fd) {
 	memset (smith_fame_list, 0, sizeof(smith_fame_list));
 	memset (chemist_fame_list, 0, sizeof(chemist_fame_list));
 	memset (taekwon_fame_list, 0, sizeof(taekwon_fame_list));
-
+	
 	size = RFIFOW(fd, 6); //Blacksmith block size
-
+	
 	for (num = 0; len < size && num < MAX_FAME_LIST; num++) {
 		memcpy(&smith_fame_list[num], RFIFOP(fd,len), sizeof(struct fame_list));
  		len += sizeof(struct fame_list);
@@ -1266,7 +1289,7 @@ int chrif_recvfamelist(int fd) {
 
 	for (num = 0; len < size && num < MAX_FAME_LIST; num++) {
 		memcpy(&chemist_fame_list[num], RFIFOP(fd,len), sizeof(struct fame_list));
- 		len += sizeof(struct fame_list);
+		len += sizeof(struct fame_list);
 	}
 
 	total += num;
@@ -1656,8 +1679,7 @@ int chrif_bsdata_save(struct map_session_data *sd, bool quit) {
 
 	// Removing...
 	if (quit && sd->bonus_script.head) {
-		uint32 flag = BSF_REM_ON_LOGOUT; //Remove bonus when logout
-
+		uint16 flag = BSF_REM_ON_LOGOUT; //Remove bonus when logout
 		if (battle_config.debuff_on_logout&1) //Remove negative buffs
 			flag |= BSF_REM_DEBUFF;
 		if (battle_config.debuff_on_logout&2) //Remove positive buffs
@@ -1735,7 +1757,7 @@ int chrif_bsdata_received(int fd) {
 			if (bs->script_str[0] == '\0' || !bs->tick)
 				continue;
 
-			if (!(entry = pc_bonus_script_add(sd, bs->script_str, bs->tick, (enum efst_type)bs->icon, bs->flag, bs->type)))
+			if (!(entry = pc_bonus_script_add(sd, bs->script_str, bs->tick, (enum efst_types)bs->icon, bs->flag, bs->type)))
 				continue;
 
 			linkdb_insert(&sd->bonus_script.head, (void *)((intptr_t)entry), entry);

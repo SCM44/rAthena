@@ -45,8 +45,6 @@ struct guild_log_entry;
 enum e_guild_storage_log : uint16;
 enum e_bg_queue_apply_ack : uint16;
 enum e_instance_notify : uint8;
-struct s_laphine_synthesis;
-struct s_laphine_upgrade;
 
 enum e_PacketDBVersion { // packet DB
 	MIN_PACKET_DB  = 0x064,
@@ -188,27 +186,6 @@ enum e_bossmap_info {
 	BOSS_INFO_DEAD,
 };
 
-enum class e_purchase_result : uint8{
-	PURCHASE_SUCCEED = 0x0,
-	PURCHASE_FAIL_MONEY,
-	PURCHASE_FAIL_WEIGHT,
-	PURCHASE_FAIL_COUNT,
-	PURCHASE_FAIL_STOCK,
-	PURCHASE_FAIL_ITEM_EXCHANGING,
-	PURCHASE_FAIL_INVALID_MCSTORE,
-	PURCHASE_FAIL_OPEN_MCSTORE_ITEMLIST,
-	PURCHASE_FAIL_GIVE_MONEY,
-	PURCHASE_FAIL_EACHITEM_COUNT,
-	// Unknown names
-	PURCHASE_FAIL_RODEX,
-	PURCHASE_FAIL_EXCHANGE_FAILED,
-	PURCHASE_FAIL_EXCHANGE_DONE,
-	PURCHASE_FAIL_STOCK_EMPTY,
-	PURCHASE_FAIL_GOODS,
-	// End unknown names
-	PURCHASE_FAIL_ADD = 0xff,
-};
-
 #define packet_len(cmd) packet_db[cmd].len
 extern struct s_packet_db packet_db[MAX_PACKET_DB+1];
 extern int packet_db_ack[MAX_ACK_FUNC + 1];
@@ -230,6 +207,7 @@ enum send_target : uint8_t {
 	PARTY_SAMEMAP_WOS,
 	PARTY_AREA,
 	PARTY_AREA_WOS,
+	PARTY_BUFF_INFO,
 	GUILD,
 	GUILD_WOS,
 	GUILD_SAMEMAP,
@@ -247,6 +225,7 @@ enum send_target : uint8_t {
 	BG_SAMEMAP_WOS,
 	BG_AREA,
 	BG_AREA_WOS,
+	BG_LISTEN,			// All players listening BG announcements
 
 	CLAN,				// Clan System
 };
@@ -554,7 +533,6 @@ enum clif_messages : uint16_t {
 
 	// Unofficial names
 	C_ITEM_EQUIP_SWITCH = 0xbc7, 
-	C_ITEM_NOEQUIP = 0x174,	/// <"You can't put this item on."
 };
 
 enum e_personalinfo : uint8_t {
@@ -610,6 +588,8 @@ void clif_setport(uint16 port);
 uint32 clif_getip(void);
 uint32 clif_refresh_ip(void);
 uint16 clif_getport(void);
+
+void clif_rank_info(struct map_session_data *sd, int points, int total, int flag);
 
 void clif_authok(struct map_session_data *sd);
 void clif_authrefuse(int fd, uint8 error_code);
@@ -827,7 +807,7 @@ void clif_party_dead( struct map_session_data *sd );
 
 // guild
 void clif_guild_created(struct map_session_data *sd,int flag);
-void clif_guild_belonginfo(struct map_session_data *sd);
+void clif_guild_belonginfo(struct map_session_data *sd, struct guild *g);
 void clif_guild_masterormember(struct map_session_data *sd);
 void clif_guild_basicinfo(struct map_session_data *sd);
 void clif_guild_allianceinfo(struct map_session_data *sd);
@@ -856,8 +836,17 @@ void clif_guild_xy_remove(struct map_session_data *sd);
 
 // Battleground
 void clif_bg_hp(struct map_session_data *sd);
+void clif_bg_hp_single(int fd, struct map_session_data* ssd);
 void clif_bg_xy(struct map_session_data *sd);
 void clif_bg_xy_remove(struct map_session_data *sd);
+void clif_bg_belonginfo(struct map_session_data *sd);
+int clif_visual_guild_id(struct block_list *bl);
+int clif_visual_emblem_id(struct block_list *bl);
+void clif_bg_emblem(struct map_session_data *sd, struct guild *g);
+void clif_bg_memberlist(struct map_session_data *sd);
+void clif_bg_leave(struct map_session_data *sd, const char *name, const char *mes);
+void clif_bg_leave_single(struct map_session_data *sd, const char *name, const char *mes);
+void clif_bg_expulsion_single(struct map_session_data *sd, const char *name, const char *mes);
 void clif_bg_message(struct s_battleground_data *bg, int src_id, const char *name, const char *mes, int len);
 void clif_bg_updatescore(int16 m);
 void clif_bg_updatescore_single(struct map_session_data *sd);
@@ -866,6 +855,7 @@ void clif_sendbgemblem_single(int fd, struct map_session_data *sd);
 
 // Battleground Queue
 void clif_bg_queue_apply_result(e_bg_queue_apply_ack result, const char *name, struct map_session_data *sd);
+void clif_bg_queue_cancel_result(bool success, const char* name, struct map_session_data* sd);
 void clif_bg_queue_apply_notify(const char *name, struct map_session_data *sd);
 void clif_bg_queue_entry_init(struct map_session_data *sd);
 void clif_bg_queue_lobby_notify(const char *name, struct map_session_data *sd);
@@ -1130,7 +1120,7 @@ void clif_channel_msg(struct Channel *channel, const char *msg, unsigned long co
 #define clif_menuskill_clear(sd) (sd)->menuskill_id = (sd)->menuskill_val = (sd)->menuskill_val2 = 0;
 
 void clif_ranklist(struct map_session_data *sd, int16 rankingType);
-void clif_update_rankingpoint(map_session_data &sd, int rankingtype, int point);
+void clif_update_rankingpoint(struct map_session_data *sd, int rankingtype, int point);
 
 void clif_crimson_marker(struct map_session_data *sd, struct block_list *bl, bool remove);
 
@@ -1159,8 +1149,6 @@ enum in_ui_type : int8 {
 };
 
 enum out_ui_type : int8 {
-	OUT_UI_STYLIST = 1,
-	OUT_UI_QUEST = 6,
 	OUT_UI_ATTENDANCE = 7
 };
 
@@ -1183,18 +1171,5 @@ void clif_equipswitch_reply( struct map_session_data* sd, bool failed );
 void clif_pet_evolution_result( struct map_session_data* sd, e_pet_evolution_result result );
 
 void clif_parse_skill_toid( struct map_session_data* sd, uint16 skill_id, uint16 skill_lv, int target_id );
-
-void clif_inventory_expansion_info( struct map_session_data* sd );
-
-// Barter System
-void clif_barter_open( struct map_session_data& sd, struct npc_data& nd );
-void clif_barter_extended_open( struct map_session_data& sd, struct npc_data& nd );
-
-void clif_summon_init(struct mob_data& md);
-void clif_summon_hp_bar(struct mob_data& md);
-
-// Laphine System
-void clif_laphine_synthesis_open( struct map_session_data *sd, std::shared_ptr<s_laphine_synthesis> synthesis );
-void clif_laphine_upgrade_open( struct map_session_data* sd, std::shared_ptr<s_laphine_upgrade> upgrade );
 
 #endif /* CLIF_HPP */

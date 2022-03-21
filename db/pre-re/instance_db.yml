@@ -24,10 +24,8 @@
 ###########################################################################
 # - Id                Instance ID.
 #   Name              Instance Name.
-#   TimeLimit         Total lifetime of instance in seconds. Use 0 to define infinite time. (Default: 3600)
-#   IdleTimeOut       Time before an idle instance is destroyed in seconds. Use 0 to define infinite idle time. (Default: 300)
-#   NoNpc             Prevent copying NPCs from the source map. (Default: false)
-#   NoMapFlag         Prevent copying Mapflags from the source map. (Default: false)
+#   TimeLimit         Total lifetime of instance in seconds. (Default: 3600)
+#   IdleTimeOut       Time before an idle instance is destroyed in seconds. (Default: 300)
 #   Destroyable       Toggles the ability to destroy the instance using instance 'Destroy' button. (Default: true)
 #                     Note: the button is displayed based on parties. For any mode, it requires the party leader to be the instance owner to destroy it.
 #   Enter:            Instance entrance coordinates.
@@ -39,10 +37,54 @@
 
 Header:
   Type: INSTANCE_DB
-  Version: 2
+  Version: 1
 
 Body:
   - Id: 1
+    Name: Poring Village
+    Enter:
+      Map: 1@begi
+      X: 102
+      Y: 24
+  - Id: 2
+    Name: Prontera Culvert
+    Enter:
+      Map: 1@prtc
+      X: 20
+      Y: 16
+  - Id: 3
+    Name: Orc's Memory
+    Enter:
+      Map: 1@orcs 
+      X: 179
+      Y: 15
+    AdditionalMaps:
+      2@orcs: true
+  - Id: 4
+    Name: Ant Hell
+    Enter:
+      Map: 1@ant
+      X: 35
+      Y: 263
+  - Id: 5
+    Name: Izlude Deepsea
+    Enter:
+      Map: 1@izu
+      X: 235
+      Y: 204
+  - Id: 6
+    Name: Sunken Ship
+    Enter:
+      Map: 1@sks
+      X: 101
+      Y: 30
+  - Id: 7
+    Name: Suspicious Shipwreck
+    Enter:
+      Map: 1@tre
+      X: 68
+      Y: 32
+  - Id: 8
     Name: Endless Tower
     TimeLimit: 14400
     Enter:
@@ -55,7 +97,7 @@ Body:
       4@tower: true
       5@tower: true
       6@tower: true
-  - Id: 2
+  - Id: 9
     Name: Sealed Catacomb
     TimeLimit: 7200
     Enter:
@@ -64,15 +106,7 @@ Body:
       Y: 224
     AdditionalMaps:
       2@cata: true
-  - Id: 3
-    Name: Orc's Memory
-    Enter:
-      Map: 1@orcs 
-      X: 179
-      Y: 15
-    AdditionalMaps:
-      2@orcs: true
-  - Id: 4
+  - Id: 10
     Name: Nidhoggur's Nest
     TimeLimit: 14400
     Enter:
@@ -81,3 +115,4 @@ Body:
       Y: 36
     AdditionalMaps:
       2@nyd: true
+

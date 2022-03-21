@@ -68,7 +68,7 @@ int chrif_changemapserver(struct map_session_data* sd, uint32 ip, uint16 port);
 int chrif_searchcharid(uint32 char_id);
 int chrif_changeemail(int id, const char *actual_email, const char *new_email);
 int chrif_req_login_operation(int aid, const char* character_name, enum chrif_req_op operation_type, int32 timediff, int val1, int val2);
-int chrif_updatefamelist(map_session_data &sd, e_rank ranktype);
+int chrif_updatefamelist(struct map_session_data *sd, short flag);
 int chrif_buildfamelist(void);
 int chrif_save_scdata(struct map_session_data *sd);
 int chrif_char_offline(struct map_session_data *sd);
@@ -78,7 +78,7 @@ int send_users_tochar(void);
 int chrif_char_online(struct map_session_data *sd);
 int chrif_changesex(struct map_session_data *sd, bool change_account);
 int chrif_divorce(int partner_id1, int partner_id2);
-
+int chrif_ranking_reset(int type);
 int chrif_removefriend(uint32 char_id, int friend_id);
 
 void chrif_parse_ack_vipActive(int fd);

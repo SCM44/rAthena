@@ -423,6 +423,7 @@ struct Battle_Config
 	int display_hallucination;	// [Skotlex]
 	int use_statpoint_table;	// [Skotlex]
 
+	int berserk_cancels_buffs; // [Aru]
 	int debuff_on_logout; // Removes a few "official" negative Scs on logout. [Skotlex]
 	int mob_ai; //Configures various mob_ai settings to make them smarter or dumber(official). [Skotlex]
 	int hom_setting; //Configures various homunc settings which make them behave unlike normal characters.. [Skotlex]
@@ -515,6 +516,15 @@ struct Battle_Config
 	int bg_magic_damage_rate;
 	int bg_misc_damage_rate;
 	int bg_flee_penalty;
+	int bg_reward_rates;
+	int bg_invincible_time;
+	int bg_mode_selection;
+	int bg_idle_announce;
+	int bg_idle_autokick;
+	int bg_reportafk_leaderonly;
+	int bg_queue2team_balanced;
+	int bg_queue_onlytowns;
+	int bg_logincount_check;
 
 	// rAthena
 	int max_third_parameter;
@@ -706,9 +716,6 @@ struct Battle_Config
 	int loose_ap_on_map;
 	int keep_ap_on_logout;
 	int attack_machine_level_difference;
-
-	int feature_barter;
-	int feature_barter_extended;
 
 #include "../custom/battle_config_struct.inc"
 };

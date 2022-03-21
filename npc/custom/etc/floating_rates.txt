@@ -18,25 +18,29 @@
 -	script	FloatingRates	-1,{
 OnInit:
 //add any other HOURS
-OnHour00:
-OnHour06:
-OnHour12:
-OnHour18:
+OnHour23:
+OnHour05:
+OnHour11:
+OnHour17:
+//OnClock1310:
 //-------------------
-	set $@brate,rand(100,150);
-	set $@jrate,rand(100,150);
-	set $@drate,rand(100,150);
+	set $@brate,rand(800,1200);
+	set $@jrate,rand(800,1200);
+	//set $@drate,rand(2000,3000);
+	//set $@mvprate,rand(200,500);
+	//set $@bossrate,rand(200,1000);
 	//Base exp
 	setbattleflag("base_exp_rate",$@brate);
 	//Job exp
 	setbattleflag("job_exp_rate",$@jrate);
 	//Drops
-	setbattleflag("item_rate_common",$@drate);
-	setbattleflag("item_rate_heal",$@drate);
-	setbattleflag("item_rate_use",$@drate);
-	setbattleflag("item_rate_equip",$@drate,true); // Apply new rates to configs set above
-	//we don't change card drops rate, because these values won't change them anyway
+	//setbattleflag("item_rate_common",$@drate);
+	//setbattleflag("item_rate_heal",$@drate);
+	//setbattleflag("item_rate_use",$@drate);
+	//setbattleflag("item_rate_card_boss",$@bossrate);
+	//setbattleflag("item_rate_card_mvp",$@mvprate);
+	//setbattleflag("item_rate_card",$@drate, true);
 	
-	announce "Current rates are: 1."+($@brate-100)+"x 1."+($@jrate-100)+"x 1."+($@drate-100)+"x",bc_all,0xFF6060;
+	announce "The Base Exp and Job Exp rates have been changed ! use @rates to check the new rates",bc_all,0xFF6060;
 	end;
 }

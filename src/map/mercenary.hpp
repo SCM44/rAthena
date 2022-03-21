@@ -65,8 +65,8 @@ public:
 
 	}
 
-	const std::string getDefaultLocation() override;
-	uint64 parseBodyNode(const YAML::Node& node) override;
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const YAML::Node& node);
 };
 
 extern MercenaryDatabase mercenary_db;

@@ -65,10 +65,10 @@
 #     Storage               If the stack is applied to the player's storage. (Default: false)
 #     GuildStorage          If the stack is applied to the player's guild storage. (Default: false)
 #   NoUse:                  Conditions when the item is unusable. (Default: null)
-#     Override              Group level to override these conditions. (Default: 100)
+#     Override              Group level to override these conditions.
 #     Sitting               If the item can not be used while sitting. (Default: false)
 #   Trade:                  Trade restrictions. (Default: null)
-#     Override              Group level to override these conditions. (Default: 100)
+#     Override              Group level to override these conditions.
 #     NoDrop                If the item can not be dropped. (Default: false)
 #     NoTrade               If the item can not be traded. (Default: false)
 #     TradePartner          If the item can not be traded to the player's partner. (Default: false)
@@ -9309,6 +9309,7 @@ Body:
     Name: Ashes of Darkness
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9350,6 +9351,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9362,6 +9364,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9375,6 +9378,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9394,6 +9398,7 @@ Body:
     Name: Big Fan Of Magic
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9560,6 +9565,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9603,6 +9609,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9627,6 +9634,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9640,6 +9648,7 @@ Body:
     Type: Etc
     Buy: 1
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9691,6 +9700,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9758,6 +9768,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9771,6 +9782,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9784,6 +9796,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9798,6 +9811,7 @@ Body:
     Flags:
       BuyingStore: true
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9810,6 +9824,7 @@ Body:
     Name: Bazett's Order
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -9824,6 +9839,7 @@ Body:
     Flags:
       BuyingStore: true
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9837,6 +9853,7 @@ Body:
     Name: Portable Toolbox
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9850,6 +9867,7 @@ Body:
     Name: Rough Mineral
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9863,6 +9881,7 @@ Body:
     Name: Stone Fragment
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9876,6 +9895,7 @@ Body:
     Name: Flower Of Alfheim
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9889,6 +9909,7 @@ Body:
     Name: Manuk Coin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9902,6 +9923,7 @@ Body:
     Name: Splendide Coin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9915,6 +9937,7 @@ Body:
     Name: Spirit Of Alfheim
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9933,6 +9956,7 @@ Body:
     Name: Bradium Fragments
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -9946,6 +9970,7 @@ Body:
     Name: Shaggy Muffler
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10012,6 +10037,7 @@ Body:
     Name: Draco's Egg
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10078,6 +10104,7 @@ Body:
     Name: Attendance Card
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10090,6 +10117,7 @@ Body:
     Name: Report On Splendide
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10103,6 +10131,7 @@ Body:
     Name: Report On Manuk
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10212,6 +10241,7 @@ Body:
     Name: Succubus Pet Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10225,6 +10255,7 @@ Body:
     Name: Imp Pet Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10238,6 +10269,7 @@ Body:
     Name: Chung E Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10264,6 +10296,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10278,6 +10311,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10300,6 +10334,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10314,6 +10349,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10328,6 +10364,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10341,6 +10378,7 @@ Body:
     Name: Purification Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10360,6 +10398,7 @@ Body:
     Name: Nightmare Terror Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10373,6 +10412,7 @@ Body:
     Name: Loli Ruri Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10386,6 +10426,7 @@ Body:
     Name: Goblin Leader Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10399,6 +10440,7 @@ Body:
     Name: Incubus Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10412,6 +10454,7 @@ Body:
     Name: Miyabi Ningyo Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10425,6 +10468,7 @@ Body:
     Name: Giant Whisper Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10438,6 +10482,7 @@ Body:
     Name: Evil Nymph Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10451,6 +10496,7 @@ Body:
     Name: Medusa Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10464,6 +10510,7 @@ Body:
     Name: Stone Shooter Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10477,6 +10524,7 @@ Body:
     Name: Marionette Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10490,6 +10538,7 @@ Body:
     Name: Leaf Cat Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10503,6 +10552,7 @@ Body:
     Name: Dullahan Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10516,6 +10566,7 @@ Body:
     Name: Shinobi Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10529,6 +10580,7 @@ Body:
     Name: Golem Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10542,6 +10594,7 @@ Body:
     Name: Civil Servant Exchange Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10587,6 +10640,7 @@ Body:
     Name: Eternity Of Chocolate
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10599,6 +10653,7 @@ Body:
     Name: Simple Chocolate
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10611,6 +10666,7 @@ Body:
     Name: Key of The Mansion
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10624,6 +10680,7 @@ Body:
     Name: Giant Bradium Fragment
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10636,6 +10693,7 @@ Body:
     Name: Glittering Crystal
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10648,6 +10706,7 @@ Body:
     Name: Special Exchange Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -10662,6 +10721,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10679,6 +10739,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10929,6 +10990,7 @@ Body:
     Name: I Love You
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10941,6 +11003,7 @@ Body:
     Name: Thank You
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -10953,6 +11016,7 @@ Body:
     Name: I Respect You
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11033,6 +11097,7 @@ Body:
     Name: Delivery_Daishin_Box
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11046,6 +11111,7 @@ Body:
     Name: Eden Group Mark
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11090,6 +11156,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11103,6 +11170,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11115,6 +11183,7 @@ Body:
     Name: +9 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11127,6 +11196,7 @@ Body:
     Name: +8 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11139,6 +11209,7 @@ Body:
     Name: +7 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11151,6 +11222,7 @@ Body:
     Name: +6 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11163,6 +11235,7 @@ Body:
     Name: +9 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11175,6 +11248,7 @@ Body:
     Name: +8 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11187,6 +11261,7 @@ Body:
     Name: +7 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11199,6 +11274,7 @@ Body:
     Name: +6 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11211,6 +11287,7 @@ Body:
     Name: Blue Card 7
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11223,6 +11300,7 @@ Body:
     Name: Guarana Fruit
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11236,6 +11314,7 @@ Body:
     Name: +11 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11248,6 +11327,7 @@ Body:
     Name: +11 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11262,6 +11342,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11276,6 +11357,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11290,6 +11372,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoSell: true
       NoGuildStorage: true
@@ -11480,6 +11563,7 @@ Body:
     Name: Key Of Deception
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11493,6 +11577,7 @@ Body:
     Name: Key Of Illusion
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11506,6 +11591,7 @@ Body:
     Name: Key Of Gaiety
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11519,6 +11605,7 @@ Body:
     Name: A Master's Blush
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11532,6 +11619,7 @@ Body:
     Name: A Picture Of Minstrel Song
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11544,6 +11632,7 @@ Body:
     Name: Receipt
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11556,6 +11645,7 @@ Body:
     Name: Experiment Seed
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11569,6 +11659,7 @@ Body:
     Name: Seed For Experiment
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11582,6 +11673,7 @@ Body:
     Name: A Piece Of Cloth Of A Saint
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11595,6 +11687,7 @@ Body:
     Name: Shield Of King
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11608,6 +11701,7 @@ Body:
     Name: Clear Reagent
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11621,6 +11715,7 @@ Body:
     Name: Red Reagent
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11634,6 +11729,7 @@ Body:
     Name: Black Reagent
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -11756,6 +11852,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11777,6 +11874,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11790,6 +11888,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -11901,6 +12000,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -12046,6 +12146,7 @@ Body:
     Name: Love Ball
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12063,6 +12164,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12076,6 +12178,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12089,6 +12192,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12102,6 +12206,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12115,6 +12220,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12128,6 +12234,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12141,6 +12248,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12154,6 +12262,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12167,6 +12276,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12180,6 +12290,7 @@ Body:
     Type: Etc
     Buy: 4020
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12194,6 +12305,7 @@ Body:
     Buy: 4020
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12206,6 +12318,7 @@ Body:
     Name: Free Cash Coupon
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -12219,6 +12332,7 @@ Body:
     Name: Guidebook Exchange
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -12298,6 +12412,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -12420,6 +12535,7 @@ Body:
     Name: +5 Weapon Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -12432,6 +12548,7 @@ Body:
     Name: +5 Armor Refine Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -12686,6 +12803,7 @@ Body:
     Buy: 30000
     Weight: 50
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -13839,6 +13957,7 @@ Body:
     Name: Crumb of Sobbing Starlight
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -13852,6 +13971,7 @@ Body:
     Name: Sobbing Starlight
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14507,6 +14627,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14520,6 +14641,7 @@ Body:
     Name: Doodled Message
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14720,6 +14842,7 @@ Body:
     Name: Witch's Spell Scroll
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14733,6 +14856,7 @@ Body:
     Name: Symbol of the Nine Realms
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14746,6 +14870,7 @@ Body:
     Name: Piece of Spirit
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14759,6 +14884,7 @@ Body:
     Name: Spiritual Whispers
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14772,6 +14898,7 @@ Body:
     Name: Witch's Tonic
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14785,6 +14912,7 @@ Body:
     Name: Crow Wing
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14824,6 +14952,7 @@ Body:
     Type: Etc
     Buy: 2
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14954,6 +15083,7 @@ Body:
     Name: Complete Tablet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14967,6 +15097,7 @@ Body:
     Name: Prontera Tablet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14980,6 +15111,7 @@ Body:
     Name: Payon Tablet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -14993,6 +15125,7 @@ Body:
     Name: Morocc Tablet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15006,6 +15139,7 @@ Body:
     Name: Geffen Tablet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15027,6 +15161,7 @@ Body:
     Name: Commemorative Travel Card
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15049,6 +15184,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15063,6 +15199,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15077,6 +15214,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15091,6 +15229,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15113,6 +15252,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15141,6 +15281,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15161,6 +15302,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15535,6 +15677,7 @@ Body:
     Name: Letter of Recommendation
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15547,6 +15690,7 @@ Body:
     Name: Written Request(A)
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15559,6 +15703,7 @@ Body:
     Name: Written Request(B)
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -15579,6 +15724,7 @@ Body:
     Name: Skull
     Type: Etc
     Trade:
+      Override: 100
       NoTrade: true
       NoCart: true
       NoStorage: true
@@ -15590,6 +15736,7 @@ Body:
     Name: Red Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15602,6 +15749,7 @@ Body:
     Name: Yellow Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15614,6 +15762,7 @@ Body:
     Name: Blue Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15626,6 +15775,7 @@ Body:
     Name: Green Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15638,6 +15788,7 @@ Body:
     Name: Black Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15650,6 +15801,7 @@ Body:
     Name: Red Charm Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15662,6 +15814,7 @@ Body:
     Name: Yellow Charm Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15674,6 +15827,7 @@ Body:
     Name: Blue Charm Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15686,6 +15840,7 @@ Body:
     Name: Green Charm Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15698,6 +15853,7 @@ Body:
     Name: Black Charm Stone
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15710,6 +15866,7 @@ Body:
     Name: Pile of Books
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -15722,6 +15879,7 @@ Body:
     Name: Leather Pouch
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16101,6 +16259,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16115,6 +16274,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16129,6 +16289,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16142,6 +16303,7 @@ Body:
     Name: Culinary Wine
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16155,6 +16317,7 @@ Body:
     Name: Delivery Package
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16168,6 +16331,7 @@ Body:
     Name: Cottage Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16181,6 +16345,7 @@ Body:
     Name: Letter to Elly
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16194,6 +16359,7 @@ Body:
     Name: Steel Box
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16207,6 +16373,7 @@ Body:
     Name: Yellow Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16220,6 +16387,7 @@ Body:
     Name: Golden Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16233,6 +16401,7 @@ Body:
     Name: Luxurious Button
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16246,6 +16415,7 @@ Body:
     Name: Blue Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16259,6 +16429,7 @@ Body:
     Name: Red Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16272,6 +16443,7 @@ Body:
     Name: Metal Fragment
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16285,6 +16457,7 @@ Body:
     Name: Rosimier Mansion Keys
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16298,6 +16471,7 @@ Body:
     Name: Family Portrait
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16311,6 +16485,7 @@ Body:
     Name: Woman's Portrait
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16324,6 +16499,7 @@ Body:
     Name: K.H's Letter
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16337,6 +16513,7 @@ Body:
     Name: James's Note
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16350,6 +16527,7 @@ Body:
     Name: Man's Portrait
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16363,6 +16541,7 @@ Body:
     Name: Power Device
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16376,6 +16555,7 @@ Body:
     Name: Toy Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16389,6 +16569,7 @@ Body:
     Name: Black Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16409,6 +16590,7 @@ Body:
     Name: Allysia's Ring
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16422,6 +16604,7 @@ Body:
     Name: Luxurious Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16472,6 +16655,7 @@ Body:
     Type: Etc
     Buy: 2
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16484,6 +16668,7 @@ Body:
     Name: Green Keycard
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16503,6 +16688,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16559,6 +16745,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16577,6 +16764,7 @@ Body:
     Type: Etc
     Weight: 100
     Trade:
+      Override: 100
       NoTrade: true
       NoSell: true
       NoCart: true
@@ -16597,6 +16785,7 @@ Body:
     Name: Travel Brochure [Amatsu]
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16610,6 +16799,7 @@ Body:
     Name: Travel Brochure [Kunlun]
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16623,6 +16813,7 @@ Body:
     Name: Travel Brochure [Luoyang]
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16636,6 +16827,7 @@ Body:
     Name: Travel Brochure [Ayothaya]
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16649,6 +16841,7 @@ Body:
     Name: Amatsu Completed Photo Album
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16662,6 +16855,7 @@ Body:
     Name: Kunlun Completed Photo Album
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16675,6 +16869,7 @@ Body:
     Name: Luoyang Completed Photo Album
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16688,6 +16883,7 @@ Body:
     Name: Ayothaya Completed Photo Album
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16701,6 +16897,7 @@ Body:
     Name: Sand for Work
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16713,6 +16910,7 @@ Body:
     Name: Poring Coin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16762,6 +16960,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16776,6 +16975,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16790,6 +16990,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16804,6 +17005,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16818,6 +17020,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16832,6 +17035,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16844,6 +17048,7 @@ Body:
     Name: Lotus Flower
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16856,6 +17061,7 @@ Body:
     Name: Striped Candle
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16868,6 +17074,7 @@ Body:
     Name: Green Incense
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -16880,6 +17087,7 @@ Body:
     Name: Longing Heart
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16892,6 +17100,7 @@ Body:
     Name: Invitation Letter
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16904,6 +17113,7 @@ Body:
     Name: Invitation Ticket
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16916,6 +17126,7 @@ Body:
     Name: Key to the Secret Garden
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -16996,6 +17207,7 @@ Body:
     Name: Wind Hammer
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17017,6 +17229,7 @@ Body:
     Name: Ashy Necklace
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17029,6 +17242,7 @@ Body:
     Name: Sparkling Necklace
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17048,6 +17262,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17062,6 +17277,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17077,6 +17293,7 @@ Body:
     Buy: 20
     Weight: 50
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17097,6 +17314,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17111,6 +17329,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17137,6 +17356,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17151,6 +17371,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17165,6 +17386,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17179,6 +17401,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17193,6 +17416,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17207,6 +17431,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17274,6 +17499,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17342,6 +17568,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17374,6 +17601,7 @@ Body:
     Buy: 2
     Weight: 100
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17387,28 +17615,12 @@ Body:
     Type: Etc
     Buy: 2
     Weight: 10
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 7620
     AegisName: Enriched_Oridecon
     Name: Enriched Oridecon
     Type: Etc
     Buy: 2
     Weight: 10
-    Trade:
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 7621
     AegisName: Token_Of_Siegfried
     Name: Token Of Siegfried
@@ -17416,6 +17628,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17429,6 +17642,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoSell: true
       NoGuildStorage: true
@@ -17438,6 +17652,7 @@ Body:
     Type: Etc
     Buy: 2
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17453,6 +17668,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17483,6 +17699,7 @@ Body:
     Name: Pink Gift Box
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17829,6 +18046,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17884,6 +18102,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17898,6 +18117,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -17935,6 +18155,7 @@ Body:
     Name: Wat Badge
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -17958,6 +18179,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18006,6 +18228,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18019,6 +18242,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18032,6 +18256,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18045,6 +18270,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18058,6 +18284,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18071,6 +18298,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18084,6 +18312,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18097,6 +18326,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18114,6 +18344,7 @@ Body:
     Name: Golden Apple
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18126,6 +18357,7 @@ Body:
     Name: The Crow of Destiny
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18168,6 +18400,7 @@ Body:
     Name: Golden Charm Apple
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18180,6 +18413,7 @@ Body:
     Name: Girl's Letter
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18192,6 +18426,7 @@ Body:
     Name: Signature Notebook
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18204,6 +18439,14 @@ Body:
     Name: Beginner's Field Manual
     Type: Etc
     Weight: 10
+  - Id: 7804
+    AegisName: Battleground_Badge
+    Name: Battleground Badge
+    Type: Etc
+    Buy: 20
+    Weight: 0
+    Flags:
+      BuyingStore: true
   - Id: 7805
     AegisName: Brown_Ring
     Name: Brown Jenoss's Family Ring
@@ -18284,6 +18527,7 @@ Body:
     Name: Piece of Morocc Skin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18299,6 +18543,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18313,6 +18558,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18327,6 +18573,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18343,6 +18590,7 @@ Body:
     Flags:
       BuyingStore: true
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18361,6 +18609,7 @@ Body:
     Name: Continental Guard Paper
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18378,6 +18627,7 @@ Body:
     Name: Bravery Badge
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18389,6 +18639,7 @@ Body:
     Name: Valor Badge
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18472,6 +18723,7 @@ Body:
     Name: Crystal Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18484,6 +18736,7 @@ Body:
     Name: Valkyrie's Gift
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18497,6 +18750,7 @@ Body:
     Name: Stained Piece Of Paper
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18509,6 +18763,7 @@ Body:
     Name: Torn Piece Of Paper
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18521,6 +18776,7 @@ Body:
     Name: Old Piece Of Paper
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18533,6 +18789,7 @@ Body:
     Name: Burnt Pieces Of Paper
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18647,6 +18904,7 @@ Body:
     Buy: 20
     Weight: 200
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18665,6 +18923,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18678,6 +18937,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18739,6 +18999,7 @@ Body:
     Type: Etc
     Buy: 300000
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18751,6 +19012,7 @@ Body:
     Type: Etc
     Weight: 50
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18764,6 +19026,7 @@ Body:
     Type: Etc
     Weight: 100
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18777,6 +19040,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18790,6 +19054,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18803,6 +19068,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18816,6 +19082,7 @@ Body:
     Type: Etc
     Weight: 50
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18828,6 +19095,7 @@ Body:
     Name: Sharp Branch
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18840,6 +19108,7 @@ Body:
     Name: Wooden Flute
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18852,6 +19121,7 @@ Body:
     Name: Jade Plate
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18864,6 +19134,7 @@ Body:
     Name: Sacred Arrow
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18920,6 +19191,7 @@ Body:
     Name: Rama5 Book
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18932,6 +19204,7 @@ Body:
     Name: Loykrathong Book
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18944,6 +19217,7 @@ Body:
     Name: Constitution Book
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18956,6 +19230,7 @@ Body:
     Name: VV Strong Balmung
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18968,6 +19243,7 @@ Body:
     Name: Dagger Of Psychic
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -18980,6 +19256,7 @@ Body:
     Name: Jonathan Family Ring
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -18993,6 +19270,7 @@ Body:
     Name: Jillberriel Family Ring
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19006,6 +19284,7 @@ Body:
     Name: Jessur Family Ring
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19019,6 +19298,7 @@ Body:
     Name: Jenoss Family Ring
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19032,6 +19312,7 @@ Body:
     Name: Piano Key
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19051,6 +19332,7 @@ Body:
     Name: Poppy Wreath
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19066,6 +19348,7 @@ Body:
     Buy: 20
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19098,6 +19381,7 @@ Body:
     Name: Portable Snowman Machine
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19111,6 +19395,7 @@ Body:
     Name: Battle Test Certificate
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19125,6 +19410,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19178,6 +19464,7 @@ Body:
     Name: Krathong
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19192,6 +19479,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19207,6 +19495,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19221,6 +19510,7 @@ Body:
     Type: Etc
     Weight: 1000
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19329,6 +19619,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoSell: true
       NoGuildStorage: true
@@ -19338,6 +19629,7 @@ Body:
     Type: Etc
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoSell: true
       NoGuildStorage: true
@@ -19363,6 +19655,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19376,6 +19669,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19389,6 +19683,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19402,6 +19697,7 @@ Body:
     Name: Gift Of Lomi Ross
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19415,6 +19711,7 @@ Body:
     Name: Gift Of Juliet
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoSell: true
@@ -19430,6 +19727,7 @@ Body:
     Buy: 10
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19462,6 +19760,7 @@ Body:
     Name: Ancient Gold Coin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoGuildStorage: true
   - Id: 7960
@@ -19469,6 +19768,7 @@ Body:
     Name: Ancient Silver Coin
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoGuildStorage: true
   - Id: 7961
@@ -19476,6 +19776,7 @@ Body:
     Name: Weapon Exchange
     Type: Etc
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19489,6 +19790,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19502,6 +19804,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19515,6 +19818,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19528,6 +19832,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19541,6 +19846,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19554,6 +19860,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19567,6 +19874,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19580,6 +19888,7 @@ Body:
     Type: Etc
     Buy: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19605,6 +19914,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19618,6 +19928,7 @@ Body:
     Type: Etc
     Buy: 20
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19645,6 +19956,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19659,6 +19971,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19673,6 +19986,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19687,6 +20001,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19701,6 +20016,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19715,6 +20031,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19729,6 +20046,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19743,6 +20061,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19757,6 +20076,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19771,6 +20091,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19785,6 +20106,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19799,6 +20121,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19813,6 +20136,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19827,6 +20151,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19841,6 +20166,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19855,6 +20181,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19869,6 +20196,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19883,6 +20211,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19897,6 +20226,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19911,6 +20241,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19925,6 +20256,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -19939,6 +20271,7 @@ Body:
     Buy: 2
     Weight: 10
     Trade:
+      Override: 100
       NoDrop: true
       NoTrade: true
       NoCart: true
@@ -20422,6 +20755,112 @@ Body:
     EquipLevelMin: 1
     Script: |
       bonus bAtkEle,Ele_Water;
+  - Id: 13219
+    AegisName: Earth_Bullet
+    Name: Earth Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Earth;
+  - Id: 13228
+    AegisName: Fire_Bullet
+    Name: Fire Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Fire;
+  - Id: 13229
+    AegisName: Wind_Bullet
+    Name: Wind Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Wind;
+  - Id: 13230
+    AegisName: Water_Bullet
+    Name: Water Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Water;
+  - Id: 13231
+    AegisName: Poison_Bullet
+    Name: Poison Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Poison;
+      bonus2 bAddEff,Eff_Poison,500;
+  - Id: 13232
+    AegisName: Shadow_Bullet
+    Name: Shadow Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Dark;
+  - Id: 13233
+    AegisName: Ghost_Bullet
+    Name: Ghost Bullet
+    Type: Ammo
+    SubType: Bullet
+    Buy: 10
+    Weight: 1
+    Attack: 20
+    Jobs:
+      Gunslinger: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    Script: |
+      bonus bAtkEle,Ele_Ghost;
   - Id: 13250
     AegisName: Shuriken
     Name: Shuriken
@@ -21162,3 +21601,1890 @@ Body:
     Locations:
       Ammo: true
     EquipLevelMin: 99
+  - Id: 18005
+    AegisName: Mixed_Rune_Fragment
+    Name: Mixed Rune Fragment
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18006
+    AegisName: Rune_reset
+    Name: Rune reset
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18007
+    AegisName: Rune_lvl_up
+    Name: Rune lvl up
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18008
+    AegisName: Rune_+
+    Name: Rune +
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18009
+    AegisName: Rune_max
+    Name: Rune max
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18010
+    AegisName: Rare_Coin
+    Name: Rare Coin
+    Type: Etc
+    Buy: 0
+    Weight: 0
+    Flags:
+      BuyingStore: true
+  - Id: 18016
+    AegisName: 5% XP
+    Name: 5% XP
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bExpAddRace,RC_All,5;
+  - Id: 18017
+    AegisName: 3% Drop
+    Name: 3% Drop
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bDropAddRace,RC_All,3;
+  - Id: 18018
+    AegisName: 1% Vol de vie
+    Name: 1% Vol de vie
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus2 bHPDrainRate,1000,1;
+  - Id: 18019
+    AegisName: ATK + 2
+    Name: ATK + 2
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bBaseAtk,2;
+  - Id: 18020
+    AegisName: MATK + 2
+    Name: MATK + 2
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMatk,2;
+  - Id: 18021
+    AegisName: HP + 1%
+    Name: HP + 1%
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMaxHPrate,1;
+  - Id: 18022
+    AegisName: Def + 1
+    Name: Def + 1
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bDef,2;
+  - Id: 18023
+    AegisName: Mdef + 1
+    Name: Mdef + 1
+    Type: Card
+    SubType: Enchant
+    Buy: 0
+    Weight: 10
+    Script: |
+      bonus bMdef,2;
+  - Id: 25424
+    AegisName: Shimmering_Crystal
+    Name: Shimmering Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 25429
+    AegisName: Mythril_Ore
+    Name: Mythril Ore
+    Type: Etc
+    Buy: 20
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25430
+    AegisName: Mythril
+    Name: Mythril
+    Type: Etc
+    Buy: 20
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25457
+    AegisName: Cursed_Emerald_
+    Name: Cursed Emerald 
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25458
+    AegisName: Shinee_Opal_
+    Name: Shiny Opal
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25459
+    AegisName: Sea_Sapphire_
+    Name: Sea Sapphire
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25460
+    AegisName: Bloody_Ruby_
+    Name: Bloody Ruby
+    Type: Etc
+    Buy: 50000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25465
+    AegisName: Jello_Shard_Poring
+    Name: Poring Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25466
+    AegisName: Jello_Shard_Poporing
+    Name: Poporing Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25467
+    AegisName: Jello_Shard_Drops
+    Name: Drops Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25468
+    AegisName: Jello_Shard_Devil
+    Name: Deviling Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25469
+    AegisName: Jello_Shard_Angel
+    Name: Angeling Jello Shard 
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25470
+    AegisName: Red_Lotus_Gel_Stone
+    Name: Red Lotus Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25471
+    AegisName: Breeze_Gel_Stone
+    Name: Breeze Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25472
+    AegisName: Dusk_Gel_Stone
+    Name: Dusk Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25473
+    AegisName: Chaotic_Gel_Stone
+    Name: Chaotic Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25474
+    AegisName: Holy_Gel_Stone
+    Name: Holy Jello Stone
+    Type: Etc
+    Buy: 10000
+    Weight: 1
+    Flags:
+      BuyingStore: true
+  - Id: 25475
+    AegisName: Azure_Crystal
+    Name: Azure Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 25476
+    AegisName: Crimson_Crystal
+    Name: Crimson Crystal
+    Type: Etc
+    Buy: 0
+    Weight: 0
+  - Id: 29387
+    AegisName: Swordsman_Essence_1
+    Name: Swordsman Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "SM_MAGNUM", 10);
+      bonus(bAspdRate, getskilllv("SM_BASH") / 2);
+  - Id: 29388
+    AegisName: Merchant_Essence_1
+    Name: Merchant Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 2 * getskilllv("MC_DISCOUNT"));
+      bonus(bAspdRate, getskilllv("MC_OVERCHARGE"));
+  - Id: 29389
+    AegisName: Thief_Essence_1
+    Name: Thief Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "TF_STEAL");
+      bonus(bAspdRate, getskilllv("TF_STEAL") / 2);
+  - Id: 29390
+    AegisName: Mage_Essence_1
+    Name: Mage Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+      bonus(bCastrate, -getskilllv("MG_FIREWALL") / 2);
+  - Id: 29391
+    AegisName: Acolyte_Essence_1
+    Name: Acolyte Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSPrate, "AL_HEAL", -15);
+      bonus2(bSkillUseSPrate, "AL_INCAGI", -15);
+      bonus2(bSkillUseSPrate, "AL_BLESSING", -15);
+      bonus(bHealPower, getskilllv("AL_HEAL"));
+  - Id: 29392
+    AegisName: Archer_Essence_1
+    Name: Archer Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "AC_DOUBLE", 5);
+      bonus(bLongAtkRate, getskilllv("AC_VULTURE"));
+  - Id: 29393
+    AegisName: Swordsman_Essence_2
+    Name: Swordsman Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "SM_MAGNUM", 10);
+      bonus(bAspdRate, getskilllv("SM_BASH") / 2);
+      bonus2(bSkillAtk, "SM_MAGNUM", 15 * (getrefine() / 2));
+  - Id: 29394
+    AegisName: Merchant_Essence_2
+    Name: Merchant Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 2 * getskilllv("MC_DISCOUNT"));
+      bonus(bAspdRate, getskilllv("MC_OVERCHARGE"));
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+  - Id: 29395
+    AegisName: Thief_Essence_2
+    Name: Thief Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "TF_STEAL","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bAspdRate, getskilllv("TF_STEAL") / 2);
+      bonus(bFlee, 10 * (getrefine() / 2));
+  - Id: 29396
+    AegisName: Mage_Essence_2
+    Name: Mage Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+      bonus(bCastrate, -getskilllv("MG_FIREWALL") / 2); 
+      bonus(bMaxSP, 50 * (getrefine() / 2));
+  - Id: 29397
+    AegisName: Acolyte_Essence_2
+    Name: Acolyte Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSPrate, "AL_HEAL", -15);
+      bonus2(bSkillUseSPrate, "AL_INCAGI", -15);
+      bonus2(bSkillUseSPrate, "AL_BLESSING", -15);
+      bonus(bMaxHP, 70 * (getrefine() / 2));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+  - Id: 29398
+    AegisName: Archer_Essence_2
+    Name: Archer Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillUseSP, "AC_DOUBLE", 5);
+      bonus(bLongAtkRate, getskilllv("AC_VULTURE"));
+      bonus2(bSkillAtk, "AC_SHOWER", 5 * (getrefine() / 2));
+  - Id: 29399
+    AegisName: Knight_Essence_1
+    Name: Knight Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 3 * getskilllv("KN_CAVALIERMASTERY"));
+      bonus2(bSkillAtk, "KN_BOWLINGBASH", 20);
+      bonus(bAspdRate, getrefine());
+  - Id: 29400
+    AegisName: Blacksmith_Essence_1
+    Name: Blacksmith Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bCritical, 10); }", 1000, 60000, "BS_WEAPONPERFECT");
+      bonus2(bSkillAtk, "WS_CARTTERMINATION", 20);
+      bonus(bCritical, 3 * getskilllv("BS_MAXIMIZE"));
+      bonus(bAspdRate, getrefine());
+  - Id: 29401
+    AegisName: Assassin_Essence_1
+    Name: Assassin Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 3 * getskilllv("AS_GRIMTOOTH"));
+      bonus2(bSkillAtk, "AS_SONICBLOW", 20);
+      bonus(bCritAtkRate, getrefine());
+  - Id: 29402
+    AegisName: Wizard_Essence_1
+    Name: Wizard Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("WZ_HEAVENDRIVE"));
+      bonus2(bSkillAtk, "WZ_METEOR", 20);
+      bonus2(bSkillAtk, "WZ_VERMILION", 20);
+      bonus2(bSkillAtk, "WZ_STORMGUST", 20);
+      bonus(bMatkRate, getrefine() / 2);
+  - Id: 29403
+    AegisName: Priest_Essence_1
+    Name: Priest Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("PR_MAGNIFICAT"));
+      bonus2(bSkillAtk, "PR_MAGNUS", 30);
+  - Id: 29404
+    AegisName: Hunter_Essence_1
+    Name: Hunter Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAspdRate, 2 * getskilllv("HT_BLITZBEAT"));
+      bonus2(bSkillAtk, "HT_BLITZBEAT", 40);
+      bonus(bLuk, getrefine());
+  - Id: 29405
+    AegisName: Crusader_Essence_1
+    Name: Crusader Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("CR_TRUST"));
+      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 20);
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+  - Id: 29406
+    AegisName: Alchemist_Essence_1
+    Name: Alchemist Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bInt, 1 * (getskilllv("AM_LEARNINGPOTION")/2));
+      bonus(bAspdRate, 5);
+      bonus(bAgi, 1 * (getrefine() / 2));
+  - Id: 29407
+    AegisName: Rogue_Essence_1
+    Name: Rogue Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("RG_PLAGIARISM"));
+      bonus2(bSkillAtk, "RG_RAID", 150);
+      bonus(bAspdRate, getrefine());
+  - Id: 29408
+    AegisName: Sage_Essence_1
+    Name: Sage Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("SA_AUTOSPELL"));
+      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 20);
+      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 20);
+      bonus(bAspdRate, getrefine());
+  - Id: 29409
+    AegisName: Monk_Essence_1
+    Name: Monk Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_CHAINCOMBO", 20);
+      bonus2(bSkillAtk, "MO_COMBOFINISH", 20);
+  - Id: 29410
+    AegisName: Bard_Dancer_Essence_1
+    Name: Bard & Dancer Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bSkillCooldown, "BD_ADAPTATION", -60000 - 1000*(getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+  - Id: 29411
+    AegisName: Knight_Essence_2
+    Name: Knight Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 5 * getskilllv("KN_CAVALIERMASTERY"));
+      bonus2(bSkillAtk, "KN_BOWLINGBASH", 35);
+      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","SM_BASH",10,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      autobonus3("{ bonus(bCritAtkRate, 7); }", 1000, 60000, "KN_TWOHANDQUICKEN","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29412
+    AegisName: Blacksmith_Essence_2
+    Name: Blacksmith Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      autobonus3("{ bonus(bCritical, 10); }", 1000, 60000, "BS_WEAPONPERFECT","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bCritical, 5 * getskilllv("BS_MAXIMIZE"));
+      bonus2(bSkillAtk, "WS_CARTTERMINATION", 35);
+      bonus4 bAutoSpellOnSkill,"WS_CARTTERMINATION","BS_HAMMERFALL",5,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      bonus(bCritAtkRate, getskilllv("BS_WEAPONRESEARCH"));
+  - Id: 29413
+    AegisName: Assassin_Essence_2
+    Name: Assassin Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCritical, 5 * getskilllv("AS_GRIMTOOTH"));
+      bonus2(bSkillAtk, "AS_SONICBLOW", 35);
+      bonus(bCritAtkRate, getrefine());
+      bonus4 bAutoSpellOnSkill,"AS_SONICBLOW","AS_CLOAKING",10,40 * getrefine();
+      autobonus3("{ bonus(bAspdRate, 7); }", 1000, 60000, "AS_SONICBLOW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29414
+    AegisName: Wizard_Essence_2
+    Name: Wizard Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -5 * getskilllv("WZ_HEAVENDRIVE"));
+      bonus2(bSkillAtk, "WZ_METEOR", 35);
+      bonus2(bSkillAtk, "WZ_VERMILION", 35);
+      bonus2(bSkillAtk, "WZ_STORMGUST", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_STORMGUST","WZ_METEOR",10,20 * getrefine();
+      bonus(bMatkRate, getrefine() / 2);
+      autobonus3("{ bonus(bFlee, 30); }", 1000, 60000, "WZ_QUAGMIRE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29415
+    AegisName: Priest_Essence_2
+    Name: Priest Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -5 * getskilllv("PR_MAGNIFICAT"));
+      bonus2(bSkillAtk, "PR_MAGNUS", 60);
+      bonus4 bAutoSpellOnSkill,"PR_MAGNUS","PR_SUFFRAGIUM",3,30 * getrefine();
+      autobonus3("{ bonus(bMatkRate, 7); bonus(bHealPower, 50); }", 1000, 60000, "PR_GLORIA", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29416
+    AegisName: Hunter_Essence_2
+    Name: Hunter Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAspdRate, 3 * getskilllv("HT_BLITZBEAT"));
+      bonus2(bSkillAtk, "HT_BLITZBEAT", 40);
+      bonus2(bSkillAtk, "SN_FALCONASSAULT", 35);
+      bonus4 bAutoSpellOnSkill,"SN_FALCONASSAULT","HT_BLITZBEAT",10,20 * getrefine();
+      bonus(bInt, getrefine());
+      //autobonus3("{ bonus(bSkillAtk, "HT_BLITZBEAT", 40); }", 1000, 60000, "AC_CONCENTRATION", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29417
+    AegisName: Crusader_Essence_2
+    Name: Crusader Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("CR_TRUST"));
+      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 40);
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+      bonus4 bAutoSpellOnSkill,"PA_SHIELDCHAIN","PA_PRESSURE",5,20 * getrefine();
+      autobonus3("{ bonus(bDef, 10); }", 1000, 60000, "CR_AUTOGUARD", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29418
+    AegisName: Alchemist_Essence_2
+    Name: Alchemist Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bInt, 1 * getskilllv("AM_LEARNINGPOTION"));
+      bonus(bAspdRate, 10);
+      bonus(bAgi, 1 * (getrefine() / 2));
+      autobonus3("{ bonus(bInt, 5); bonus(bDex, 5); bonus(bLuk, 5); bonus2(bAddMonsterDropItem, Coating_Bottle, 30 *getrefine()); bonus2(bAddMonsterDropItem, MenEater_Plant_Bottle, 30 * getrefine()); }", 1000, 60000, "AM_POTIONPITCHER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29419
+    AegisName: Rogue_Essence_2
+    Name: Rogue Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("RG_PLAGIARISM"));
+      bonus2(bSkillAtk, "RG_RAID", 300);
+      bonus(bAspdRate, getrefine());
+      bonus4 bAutoSpellOnSkill,"RG_RAID","TF_HIDING",10,40 * getrefine();
+      bonus2(bSkillUseSPrate, "RG_RAID", 20);      
+  - Id: 29420
+    AegisName: Sage_Essence_2
+    Name: Sage Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("SA_AUTOSPELL"));
+      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 35);
+      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_EARTHSPIKE","WZ_HEAVENDRIVE",5,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"WZ_HEAVENDRIVE","WZ_EARTHSPIKE",5,20 * getrefine();
+      bonus(bAspdRate, getrefine());
+      autobonus3("{ bonus(bAspd, 5); bonus2(bMagicAtkEle, Ele_Earth, 15); }", 1000, 60000, "SA_AUTOSPELL", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29421
+    AegisName: Monk_Essence_2
+    Name: Monk Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bAspdRate, 10;
+      bonus(bAtk, 5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_CHAINCOMBO", 60);
+      bonus2(bSkillAtk, "MO_COMBOFINISH", 60);
+      bonus4 bAutoSpellOnSkill,"MO_CHAINCOMBO","PF_SPIDERWEB",1,30 * getrefine();
+      //bonus3({"bAutoSpell, "MO_CALLSPIRITS", 5, 100); }", 1000, 60000, "MO_EXPLOSIONSPIRITS", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus3(bAutoSpell, MO_CALLSPIRITS, 5, 100); }", 1000, 60000, MO_EXPLOSIONSPIRITS, "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,3 * getrefine();
+  - Id: 29422
+    AegisName: Bard_Dancer_Essence_2
+    Name: Bard & Dancer Essence Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bInt, 10;
+      bonus bDex, 10;
+      bonus bAspdRate, 10;
+      bonus2(bSkillCooldown, "BD_ADAPTATION", -60000 - 3000*(getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus(bMaxSP, 30 * (getrefine() / 2));
+      autobonus3("{ bonus(bSPrecovRate, 100); }", 1000, 60000, "BA_POEMBRAGI", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus(bSPrecovRate, 100); }", 1000, 60000, "DC_SERVICEFORYOU", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29525
+    AegisName: Ninja_Essence_1
+    Name: Ninja Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bAtk, 3 * getskilllv("NJ_TOBIDOUGU"));
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 30);
+      bonus2(bSkillAtk, "NJ_HUUMA", 30);
+      bonus2(bSkillAtk, "NJ_ISSEN", 10);
+      bonus(bMaxHP, 100 * (getrefine() / 2));
+      bonus(bHit, 5 * (getrefine() / 2));
+  - Id: 29526
+    AegisName: Ninja_Essence_2
+    Name: Ninja Essence Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bAtk, 5 * getskilllv("NJ_TOBIDOUGU"));
+      bonus2(bSkillAtk, "NJ_KIRIKAGE", 50);
+      bonus2(bSkillAtk, "NJ_HUUMA", 50);
+      bonus2(bSkillAtk, "NJ_ISSEN", 20);
+      //bonus5 bAutoSpellOnSkill,"NJ_ISSEN","AL_HEAL",10,1000,1;
+      bonus(bMaxHP, 200 * (getrefine() / 2));
+      bonus(bHit, 10 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "NJ_NEN", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus2(bHPRegenRate, 250,100); }", 1000, 1000, "NJ_ISSEN", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29553
+    AegisName: Knight_Essence2_1
+    Name: Knight Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, getskilllv("KN_SPEARMASTERY"));
+      bonus2(bSkillAtk, "KN_PIERCE", 20);
+      bonus2(bSkillAtk, "KN_BRANDISHSPEAR", 20);
+      bonus2(bSkillAtk, "LK_SPIRALPIERCE", 20);
+      bonus(bAtk, 2 * getrefine());
+  - Id: 29554
+    AegisName: Blacksmith_Essence2_1
+    Name: Blacksmith Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bLuk, getskilllv("BS_SKINTEMPER") + (getrefine() / 2));
+      bonus(bDex, 2 * getskilllv("BS_SKINTEMPER"));
+  - Id: 29555
+    AegisName: Assassin_Essence2_1
+    Name: Assassin Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bFlee, 3 * getskilllv("AS_LEFT"));
+      bonus2(bSkillAtk, "AS_SPLASHER", 50);
+      bonus2(bSkillAtk, "ASC_BREAKER", 20);
+      bonus(bCastrate, -3 * (getrefine() / 2));
+  - Id: 29556
+    AegisName: Wizard_Essence2_1
+    Name: Wizard Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -2 * getskilllv("WZ_VERMILION"));
+      bonus2(bSkillAtk, "WZ_JUPITEL", 20);
+      bonus(bMatk, 2 * getrefine());
+  - Id: 29557
+    AegisName: Priest_Essence2_1
+    Name: Priest Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("PR_MACEMASTERY") + 2 * getrefine());
+      bonus(bCritAtkRate, 15);
+  - Id: 29558
+    AegisName: Hunter_Essence2_1
+    Name: Hunter Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("HT_BEASTBANE"));
+      bonus2(bSkillAtk, "AC_DOUBLE", 20);
+      bonus(bLongAtkRate, 3 * (getrefine() / 2));
+  - Id: 29559
+    AegisName: Ninja_Essence2_1
+    Name: Ninja Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bMatk, 3 * getskilllv("NJ_NINPOU"));
+      bonus2(bSkillAtk, "NJ_BAKUENRYU", 20);
+      bonus2(bSkillAtk, "NJ_HYOUSYOURAKU", 20);
+      bonus2(bSkillAtk, "NJ_KAMAITACHI", 20);
+      bonus2(bCastrate, "NJ_KOUENKA", -5 * (getrefine() / 2));
+      bonus2(bCastrate, "NJ_HYOUSENSOU", -5 * (getrefine() / 2));
+      bonus2(bCastrate, "NJ_HUUJIN", -5 * (getrefine() / 2));
+  - Id: 29560
+    AegisName: Crusader_Essence2_1
+    Name: Crusader Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("CR_TRUST") + 2 * getrefine());
+      bonus2(bSkillAtk, "CR_GRANDCROSS", 20);
+  - Id: 29561
+    AegisName: Alchemist_Essence2_1
+    Name: Alchemist Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * getskilllv("AM_PHARMACY") + 2 * getrefine());
+      bonus2(bSkillAtk, "MC_MAMMONITE", 50);
+  - Id: 29562
+    AegisName: Rogue_Essence2_1
+    Name: Rogue Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, getskilllv("RG_SNATCHER"));
+      bonus2(bSkillAtk, "RG_BACKSTAP", 50);
+      bonus(bAtk, 2 * getrefine());
+  - Id: 29563
+    AegisName: Sage_Essence2_1
+    Name: Sage Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 3 * getskilllv("SA_ADVANCEDBOOK") + 2 * getrefine());
+      bonus2(bSkillAtk, "MG_FIREBOLT", 20);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 20);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20);
+  - Id: 29564
+    AegisName: Monk_Essence2_1
+    Name: Monk Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bCastrate, "MO_INVESTIGATE", -3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_INVESTIGATE", 20);
+      bonus2(bCastrate, "MO_FINGEROFFENSIVE", -3 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_FINGEROFFENSIVE", 20);
+  - Id: 29565
+    AegisName: Bard_Dancer_Essence2_1
+    Name: Bard & Dancer Essence II Lv1 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 3 * (getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 20 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "DC_THROWARROW", 20 + (5 * getrefine()/2));
+      bonus2(bSkillAtk, "CG_ARROWVULCAN", 10 + (5 * getrefine()/2));
+      bonus(bLongAtkRate, getrefine() / 2);
+  - Id: 29566
+    AegisName: Knight_Essence2_2
+    Name: Knight Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, 2 * getskilllv("KN_SPEARMASTERY"));
+      bonus2(bSkillAtk, "KN_PIERCE", 35);
+      bonus2(bSkillAtk, "KN_BRANDISHSPEAR", 35);
+      bonus2(bSkillAtk, "LK_SPIRALPIERCE", 35);
+      bonus4 bAutoSpellOnSkill,"LK_SPIRALPIERCE","LK_JOINTBEAT",10,30 * getrefine();
+      bonus(bAtk, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "KN_PIERCE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29567
+    AegisName: Blacksmith_Essence2_2
+    Name: Blacksmith Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bLuk, 2 * getskilllv("BS_SKINTEMPER") + getrefine() / 2);
+      bonus(bDex, 10);
+      autobonus3("{ bonus(bLuk, 20); bonus(bDex, 20); }", 1000, 60000, "BS_ADRENALINE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29568
+    AegisName: Assassin_Essence2_2
+    Name: Assassin Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bFlee, 5 * getskilllv("AS_LEFT"));
+      bonus2(bSkillAtk, "AS_SPLASHER", 75);
+      bonus2(bSkillAtk, "ASC_BREAKER", 35);
+      bonus4 bAutoSpellOnSkill,"ASC_BREAKER","AS_CLOAKING",10,40 * getrefine();
+      bonus(bCastrate, -3 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "AS_CLOAKING", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29569
+    AegisName: Wizard_Essence2_2
+    Name: Wizard Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bCastrate, -3 * getskilllv("WZ_VERMILION"));
+      bonus2(bSkillAtk, "WZ_JUPITEL", 35);
+      bonus4 bAutoSpellOnSkill,"WZ_JUPITEL","HW_MAGICPOWER",10,20 * getrefine();
+      bonus(bMatk, 2 * getrefine());
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "WZ_JUPITEL", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29570
+    AegisName: Priest_Essence2_2
+    Name: Priest Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("PR_MACEMASTERY") + 2 * getrefine());
+      bonus(bCritAtkRate, 15);
+      //bonus4 bAutoSpellOnSkill,"SM_BASH","KN_BOWLINGBASH",10,30 * getrefine();
+      bonus3 bAutoSpell,"SM_BASH",10, 30 * getrefine();
+      bonus3 bAutoSpell,"KN_BOWLINGBASH",10, 30 * getrefine();
+      //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "PR_STRECOVERY","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29571
+    AegisName: Hunter_Essence2_2
+    Name: Hunter Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("HT_BEASTBANE"));
+      bonus2(bSkillAtk, "AC_DOUBLE", 35);
+      bonus2(bSkillAtk, "SN_SHARPSHOOTING", 20);
+      //bonus4 bAutoSpellOnSkill,"AC_DOUBLE","SN_SIGHT",10,200;
+      bonus2 bAddEff,Eff_Stun,500;
+      bonus2 bAddEff,Eff_Curse,500;
+      bonus2 bAddEff,Eff_Silence,500;
+      bonus(bLongAtkRate, 3 * (getrefine() / 2));
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "AC_DOUBLE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}"); 
+  - Id: 29572
+    AegisName: Ninja_Essence2_2
+    Name: Ninja Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bMatk, 5 * getskilllv("NJ_NINPOU"));
+      bonus2(bSkillAtk, "NJ_BAKUENRYU", 35);
+      bonus2(bSkillAtk, "NJ_HYOUSYOURAKU", 35);
+      bonus2(bSkillAtk, "NJ_KAMAITACHI", 35);
+      bonus2(bCastrate, "NJ_KOUENKA", -5 * getrefine());
+      bonus2(bCastrate, "NJ_HYOUSENSOU", -5 * getrefine());
+      bonus2(bCastrate, "NJ_HUUJIN", -5 * getrefine());
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "NJ_UTSUSEMI", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29573
+    AegisName: Crusader_Essence2_2
+    Name: Crusader Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("CR_TRUST") + 2 * getrefine());
+      bonus2(bSkillAtk, "CR_GRANDCROSS", 40);
+      bonus4 bAutoSpellOnSkill,"CR_GRANDCROSS","AL_HEAL",10,20 * getrefine();
+      autobonus3("{ bonus(bHealPower2, 50); }", 1000, 60000, "SM_ENDURE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29574
+    AegisName: Alchemist_Essence2_2
+    Name: Alchemist Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * getskilllv("AM_PHARMACY") + 2 * getrefine());
+      bonus2(bSkillAtk, "MC_MAMMONITE", 100);
+      bonus4 bAutoSpellOnSkill,"MC_MAMMONITE","SM_BASH",10,20 * getrefine();
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "MC_MAMMONITE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus3(bAutoSpell, "SM_BASH", 10, 100); }", 1000, 60000, "AM_POTIONPITCHER","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29575
+    AegisName: Rogue_Essence2_2
+    Name: Rogue Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bHit, 2 * getskilllv("RG_SNATCHER"));
+      bonus2(bSkillAtk, "RG_BACKSTAP", 125);
+      bonus4 bAutoSpellOnSkill,"RG_BACKSTAP","TF_HIDING",10, 40 * getrefine();
+      bonus(bAtk, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "RG_BACKSTAP", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus2(bSkillAtk, "RG_BACKSTAP", 20); }", 1000, 60000, "TF_POISON","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29576
+    AegisName: Sage_Essence2_2
+    Name: Sage Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bMatk, 5 * getskilllv("SA_ADVANCEDBOOK") + 2 * getrefine());
+      bonus2(bSkillAtk, "MG_FIREBOLT", 35);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 35);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 35);
+      bonus2(bCastrate, "MG_LIGHTNINGBOLT", -5 * getrefine());
+      bonus4 bAutoSpellOnSkill,"PF_HPCONVERSION","AL_HEAL",10, 50 * getrefine();
+      autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "MG_FIREBOLT", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      //autobonus3("{ bonus2(bSkillAtk, "MG_FIREBOLT", 20); bonus2(bSkillAtk, "MG_COLDBOLT", 20); bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 20); }", 1000, 60000, "WZ_EARTHSPIKE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29577
+    AegisName: Monk_Essence2_2
+    Name: Monk Essence II Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus2(bCastrate, "MO_INVESTIGATE", -5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_INVESTIGATE", 20 + 5 * (getrefine() / 2));
+      bonus2(bCastrate, "MO_FINGEROFFENSIVE", -5 * getskilllv("AL_DEMONBANE"));
+      bonus2(bSkillAtk, "MO_FINGEROFFENSIVE", 20 + 5 * (getrefine() / 2));
+      bonus4 bAutoSpellOnSkill,"MO_INVESTIGATE","MO_CALLSPIRITS",5,30 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MO_FINGEROFFENSIVE","CH_SOULCOLLECT",1,30 * getrefine();
+      //autobonus3("{ bonus5(bAutoSpellOnSkill, "MO_INVESTIGATE", "MO_CALLSPIRITS", 5, 500, 1); }", 1000, 60000, "AL_BLESSING","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29578
+    AegisName: Bard_Dancer_Essence2_2
+    Name: Bard & Dancer Essence II Lv2 
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus(bAtk, 5 * (getskilllv("BA_MUSICALLESSON") + getskilllv("DC_DANCINGLESSON")));
+      bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 50);
+      bonus2(bSkillAtk, "DC_THROWARROW", 50);
+      bonus2(bSkillAtk, "CG_ARROWVULCAN", 35);
+      bonus4 bAutoSpellOnSkill,"CG_ARROWVULCAN","CG_TAROTCARD",5,40 * getrefine();
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "DC_THROWARROW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "BA_MUSICALSTRIKE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus(bLongAtkRate, getrefine() / 2);
+      //autobonus3("{ bonus2(bSkillAtk, "BA_MUSICALSTRIKE", 20); bonus2(bSkillAtk, "DC_THROWARROW", 20); }", 1000, 60000, "BD_ENCORE","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+
+
+  - Id: 29579
+    AegisName: Gun_Essence1
+    Name: Gunslinger Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bAtk, 1 * getskilllv("GS_SNAKEEYE"));
+      bonus2(bSkillAtk, "GS_RAPIDSHOWER", 25);
+  - Id: 29580
+    AegisName: Gun_Essence2
+    Name: Gunslinger Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus(bAtk, 2 * getskilllv("GS_SNAKEEYE"));
+      bonus2(bSkillAtk, "GS_RAPIDSHOWER", 50);
+      bonus4 bAutoSpellOnSkill,"GS_RAPIDSHOWER","GS_DISARM",5, 20 * getrefine();
+      bonus(bAgi, 2 * getrefine());
+      autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "GS_RAPIDSHOWER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+  - Id: 29581
+    AegisName: SG_Essence1
+    Name: Star Gladiator Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus bAspdRate, 10;
+      bonus(bAtk, 1 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "TK_JUMPKICK", 50);
+  - Id: 29582
+    AegisName: SG_Essence2
+    Name: Star Gladiator Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus bAspdRate, 20;
+      bonus(bAtk, 2 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "TK_JUMPKICK", 100);
+  - Id: 29583
+    AegisName: Battleground_Badge2
+    Name: Battleground Badge2
+    Type: Etc
+    Buy: 20
+    Weight: 0
+    Flags:
+      BuyingStore: true
+
+
+
+
+
+
+
+
+

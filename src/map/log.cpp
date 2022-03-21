@@ -85,8 +85,6 @@ static char log_picktype2char(e_log_pick_type type)
 		case LOG_TYPE_MERGE_ITEM:		return 'Z';  // Merged Item
 		case LOG_TYPE_QUEST:			return 'Q';  // (Q)uest Item
 		case LOG_TYPE_PRIVATE_AIRSHIP:	return 'H';  // Private Airs(H)ip
-		case LOG_TYPE_BARTER:			return 'J';  // Barter Shop
-		case LOG_TYPE_LAPHINE:			return 'W'; // Laphine UI
 	}
 
 	// should not get here, fallback
@@ -200,7 +198,33 @@ void log_branch(struct map_session_data* sd)
 		fclose(logfp);
 	}
 }
+void log_bg_kill(struct map_session_data* ssd, struct map_session_data* tsd, uint16 skill_id)
+{
+	char esc_sname[NAME_LENGTH*2+1];
+	char esc_tname[NAME_LENGTH*2+1];
 
+	Sql_EscapeStringLen(mmysql_handle, esc_sname, ssd->status.name, strnlen(ssd->status.name, NAME_LENGTH));
+	Sql_EscapeStringLen(mmysql_handle, esc_tname, tsd->status.name, strnlen(tsd->status.name, NAME_LENGTH));
+
+	if( SQL_ERROR == Sql_Query(mmysql_handle,LOG_QUERY " INTO `rank_bg_log` (`time`,`killer`,`killer_id`,`killed`,`killed_id`,`map`,`skill`) VALUES (NOW(), '%s', '%d', '%s', '%d', '%s', '%d')", esc_sname, ssd->status.char_id, esc_tname, tsd->status.char_id, map[tsd->bl.m].name, skill_id) )
+		Sql_ShowDebug(mmysql_handle);
+
+	return;
+}
+ 
+void log_woe_kill(struct map_session_data* ssd, struct map_session_data* tsd, uint16 skill_id)
+{
+	char esc_sname[NAME_LENGTH*2+1];
+	char esc_tname[NAME_LENGTH*2+1];
+
+	Sql_EscapeStringLen(mmysql_handle, esc_sname, ssd->status.name, strnlen(ssd->status.name, NAME_LENGTH));
+	Sql_EscapeStringLen(mmysql_handle, esc_tname, tsd->status.name, strnlen(tsd->status.name, NAME_LENGTH));
+
+	if( SQL_ERROR == Sql_Query(mmysql_handle,LOG_QUERY " INTO `rank_woe_log` (`time`,`killer`,`killer_id`,`killed`,`killed_id`,`map`,`skill`) VALUES (NOW(), '%s', '%d', '%s', '%d', '%s', '%d')", esc_sname, ssd->status.char_id, esc_tname, tsd->status.char_id, map[tsd->bl.m].name, skill_id) )
+		Sql_ShowDebug(mmysql_handle);
+
+	return;
+}
 /// logs item transactions (generic)
 void log_pick(int id, int16 m, e_log_pick_type type, int amount, struct item* itm)
 {

@@ -41,7 +41,7 @@
 #define BOUND_ITEMS
 
 /// Uncomment to enable real-time server stats (in and out data and ram usage).
-//#define SHOW_SERVER_STATS
+#define SHOW_SERVER_STATS
 
 /// Comment to disable the job base HP/SP/AP table (job_basepoints.yml)
 #define HP_SP_TABLES

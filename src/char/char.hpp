@@ -12,8 +12,6 @@
 #include "../common/timer.hpp"
 #include "../config/core.hpp"
 
-#include "packets.hpp"
-
 extern int login_fd; //login file descriptor
 extern int char_fd; //char file descriptor
 
@@ -182,7 +180,8 @@ struct CharServ_Config {
 	int autosave_interval;
 	int start_zeny;
 	int guild_exp_rate;
-
+	int bg_regular_rewards[3];
+	
 	char default_map[MAP_NAME_LENGTH];
 	unsigned short default_map_x;
 	unsigned short default_map_y;
@@ -266,13 +265,17 @@ DBMap* char_get_chardb(); // uint32 char_id -> struct mmo_charstatus*
 extern int fame_list_size_chemist;
 extern int fame_list_size_smith;
 extern int fame_list_size_taekwon;
+// BG extended
+extern int fame_list_size_bg;
 // Char-server-side stored fame lists [DracoRPG]
 extern struct fame_list smith_fame_list[MAX_FAME_LIST];
 extern struct fame_list chemist_fame_list[MAX_FAME_LIST];
 extern struct fame_list taekwon_fame_list[MAX_FAME_LIST];
+// BG extended
+extern struct fame_list bg_fame_list[MAX_FAME_LIST];
 
 #define DEFAULT_AUTOSAVE_INTERVAL 300*1000
-#define MAX_CHAR_BUF sizeof( struct CHARACTER_INFO ) //Max size (for WFIFOHEAD calls)
+#define MAX_CHAR_BUF 150 //Max size (for WFIFOHEAD calls)
 
 int char_search_mapserver(unsigned short map, uint32 ip, uint16 port);
 int char_lan_subnetcheck(uint32 ip);
@@ -296,6 +299,8 @@ int char_rename_char_sql(struct char_session_data *sd, uint32 char_id);
 int char_divorce_char_sql(int partner_id1, int partner_id2);
 int char_memitemdata_to_sql(const struct item items[], int max, int id, enum storage_type tableswitch, uint8 stor_id);
 bool char_memitemdata_from_sql(struct s_storage* p, int max, int id, enum storage_type tableswitch, uint8 stor_id);
+
+int char_ranking_reset(int type);
 
 int char_married(int pl1,int pl2);
 int char_child(int parent_id, int child_id);

@@ -13,11 +13,13 @@
 #include "../common/socket.hpp" // last_tick
 #include "../common/strlib.hpp"
 #include "../common/timer.hpp"
+#include "../common/utilities.hpp"
 #include "../common/utils.hpp"
 
 #include "achievement.hpp"
 #include "atcommand.hpp"	//msg_txt()
 #include "battle.hpp"
+#include "battleground.hpp"
 #include "clif.hpp"
 #include "instance.hpp"
 #include "intif.hpp"
@@ -27,6 +29,8 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "trade.hpp"
+
+using namespace rathena;
 
 static DBMap* party_db; // int party_id -> struct party_data* (releases data)
 static DBMap* party_booking_db; // uint32 char_id -> struct party_booking_ad_info* (releases data) // Party Booking [Spiria]
@@ -674,6 +678,10 @@ int party_member_withdraw(int party_id, uint32 account_id, uint32 char_id, char 
 #endif
 
 		sd->status.party_id = 0;
+		if( sd->state.spb ) {
+			sd->state.spb = 0;
+			clif_displaymessage(sd->fd, msg_txt(sd,1072));
+		}
 		clif_name_area(&sd->bl); //Update name display [Skotlex]
 		//TODO: hp bars should be cleared too
 
@@ -1251,42 +1259,69 @@ int party_sub_count_class(struct block_list *bl, va_list ap)
 
 	return 1;
 }
+bool party_foreachsamemap_loop(struct map_session_data* sd, struct map_session_data* psd, int range, int x0, int x1, int y0, int y1) {
+	if (!psd || !sd)
+		return false;
 
+	if (psd->bl.m != sd->bl.m || !psd->bl.prev)
+		return false;
+
+	if (range &&
+		(psd->bl.x<x0 || psd->bl.y<y0 ||
+		 psd->bl.x>x1 || psd->bl.y>y1))
+		return false;
+
+	return true;
+}
 /// Executes 'func' for each party member on the same map and in range (0:whole map)
 int party_foreachsamemap(int (*func)(struct block_list*,va_list),struct map_session_data *sd,int range,...)
 {
 	struct party_data *p;
+	std::shared_ptr<s_battleground_data> bg;
+	struct map_session_data* psd;
 	int i;
 	int x0,y0,x1,y1;
-	struct block_list *list[MAX_PARTY];
 	int blockcount=0;
 	int total = 0; //Return value.
 
 	nullpo_ret(sd);
 
-	if((p = party_search(sd->status.party_id)) == NULL)
-		return 0;
+	bool bg_mode = (map_getmapflag(sd->bl.m, MF_BATTLEGROUND)>0);
+	struct block_list **list = (struct block_list**)aCalloc(1, bg_mode ? MAX_BG_MEMBERS : MAX_PARTY);
+	
+	if(bg_mode) {
+		if(!(bg = util::umap_find(bg_team_db, bg_team_get_id(&sd->bl))))
+			return 0;
+	} else {
+		if((p = party_search(sd->status.party_id)) == NULL)
+			return 0;
+	}
 
 	x0 = sd->bl.x-range;
 	y0 = sd->bl.y-range;
 	x1 = sd->bl.x+range;
 	y1 = sd->bl.y+range;
 
-	for(i = 0; i < MAX_PARTY; i++) {
-		struct map_session_data *psd = p->data[i].sd;
 
-		if(!psd)
-			continue;
+	if (bg_mode) {
+		for (auto& pl_sd : bg->members) {
+			psd = pl_sd.sd;
 
-		if(psd->bl.m!=sd->bl.m || !psd->bl.prev)
-			continue;
+			if (psd == nullptr || !party_foreachsamemap_loop(sd, psd, range, x0, x1, y0, y1))
+				continue;
 
-		if(range &&
-			(psd->bl.x<x0 || psd->bl.y<y0 ||
-			 psd->bl.x>x1 || psd->bl.y>y1 ) )
-			continue;
+			list[blockcount++] = &psd->bl;
+		}
+	}
+	else {
+		for (i = 0; i < MAX_PARTY; i++) {
+			psd = p->data[i].sd;
 
-		list[blockcount++]=&psd->bl;
+			if (!party_foreachsamemap_loop(sd, psd, range, x0, x1, y0, y1))
+				continue;
+
+			list[blockcount++] = &psd->bl;
+		}
 	}
 
 	map_freeblock_lock();
