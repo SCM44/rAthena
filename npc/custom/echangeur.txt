@@ -126,6 +126,10 @@ paramk,23,186,4	script	Rune Dealer	664,{
     OnInit:
         .IDcoin = 18005;
         setarray .LstItemCraft[0],18006,18007,18008,18009;
+<<<<<<< HEAD
         setarray .LstItemPrix[0],10,15,4,30;
+=======
+        setarray .LstItemPrix[0],5,15,4,30;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
     end;
 }

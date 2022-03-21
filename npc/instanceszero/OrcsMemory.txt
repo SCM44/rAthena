@@ -35,6 +35,7 @@ gef_fild10,231,203,5	script	Calm Scientist#0	4_F_GON,5,5,{
 		close;
 	}
 	mes "^ff0000If you attempt to tame any monsters, it will not count as a kill. Please be careful.^000000";
+<<<<<<< HEAD
 	next;
 	.@md_name$ = "Orc's Memory";
 	if(isbegin_quest(12419) == 0){
@@ -244,6 +245,130 @@ gef_fild10,231,203,5	script	Calm Scientist#0	4_F_GON,5,5,{
 			mes "[Calm Scientist]";
 			mes "Changed your mind?";
 			close;
+=======
+    next;
+	.@md_name$ = "Orc's Memory";
+        switch(checkquest(12420,PLAYTIME)) {
+        case -1: break;
+        case 0:
+        case 1:
+			mes "[Calm Scientist]";
+            mes "Sorry, but the entry period to the "+.@md_name$+" has expired.";
+            mes "Take a rest while waiting for the dungeon to be available again.";
+			next;
+			switch(select("Reset cooldown (50,000z)","No thanks.")){
+				
+				case 1:
+					if(zeny < 50000){
+						mes "[Calm Scientist]";
+						mes "You want to reset the cooldown, it will cost you 50,000 zeny.";
+						close;
+					}
+					mes "[Calm Scientist]";
+					mes "You really don't have any patience...I'll be taking the zeny and reset the instance for you.";
+					mes "You may enter.";
+					set zeny,zeny-50000;
+					erasequest 12420;
+					close;
+				
+				case 2:
+					if(countitem(18010) < 100){
+						mes "[Calm Scientist]";
+						mes "You want to reset the cooldown, it will cost you 100 Rare Coins.";
+						close;
+					}
+					mes "[Calm Scientist]";
+					mes "That's fine, if you change your mind, talk to me any time!";
+					close;
+			}
+			
+        case 2:
+            erasequest 12420;
+			mes "[Calm Scientist]";
+            mes "The cooldown has expired.";
+            mes "You may re-enter the Memorial Dungeon.";
+            close;
+        }
+		if(isbegin_quest(12419) == 0){
+			
+			mes "[Calm Scientist]";
+			mes "Have you seen the Doctor who used to work here before?";
+			next;
+			select("Well...");
+			mes "[Calm Scientist]";
+			mes "He was my advisor, he was studying the ancient ecology of the area.";
+			next;
+			mes "[Calm Scientist]";
+			mes "I lost the contact with him, so I went here to find him personally and there's no trace of where he is...";
+			next;
+			select("He was a weirdo.","I've never met him before...");
+			mes "[Calm Scientist]";
+			mes "Well, I see. Anyway, the research itself must not be interrupted, so I had to do the research instead, but there are quite a few things that are difficult to do alone.";
+			next;
+			mes "[Calm Scientist]";
+			mes "The former doctor said that he received a lot of help from adventurers, but I would like to ask if you can help me.";
+			next;
+			select("Like a dungeon terrain survey?","Investigating the monster's habitat.","First, you have to kill a monster.");
+			mes "[Calm Scientist]";
+			mes "Oh well, it's not that limited. I've finished the gate work to the ancient dimension of this orc area, but I can't go in myself.";
+			next;
+			mes "[Calm Scientist]";
+			mes "I can't give you any specific remuneration, but if you're adventurous, don't you want to help me?";
+			next;
+			select("I'm sorry, I'm new to this.","Not really...");
+			mes "[Calm Scientist]";
+			mes "Okay. There are many other adventurers who use the gates I open, so for now, I'll just register you on the gate access list.";
+			next;
+			select("Register my name.");
+			mes "[Calm Scientist]";
+			mes ""+strcharinfo(0)+" is the name. The gate is now available, so please talk to me whenever you want.";
+			setquest 12419;
+			close;
+		}
+		mes "[Calm Scientist]";
+		mes "Oh, you came earlier than I thought. Will you use the gate for ecological survey?";
+		next;
+		switch(select("Create Orc's Memory 1F:Enter the Dungeon:Cancel")) {
+			case 1:
+				if (is_party_leader() == false) {
+					mes "[Calm Scientist]";
+					mes "Please tell your Party Leader to create the instance.";
+					close;
+				}
+				instance_create(.@md_name$);
+				mes "[Calm Scientist]";
+				mes "The Memorial Dungeon of Orc' Memory has been created.";
+				mes "You may now enter.";
+				close;
+				
+			case 2:
+               switch( instance_enter(.@md_name$) ) {
+                    case IE_NOMEMBER:
+                        end;
+                    case IE_NOINSTANCE:
+                        mes "There is no Memorial Dungeon registered.";
+                        close;
+                    case IE_OTHER:
+                        mes "An unknown error has occurred.";
+                        close;
+                    case IE_OK:
+						mes "[Calm Scientist]";
+                        mes "I'll meet you there!";
+                        mapannounce "gef_fild10", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
+                        if(isbegin_quest(12420)<1) setquest 12420;
+						if(is_party_leader() == true) transform 1087,1800000; // Party Leader
+						else {
+							if(Sex == 1) transform 1023,1800000;// Male
+								else transform 1273,1800000;// Female
+						}
+                }
+				close;
+				
+			case 3:
+				mes "[Calm Scientist]";
+				mes "Changed your mind?";
+				close;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 
 OnTouch:
@@ -285,14 +410,19 @@ end;
 OnInstanceInit:
 	'power = 0;
 	'boss = 0;
+<<<<<<< HEAD
 	'BossActive = 0;
 	'progress = 0;
+=======
+    'progress = 0;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	'Map$ = instance_mapname("1@orcs");
 	disablenpc instance_npcname("#ORC_Warp1");
 	disablenpc instance_npcname("#ORC_Warp2");
 	disablenpc instance_npcname("#ORC_Warp3");
 	end;
 	
+<<<<<<< HEAD
 OnStart:
 	.@arr$ = getvariableofnpc(.mode_config$,"#Instance_Config");
 	explode(.@mod$,.@arr$,"-");
@@ -310,6 +440,9 @@ OnStart:
 			break;
 		}
 	}
+=======
+OnStart:	
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	.@event1$ = instance_npcname("#gulokorc") + "::OnMyMobDead1";
 	.@event2$ = instance_npcname("#gulokorc") + "::OnMyMobDead2";
 	.@event3$ = instance_npcname("#gulokorc") + "::OnMyMobDead3";
@@ -321,10 +454,17 @@ OnStart:
 
 	//Spawn Dynamic Mobs	
 	setarray .@m_info,
+<<<<<<< HEAD
 		143,61 ,162,113,3897,4 ,3898,12, //1st Zone
 		103,115,114,165,3897,10,3898,10, //2nd Zone
 		33 ,47 ,91 ,82 ,3897,12,3898,10, //3rd Zone
 		32 ,124,58 ,163,3897,8 ,3898,10 //4th Zone
+=======
+		143,61,162,113,3897,4,3898,12, //1st Zone
+		103,115,114,165,3897,10,3898,10, //2nd Zone
+		33,47,91,82,3897,12,3898,10, //3rd Zone
+		32,124,58,163,3897,8,3898,10 //4th Zone
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		;
 	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=8) {
 		.@ct++;
@@ -338,6 +478,7 @@ OnStart:
 		
 		//Spawn Orc Zombie
 		areamonster 'Map$,.@m_info[.@m],.@m_info[.@m+1],.@m_info[.@m+2],.@m_info[.@m+3],"--ja--",.@m_info[.@m+4],.@amt1,getd(".@event"+(.@ct)+"$");
+<<<<<<< HEAD
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
 			setd(".@"+.@mob$+.@i), $@mobid[.@i];
 			if(unitexists(getd(".@"+.@mob$+.@i))) {
@@ -361,6 +502,11 @@ OnStart:
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * 'atk_mod;
 			}
 		}
+=======
+		
+		//Spawn Orc Skeleton
+		areamonster 'Map$,.@m_info[.@m],.@m_info[.@m+1],.@m_info[.@m+2],.@m_info[.@m+3],"--ja--",.@m_info[.@m+6],.@amt2,getd(".@event"+(.@ct)+"$");
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	end;
 
@@ -398,6 +544,7 @@ OnMyMobDead4:
 		instance_announce 0,"Fake Orc Hero: Come at me! Nature will protect me!",bc_map,"0xFF0000",FW_BOLD;
 		if('boss == 0) monster instance_mapname("1@orcs"),27,174,"--ja--",3901,1,instance_npcname("#gulokorc") + "::OnBossDead";
 		'boss = $@mobid[0];
+<<<<<<< HEAD
 		'BossActive = 1;
 		unittalk 'boss,"Listen to me, do as I say and perish!!";
 		initnpctimer;
@@ -428,11 +575,16 @@ OnMyMobDead4:
 			setunitdata 'Boss,UMOB_FLEE,'boss_flee;
 		}
 
+=======
+		unittalk 'boss,"Listen to me, do as I say and perish!!";
+		initnpctimer;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	end;	
 
 OnTimer5000:
 	.@ct = mobcount(instance_mapname('Map$),instance_npcname(strnpcinfo(0))+"::OnFlower");
+<<<<<<< HEAD
 	if(.@ct < 10) {
 		getunitdata 'boss, .@arr;
 		.@boss_x = .@arr[6];
@@ -467,6 +619,42 @@ OnTimer5000:
 				'x_2 = .@flwr_x; .@y_2 = .@flwr_y; 
 				break;
 			case 3: 
+=======
+    if(.@ct < 10) {
+        getunitdata 'boss, .@arr;
+        .@boss_x = .@arr[6];
+        .@boss_y = .@arr[7];
+
+        freeloop(1);        
+        do {
+            .@flwr_x = .@boss_x + F_Rand(-5,-4,-3,3,4,5);
+            .@flwr_y = .@boss_y + F_Rand(-5,-4,-3,3,4,5);
+			////debugmes "[Orc Memory Instance] Attempting to checkcell for x="+.@flwr_x+", y="+.@flwr_y;
+        } while (
+                !checkcell('Map$,.@flwr_x,.@flwr_y,cell_chkpass) || 
+                (.@flwr_x == 'x_1 && .@flwr_y == 'y_1) || 
+                (.@flwr_x == 'x_2 && .@flwr_y == 'y_2) || 
+                (.@flwr_x == 'x_3 && .@flwr_y == 'y_3) ||
+				(.@flwr_x == 'x_4 && .@flwr_y == 'y_4) ||
+				(.@flwr_x == 'x_5 && .@flwr_y == 'y_5) ||
+				(.@flwr_x == 'x_6 && .@flwr_y == 'y_6) ||
+				(.@flwr_x == 'x_7 && .@flwr_y == 'y_7) ||
+				(.@flwr_x == 'x_8 && .@flwr_y == 'y_8) ||
+				(.@flwr_x == 'x_9 && .@flwr_y == 'y_9) ||
+				(.@flwr_x == 'x_10 && .@flwr_y == 'y_10));
+        freeloop(0);
+        
+        switch(.@ct){
+            case 1: 
+				areamobuseskill instance_mapname("1@orcs"),200,200,200,3901,"AL_HEAL",1,0,0,ET_SMILE,0;
+				'x_1 = .@flwr_x; .@y_1 = .@flwr_y; 
+				break;
+            case 2: 
+				areamobuseskill instance_mapname("1@orcs"),200,200,200,3901,"AL_HEAL",2,0,0,ET_SMILE,0;
+				'x_2 = .@flwr_x; .@y_2 = .@flwr_y; 
+				break;
+            case 3: 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 				areamobuseskill instance_mapname("1@orcs"),200,200,200,3901,"AL_HEAL",3,0,0,ET_SMILE,0;
 				'x_3 = .@flwr_x; .@y_3 = .@flwr_y; 
 				break;
@@ -499,6 +687,7 @@ OnTimer5000:
 			case 10:
 				'x_10 = .@flwr_x; .@y_10 = .@flwr_y; 
 				break;
+<<<<<<< HEAD
 			default: break;
 		}
 		monster 'Map$,.@flwr_x,.@flwr_y,"",3903,1, instance_npcname("#gulokorc") + "::OnFlower";
@@ -552,12 +741,59 @@ OnBossDead:
 			enablenpc instance_npcname("Treasure Chest#orc" + .@i);
 		}
 	}
+=======
+            default: break;
+        }
+        monster 'Map$,.@flwr_x,.@flwr_y,"",3903,1, instance_npcname("#gulokorc") + "::OnFlower";
+        'power++;
+    	getunitdata 'boss, .@arr;
+		setunitdata 'boss,UMOB_ATKMIN, .@arr[UMOB_ATKMIN] + 50;
+		setunitdata 'boss,UMOB_ATKMAX, .@arr[UMOB_ATKMAX] + 50;
+		setunitdata 'boss,UMOB_MATKMIN, .@arr[UMOB_MATKMIN] + 50;
+		setunitdata 'boss,UMOB_MATKMAX, .@arr[UMOB_MATKMAX] + 50;
+		setunitdata 'boss,UMOB_DEF, .@arr[UMOB_DEF] + 15;
+		setunitdata 'boss,UMOB_MDEF, .@arr[UMOB_MDEF] + 5;
+		setunitdata 'boss,UMOB_HIT, .@arr[UMOB_HIT] + 15;
+		setunitdata 'boss,UMOB_FLEE, .@arr[UMOB_FLEE] + 15;
+    	instance_announce -1,"Fake Orc Hero's combat power increased to level "+'power+".",bc_map,"0xFFFFFF",FW_BOLD;
+        setarray .@msg$[1],
+            "Fake Orc Hero: Nature protects me.",
+            "Fake Orc Hero: Your attack doesn't hurt that much.",
+            "Fake Orc Hero: My lovely flowers, boost my power!";
+        unittalk 'boss,.@msg$[rand(1,3)];
+	}
+    end;
+
+OnTimer10000:
+    initnpctimer;
+    end;
+
+OnFlower:
+    'power--;
+    instance_announce -1,"Fake Orc Hero's combat power decreased to level "+'power+"",bc_map,"0xFFFFFF",FW_BOLD;
+	getunitdata 'boss, .@arr;
+    setunitdata 'boss,UMOB_ATKMIN, .@arr[UMOB_ATKMIN] - 50;
+    setunitdata 'boss,UMOB_ATKMAX, .@arr[UMOB_ATKMAX] - 50;
+    setunitdata 'boss,UMOB_MATKMIN, .@arr[UMOB_MATKMIN] - 50;
+    setunitdata 'boss,UMOB_MATKMAX, .@arr[UMOB_MATKMAX] - 50;
+    setunitdata 'boss,UMOB_DEF, .@arr[UMOB_DEF] - 15;
+    setunitdata 'boss,UMOB_MDEF, .@arr[UMOB_MDEF] - 5;
+    setunitdata 'boss,UMOB_HIT, .@arr[UMOB_HIT] - 15;
+    setunitdata 'boss,UMOB_FLEE, .@arr[UMOB_FLEE] - 15;
+    end;
+	
+OnBossDead:
+	stopnpctimer;
+	killmonster 'Map$, instance_npcname("#gulokorc") + "::OnFlower";
+	enablenpc instance_npcname("Treasure Chest#orc1");
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	enablenpc instance_npcname("Gulok#end");
 	end;
 }
 
 //Treasure Chest
 1@orcs,22,186,4	script	Treasure Chest#orc1	10005,{
+<<<<<<< HEAD
 	.@unique_id = callfunc("F_GetUniqueID", getcharid(3));
 	if ('Mode >= 2) {
 		if (strpos('RewardUniqueIDLogs$, ""+.@unique_id) != -1) {
@@ -582,10 +818,39 @@ OnBossDead:
 		29586,5,	//Refine_Box
 		15220,100,	//Subjugation_Armor
 		15220,50,	//Subjugation_Armor
+=======
+
+		setarray .@reward[1],
+		25424,100,	//Shimering_Crystal
+		25424,100,	//Shimering_Crystal
+		25424,100,	//Shimering_Crystal
+		25424,100,	//Shimering_Crystal
+		25424,100,	//Shimering_Crystal
+		25424,100,	//Shimering_Crystal
+		25424,50,	//Shimering_Crystal
+		25424,50,	//Shimering_Crystal
+		25424,25,	//Shimering_Crystal
+		25424,25,	//Shimering_Crystal
+		29587,50,	//Shimering_Crystal_Box
+		29587,25,	//Shimering_Crystal_Box
+		18005,10,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+		18005,1,	//Mixed_Rune_Fragment
+		29584,1,	//Rune_Box
+		29585,5,	//PVM_Box
+		29585,2,	//PVM_Box
+		29586,5,	//Refine_Box
+		15220,100,	//Subjugation_Armor
+		15220,50,	//Subjugation_Armor
+		15220,50,	//Subjugation_Armor
+		15220,50,	//Subjugation_Armor
+		15220,25,	//Subjugation_Armor
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		15220,25,	//Subjugation_Armor
 		20867,100,	//Subjugation_Slash
 		20867,50,	//Subjugation_Slash
 		20867,25,	//Subjugation_Slash
+<<<<<<< HEAD
 		6635,1;		//Blacksmith Blessing
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
@@ -610,6 +875,12 @@ OnBossDead:
 		29586,10,	//Refine_Box
 		6635,10;	//Blacksmith Blessing
 	}
+=======
+		20867,10,	//Subjugation_Slash
+		25457,100,	//Cursed_Emerald
+		25457,50,	//Cursed_Emerald
+		25457,25;	//Cursed_Emerald
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
@@ -637,6 +908,7 @@ OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
 	end;	
 }
+<<<<<<< HEAD
 1@orcs,19,186,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc2	10005
 1@orcs,16,186,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc3	10005
 1@orcs,25,186,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc4	10005
@@ -648,6 +920,8 @@ OnInstanceInit:
 1@orcs,28,183,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc10	10005
 1@orcs,22,180,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc11	10005
 1@orcs,25,180,4	duplicate(Treasure Chest#orc1)	Treasure Chest#orc12	10005
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 //Exit NPC
 1@orcs,21,178,4	script	Gulok#end	4_ORCWARRIOR,{
@@ -659,6 +933,10 @@ OnInstanceInit:
 		mes "[Gulok]";
 		mes "Oh well, before you go, I picked this up. I don't need it, so take it.";
 		completequest 12419;
+<<<<<<< HEAD
+=======
+		getitem F_Rand(15220,20867),1;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		getexp 100000,50000;
 		next;
 	}
@@ -681,6 +959,11 @@ OnInstanceInit:
 			mes "[Gulok]";
 			mes "Alright, I will warp you out of here.";
 			close2;
+<<<<<<< HEAD
+=======
+			//getitem F_Rand(28539,22150),1;
+			getitem 25424, F_Rand(1,2,3,4);
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			warp "gef_fild10",236,208;
 			end;
 	}

@@ -21,8 +21,13 @@ OnInit:
 	//Mode, MobHP, MobAtk, MobAmt, BossHP, BossAtk, BossDef, BossMdef, BossHit, BossFlee
 	setarray .mode_arr$,
 		1,1,1,1,1,1,1,1,1,1,	//Easy
+<<<<<<< HEAD
 		2,3,2,2,2,2,1,1,2,1, 	//Normal
 		3,6,4,5,5,5,2,2,3,1	//Hard
+=======
+		2,4,3,3,3,2,1,1,2,1, 	//Normal
+		3,10,6,5,10,7,2,2,3,1	//Hard
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		;
 	.mode_config$ = implode(.mode_arr$,"-");
 	
@@ -30,7 +35,11 @@ OnInit:
 	setarray .menu_arr$, 
 		"^008000Easy Challenges^000000 suit me",
 		"I like ^0000FFNormal Challenges^000000",
+<<<<<<< HEAD
 		"Nothing's ^FF0000 Hard^000000 for me, bring it on!";
+=======
+		"Nothing's ^FF0000Hard^000000 for me, bring it on!";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	.menu_config$ = implode(.menu_arr$,":");
 	end;
 
@@ -48,7 +57,11 @@ function	script	F_ChkInsCD	{
 		close;
 	}
 	if(.@cd == 0 || .@cd == 1) {
+<<<<<<< HEAD
 		mes "^ff0000- You have to wait 24h, the cooldown isn't gone yet ! -^000000";
+=======
+		mes "^ff0000- You can access this memorial dungeon tomorrow at 00:01 -^000000";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		close;
 	}
 

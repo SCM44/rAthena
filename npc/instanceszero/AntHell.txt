@@ -438,12 +438,21 @@ OnInstanceInit:
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
 		29586,5,	//Refine_Box
+<<<<<<< HEAD
 		29586,10,	//Refine_Box
+=======
+		29586,3,	//Refine_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
 		29585,5,	//Pvm_Box
 		29585,3,	//Pvm_Box
+<<<<<<< HEAD
 		18005,50,	//Mixed_Rune_Fragment
+=======
+		18005,10,	//Mixed_Rune_Fragment
+		18005,5,	//Mixed_Rune_Fragment
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		18005,1,	//Mixed_Rune_Fragment
 		23649,100,	//Gel_Fragment_Box
 		23649,70,	//Gel_Fragment_Box
@@ -453,6 +462,7 @@ OnInstanceInit:
 		29588,10,	//Azure_Crystal_Box
 		25475,100,	//Azure_Crystal
 		25475,70,	//Azure_Crystal
+<<<<<<< HEAD
 		25475,40,	//Azure_Crystal
 		6635,1;		//Blacksmith Blessing
 	} else if ('Mode == 3) {
@@ -471,6 +481,22 @@ OnInstanceInit:
 		29588,50,	//Azure_Crystal_Box
 		29587,100,	//Shimmering_Crystal_Box
 		29587,50,	//Shimmering_Crystal_Box
+=======
+		25475,40;	//Azure_Crystal
+	} else if ('Mode == 3) {
+		setarray .@reward[1],
+		25460,100,	//Bloody_Ruby
+		25460,50,	//Bloody_Ruby
+		25460,10,	//Bloody_Ruby
+		29586,5,	//Refine_Box
+		29586,3,	//Refine_Box
+		29584,2,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29588,50,	//Azure_Crystal_Box
+		29588,25,	//Azure_Crystal_Box
+		29587,50,	//Shimmering_Crystal_Box
+		29587,25,	//Shimmering_Crystal_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -489,6 +515,7 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
+<<<<<<< HEAD
 		//25429,100,	//Mythril_Ore
 		//25429,100,	//Mythril_Ore
 		//25429,100,	//Mythril_Ore
@@ -501,6 +528,20 @@ OnInstanceInit:
 		//25429,10,	//Mythril_Ore
 		//25429,10,	//Mythril_Ore
 		//25429,10,	//Mythril_Ore
+=======
+		25429,100,	//Mythril_Ore
+		25429,100,	//Mythril_Ore
+		25429,100,	//Mythril_Ore
+		25429,70,	//Mythril_Ore
+		25429,70,	//Mythril_Ore
+		25429,70,	//Mythril_Ore
+		25429,40,	//Mythril_Ore
+		25429,40,	//Mythril_Ore
+		25429,40,	//Mythril_Ore
+		25429,10,	//Mythril_Ore
+		25429,10,	//Mythril_Ore
+		25429,10,	//Mythril_Ore
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
@@ -508,8 +549,12 @@ OnInstanceInit:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
+<<<<<<< HEAD
 		993,20,		//Yellow_Live
 		6635,10;	//Blacksmith Blessing
+=======
+		993,20;		//Yellow_Live
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	

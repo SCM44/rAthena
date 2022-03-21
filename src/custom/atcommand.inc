@@ -18,6 +18,7 @@
 //	return 0;
 //}
 
+<<<<<<< HEAD
 
 void atcommand_battlestats_sub(int fd, struct map_session_data* sd) {
 	status_data* status = status_get_status_data(&sd->bl);
@@ -167,6 +168,8 @@ ACMD_FUNC(enemystats) {
 }
 
 
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 ACMD_FUNC(battleinfo)
 {
 	if( sd->state.battleinfo )

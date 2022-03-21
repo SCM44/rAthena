@@ -35,6 +35,18 @@ OnInstanceInit:
 //Entrance NPC
 prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 
+<<<<<<< HEAD
+=======
+	//Give all 1st timers
+	if(Ins_PV_FirstRun == 0) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Here's something I think you deserve.";
+		mes "A little something to commemorate defeating the porings!";
+		Ins_PV_FirstRun = 1;
+		getitem F_Rand(19238,19239),1;			
+		close;
+	}
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	
 	.@party_id = getcharid(1);
 	.@ins_mas = getpartyleader(.@party_id,2);
@@ -129,10 +141,15 @@ prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 			mes "Only the registered members can enter the instance "+.@md_name$+".";
 			close;
 		case IE_OK:
+<<<<<<< HEAD
 			if(.@quest){
 				setquest .@quest;
 			break;
 			}
+=======
+			setquest .@quest;
+			break;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		}
 		//debugmes "Instance Entrance Poring Village "+strcharinfo(0)+".";
 		close;
@@ -302,7 +319,11 @@ OnGuardianDied:
 	.@remaining = mobcount('Map$,'NPC_Name$+"::OnGuardianDied" );
 	
 	if( !.@remaining ){
+<<<<<<< HEAD
 		sleep2 500;
+=======
+		sleep 500;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		
 		//Boss Stage
 		switch('Boss_Stage) {
@@ -314,6 +335,7 @@ OnGuardianDied:
 			break;			
 		case 3:
 			donpcevent instance_npcname("#begi_timer") + "::OnStopTimer";
+<<<<<<< HEAD
 			if ('Mode == 1) {
 				enablenpc instance_npcname("Treasure Chest#begi1");
 			} else {
@@ -323,6 +345,10 @@ OnGuardianDied:
 					enablenpc instance_npcname("Treasure Chest#begi" + .@i);
 				}
 			}
+=======
+			enablenpc instance_npcname("Treasure Chest#begi");
+		
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			instance_announce instance_id(), "[Almighty King of Porings] Though I have been defeated..", bc_map, 0xFF0000;
 			sleep 1500;
 			instance_announce instance_id(), "[Almighty King of Porings] Don't be conceited. I will be avenged.", bc_map, 0xFF0000;
@@ -379,6 +405,7 @@ OnTouch_:
 1@begi,175,200,5	duplicate(Strange Light#begi1)	Strange Light#begi3	10043,3,3
 
 
+<<<<<<< HEAD
 1@begi,173,193,4	script	Treasure Chest#begi1	10005,{
 	//Check if Party Leader
 	//callfunc "F_ChkInstancePT","";
@@ -391,6 +418,14 @@ OnTouch_:
 		}
 		'RewardUniqueIDLogs$ = 'RewardUniqueIDLogs$ + "||" + .@unique_id;
 	}
+=======
+1@begi,173,193,4	script	Treasure Chest#begi	10005,{
+	//Check if Party Leader
+	callfunc "F_ChkInstancePT","";
+	//Log Event
+	//debugmes "Instance Completion Poring Village";
+	
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	.@ins_map$ = strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -417,10 +452,16 @@ OnTouch_:
 		'Mode == 3
 	) .@frag = 23649;
 	
+<<<<<<< HEAD
 	if('Mode <= 2) {
 		setarray .@reward[1],
 		19238,50,	//carrot
 		19239,50,	//asperge
+=======
+	
+		setarray .@reward[1],
+		
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		11565,100,	//White_Potion_B
 		11565,100,	//White_Potion_B
 		11565,100,	//White_Potion_B
@@ -486,12 +527,21 @@ OnTouch_:
 		18010,100,	//Rare_Coin
 		18010,100,	//Rare_Coin
 		18010,100,	//Rare_Coin
+<<<<<<< HEAD
+=======
+		18010,100,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,50,	//Rare_Coin
+		18010,250,	//Rare_Coin
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		18005,5,	//Mixed_Rune_Fragment
 		18005,3,	//Mixed_Rune_Fragment
 		18005,1,	//Mixed_Rune_Fragment
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
+<<<<<<< HEAD
 		.@frag,10,	//Day-Based Ore
 		.@frag,10,	//Day-Based Ore
 		.@frag,5,	//Day-Based Ore
@@ -511,11 +561,14 @@ OnTouch_:
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,100,	//Day-Based Ore
 		.@frag,20,	//Day-Based Ore
 		.@frag,20,	//Day-Based Ore
+<<<<<<< HEAD
 		18005,100,	//Mixed_Rune_Fragment
 		18005,10,	//Mixed_Rune_Fragment
 		18005,10,	//Mixed_Rune_Fragment
@@ -527,6 +580,13 @@ OnTouch_:
 		29586,5,	//Refine_Box
 		6635,100;	//Blacksmith Blessing
 	}
+=======
+		.@frag,20,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,20;	//Day-Based Ore
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 	getmapxy('Map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	
@@ -547,6 +607,7 @@ OnInstanceInit:
 	end;	
 }
 
+<<<<<<< HEAD
 1@begi,170,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi2	10005
 1@begi,167,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi3	10005
 1@begi,176,193,4	duplicate(Treasure Chest#begi1)	Treasure Chest#begi4	10005
@@ -571,6 +632,9 @@ OnInstanceInit:
 		close;
 	}
 
+=======
+1@begi,184,196,4	script	Curious Adventurer::alapovivig	671,{
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	mes "[Curious Adventurer]";
 	mes "Thank you for your help!";
 	mes "I can send you back if needed.";

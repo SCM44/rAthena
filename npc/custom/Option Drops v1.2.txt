@@ -20,7 +20,11 @@ that same item again, or if you have 2str, the item cant have another Str stat, 
 ------
 Runes :
 ------
+<<<<<<< HEAD
 4 types of runes
+=======
+4 types of runes 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 ( 4 custom rune to create )
 
@@ -31,6 +35,7 @@ wont work if the max is str 2, and you already have str 2 )
 4: RuneMax => Will up the stat of your random stat slot of your choice to the Max.
 
 -------------------------------------------------------
+<<<<<<< HEAD
 NPC
 -------
 
@@ -42,11 +47,28 @@ close the conversation
 
  Choice 2 => the player wants to reset a stat slot of their choice => if the player has the rune reset x 1 in his inventory =>
 reset the selected stat slot to a new random one => if not fail
+=======
+NPC 
+-------
+
+- A NPC who will do the rune system => 
+
+4 Choice => 1 : the player wants to add a random stat slot( lvlup the rarity ) => player specify wich item => if rarity = legendary : fail => 
+else => check if player has Rune lvl up x 1 on his inventory , if not , fail => else =>  add a random stat slot ( up the rarity of the item)
+close the conversation
+
+ Choice 2 => the player wants to reset a stat slot of their choice => if the player has the rune reset x 1 in his inventory => 
+reset the selected stat slot to a new random one => if not fail 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 close the conversation
 
  choice 3 => the player wants to buff the stat of his choice => if the player has the rune + x 1 on his inventory then do =>
 	     if the selected bonus stat < selected bonus stat Max , then do =>
+<<<<<<< HEAD
  	    ( if the selected bonus Stat Max is <= 10 , add  += 1 of the selected bonus stat )
+=======
+ 	    ( if the selected bonus Stat Max is <= 10 , add  += 1 of the selected bonus stat ) 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	    ( if the selected bonus Stat Max is > 10 and < 30 , add += 2 of the selected bonus stat )
 	    ( if the selected bonus Stat Max is >= 100 and < 1000 , add += 10 of the selected bonus stat )
 	    ( if the selected bonus Stat Max is >= 1000, add += 100 of the selected bonus stat )
@@ -63,7 +85,11 @@ Random stats items =>
 
 the stats random will depend on the item categorie they are on =>
 
+<<<<<<< HEAD
 Weapons =>
+=======
+Weapons => 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 Str 1-3 bonus bStr,n;
 Agi 1-3 bonus bAgi,n;
 Int 1-3 bonus bInt,n;
@@ -76,7 +102,11 @@ Dmg on all size + 5-25% bonus2 bAddSize,Size_All,x; bonus2 bMagicAddSize,Size_Al
 ACD reduction + 3-10% bonus bDelayRate,-x;
 ASPD+ 3-10% bonus bAspdRate,n
 cast time reduction + 3-10% bonus bCastrate,-x;
+<<<<<<< HEAD
 crit + 10-20 bonus bCritical,n;
+=======
+crit + 10-20 bonus bCritical,n; 
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 atk + 20-50 bonus bBaseAtk,n;
 matk + 20-50 bonus bMatk,n;
 
@@ -133,8 +163,13 @@ Int 1 bonus bInt,n;
 Dex 1 bonus bDex,n;
 Vit 1 bonus bVit,n;
 Luk 1 bonus bLuk,n;
+<<<<<<< HEAD
 crit + 1-5 bonus bCritical,n;
 aze
+=======
+crit + 1-5 bonus bCritical,n; 
+
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 hat ( upper only )=>
 
 def+ 1-3 bonus bDef,n;
@@ -157,7 +192,11 @@ OnInit:
 	setarray .@mob_db_bounds, 1001, 20269;
 
 	freeloop(true);
+<<<<<<< HEAD
 	.@item_db_query = query_sql("SELECT `id` FROM `item_db"+(checkre(0)?"_re":"")+"` WHERE `type` = 'Weapon' OR `type` = 'Armor' UNION SELECT `id` FROM `item_db2"+(checkre(0)?"_re":"")+"` WHERE `type` = 'Weapon' OR `type` = 'Armor';", .@equipment_ids);
+=======
+//	.@item_db_query = query_sql("SELECT `id` FROM `item_db"+(checkre(0)?"_re":"")+"` WHERE `type` = 'Weapon' OR `type` = 'Armor' UNION SELECT `id` FROM //`item_db2"+(checkre(0)?"_re":"")+"` WHERE `type` = 'Weapon' OR `type` = 'Armor';", .@equipment_ids);
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	if(.@item_db_query <= 0) {
 		debugmes "OptionDrops: Cannot find SQL Databases bruteforcing item IDs.";
 		for(.@a = .@item_db_bounds[0]; .@a < .@item_db_bounds[1]+1; .@a++) {
@@ -169,7 +208,11 @@ OnInit:
 			}
 		}
 	}
+<<<<<<< HEAD
 	.@mob_db_query = query_sql("SELECT `ID` FROM `mob_db"+(checkre(0)?"_re":"")+"` UNION SELECT `ID` FROM `mob_db2"+(checkre(0)?"_re":"")+"`;", .@mob_ids);
+=======
+//	.@mob_db_query = query_sql("SELECT `ID` FROM `mob_db"+(checkre(0)?"_re":"")+"` UNION SELECT `ID` FROM `mob_db2"+(checkre(0)?"_re":"")+"`;", .@mob_ids);
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	if(.@mob_db_query <= 0) {
 		debugmes "OptionDrops: Cannot find SQL Databases bruteforcing mob IDs.";
 		for(.@a = .@mob_db_bounds[0]; .@a < .@mob_db_bounds[1]+1; .@a++) {
@@ -310,9 +353,15 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.RACE_TOLERACE_DEVIL), 1, 10;
 		setarray getd(".@values_"+.RACE_TOLERACE_HUMAN), 1, 10;
 		setarray getd(".@values_"+.RACE_TOLERACE_DRAGON), 1, 10;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.DAMAGE_SIZE_SMALL_USER), 1, 3;
 		setarray getd(".@values_"+.DAMAGE_SIZE_MIDIUM_USER), 1, 3;
 		setarray getd(".@values_"+.DAMAGE_SIZE_LARGE_USER), 1, 3;
+=======
+		//setarray getd(".@values_"+.DAMAGE_SIZE_SMALL_USER), 1, 5;
+		//setarray getd(".@values_"+.DAMAGE_SIZE_MIDIUM_USER), 1, 5;
+		//setarray getd(".@values_"+.DAMAGE_SIZE_LARGE_USER), 1, 5;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.ATTR_TOLERACE_NOTHING), 1, 5;
 		setarray getd(".@values_"+.ATTR_TOLERACE_WATER), 1, 5;
 		setarray getd(".@values_"+.ATTR_TOLERACE_GROUND), 1, 5;
@@ -344,9 +393,15 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.RACE_TOLERACE_DEVIL,
 			.RACE_TOLERACE_HUMAN,
 			.RACE_TOLERACE_DRAGON,
+<<<<<<< HEAD
 			.DAMAGE_SIZE_SMALL_USER,
 			.DAMAGE_SIZE_MIDIUM_USER,
 			.DAMAGE_SIZE_LARGE_USER,
+=======
+			//.DAMAGE_SIZE_SMALL_USER,
+			//.DAMAGE_SIZE_MIDIUM_USER,
+			//.DAMAGE_SIZE_LARGE_USER,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			.ATTR_TOLERACE_NOTHING,
 			.ATTR_TOLERACE_WATER,
 			.ATTR_TOLERACE_GROUND,
@@ -395,6 +450,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.ADDEXPPERCENT_KILLRACE_ALL), 1, 25;
 		setarray getd(".@values_"+.ATK_KILL_HP_REGEN), 1, 100;
 		setarray getd(".@values_"+.ATK_KILL_SP_REGEN), 1, 20;
+<<<<<<< HEAD
+=======
+		setarray getd(".@values_"+.MATK_KILL_HP_REGEN), 1, 100;
+		setarray getd(".@values_"+.MATK_KILL_SP_REGEN), 1, 20;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.DOUBLE_ATTACK_RATE), 10, 30;
 		setarray .@options,
 			.ATTR_TOLERACE_NOTHING,
@@ -425,6 +485,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.ADDEXPPERCENT_KILLRACE_ALL,
 			.ATK_KILL_HP_REGEN,
 			.ATK_KILL_SP_REGEN,
+<<<<<<< HEAD
+=======
+			.MATK_KILL_HP_REGEN,
+			.MATK_KILL_SP_REGEN,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			.DOUBLE_ATTACK_RATE;
 	} else if(.@equip_location & EQP_HAND_R) { //Weapon
 		setarray getd(".@values_"+.VAR_STRAMOUNT), 1, 5;
@@ -459,15 +524,24 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.MDAMAGE_SIZE_SMALL_TARGET), 1, 25;
 		setarray getd(".@values_"+.MDAMAGE_SIZE_MIDIUM_TARGET), 1, 25;
 		setarray getd(".@values_"+.MDAMAGE_SIZE_LARGE_TARGET), 1, 25;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.DEC_SPELL_CAST_TIME), 1, 10;
+=======
+		setarray getd(".@values_"+.DEC_SPELL_DELAY_TIME), 1, 10;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.VAR_PLUSASPDPERCENT), 1, 20;
 		setarray getd(".@values_"+.VAR_CRITICALSUCCESSVALUE), 1, 25;
 		setarray getd(".@values_"+.VAR_ATTPOWER), 5, 50;
 		setarray getd(".@values_"+.VAR_ATTMPOWER), 5, 50;
 		setarray getd(".@values_"+.VAR_ATKPERCENT), 1, 10;
 		setarray getd(".@values_"+.VAR_MAGICATKPERCENT), 1, 10;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.RACE_IGNORE_DEF_PERCENT_HUMAN), 1, 25;
 		setarray getd(".@values_"+.RACE_IGNORE_MDEF_PERCENT_HUMAN), 1, 25;
+=======
+		setarray getd(".@values_"+.RACE_IGNORE_DEF_PERCENT_HUMAN), 1, 30;
+		setarray getd(".@values_"+.RACE_IGNORE_MDEF_PERCENT_HUMAN), 1, 30;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.WEAPON_ATTR_POISON),0,0;
 		setarray getd(".@values_"+.WEAPON_ATTR_SAINT),0,0;
 		setarray getd(".@values_"+.WEAPON_ATTR_DARKNESS),0,0;
@@ -513,7 +587,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.MDAMAGE_SIZE_SMALL_TARGET,
 			.MDAMAGE_SIZE_MIDIUM_TARGET,
 			.MDAMAGE_SIZE_LARGE_TARGET,
+<<<<<<< HEAD
 			.DEC_SPELL_CAST_TIME,
+=======
+			.DEC_SPELL_DELAY_TIME,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			.VAR_PLUSASPDPERCENT,
 			.VAR_CRITICALSUCCESSVALUE,
 			.VAR_ATTPOWER,
@@ -547,9 +625,15 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.RACE_TOLERACE_HUMAN), 1, 5;
 		setarray getd(".@values_"+.RACE_TOLERACE_ANGEL), 1, 5;
 		setarray getd(".@values_"+.RACE_TOLERACE_DRAGON), 1, 5;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.DAMAGE_SIZE_SMALL_USER), 1, 3;
 		setarray getd(".@values_"+.DAMAGE_SIZE_MIDIUM_USER), 1, 3;
 		setarray getd(".@values_"+.DAMAGE_SIZE_LARGE_USER), 1, 3;
+=======
+		//setarray getd(".@values_"+.DAMAGE_SIZE_SMALL_USER), 1, 5;
+		//setarray getd(".@values_"+.DAMAGE_SIZE_MIDIUM_USER), 1, 5;
+		//setarray getd(".@values_"+.DAMAGE_SIZE_LARGE_USER), 1, 5;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		//setarray getd(".@values_"+.RANGE_ATTACK_DAMAGE_USER), 1, 5;
 		setarray getd(".@values_"+.REFLECT_PHYSICAL_DAMAGE_PERCENT), 1, 10;
 		setarray getd(".@values_"+.REFLECT_MAGIC_DAMAGE_PERCENT), 1, 10;
@@ -594,9 +678,15 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.RACE_TOLERACE_HUMAN,
 			.RACE_TOLERACE_ANGEL,
 			.RACE_TOLERACE_DRAGON,
+<<<<<<< HEAD
 			.DAMAGE_SIZE_SMALL_USER,
 			.DAMAGE_SIZE_MIDIUM_USER,
 			.DAMAGE_SIZE_LARGE_USER,
+=======
+			//.DAMAGE_SIZE_SMALL_USER,
+			//.DAMAGE_SIZE_MIDIUM_USER,
+			//.DAMAGE_SIZE_LARGE_USER,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			//.RANGE_ATTACK_DAMAGE_USER,
 			.REFLECT_PHYSICAL_DAMAGE_PERCENT,
 			.REFLECT_MAGIC_DAMAGE_PERCENT,
@@ -629,27 +719,46 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.HEAL_VALUE,
 			.HEAL_MODIFY_PERCENT;
 	} else if(.@equip_location & EQP_SHOES) { //Boots
+<<<<<<< HEAD
 		setarray getd(".@values_"+.VAR_ITEMDEFPOWER), 1, 2;
 		setarray getd(".@values_"+.VAR_MDEFPOWER), 1, 2;
+=======
+		setarray getd(".@values_"+.VAR_ITEMDEFPOWER), 1, 5;
+		setarray getd(".@values_"+.VAR_MDEFPOWER), 1, 5;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.VAR_MAXHPAMOUNT), 50, 500;
 		setarray getd(".@values_"+.VAR_MAXSPAMOUNT), 10, 100;
 		setarray getd(".@values_"+.VAR_MAXHPPERCENT), 1, 10;
 		setarray getd(".@values_"+.VAR_MAXSPPERCENT), 1, 5;
 		setarray getd(".@values_"+.DEC_SPELL_DELAY_TIME), 1, 10;
 		setarray getd(".@values_"+.DEC_SPELL_CAST_TIME), 1, 10;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.RACE_IGNORE_DEF_PERCENT_HUMAN), 1, 10;
 		setarray getd(".@values_"+.RACE_IGNORE_MDEF_PERCENT_HUMAN), 1, 10;
+=======
+		setarray getd(".@values_"+.RACE_IGNORE_DEF_PERCENT_HUMAN), 1, 15;
+		setarray getd(".@values_"+.RACE_IGNORE_MDEF_PERCENT_HUMAN), 1, 15;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.VAR_HPACCELERATION), 1, 20;
 		setarray getd(".@values_"+.VAR_SPACCELERATION), 1, 20;
 		setarray getd(".@values_"+.HEAL_VALUE), 1, 20;
 		setarray getd(".@values_"+.HEAL_MODIFY_PERCENT), 1, 20;
 		setarray getd(".@values_"+.DEC_SP_CONSUMPTION), 1, 20;
 		setarray getd(".@values_"+.VAR_AVOIDSUCCESSVALUE), 1, 20;
+<<<<<<< HEAD
 		setarray getd(".@values_"+.VAR_PLUSAVOIDSUCCESSVALUE), 1, 10;
+=======
+		setarray getd(".@values_"+.VAR_PLUSAVOIDSUCCESSVALUE), 1, 20;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.VAR_HITSUCCESSVALUE), 1, 20;
 		setarray getd(".@values_"+.ADDEXPPERCENT_KILLRACE_ALL), 1, 25;
 		setarray getd(".@values_"+.ATK_KILL_HP_REGEN), 1, 100;
 		setarray getd(".@values_"+.ATK_KILL_SP_REGEN), 1, 20;
+<<<<<<< HEAD
+=======
+		setarray getd(".@values_"+.MATK_KILL_HP_REGEN), 1, 100;
+		setarray getd(".@values_"+.MATK_KILL_SP_REGEN), 1, 20;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.DOUBLE_ATTACK_RATE), 10, 30;
 		setarray .@options,
 			.VAR_ITEMDEFPOWER,
@@ -673,10 +782,19 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.ADDEXPPERCENT_KILLRACE_ALL,
 			.ATK_KILL_HP_REGEN,
 			.ATK_KILL_SP_REGEN,
+<<<<<<< HEAD
 			.DOUBLE_ATTACK_RATE;
 	} else if(.@equip_location & (EQP_ACC_L|EQP_ACC_R)) { //Accessory
 		setarray getd(".@values_"+.VAR_ATTPOWER), 1, 10;
 		setarray getd(".@values_"+.VAR_ATTMPOWER), 1, 10;
+=======
+			.MATK_KILL_HP_REGEN,
+			.MATK_KILL_SP_REGEN,
+			.DOUBLE_ATTACK_RATE;
+	} else if(.@equip_location & (EQP_ACC_L|EQP_ACC_R)) { //Accessory
+		setarray getd(".@values_"+.VAR_ATTPOWER), 1, 20;
+		setarray getd(".@values_"+.VAR_ATTMPOWER), 1, 20;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.VAR_MAXHPPERCENT), 1, 2;
 		setarray getd(".@values_"+.VAR_ITEMDEFPOWER), 1, 2;
 		setarray getd(".@values_"+.VAR_MDEFPOWER), 1, 2;
@@ -687,12 +805,20 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 		setarray getd(".@values_"+.VAR_VITAMOUNT), 1, 1;
 		setarray getd(".@values_"+.VAR_LUKAMOUNT), 1, 1;
 		setarray getd(".@values_"+.VAR_CRITICALSUCCESSVALUE), 1, 10;
+<<<<<<< HEAD
 		//setarray getd(".@values_"+.ADDSKILLMDAMAGE_NOTHING), 1, 5;
+=======
+		setarray getd(".@values_"+.ADDSKILLMDAMAGE_NOTHING), 1, 5;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_WATER), 1, 5;
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_GROUND), 1, 5;
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_FIRE), 1, 5;
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_WIND), 1, 5;
+<<<<<<< HEAD
 		//setarray getd(".@values_"+.ADDSKILLMDAMAGE_POISON), 1, 5;
+=======
+		setarray getd(".@values_"+.ADDSKILLMDAMAGE_POISON), 1, 5;
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_SAINT), 1, 5;
 		setarray getd(".@values_"+.ADDSKILLMDAMAGE_TELEKINESIS), 1, 5;
 		setarray getd(".@values_"+.DAMAGE_CRI_TARGET), 1, 10;
@@ -714,12 +840,20 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			.VAR_VITAMOUNT,
 			.VAR_LUKAMOUNT,
 			.VAR_CRITICALSUCCESSVALUE,
+<<<<<<< HEAD
 			//.ADDSKILLMDAMAGE_NOTHING,
+=======
+			.ADDSKILLMDAMAGE_NOTHING,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			.ADDSKILLMDAMAGE_WATER,
 			.ADDSKILLMDAMAGE_GROUND,
 			.ADDSKILLMDAMAGE_FIRE,
 			.ADDSKILLMDAMAGE_WIND,
+<<<<<<< HEAD
 			//.ADDSKILLMDAMAGE_POISON,
+=======
+			.ADDSKILLMDAMAGE_POISON,
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			.ADDSKILLMDAMAGE_SAINT,
 			.ADDSKILLMDAMAGE_TELEKINESIS,
 			.DAMAGE_CRI_TARGET,
@@ -771,7 +905,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 				misceffect 154;
 				emotion ET_SMILE;
 				mes "You equipement got a new buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+<<<<<<< HEAD
 				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a ï¿½tï¿½ ajoutï¿½ a l'ï¿½quipement "+(.@a+1)+"!";
+=======
+				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			} else {
 				mes .npc_name$;
 				mes "This equipement already have 3 slots, you cant add more that way, please choose the Option Add the 4th Random Option Slot instead.";
@@ -816,7 +954,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			misceffect 154;
 			emotion ET_SMILE;
 			mes "Your equipement got a new buff ! ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+<<<<<<< HEAD
 			//mes "La stat de l'ï¿½quipement du slot "+(.@index+1)+" a ï¿½tï¿½ reset en ["+.option_names$[.@options[.@random_option]]+"]!";
+=======
+			//mes "La stat de l'équipement du slot "+(.@index+1)+" a été reset en ["+.option_names$[.@options[.@random_option]]+"]!";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			break;
 		case 3:
 			mes .npc_name$;
@@ -903,7 +1045,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			misceffect 154;
 			emotion ET_SMILE;
 			mes "Your slot stat just got maximized, congratz ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
+<<<<<<< HEAD
 			//mes "La stat du slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] a ï¿½tï¿½e maximisï¿½e !";
+=======
+			//mes "La stat du slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] a étée maximisée !";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			break;
 		case 5:
 			if(countitem(.level_up_rune_id) < 3) {
@@ -944,7 +1090,11 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 				misceffect 154;
 				emotion ET_SMILE;
 				mes "Your equipement got a new slot buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
+<<<<<<< HEAD
 				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a ï¿½tï¿½ ajoutï¿½ a l'ï¿½quipement "+(.@a+1)+"!";
+=======
+				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			} else {
 				mes .npc_name$;
 				mes "That equipement already have 4 slot Random Options, you cant add more !";
@@ -1220,10 +1370,17 @@ OnInit:
 	.option_names$[.SPLASH_ATK] = "Splash Damage";
 	.option_names$[.NO_CAST_CANCEL] = "Skill casting can't be interrupted.";
 
+<<<<<<< HEAD
 
 
 
 
+=======
+	
+	
+
+	
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 }
 
 /* Client Side Modifications
@@ -1262,7 +1419,11 @@ addrandomoptionnametable.lub
 //	Find:
 //
 //				if (rnd() % 10000 < option->chance) {
+<<<<<<< HEAD
 //
+=======
+//	
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 //	Add After:
 //
 //					bool skip = false;
@@ -3296,4 +3457,8 @@ Body:
             MaxValue: 3
             Param: -1
             Chance: 28
+<<<<<<< HEAD
 */
+=======
+*/
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
