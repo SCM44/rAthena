@@ -1598,8 +1598,6 @@ Body:
             Level: 1
       - Name: MG_FIREBOLT
         MaxLevel: 10
-      - Name: PF_DOUBLECASTING
-        MaxLevel: 5
       - Name: MG_LIGHTNINGBOLT
         MaxLevel: 10
       - Name: MG_THUNDERSTORM
@@ -3223,7 +3221,7 @@ Body:
             Level: 7
           - Name: SL_STUN
             Level: 7
-      - Name: SL_SWOO 
+      - Name: SL_SWOO
         MaxLevel: 7
         Requires:
           - Name: SL_PRIEST
