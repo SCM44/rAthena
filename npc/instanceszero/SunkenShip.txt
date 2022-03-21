@@ -314,8 +314,7 @@ OnInstanceInit:
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
-		18005,10,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
+		18005,50,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
@@ -324,11 +323,11 @@ OnInstanceInit:
 		25475,100,	//Azure_Crystal
 		25475,50,	//Azure_Crystal
 		25475,10,	//Azure_Crystal
+		29586,10,	//Refine_Box
 		29586,5,	//Refine_Box
-		29586,3,	//Refine_Box
-		29584,1,	//Rune_Box
-		29584,1,	//Rune_Box
-		29585,5,	//Pvm_Box
+		29584,2,	//Rune_Box
+		29584,2,	//Rune_Box
+		29585,10,	//Pvm_Box
 		29585,3,	//Pvm_Box
 		23649,100,	//Gel_Fragment_Box
 		23649,100,	//Gel_Fragment_Box
@@ -364,8 +363,6 @@ OnInstanceInit:
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
 		18005,100,	//Mixed_Rune_Fragment
-		18005,100,	//Mixed_Rune_Fragment
-		18005,50,	//Mixed_Rune_Fragment
 		//25460,100,	//Bloody_Ruby
 		//25460,50,	//Bloody_Ruby
 		//25460,10,	//Bloody_Ruby

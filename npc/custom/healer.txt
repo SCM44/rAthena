@@ -47,15 +47,15 @@
 //============================================================
 alberta,25,240,6	duplicate(Healer)	Healer#alb	769
 aldebaran,135,118,6	duplicate(Healer)	Healer#alde	769
-amatsu,200,79,4	duplicate(Healer)	Healer#ama	769
+amatsu,102,154,4	duplicate(Healer)	Healer#ama	769
 ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	769
 comodo,184,158,6	duplicate(Healer)	Healer#com	769
-einbech,57,36,6	duplicate(Healer)	Healer#einbe	769
+einbech,171,132,6	duplicate(Healer)	Healer#einbe	769
 einbroch,57,202,6	duplicate(Healer)	Healer#einbr	769
 geffen,115,72,6	duplicate(Healer)	Healer#gef	769
 gonryun,156,122,6	duplicate(Healer)	Healer#gon	769
 hugel,89,150,6	duplicate(Healer)	Healer#hug	769
-izlude,121,150,6	duplicate(Healer)	Healer#izl	769	//Pre-RE: (125,118)
+izlude,127,116,6	duplicate(Healer)	Healer#izl	769	//Pre-RE: (125,118)
 jawaii,250,139,4	duplicate(Healer)	Healer#jaw	769
 lighthalzen,152,100,6	duplicate(Healer)	Healer#lhz	769
 louyang,226,103,4	duplicate(Healer)	Healer#lou	769
@@ -63,19 +63,19 @@ manuk,272,144,6	duplicate(Healer)	Healer#man	769
 mid_camp,203,289,6	duplicate(Healer)	Healer#mid	769
 moc_ruins,72,164,4	duplicate(Healer)	Healer#moc	769
 morocc,153,97,6	duplicate(Healer)	Healer#mor	769
-moscovia,220,191,4	duplicate(Healer)	Healer#mos	769
+moscovia,230,196,4	duplicate(Healer)	Healer#mos	769
 niflheim,212,182,5	duplicate(Healer)	Healer#nif	769
 payon,179,106,4	duplicate(Healer)	Healer#pay	769
 prontera,168,194,4	duplicate(Healer)	Healer#prt	769
 prontera,220,82,4	duplicate(Healer)	Healer#prt1	769
 prontera,256,82,4	duplicate(Healer)	Healer#prt2	769
-rachel,125,116,6	duplicate(Healer)	Healer#rac	769
+rachel,107,135,6	duplicate(Healer)	Healer#rac	769
 splendide,201,153,4	duplicate(Healer)	Healer#spl	769
 thor_camp,249,74,4	duplicate(Healer)	Healer#thor	769
 umbala,105,148,3	duplicate(Healer)	Healer#umb	769
 veins,217,121,4	duplicate(Healer)	Healer#ve	769
 xmas,143,136,4	duplicate(Healer)	Healer#xmas	769
-yuno,164,45,4	duplicate(Healer)	Healer#yuno	769
+yuno,165,185,4	duplicate(Healer)	Healer#yuno	769
 
 // Duplicates (Renewal)
 //============================================================

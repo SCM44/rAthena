@@ -21,8 +21,8 @@ OnInit:
 	//Mode, MobHP, MobAtk, MobAmt, BossHP, BossAtk, BossDef, BossMdef, BossHit, BossFlee
 	setarray .mode_arr$,
 		1,1,1,1,1,1,1,1,1,1,	//Easy
-		2,2,2,2,2,2,1,1,2,1, 	//Normal
-		3,4,4,5,4,5,2,2,3,1	//Hard
+		2,3,2,2,2,2,1,1,2,1, 	//Normal
+		3,6,4,5,5,5,2,2,3,1	//Hard
 		;
 	.mode_config$ = implode(.mode_arr$,"-");
 	
@@ -30,7 +30,7 @@ OnInit:
 	setarray .menu_arr$, 
 		"^008000Easy Challenges^000000 suit me",
 		"I like ^0000FFNormal Challenges^000000",
-		"Nothing's ^FF0000Hard^000000 for me, bring it on!";
+		"Nothing's ^FF0000 Hard^000000 for me, bring it on!";
 	.menu_config$ = implode(.menu_arr$,":");
 	end;
 

@@ -254,9 +254,9 @@ function Set_Enchant; function Chk_Slot;
 		mes "^ff0000Expedition Armor Class IV can only obtain 1st Job Essence.^000000";
 		next;
 		mes .@name$;
-		mes "Enchant & reset fee: 500000 zeny.";
+		mes "Enchant & reset fee: 100000 zeny.";
 		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
-		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		mes "Using 200 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
 		close;
 	case 2:
 		.@service_type = 1;
@@ -376,7 +376,7 @@ S_Enchant:
 	}
 
 	//Enchant Cost
-	.@Zeny = 500000;
+	.@Zeny = 100000;
 	
 	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
 		mes .@name$;
@@ -491,18 +491,18 @@ S_Initialize:
 		close;
 	}
 	next;
-	if(select("^0000FF100% Success Rate^000000 (500xRare Coins):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	if(select("^0000FF100% Success Rate^000000 (200xRare Coins):90% Success Rate (100,000 Zeny)")==1) .@nofail = 1;
 	//Additional dialogue to remind player of their choice
 	mes .@name$;
-	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 200x Rare Coin":"^FF000090% Success Rate^000000 100,000 Zeny")+" Option.";
 	mes "Do you want to proceed?";
 	next;
 	if(select("No:Yes, I am sure")==1) close;
 	
 	if (!.@nofail) {
 		mes .@name$;
-		if(Zeny < 500000) {
-			mes "You've got to pay 500,000 Zeny if you want the services.";
+		if(Zeny < 100000) {
+			mes "You've got to pay 100,000 Zeny if you want the services.";
 			close;
 		} else {
 			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
@@ -512,17 +512,17 @@ S_Initialize:
 		}
 	}
 	
-	if(.@nofail && countitem(18010) < 500) {
+	if(.@nofail && countitem(18010) < 200) {
 		mes .@name$;
-		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		mes "You need to offer 200x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
 		close;
 	}
 	specialeffect2 EF_REPAIRWEAPON;
 	mes .@name$;
 	delequip .@part;
-	if(.@nofail) delitem 18010,500; //Rare Coins
-	if(!.@nofail) Zeny -= 500000;
-	if(!.@nofail && rand(1,100) <= 30) {
+	if(.@nofail) delitem 18010,200; //Rare Coins
+	if(!.@nofail) Zeny -= 100000;
+	if(!.@nofail && rand(1,100) <= 10) {
 		mes "^FF0000Unfortunately, we failed.^000000";
 		mes "The equipment has been destroyed.";
 		close;
@@ -763,12 +763,12 @@ function Set_Enchant; function Chk_Slot;
 		mes "The statue can apply enchants to Expedition of Armor, Garment, Footgear and Accessory!";
 		next;
 		mes .@name$;
-		mes "If ^0000ffExpedition Armor^000000 is refined to +6 or above, it has chance to obtain ^0000FFSpecial 1st Job Essence^000000 enchant!";
+		mes "If ^0000ffExpedition Armor^000000 is refined to +5 or above, it has chance to obtain ^0000FFSpecial 1st Job Essence^000000 enchant!";
 		next;
 		mes .@name$;
-		mes "Enchant & reset fee: 500000 zeny.";
+		mes "Enchant & reset fee: 100000 zeny.";
 		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
-		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		mes "Using 200 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
 		close;
 	case 2:
 		.@service_type = 1;
@@ -888,7 +888,7 @@ S_Enchant:
 	}
 
 	//Enchant Cost
-	.@Zeny = 500000;
+	.@Zeny = 100000;
 	
 	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
 		mes .@name$;
@@ -1003,18 +1003,18 @@ S_Initialize:
 		close;
 	}
 	next;
-	if(select("^0000FF100% Success Rate^000000 (500x Rare Coin):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	if(select("^0000FF100% Success Rate^000000 (200x Rare Coin):90% Success Rate (100,000 Zeny)")==1) .@nofail = 1;
 	//Additional dialogue to remind player of their choice
 	mes .@name$;
-	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 200x Rare Coin":"^FF000070% Success Rate^000000 100,000 Zeny")+" Option.";
 	mes "Do you want to proceed?";
 	next;
 	if(select("No:Yes, I am sure")==1) close;
 	
 	if (!.@nofail) {
 		mes .@name$;
-		if(Zeny < 500000) {
-			mes "You've got to pay 500,000 Zeny if you want the services.";
+		if(Zeny < 100000) {
+			mes "You've got to pay 100,000 Zeny if you want the services.";
 			close;
 		} else {
 			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
@@ -1024,17 +1024,17 @@ S_Initialize:
 		}
 	}
 	
-	if(.@nofail && countitem(18010) < 500) {
+	if(.@nofail && countitem(18010) < 200) {
 		mes .@name$;
-		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		mes "You need to offer 200x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
 		close;
 	}
 	specialeffect2 EF_REPAIRWEAPON;
 	mes .@name$;
 	delequip .@part;
-	if(.@nofail) delitem 18010,500; //Rare Coins
-	if(!.@nofail) Zeny -= 500000;
-	if(!.@nofail && rand(1,100) <= 30) {
+	if(.@nofail) delitem 18010,200; //Rare Coins
+	if(!.@nofail) Zeny -= 100000;
+	if(!.@nofail && rand(1,100) <= 10) {
 		mes "^FF0000Unfortunately, we failed.^000000";
 		mes "The equipment has been destroyed.";
 		close;
@@ -1279,9 +1279,9 @@ function Set_Enchant; function Chk_Slot;
 		mes "If ^0000ffExpedition Armor^000000 is refined to +8 or above, it has chance to obtain ^0000FFSpecial Ninja/Gun/SG Job Essence^000000 enchant!";
 		next;
 		mes .@name$;
-		mes "Enchant & reset fee: 500000 zeny.";
+		mes "Enchant & reset fee: 100000 zeny.";
 		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
-		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		mes "Using 200 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
 		close;
 	case 2:
 		.@service_type = 1;
@@ -1401,7 +1401,7 @@ S_Enchant:
 	}
 
 	//Enchant Cost
-	.@Zeny = 500000;
+	.@Zeny = 100000;
 	
 	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
 		mes .@name$;
@@ -1516,18 +1516,18 @@ S_Initialize:
 		close;
 	}
 	next;
-	if(select("^0000FF100% Success Rate^000000 (500x Rare Coin):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	if(select("^0000FF100% Success Rate^000000 (200x Rare Coin):90% Success Rate (100,000 Zeny)")==1) .@nofail = 1;
 	//Additional dialogue to remind player of their choice
 	mes .@name$;
-	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 200x Rare Coin":"^FF000090% Success Rate^000000 100,000 Zeny")+" Option.";
 	mes "Do you want to proceed?";
 	next;
 	if(select("No:Yes, I am sure")==1) close;
 	
 	if (!.@nofail) {
 		mes .@name$;
-		if(Zeny < 500000) {
-			mes "You've got to pay 500,000 Zeny if you want the services.";
+		if(Zeny < 100000) {
+			mes "You've got to pay 100,000 Zeny if you want the services.";
 			close;
 		} else {
 			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
@@ -1537,17 +1537,17 @@ S_Initialize:
 		}
 	}
 	
-	if(.@nofail && countitem(18010) < 500) {
+	if(.@nofail && countitem(18010) < 200) {
 		mes .@name$;
-		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		mes "You need to offer 200x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
 		close;
 	}
 	specialeffect2 EF_REPAIRWEAPON;
 	mes .@name$;
 	delequip .@part;
-	if(.@nofail) delitem 18010,500; //Rare Coins
-	if(!.@nofail) Zeny -= 500000;
-	if(!.@nofail && rand(1,100) <= 30) {
+	if(.@nofail) delitem 18010,200; //Rare Coins
+	if(!.@nofail) Zeny -= 100000;
+	if(!.@nofail && rand(1,100) <= 10) {
 		mes "^FF0000Unfortunately, we failed.^000000";
 		mes "The equipment has been destroyed.";
 		close;

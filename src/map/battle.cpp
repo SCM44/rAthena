@@ -4263,10 +4263,10 @@ static int battle_calc_attack_skill_ratio(struct Damage* wd, struct block_list *
 			break;
 		case PA_SHIELDCHAIN:
 #ifdef RENEWAL
-			skillratio = 30 + 60 * skill_lv;
+			skillratio = 60 + 40 * skill_lv;
 			RE_LVL_DMOD(100);
 #else
-			skillratio += 35 * skill_lv;
+			skillratio += 30 * skill_lv;
 #endif
 			if (sc && sc->data[SC_SHIELD_POWER])// Whats the official increase? [Rytech]
 				skillratio += skillratio * 50 / 100;

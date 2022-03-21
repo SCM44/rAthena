@@ -188,14 +188,12 @@ login-server: src/login/CMakeFiles/login-server.dir/loginclif.cpp.o
 login-server: src/login/CMakeFiles/login-server.dir/logincnslif.cpp.o
 login-server: src/login/CMakeFiles/login-server.dir/loginlog.cpp.o
 login-server: src/login/CMakeFiles/login-server.dir/build.make
-login-server: /usr/lib/x86_64-linux-gnu/libm.so
-login-server: /usr/lib/x86_64-linux-gnu/libdl.so
+login-server: /usr/lib/x86_64-linux-gnu/libnsl.so
 login-server: /usr/lib/x86_64-linux-gnu/librt.so
 login-server: lib/libcommonr.a
 login-server: /usr/lib/x86_64-linux-gnu/libmysqlclient.so
 login-server: lib/libcommon_baser.a
-login-server: /usr/lib/x86_64-linux-gnu/libm.so
-login-server: /usr/lib/x86_64-linux-gnu/libdl.so
+login-server: /usr/lib/x86_64-linux-gnu/libnsl.so
 login-server: /usr/lib/x86_64-linux-gnu/librt.so
 login-server: /usr/lib/x86_64-linux-gnu/libz.so
 login-server: lib/libyaml-cppr.a

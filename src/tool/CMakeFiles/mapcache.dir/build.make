@@ -284,8 +284,7 @@ mapcache: src/tool/CMakeFiles/mapcache.dir/__/common/grfio.cpp.o
 mapcache: src/tool/CMakeFiles/mapcache.dir/__/common/utils.cpp.o
 mapcache: src/tool/CMakeFiles/mapcache.dir/mapcache.cpp.o
 mapcache: src/tool/CMakeFiles/mapcache.dir/build.make
-mapcache: /usr/lib/x86_64-linux-gnu/libm.so
-mapcache: /usr/lib/x86_64-linux-gnu/libdl.so
+mapcache: /usr/lib/x86_64-linux-gnu/libnsl.so
 mapcache: /usr/lib/x86_64-linux-gnu/librt.so
 mapcache: /usr/lib/x86_64-linux-gnu/libz.so
 mapcache: src/tool/CMakeFiles/mapcache.dir/link.txt

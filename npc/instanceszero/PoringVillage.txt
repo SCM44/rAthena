@@ -129,8 +129,10 @@ prt_fild05,141,236,3	script	Curious Adventurer#begi	671,{
 			mes "Only the registered members can enter the instance "+.@md_name$+".";
 			close;
 		case IE_OK:
-			setquest .@quest;
+			if(.@quest){
+				setquest .@quest;
 			break;
+			}
 		}
 		//debugmes "Instance Entrance Poring Village "+strcharinfo(0)+".";
 		close;
@@ -192,7 +194,7 @@ OnInit:
 OnSummon: //Define monster list based on mode
 	//Poring, Drops, Poporing, Marin, Goldring, Amering, King Poring
 	switch('Mode) {
-		case 1: setarray 'List,1002,1113,1031,1242,3811,3812,3810; break;
+		case 1: setarray 'List,3815,3813,3814,3816,3811,3812,3810; break;
 		case 2: setarray 'List,3815,3813,3814,3816,3811,3812,3810; break; 
 		case 3: setarray 'List,1810,1808,1809,1811,1806,1807,1805; break;
 	}

@@ -362,10 +362,10 @@ ZLIB_SYSTEM_INCLUDE_DIRS:PATH=/usr/include
 ZLIB_SYSTEM_LIBRARIES:PATH=/usr/lib/x86_64-linux-gnu/libz.so
 
 //Dependencies for the target
-common_LIB_DEPENDS:STATIC=general;-lpthread;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/libdl.so;/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libmysqlclient.so;common_base;yaml-cpp;
+common_LIB_DEPENDS:STATIC=general;-lpthread;/usr/lib/x86_64-linux-gnu/libnsl.so;/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libmysqlclient.so;common_base;yaml-cpp;
 
 //Dependencies for the target
-common_base_LIB_DEPENDS:STATIC=general;-lpthread;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/libdl.so;/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libz.so;yaml-cpp;
+common_base_LIB_DEPENDS:STATIC=general;-lpthread;/usr/lib/x86_64-linux-gnu/libnsl.so;/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libz.so;yaml-cpp;
 
 //Path to a library.
 dl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libdl.so
@@ -381,6 +381,9 @@ httplib_SOURCE_DIR:STATIC=/home/debian/rathena/3rdparty/httplib
 
 //Path to a library.
 m_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
+
+//Path to a library.
+nsl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libnsl.so
 
 //Value Computed by CMake
 rAthena_BINARY_DIR:STATIC=/home/debian/rathena
@@ -598,12 +601,12 @@ FIND_PACKAGE_MESSAGE_DETAILS_PCRE:INTERNAL=[/usr/lib/x86_64-linux-gnu/libpcre.so
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding ZLIB
 FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/usr/lib/x86_64-linux-gnu/libz.so][/usr/include][v1.2.11()]
-//Found dlopen in dl
-FUNCTION_DLOPEN_LIBRARIES:INTERNAL=/usr/lib/x86_64-linux-gnu/libdl.so
-//Found floor in m
-FUNCTION_FLOOR_LIBRARIES:INTERNAL=/usr/lib/x86_64-linux-gnu/libm.so
-//Found gethostbyname in global libraries
-FUNCTION_GETHOSTBYNAME_LIBRARIES:INTERNAL=0
+//Found dlopen in global libraries
+FUNCTION_DLOPEN_LIBRARIES:INTERNAL=0
+//Found floor in global libraries
+FUNCTION_FLOOR_LIBRARIES:INTERNAL=0
+//Found gethostbyname in nsl
+FUNCTION_GETHOSTBYNAME_LIBRARIES:INTERNAL=/usr/lib/x86_64-linux-gnu/libnsl.so
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GLOBAL_DEFINITIONS
@@ -614,7 +617,7 @@ GLOBAL_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 GLOBAL_INCLUDE_DIRS:INTERNAL=/home/debian/rathena/src/common
 //ADVANCED property for variable: GLOBAL_LIBRARIES
 GLOBAL_LIBRARIES-ADVANCED:INTERNAL=1
-GLOBAL_LIBRARIES:INTERNAL=-lpthread;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/libdl.so;/usr/lib/x86_64-linux-gnu/librt.so
+GLOBAL_LIBRARIES:INTERNAL=-lpthread;/usr/lib/x86_64-linux-gnu/libnsl.so;/usr/lib/x86_64-linux-gnu/librt.so
 //Have function getpid
 HAVE_GETPID:INTERNAL=1
 //Have function gettid
@@ -725,4 +728,6 @@ ZLIB_SYSTEM_LIBRARIES-ADVANCED:INTERNAL=1
 dl_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: m_LIBRARY
 m_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: nsl_LIBRARY
+nsl_LIBRARY-ADVANCED:INTERNAL=1
 

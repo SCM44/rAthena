@@ -106,25 +106,25 @@ gef_fild10,231,203,5	script	Calm Scientist#0	4_F_GON,5,5,{
 					mes "Sorry, but the entry period to the "+.@md_name$+" has expired.";
 					mes "Take a rest while waiting for the dungeon to be available again.";
 					next;
-					switch(select("Reset cooldown (50,000z)","No thanks.")) {
+					switch(select("Reset cooldown (1,000,000z)","No thanks.")) {
 						
 						case 1:
-							if(zeny < 50000){
+							if(zeny < 1000000){
 								mes "[Calm Scientist]";
-								mes "You want to reset the cooldown, it will cost you 50,000 zeny.";
+								mes "You want to reset the cooldown, it will cost you 1,000,000 zeny.";
 								close;
 							}
 							mes "[Calm Scientist]";
 							mes "You really don't have any patience...I'll be taking the zeny and reset the instance for you.";
 							mes "You may enter.";
-							set zeny,zeny-50000;
+							set zeny,zeny-1000000;
 							erasequest .@quest;
 							close;
 						
 						case 2:
-							if(countitem(18010) < 100){
+							if(countitem(18010) < 300){
 								mes "[Calm Scientist]";
-								mes "You want to reset the cooldown, it will cost you 100 Rare Coins.";
+								mes "You want to reset the cooldown, it will cost you 300 Rare Coins.";
 								close;
 							}
 							mes "[Calm Scientist]";
@@ -178,25 +178,25 @@ gef_fild10,231,203,5	script	Calm Scientist#0	4_F_GON,5,5,{
 						mes "Sorry, but the entry period to the "+.@md_name$+" has expired.";
 						mes "Take a rest while waiting for the dungeon to be available again.";
 						next;
-						switch(select("Reset cooldown (50,000z)","No thanks.")) {
+						switch(select("Reset cooldown (1,000,000z)","No thanks.")) {
 							
 							case 1:
-								if(zeny < 50000){
+								if(zeny < 1000000){
 									mes "[Calm Scientist]";
-									mes "You want to reset the cooldown, it will cost you 50,000 zeny.";
+									mes "You want to reset the cooldown, it will cost you 1,000,000 zeny.";
 									close;
 								}
 								mes "[Calm Scientist]";
 								mes "You really don't have any patience...I'll be taking the zeny and reset the instance for you.";
 								mes "You may enter.";
-								set zeny,zeny-50000;
+								set zeny,zeny-1000000;
 								erasequest .@quest;
 								close;
 							
 							case 2:
-								if(countitem(18010) < 100){
+								if(countitem(18010) < 300){
 									mes "[Calm Scientist]";
-									mes "You want to reset the cooldown, it will cost you 100 Rare Coins.";
+									mes "You want to reset the cooldown, it will cost you 300 Rare Coins.";
 									close;
 								}
 								mes "[Calm Scientist]";
@@ -574,11 +574,11 @@ OnBossDead:
 		25424,25,	//Shimering_Crystal
 		29587,50,	//Shimering_Crystal_Box
 		29587,25,	//Shimering_Crystal_Box
-		18005,10,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
+		18005,50,	//Mixed_Rune_Fragment
 		18005,1,	//Mixed_Rune_Fragment
 		29584,1,	//Rune_Box
-		29585,2,	//PVM_Box
+		29585,5,	//PVM_Box
+		29586,10,	//Refine_Box
 		29586,5,	//Refine_Box
 		15220,100,	//Subjugation_Armor
 		15220,50,	//Subjugation_Armor
@@ -601,15 +601,13 @@ OnBossDead:
 		29587,100,	//Shimering_Crystal_Box
 		29587,100,	//Shimering_Crystal_Box
 		18005,100,	//Mixed_Rune_Fragment
-		18005,10,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
 		18005,1,	//Mixed_Rune_Fragment
 		29584,5,	//Rune_Box
-		29585,20,	//PVM_Box
+		29585,10,	//PVM_Box
 		29586,20,	//Refine_Box
 		29584,1,	//Rune_Box
 		29585,2,	//PVM_Box
-		29586,5,	//Refine_Box
+		29586,10,	//Refine_Box
 		6635,10;	//Blacksmith Blessing
 	}
 
@@ -661,7 +659,6 @@ OnInstanceInit:
 		mes "[Gulok]";
 		mes "Oh well, before you go, I picked this up. I don't need it, so take it.";
 		completequest 12419;
-		getitem F_Rand(15220,20867),1;
 		getexp 100000,50000;
 		next;
 	}
@@ -684,8 +681,6 @@ OnInstanceInit:
 			mes "[Gulok]";
 			mes "Alright, I will warp you out of here.";
 			close2;
-			//getitem F_Rand(28539,22150),1;
-			getitem 25424, F_Rand(1,2,3,4);
 			warp "gef_fild10",236,208;
 			end;
 	}

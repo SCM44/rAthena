@@ -139,9 +139,12 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 			mes "Only the registered members can enter the instance "+.@md_name$+".";
 			close;
 		case IE_OK:
-			setquest .@quest;
+			if(.@quest){
+				setquest .@quest;
 			break;
+			}
 		}
+
 		//debugmes "Instance Entrance Prontera Culvert "+strcharinfo(0)+".";
 		close;
 	case 3: close;
@@ -478,13 +481,12 @@ OnFumes:
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
-		18005,5,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
+		18005,50,	//Mixed_Rune_Fragment
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
 		29584,1,	//Rune_Box
-		29585,2,	//PVM_Box
+		29585,3,	//PVM_Box
+		29586,10,	//Refine_Box
 		29586,5,	//Refine_Box
 		22150,100,	//Expedition_Greaves_4
 		22150,50,	//Expedition_Greaves_4
@@ -509,11 +511,8 @@ OnFumes:
 		29585,20,	//Pvm_Box
 		29584,1,	//Rune_Box
 		29585,2,	//PVM_Box
-		29586,5,	//Refine_Box
+		29586,10,	//Refine_Box
 		18005,100,	//Mixed_Rune_Fragment
-		18005,10,	//Mixed_Rune_Fragment
-		18005,10,	//Mixed_Rune_Fragment
-		18005,10,	//Mixed_Rune_Fragment
 		29587,100,	//Shimmering_Crystal_Box
 		29587,100,	//Shimmering_Crystal_Box
 		756,100,	//Oridecon_Stone

@@ -41856,7 +41856,7 @@ Body:
       - Item: Green_Herb
         Rate: 25
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 2569
     AegisName: G_ANOPHELES
     Name: Anopheles
@@ -41923,7 +41923,7 @@ Body:
       - Item: Emperium
         Rate: 1
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 3899
     AegisName: MD_HIGH_ORC
     Name: Fallen_High Orc
@@ -41962,7 +41962,7 @@ Body:
       - Item: Emperium
         Rate: 1
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 3900
     AegisName: MD_ORC_ARCHER
     Name: Fallen_Orc Archer
@@ -42012,8 +42012,8 @@ Body:
     MvpExp: 53460
     Attack: 600
     Attack2: 130
-    Defense: 50
-    MagicDefense: 50
+    Defense: 35
+    MagicDefense: 30
     Str: 97
     Agi: 82
     Vit: 107
@@ -42047,7 +42047,7 @@ Body:
       - Item: Rare_Coin
         Rate: 1000
       - Item: Mixed_Rune_Fragment
-        Rate: 50
+        Rate: 1000
         StealProtected: true
   - Id: 3902
     AegisName: MD_ORC_LORD
@@ -42057,8 +42057,8 @@ Body:
     MvpExp: 53460
     Attack: 662
     Attack2: 300
-    Defense: 50
-    MagicDefense: 50
+    Defense: 30
+    MagicDefense: 30
     Str: 97
     Agi: 82
     Vit: 107
@@ -42092,7 +42092,7 @@ Body:
       - Item: Rare_Coin
         Rate: 1000
       - Item: Mixed_Rune_Fragment
-        Rate: 50
+        Rate: 1000
         StealProtected: true
   - Id: 3903
     AegisName: MD_ORC_FLOWER
@@ -42206,7 +42206,7 @@ Body:
       - Item: Iron_Ore
         Rate: 250
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 3973
     AegisName: MD_THIEF_BUG
     Name: Tiny Thief Bug
@@ -42314,7 +42314,7 @@ Body:
       - Item: Rare_Coin
         Rate: 1000
       - Item: Mixed_Rune_Fragment
-        Rate: 50
+        Rate: 1000
         StealProtected: true
   - Id: 20076
     AegisName: MD_MAYA
@@ -42326,8 +42326,8 @@ Body:
     MvpExp: 89280
     Attack: 900
     Attack2: 700
-    Defense: 50
-    MagicDefense: 50
+    Defense: 30
+    MagicDefense: 30
     Str: 88
     Agi: 72
     Vit: 76
@@ -42361,7 +42361,7 @@ Body:
       - Item: Rare_Coin
         Rate: 1000
       - Item: Mixed_Rune_Fragment
-        Rate: 50
+        Rate: 100
         StealProtected: true
   - Id: 20077
     AegisName: MD_DENIRO
@@ -42372,7 +42372,7 @@ Body:
     JobExp: 740
     Attack: 45
     Attack2: 161
-    Defense: 52
+    Defense: 30
     MagicDefense: 16
     Str: 15
     Agi: 16
@@ -42407,7 +42407,7 @@ Body:
       - Item: Sparkling_Dust
         Rate: 8
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20078
     AegisName: MD_VITATA
     Name: Cannibal Vitata
@@ -42417,7 +42417,7 @@ Body:
     JobExp: 756
     Attack: 68
     Attack2: 186
-    Defense: 44
+    Defense: 30
     MagicDefense: 12
     Str: 20
     Agi: 11
@@ -42449,7 +42449,7 @@ Body:
       - Item: Honey
         Rate: 350
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20079
     AegisName: MD_ANDRE
     Name: Cannibal Andre
@@ -42496,7 +42496,7 @@ Body:
       - Item: Iron_Ore
         Rate: 350
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20080
     AegisName: MD_PIERE
     Name: Cannibal Piere
@@ -42541,7 +42541,7 @@ Body:
       - Item: Sparkling_Dust
         Rate: 5
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20081
     AegisName: MD_IZ_COELACANTH
     Name: Deepsea Coelacanth
@@ -42552,8 +42552,8 @@ Body:
     MvpExp: 157580
     Attack: 1000
     Attack2: 350
-    Defense: 50
-    MagicDefense: 50
+    Defense: 30
+    MagicDefense: 30
     Str: 92
     Agi: 68
     Vit: 101
@@ -42587,7 +42587,7 @@ Body:
       - Item: Rare_Coin
         Rate: 1000
       - Item: Mixed_Rune_Fragment
-        Rate: 50
+        Rate: 1000
         StealProtected: true
   - Id: 20082
     AegisName: MD_IZ_MARSE
@@ -42634,7 +42634,7 @@ Body:
       - Item: Grape
         Rate: 300
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20083
     AegisName: MD_IZ_MERMAN
     Name: Deepsea Merman
@@ -42676,7 +42676,7 @@ Body:
       - Item: Oridecon_Stone
         Rate: 203
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20084
     AegisName: MD_IZ_OBEAUNE
     Name: Deepsea Obeaune
@@ -42720,7 +42720,7 @@ Body:
       - Item: Witherless_Rose
         Rate: 30
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20085
     AegisName: MD_IZ_CORNUTUS
     Name: Deepsea Cornutus
@@ -42766,7 +42766,7 @@ Body:
       - Item: Blue_Gemstone
         Rate: 100
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20111
     AegisName: MD_TRE_DRAKE
     Name: Stormy Drake
@@ -42777,8 +42777,8 @@ Body:
     MvpExp: 257580
     Attack: 1500
     Attack2: 400
-    Defense: 50
-    MagicDefense: 50
+    Defense: 35
+    MagicDefense: 35
     Str: 121
     Agi: 103
     Vit: 114
@@ -42846,6 +42846,20 @@ Body:
       IgnoreMelee: true
       IgnoreMisc: true
       IgnoreRanged: true
+    Drops:
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Rare_Coin
+        Rate: 1000
+      - Item: Mixed_Rune_Fragment
+        Rate: 100
+        StealProtected: true
   - Id: 20113
     AegisName: MD_TRE_MIMIC
     Name: Stormy Mimic
@@ -42904,8 +42918,8 @@ Body:
     Hp: 12000
     Attack: 335
     Attack2: 396
-    Defense: 80
-    MagicDefense: 40
+    Defense: 20
+    MagicDefense: 20
     Str: 62
     Agi: 26
     Vit: 30
@@ -42936,7 +42950,7 @@ Body:
       - Item: Crystal_Jewel_
         Rate: 5
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20115
     AegisName: MD_TRE_PIRATE_SKEL
     Name: Stormy Pirate Skeleton
@@ -42946,8 +42960,8 @@ Body:
     JobExp: 1900
     Attack: 348
     Attack2: 125
-    Defense: 53
-    MagicDefense: 20
+    Defense: 25
+    MagicDefense: 10
     Str: 35
     Agi: 25
     Vit: 25
@@ -42976,7 +42990,7 @@ Body:
       - Item: Well_Dried_Bone
         Rate: 20
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20116
     AegisName: MD_TRE_WHISPER
     Name: Stormy Whisper
@@ -42987,7 +43001,7 @@ Body:
     Attack: 452
     Attack2: 120
     Defense: 20
-    MagicDefense: 40
+    MagicDefense: 35
     Str: 32
     Agi: 48
     Vit: 20
@@ -43018,7 +43032,7 @@ Body:
       - Item: Fit_Pipe
         Rate: 20
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20117
     AegisName: MD_TRE_HYDRA
     Name: Stormy Hydra
@@ -43061,7 +43075,7 @@ Body:
       - Item: Meat
         Rate: 700
       - Item: Rare_Coin
-        Rate: 250
+        Rate: 100
   - Id: 20165
     AegisName: MD_TOUCAN
     Name: Toucan

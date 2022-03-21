@@ -364,14 +364,12 @@ char-server: src/char/CMakeFiles/char-server.dir/int_quest.cpp.o
 char-server: src/char/CMakeFiles/char-server.dir/int_storage.cpp.o
 char-server: src/char/CMakeFiles/char-server.dir/inter.cpp.o
 char-server: src/char/CMakeFiles/char-server.dir/build.make
-char-server: /usr/lib/x86_64-linux-gnu/libm.so
-char-server: /usr/lib/x86_64-linux-gnu/libdl.so
+char-server: /usr/lib/x86_64-linux-gnu/libnsl.so
 char-server: /usr/lib/x86_64-linux-gnu/librt.so
 char-server: lib/libcommonr.a
 char-server: /usr/lib/x86_64-linux-gnu/libmysqlclient.so
 char-server: lib/libcommon_baser.a
-char-server: /usr/lib/x86_64-linux-gnu/libm.so
-char-server: /usr/lib/x86_64-linux-gnu/libdl.so
+char-server: /usr/lib/x86_64-linux-gnu/libnsl.so
 char-server: /usr/lib/x86_64-linux-gnu/librt.so
 char-server: /usr/lib/x86_64-linux-gnu/libz.so
 char-server: lib/libyaml-cppr.a

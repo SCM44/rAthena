@@ -22360,8 +22360,9 @@ Body:
       BuyingStore: true
     Script: |
       bonus(bMatk, 3 * getskilllv("SA_AUTOSPELL"));
-      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 20);
-      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 20);
+      bonus2(bSkillAtk, "MG_FIREBOLT", 10);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 10);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 10);
       bonus(bAspdRate, getrefine());
   - Id: 29409
     AegisName: Monk_Essence_1
@@ -22427,7 +22428,7 @@ Body:
     Script: |
       bonus(bCritical, 5 * getskilllv("KN_CAVALIERMASTERY"));
       bonus2(bSkillAtk, "KN_BOWLINGBASH", 35);
-      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","SM_BASH",10,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"KN_BOWLINGBASH","KN_BOWLINGBASH",10,20 * getrefine();
       bonus(bAspdRate, getrefine());
       autobonus3("{ bonus(bCritAtkRate, 7); }", 1000, 60000, "KN_TWOHANDQUICKEN","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29412
@@ -22477,7 +22478,7 @@ Body:
       bonus(bCritical, 5 * getskilllv("AS_GRIMTOOTH"));
       bonus2(bSkillAtk, "AS_SONICBLOW", 35);
       bonus(bCritAtkRate, getrefine());
-      bonus4 bAutoSpellOnSkill,"AS_SONICBLOW","AS_CLOAKING",10,40 * getrefine();
+      bonus4 bAutoSpellOnSkill,"AS_SONICBLOW","AS_CLOAKING",10,50 * getrefine();
       autobonus3("{ bonus(bAspdRate, 7); }", 1000, 60000, "AS_SONICBLOW", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29414
     AegisName: Wizard_Essence_2
@@ -22502,7 +22503,8 @@ Body:
       bonus2(bSkillAtk, "WZ_METEOR", 35);
       bonus2(bSkillAtk, "WZ_VERMILION", 35);
       bonus2(bSkillAtk, "WZ_STORMGUST", 35);
-      bonus4 bAutoSpellOnSkill,"WZ_STORMGUST","WZ_METEOR",10,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"WZ_METEOR","HW_MAGICPOWER",10,10 * getrefine();
+      bonus4 bAutoSpellOnSkill,"WZ_STORMGUST","HW_MAGICPOWER",10,10 * getrefine();
       bonus(bMatkRate, getrefine() / 2);
       autobonus3("{ bonus(bFlee, 30); }", 1000, 60000, "WZ_QUAGMIRE", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29415
@@ -22548,7 +22550,7 @@ Body:
       BuyingStore: true
     Script: |
       bonus(bAspdRate, 3 * getskilllv("HT_BLITZBEAT"));
-      bonus2(bSkillAtk, "HT_BLITZBEAT", 40);
+      bonus2(bSkillAtk, "HT_BLITZBEAT", 60);
       bonus2(bSkillAtk, "SN_FALCONASSAULT", 35);
       bonus4 bAutoSpellOnSkill,"SN_FALCONASSAULT","HT_BLITZBEAT",10,20 * getrefine();
       bonus(bInt, getrefine());
@@ -22573,9 +22575,9 @@ Body:
       BuyingStore: true
     Script: |
       bonus(bAtk, 5 * getskilllv("CR_TRUST"));
-      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 40);
+      bonus2(bSkillAtk, "PA_SHIELDCHAIN", 35);
       bonus(bMaxHP, 100 * (getrefine() / 2));
-      bonus4 bAutoSpellOnSkill,"PA_SHIELDCHAIN","PA_PRESSURE",5,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"PA_SHIELDCHAIN","PA_PRESSURE",5,15 * getrefine();
       autobonus3("{ bonus(bDef, 10); }", 1000, 60000, "CR_AUTOGUARD", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29418
     AegisName: Alchemist_Essence_2
@@ -22599,7 +22601,7 @@ Body:
       bonus(bInt, 1 * getskilllv("AM_LEARNINGPOTION"));
       bonus(bAspdRate, 10);
       bonus(bAgi, 1 * (getrefine() / 2));
-      autobonus3("{ bonus(bInt, 5); bonus(bDex, 5); bonus(bLuk, 5); bonus2(bAddMonsterDropItem, Coating_Bottle, 30 *getrefine()); bonus2(bAddMonsterDropItem, MenEater_Plant_Bottle, 30 * getrefine()); }", 1000, 60000, "AM_POTIONPITCHER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      autobonus3("{ bonus(bInt, 5); bonus(bDex, 5); bonus(bLuk, 5); bonus2(bAddMonsterDropItem, Coating_Bottle, 100 *getrefine()); bonus2(bAddMonsterDropItem, MenEater_Plant_Bottle, 100 * getrefine()); }", 1000, 60000, "AM_POTIONPITCHER", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29419
     AegisName: Rogue_Essence_2
     Name: Rogue Essence Lv2
@@ -22644,12 +22646,13 @@ Body:
       BuyingStore: true
     Script: |
       bonus(bMatk, 5 * getskilllv("SA_AUTOSPELL"));
-      bonus2(bSkillAtk, "WZ_EARTHSPIKE", 35);
-      bonus2(bSkillAtk, "WZ_HEAVENDRIVE", 35);
-      bonus4 bAutoSpellOnSkill,"WZ_EARTHSPIKE","WZ_HEAVENDRIVE",5,20 * getrefine();
-      bonus4 bAutoSpellOnSkill,"WZ_HEAVENDRIVE","WZ_EARTHSPIKE",5,20 * getrefine();
-      bonus(bAspdRate, getrefine());
-      autobonus3("{ bonus(bAspd, 5); bonus2(bMagicAtkEle, Ele_Earth, 15); }", 1000, 60000, "SA_AUTOSPELL", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
+      bonus2(bSkillAtk, "MG_FIREBOLT", 15);
+      bonus2(bSkillAtk, "MG_COLDBOLT", 15);
+      bonus2(bSkillAtk, "MG_LIGHTNINGBOLT", 15);
+      bonus4 bAutoSpellOnSkill,"MG_FIREBOLT","MG_LIGHTNINGBOLT",5,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MG_LIGHTNINGBOLT","MG_COLDBOLT",5,20 * getrefine();
+      bonus(bAspdRate, getrefine()*2);
+      autobonus3("{ bonus(bAspd, 5); bonus2(bMagicAtkEle, Ele_Fire, 15); }", 1000, 60000, "SA_AUTOSPELL", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29421
     AegisName: Monk_Essence_2
     Name: Monk Essence Lv2
@@ -22673,10 +22676,10 @@ Body:
       bonus(bAtk, 5 * getskilllv("AL_DEMONBANE"));
       bonus2(bSkillAtk, "MO_CHAINCOMBO", 60);
       bonus2(bSkillAtk, "MO_COMBOFINISH", 60);
-      bonus4 bAutoSpellOnSkill,"MO_CHAINCOMBO","PF_SPIDERWEB",1,30 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MO_CHAINCOMBO","RG_CLOSECONFINE",1,50 * getrefine();
       //bonus3({"bAutoSpell, "MO_CALLSPIRITS", 5, 100); }", 1000, 60000, "MO_EXPLOSIONSPIRITS", "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
       //autobonus3("{ bonus3(bAutoSpell, MO_CALLSPIRITS, 5, 100); }", 1000, 60000, MO_EXPLOSIONSPIRITS, "{specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
-      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,3 * getrefine();
+      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,30 * getrefine();
   - Id: 29422
     AegisName: Bard_Dancer_Essence_2
     Name: Bard & Dancer Essence Lv2 
@@ -22726,6 +22729,7 @@ Body:
       bonus(bAtk, 3 * getskilllv("NJ_TOBIDOUGU"));
       bonus2(bSkillAtk, "NJ_KIRIKAGE", 30);
       bonus2(bSkillAtk, "NJ_HUUMA", 30);
+      bonus2(bSkillAtk, "NJ_KUNAI", 20);
       bonus2(bSkillAtk, "NJ_ISSEN", 10);
       bonus(bMaxHP, 100 * (getrefine() / 2));
       bonus(bHit, 5 * (getrefine() / 2));
@@ -22752,6 +22756,7 @@ Body:
       bonus(bAtk, 5 * getskilllv("NJ_TOBIDOUGU"));
       bonus2(bSkillAtk, "NJ_KIRIKAGE", 50);
       bonus2(bSkillAtk, "NJ_HUUMA", 50);
+      bonus2(bSkillAtk, "NJ_KUNAI", 35);
       bonus2(bSkillAtk, "NJ_ISSEN", 20);
       //bonus5 bAutoSpellOnSkill,"NJ_ISSEN","AL_HEAL",10,1000,1;
       bonus(bMaxHP, 200 * (getrefine() / 2));
@@ -23122,7 +23127,7 @@ Body:
       bonus(bFlee, 5 * getskilllv("AS_LEFT"));
       bonus2(bSkillAtk, "AS_SPLASHER", 75);
       bonus2(bSkillAtk, "ASC_BREAKER", 35);
-      bonus4 bAutoSpellOnSkill,"ASC_BREAKER","AS_CLOAKING",10,40 * getrefine();
+      bonus4 bAutoSpellOnSkill,"ASC_BREAKER","AS_CLOAKING",10,50 * getrefine();
       bonus(bCastrate, -3 * (getrefine() / 2));
       autobonus3("{ bonus(bAtk, 30); }", 1000, 60000, "AS_CLOAKING", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29569
@@ -23146,7 +23151,7 @@ Body:
     Script: |
       bonus(bCastrate, -3 * getskilllv("WZ_VERMILION"));
       bonus2(bSkillAtk, "WZ_JUPITEL", 35);
-      bonus4 bAutoSpellOnSkill,"WZ_JUPITEL","HW_MAGICPOWER",10,20 * getrefine();
+      bonus4 bAutoSpellOnSkill,"WZ_JUPITEL","WZ_JUPITEL",10,20 * getrefine();
       bonus(bMatk, 2 * getrefine());
       autobonus3("{ bonus(bMatk, 30); }", 1000, 60000, "WZ_JUPITEL", "{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29570
@@ -23353,7 +23358,7 @@ Body:
       bonus2(bCastrate, "MO_FINGEROFFENSIVE", -5 * getskilllv("AL_DEMONBANE"));
       bonus2(bSkillAtk, "MO_FINGEROFFENSIVE", 20 + 5 * (getrefine() / 2));
       bonus4 bAutoSpellOnSkill,"MO_INVESTIGATE","MO_CALLSPIRITS",5,30 * getrefine();
-      bonus4 bAutoSpellOnSkill,"MO_FINGEROFFENSIVE","CH_SOULCOLLECT",1,30 * getrefine();
+      bonus4 bAutoSpellOnSkill,"MO_FINGEROFFENSIVE","CH_SOULCOLLECT",5,40 * getrefine();
       //autobonus3("{ bonus5(bAutoSpellOnSkill, "MO_INVESTIGATE", "MO_CALLSPIRITS", 5, 500, 1); }", 1000, 60000, "AL_BLESSING","{ specialeffect(EF_POTION_BERSERK, AREA, playerattached());}");
   - Id: 29578
     AegisName: Bard_Dancer_Essence2_2
@@ -23454,7 +23459,7 @@ Body:
       bonus bMaxHP, 1000;
       bonus bAspdRate, 10;
       bonus(bAtk, 1 * getskilllv("TK_RUN"));
-      bonus2(bSkillAtk, "TK_JUMPKICK", 50);
+      bonus2(bSkillAtk, "TK_JUMPKICK", 25);
   - Id: 29582
     AegisName: SG_Essence2
     Name: Star Gladiator Essence Lv2
@@ -23477,7 +23482,7 @@ Body:
       bonus bMaxHP, 2000;
       bonus bAspdRate, 20;
       bonus(bAtk, 2 * getskilllv("TK_RUN"));
-      bonus2(bSkillAtk, "TK_JUMPKICK", 100);
+      bonus2(bSkillAtk, "TK_JUMPKICK", 50);
   - Id: 29583
     AegisName: Battleground_Badge2
     Name: Battleground Badge2
@@ -23486,6 +23491,52 @@ Body:
     Weight: 0
     Flags:
       BuyingStore: true
+  - Id: 29590
+    AegisName: SL_Essence1
+    Name: Soul Linker Essence Lv1
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 1000;
+      bonus(bMatk, 1 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "SL_SMA", 20);
+  - Id: 29591
+    AegisName: SL_Essence2
+    Name: Soul Linker Essence Lv2
+    Type: Card
+    Buy: 20
+    Weight: 10
+    Locations:
+      Both_Accessory: true
+      Right_Hand: true
+      Head_Low: true
+      Head_Mid: true
+      Head_Top: true
+      Garment: true
+      Left_Hand: true
+      Armor: true
+      Shoes: true
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus bMaxHP, 2000;
+      bonus bDex, 2;
+      bonus bInt, 2;
+      bonus(bMatk, 2 * getskilllv("TK_RUN"));
+      bonus2(bSkillAtk, "SL_SMA", 35);
 
 
 

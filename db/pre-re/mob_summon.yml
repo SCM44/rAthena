@@ -1105,6 +1105,34 @@ Body:
         Rate: 1000000
       - Mob: TAO_GUNKA
         Rate: 1000000
+      - Mob: RSX_0806
+        Rate: 1000000
+      - Mob: BACSOJIN_
+        Rate: 1000000
+      - Mob: B_YGNIZEM
+        Rate: 1000000
+      - Mob: APOCALIPS_H
+        Rate: 1000000
+      - Mob: LADY_TANEE
+        Rate: 1000000
+      - Mob: THANATOS
+        Rate: 1000000
+      - Mob: DETALE
+        Rate: 1000000
+      - Mob: KIEL_
+        Rate: 1000000
+      - Mob: RANDGRIS
+        Rate: 1000000
+      - Mob: GLOOMUNDERNIGHT
+        Rate: 1000000
+      - Mob: KTULLANUX
+        Rate: 1000000
+      - Mob: ATROCE
+        Rate: 1000000
+      - Mob: IFRIT
+        Rate: 1000000
+      - Mob: FALLINGBISHOP
+        Rate: 1000000
   - Group: Poring_Box
     Default: PORING
     Summon:
