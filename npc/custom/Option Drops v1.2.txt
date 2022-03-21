@@ -20,7 +20,7 @@ that same item again, or if you have 2str, the item cant have another Str stat, 
 ------
 Runes :
 ------
-4 types of runes 
+4 types of runes
 
 ( 4 custom rune to create )
 
@@ -31,22 +31,22 @@ wont work if the max is str 2, and you already have str 2 )
 4: RuneMax => Will up the stat of your random stat slot of your choice to the Max.
 
 -------------------------------------------------------
-NPC 
+NPC
 -------
 
-- A NPC who will do the rune system => 
+- A NPC who will do the rune system =>
 
-4 Choice => 1 : the player wants to add a random stat slot( lvlup the rarity ) => player specify wich item => if rarity = legendary : fail => 
+4 Choice => 1 : the player wants to add a random stat slot( lvlup the rarity ) => player specify wich item => if rarity = legendary : fail =>
 else => check if player has Rune lvl up x 1 on his inventory , if not , fail => else =>  add a random stat slot ( up the rarity of the item)
 close the conversation
 
- Choice 2 => the player wants to reset a stat slot of their choice => if the player has the rune reset x 1 in his inventory => 
-reset the selected stat slot to a new random one => if not fail 
+ Choice 2 => the player wants to reset a stat slot of their choice => if the player has the rune reset x 1 in his inventory =>
+reset the selected stat slot to a new random one => if not fail
 close the conversation
 
  choice 3 => the player wants to buff the stat of his choice => if the player has the rune + x 1 on his inventory then do =>
 	     if the selected bonus stat < selected bonus stat Max , then do =>
- 	    ( if the selected bonus Stat Max is <= 10 , add  += 1 of the selected bonus stat ) 
+ 	    ( if the selected bonus Stat Max is <= 10 , add  += 1 of the selected bonus stat )
 	    ( if the selected bonus Stat Max is > 10 and < 30 , add += 2 of the selected bonus stat )
 	    ( if the selected bonus Stat Max is >= 100 and < 1000 , add += 10 of the selected bonus stat )
 	    ( if the selected bonus Stat Max is >= 1000, add += 100 of the selected bonus stat )
@@ -63,7 +63,7 @@ Random stats items =>
 
 the stats random will depend on the item categorie they are on =>
 
-Weapons => 
+Weapons =>
 Str 1-3 bonus bStr,n;
 Agi 1-3 bonus bAgi,n;
 Int 1-3 bonus bInt,n;
@@ -76,7 +76,7 @@ Dmg on all size + 5-25% bonus2 bAddSize,Size_All,x; bonus2 bMagicAddSize,Size_Al
 ACD reduction + 3-10% bonus bDelayRate,-x;
 ASPD+ 3-10% bonus bAspdRate,n
 cast time reduction + 3-10% bonus bCastrate,-x;
-crit + 10-20 bonus bCritical,n; 
+crit + 10-20 bonus bCritical,n;
 atk + 20-50 bonus bBaseAtk,n;
 matk + 20-50 bonus bMatk,n;
 
@@ -133,8 +133,8 @@ Int 1 bonus bInt,n;
 Dex 1 bonus bDex,n;
 Vit 1 bonus bVit,n;
 Luk 1 bonus bLuk,n;
-crit + 1-5 bonus bCritical,n; 
-
+crit + 1-5 bonus bCritical,n;
+aze
 hat ( upper only )=>
 
 def+ 1-3 bonus bDef,n;
@@ -771,7 +771,7 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 				misceffect 154;
 				emotion ET_SMILE;
 				mes "You equipement got a new buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
-				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
+				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a ï¿½tï¿½ ajoutï¿½ a l'ï¿½quipement "+(.@a+1)+"!";
 			} else {
 				mes .npc_name$;
 				mes "This equipement already have 3 slots, you cant add more that way, please choose the Option Add the 4th Random Option Slot instead.";
@@ -816,7 +816,7 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			misceffect 154;
 			emotion ET_SMILE;
 			mes "Your equipement got a new buff ! ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
-			//mes "La stat de l'équipement du slot "+(.@index+1)+" a été reset en ["+.option_names$[.@options[.@random_option]]+"]!";
+			//mes "La stat de l'ï¿½quipement du slot "+(.@index+1)+" a ï¿½tï¿½ reset en ["+.option_names$[.@options[.@random_option]]+"]!";
 			break;
 		case 3:
 			mes .npc_name$;
@@ -903,7 +903,7 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 			misceffect 154;
 			emotion ET_SMILE;
 			mes "Your slot stat just got maximized, congratz ! ~ "+sprintf(.option_names$[.@roa_id], .@roa_value)+"!";
-			//mes "La stat du slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] a étée maximisée !";
+			//mes "La stat du slot "+(.@index+1)+" ["+.option_names$[.@roa_id]+"] a ï¿½tï¿½e maximisï¿½e !";
 			break;
 		case 5:
 			if(countitem(.level_up_rune_id) < 3) {
@@ -944,7 +944,7 @@ paramk,48,185,4	script	Rune Enchanter	826,{
 				misceffect 154;
 				emotion ET_SMILE;
 				mes "Your equipement got a new slot buff ~ "+sprintf(.option_names$[.@options[.@random_option]], .@roa_value)+"!";
-				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a été ajouté a l'équipement "+(.@a+1)+"!";
+				//mes "Un nouveau buff ["+.option_names$[.@options[.@random_option]]+"] a ï¿½tï¿½ ajoutï¿½ a l'ï¿½quipement "+(.@a+1)+"!";
 			} else {
 				mes .npc_name$;
 				mes "That equipement already have 4 slot Random Options, you cant add more !";
@@ -1220,10 +1220,10 @@ OnInit:
 	.option_names$[.SPLASH_ATK] = "Splash Damage";
 	.option_names$[.NO_CAST_CANCEL] = "Skill casting can't be interrupted.";
 
-	
-	
 
-	
+
+
+
 }
 
 /* Client Side Modifications
@@ -1262,7 +1262,7 @@ addrandomoptionnametable.lub
 //	Find:
 //
 //				if (rnd() % 10000 < option->chance) {
-//	
+//
 //	Add After:
 //
 //					bool skip = false;
