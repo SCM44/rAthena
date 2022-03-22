@@ -1,0 +1,1780 @@
+//============================================================
+// Expedition Gear (kRo Zero)
+//============================================================
+
+paramk,34,185,4	script	Captain Cairn#mdg	868 ,{
+
+	cutin "lhz_kaz01.bmp",2;
+	mes "[Cairn]";
+	mes "To create an ^0000ffExpedition Equipment^000000 we need materials from Poring Village, Prontera Culvert, Orcs Memory, Ant Hell, Izlude Deepsea and Sunken Ship instances.";
+	mes "Take a look and see what you'd like to craft.";
+	next;
+
+function Add; function Chk; function Slot; function A_An;
+	
+	callfunc("F_CheckWeight",strnpcinfo(1),3);
+	
+	if(.Shops$ != "") .@i = 1;
+	else {
+		.@menu$ = "";
+		for(.@i = 1; .@i<=getarraysize(.Shops$); .@i++)
+				.@menu$ = .@menu$ + .Shops$[.@i]+":";
+		.@i = select(.@menu$); 
+	}
+	
+	dispbottom "Select one item at a time.";
+	addtimer 1000, strnpcinfo(0)+"::OnEnd";
+
+	callshop "expedition"+.@i,1;
+	npcshopattach "expedition"+.@i;
+	end;
+
+function Add {
+       if (getiteminfo(getarg(1),0)==-1) {
+			//debugmes strnpcinfo(0)+"#"+getarg(1)+" invalid (skipped).";
+			return; 
+		}
+        for(.@n = 5; .@n<(getargcount()); .@n+=2) {
+			
+			if (getitemname(getarg(.@n))=="null") {
+				debugmes  strnpcinfo(0)+"# MaterialID "+getarg(.@n)+" invalid (skipped) on RewardID "+ getarg(1) +".";
+				return; 
+			}
+		}
+        for(.@i = 2; .@i<.@n; .@i++)
+			set getd(".q_"+getarg(1)+"["+(.@i-2)+"]"), getarg(.@i);
+
+        npcshopadditem "expedition"+getarg(0),getarg(1),((.ShowZeny)?getarg(3):0);
+        return; 
+		}
+function Chk {
+        if (getarg(0)<getarg(1)) { @qe0 = 1; return "^FF0000"; }
+			else return "^0000FF"; 
+		}
+function Slot {
+
+		.@s$ = callfunc("F_ItemLink",getarg(0));
+        switch(.ShowSlot){
+                case 1: if (!getitemslots(getarg(0))) return .@s$;
+                case 2: if (getiteminfo(getarg(0),11)>0) return .@s$+" ["+getitemslots(getarg(0))+"]";
+                default: return .@s$; } 
+		}
+function A_An {
+        setarray .@A$[0],"a","e","i","o","u";
+        .@B$ = "_"+getarg(0);
+        for(.@i = 0; .@i<5; .@i++)
+                if (compare(.@B$,"_"+.@A$[.@i])) return "an "+getarg(0);
+        return "a "+getarg(0); 
+		}
+
+OnBuyItem: 
+        .@q[0] = @bought_nameid[0];
+		copyarray .@q[1],getd(".q_"+@bought_nameid+"[0]"),getarraysize(getd(".q_"+@bought_nameid+"[0]"));
+        deletearray @bought_nameid[0], getarraysize(@bought_nameid);
+		deletearray @bought_quantity[0], getarraysize(@bought_quantity);
+		if (!.@q[1]) { message strcharinfo(0),"An error has occurred."; end; }
+		
+		cutin "lhz_kaz02.bmp",2;
+        mes .Name$;
+		mes "^0055FF"+((.@q[1]>1)?.@q[1]+"x ":"")+Slot(.@q[0])+"^000000";
+        mes "Materials:";
+        if (.@q[2]) mes " > "+Chk(Zeny,.@q[2])+.@q[2]+" Zeny^000000";
+        if (.@q[3]) mes " > "+Chk(getd(.Points$[0]),.@q[3])+.@q[3]+" "+.Points$[1]+" ("+getd(.Points$[0])+"/"+.@q[3]+")^000000";
+        if (.@q[4]) for(.@i = 4; .@i<getarraysize(.@q); .@i+=2)
+			mes "~> "+Chk(countitem(.@q[.@i]),.@q[.@i+1])+((.DisplayID)?"{"+.@q[.@i]+"} ":"")+Slot(.@q[.@i])+" ("+countitem(.@q[.@i])+"/"+.@q[.@i+1]+")^000000";
+        next;
+        @qe1 = getiteminfo(.@q[0],5); @qe2 = getiteminfo(.@q[0],11);
+        addtimer 1000, strnpcinfo(0)+"::OnEnd";
+        while(1){
+			switch(select(" ~ Get ^0055FF"+getitemname(.@q[0])+"^000000:"+((((@qe1&1) || (@qe1&256) || (@qe1&1024) || (@qe1&2048) || (@qe1&4096) || (@qe1&8192) || (@qe1&512)) && @qe2>0 && !@qe6)?"":"")+": ~ ^777777Cancel^000000")) {
+				case 1:
+					if (@qe0) {
+						mes .Name$;
+						cutin "lhz_kaz10.bmp",2;
+						mes "You're missing one or more item requirements.";
+						close3;
+					}
+					if (!checkweight(.@q[0],.@q[1])) {
+						mes .Name$;
+						cutin "lhz_kaz11.bmp",2;
+						mes "^FF0000You need "+(((.@q[1]*getiteminfo(.@q[0],6))+Weight-MaxWeight)/10)+" additional weight capacity to complete this trade.^000000";
+						close3;
+					}
+					if (.@q[2]) set Zeny, Zeny-.@q[2];
+					if (.@q[3]) setd .Points$[0], getd(.Points$[0])-.@q[3];
+					if (.@q[4]) {
+						// Checks if Equipped
+						for(.@i = 4; .@i<getarraysize(.@q); .@i+=2) {
+							if(isequipped(.@q[.@i]) == 1) {
+								mes .Name$;
+								mes "^FF0000Please store your equipped "+getitemname(.@q[.@i])+" in kafra storage.^000000";
+								mes "I wouldn't want to accidently take it as a ingredient.";
+								close;
+							}
+						}
+						// Deletes materials
+						for(.@i = 4; .@i<getarraysize(.@q); .@i+=2) {
+							delitem .@q[.@i],.@q[.@i+1];
+						}
+					}
+					getitem .@q[0],.@q[1];
+					if (.Announce) announce strcharinfo(0)+" has created the "+A_An(getitemname(.@q[0]))+"!",0;
+					specialeffect2 699;
+					close3;
+				case 2:
+					close3;
+			}
+		}
+		end;
+	
+//Erase variable when exit NPC
+OnEnd:
+	deletearray @bought_nameid[0], getarraysize(@bought_nameid);
+	deletearray @bought_quantity[0], getarraysize(@bought_quantity);
+	if (@qe6) { atcommand "@changelook 3 "+@qe3; atcommand "@changelook 1 "+@qe4; atcommand "@changelook 2 "+@qe5; }
+	for(.@i = 0; .@i<7; .@i++)
+		setd "@qe"+.@i,0;
+	end;
+
+OnInit:	//Configuration
+	.Name$ = "[Captain Cairn]";
+ 
+	.Announce = 0;        // Announce quest completion? (1: yes / 0: no)
+	.ShowSlot = 2;        // Show item slots? (2: all equipment / 1: if slots > 0 / 0: never)
+	.DisplayID = 0;       // Show item IDs? (1: yes / 0: no)
+	.ShowZeny = 0;        // Show Zeny cost, if any? (1: yes / 0: no)
+
+	// Shop categories, if needed: "<Shop 1>","<Shop 2>"{,...};
+	// Duplicate dummy data for any additional shops (bottom of script).
+	// If no categories, use the second line instead (remove //).
+ 
+	setarray .Shops$[1],"Expedition Set ^0066cc<1st Class>^000000","Expedition Set ^6600CC<2nd Class>^000000","Expedition Set ^cc6600<3rd Class>^000000","Special Jewel Accessory";
+ 	for(.@i = 1; .@i<=getarraysize(.Shops$); .@i++)
+			npcshopdelitem "expedition"+.@i,909;
+
+	//	Add(<ShopNumber>,<RewardItemID>,<RewardAmount>,<Zeny>,<Point>,<MaterialID>,<MaterialAmount>{,...});
+	//	Shop number corresponds with order above (default is 1).
+	//	Note: Do NOT use a reward item more than once!
+
+	//Point as currency
+	setarray .Points$[0],"#CASHPOINTS","Cash Points";
+
+	//Class I
+	Add(1,15227,1,0,0,25476,50,25470,6,15223,1); //Mail
+	Add(1,20874,1,0,0,25476,50,25473,6,20870,1); //Manteau
+	Add(1,22157,1,0,0,25476,50,25470,6,22153,1); //Greaves
+	Add(1,28546,1,0,0,25476,50,25474,10,28542,1); //Ring
+
+	Add(1,15228,1,0,0,25476,50,25470,3,25473,3,15224,1); //Cloak
+	Add(1,20875,1,0,0,25476,50,25470,3,25473,3,20871,1); //Scout Manteau
+	Add(1,22158,1,0,0,25476,50,25473,6,22154,1); //Boots
+	Add(1,28547,1,0,0,25476,50,25474,10,28543,1); //Gloves
+
+	Add(1,15229,1,0,0,25476,50,25471,6,15225,1); //Robe
+	Add(1,20876,1,0,0,25476,50,25474,3,25471,3,20872,1); //Muffler
+	Add(1,22159,1,0,0,25476,50,25471,6,22155,1); //Shoes
+	Add(1,28548,1,0,0,25476,50,25474,10,28544,1); //Magical Ring
+
+	Add(1,15230,1,0,0,25476,50,25474,3,25471,3,15226,1); //Dress
+	Add(1,20877,1,0,0,25476,50,25474,6,20873,1); //Cape
+	Add(1,22160,1,0,0,25476,50,25474,6,22156,1); //Magical Shoes
+	Add(1,28549,1,0,0,25476,50,25474,10,28545,1); //Necklace
+
+	//Class II
+	Add(2,15223,1,0,0,25475,50,25470,4,15221,1); //Mail
+	Add(2,20870,1,0,0,25475,50,25473,4,20868,1); //Manteau
+	Add(2,22153,1,0,0,25475,50,25470,4,22151,1); //Greaves
+	Add(2,28542,1,0,0,25475,50,25474,6,28540,1); //Ring
+
+	Add(2,15224,1,0,0,25475,50,25470,2,25473,2,15221,1); //Cloak
+	Add(2,20871,1,0,0,25475,50,25470,2,25473,2,20868,1); //Scout Manteau
+	Add(2,22154,1,0,0,25475,50,25473,4,22151,1); //Boots
+	Add(2,28543,1,0,0,25475,50,25474,6,28540,1); //Gloves
+
+	Add(2,15225,1,0,0,25475,50,25471,4,15222,1); //Robe
+	Add(2,20872,1,0,0,25475,50,25474,2,25471,2,20869,1); //Muffler
+	Add(2,22155,1,0,0,25475,50,25471,4,22152,1); //Shoes
+	Add(2,28544,1,0,0,25475,50,25474,6,28541,1); //Magical Ring
+
+	Add(2,15226,1,0,0,25475,50,25471,2,25474,2,15222,1); //Dress
+	Add(2,20873,1,0,0,25475,50,25474,2,20869,1); //Cape
+	Add(2,22156,1,0,0,25475,50,25474,4,22152,1); //Magical Shoes
+	Add(2,28545,1,0,0,25475,50,25474,6,28541,1); //Necklace
+
+	//Class III
+	Add(3,15221,1,0,0,25424,50,25470,2,15220,1); //Armor
+	Add(3,20868,1,0,0,25424,50,25473,1,20867,1); //Manteau
+	Add(3,22151,1,0,0,25424,50,25470,1,25473,1,22150,1); //Boots
+	Add(3,28540,1,0,0,25424,50,25472,3,28539,1); //Ring
+
+	Add(3,15222,1,0,0,25424,50,25471,2,15220,1); //Robe
+	Add(3,20869,1,0,0,25424,50,25474,1,20867,1); //Muffler
+	Add(3,22152,1,0,0,25424,50,25471,1,25474,1,22150,1); //Shoes
+	Add(3,28541,1,0,0,25424,50,25474,3,28539,1); //Magical Ring
+
+	//Accessories
+	Add(4,28568,1,0,0,25457,15,25430,10); //Cursed Emerald Earrings
+	Add(4,28569,1,0,0,25458,15,25430,10); //Glittering Opal Earrings
+	Add(4,28571,1,0,0,25460,15,25430,10); //Red Union Ring
+	Add(4,28570,1,0,0,25459,15,25430,10); //Blue Oath Ring
+
+	// --------------------------------------------------
+	end;
+}
+ 
+// -------- Dummy data (duplicate as needed) --------
+-	shop	expedition1	-1,909:-1
+-	shop	expedition2	-1,909:-1
+-	shop	expedition3	-1,909:-1
+-	shop	expedition4	-1,909:-1
+-	shop	expedition5	-1,909:-1
+
+//============================================================
+// Expedition Gear Enchantment (kRo Zero)
+//============================================================
+paramk,33,171,3	script	2nd Job Essence Statue#mdg	111,{
+function Set_Enchant; function Chk_Slot;
+
+	callfunc("F_CheckWeight",strnpcinfo(1),2);
+	disable_items;
+	.@name$ = "["+strnpcinfo(1)+"]";
+	
+	mes .@name$;
+	mes "Pray to the Statue of Hero.";
+	mes "It will grant power to your ^0000FFExpedition Equipment^000000.";
+	next;
+	switch(select("Information:^0000FFEnchant Expedition Gear^000000:^FF0000Reset Expedition Gear^000000")) {
+	case 1:
+		mes .@name$;
+		mes "The statue can apply enchants to Expedition of Armor, Garment, Footgear and Accessory!";
+		next;
+		mes .@name$;
+		mes "If ^0000ffExpedition Armor I^000000 is refined to +8 or above, it has chance to obtain ^0000FFSpecial 2nd Job Essence Lv2^000000 enchant!";
+		mes "If ^0000ffExpedition Armor II and III^000000 is refined to +8 or above, it has chance to obtain ^0000FFSpecial 2nd Job Essence Lv1 or Lv2^000000 enchant!";
+		mes "^ff0000Expedition Armor Class IV can only obtain 1st Job Essence.^000000";
+		next;
+		mes .@name$;
+		mes "Enchant & reset fee: 500000 zeny.";
+		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
+		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		close;
+	case 2:
+		.@service_type = 1;
+		break;
+	case 3:
+		.@service_type = 2;
+		break;
+	}
+	mes .@name$;
+	mes "Which equipment do you wish to be enchanted?";
+	next;
+	
+	setarray .@indices[1], EQI_ARMOR, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R;
+	for( .@i = 1; .@i <= 5; .@i++ ) {
+		if( getequipisequiped(.@indices[.@i]) )
+			.@menu$ = .@menu$ + F_getpositionname(.@indices[.@i]) + "-[" + getequipname(.@indices[.@i]) + "]";
+		.@menu$ = .@menu$ + ":";
+	}
+	.@select = select(.@menu$);
+	.@part = .@indices[ .@select ];	
+	
+	if (!getequipisequiped(.@part)) {
+		mes .@name$;
+		mes "You have to wear the equipment.";
+		close;
+	}
+	
+	switch(.@service_type) {
+		case 1: callsub S_Enchant,.@part; break;
+		case 2: callsub S_Initialize,.@part; break;
+	}
+	
+	close;
+
+S_Enchant:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_name = getitemname(.@eq_id);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+	
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:
+		.@class = 4;
+		.@max_ench = 1;
+		break;		
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+		.@class = 3;
+		.@max_ench = 1;
+		break;	
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+		.@class = 2;	
+		.@max_ench = 2;
+		break;	
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		.@class = 1;	
+		.@max_ench = 3;
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+
+	//Check equipment position	
+	.@position = Chk_Slot(.@max_ench,.@equip_card[1],.@equip_card[2],.@equip_card[3]);
+	 if(.@position == 999) {
+		mes .@name$;
+		mes "This equipment has reached it's enchant capacity.";
+		close;	
+	}
+
+	//Enchant Cost
+	.@Zeny = 500000;
+	
+	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
+		mes .@name$;
+		mes "Come back whenever you are ready!";
+		close;	
+	} else {
+		mes .@name$;
+		mes "Enchanting "+callfunc("F_ItemLink",.@eq_id)+",";
+		mes "will be applied on socket "+.@position+".";
+		mes "Proceed?";
+		next;
+		if(select("Yes","No")==2) close;
+		
+	}
+	
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@eq_id) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@eq_refine) ||
+		callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+				
+	// set enchant data
+	.@enchant = Set_Enchant(.@class,.@position,(.@part==EQI_ARMOR?1:0),getequiprefinerycnt(.@part));
+	
+	.@equip_card[.@position] = .@enchant;
+	if(.@position == -1 || .@enchant == -1 || .@enchant == 0) {
+		mes .@name$;
+		mes "An Error has occured.";
+		mes "Please contact the GM Team.";
+		close;	
+	}
+	
+	if (Zeny < .@Zeny) {
+		mes .@name$;
+		mes "Offer me "+callfunc("F_InsertComma",.@Zeny)+" Zeny.";
+		close;
+	}
+	Zeny-=.@Zeny;
+
+	delequip .@part;
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	mes "Enchanting of "+callfunc("F_ItemLink",.@eq_id)+" at socket "+.@position+" was successful.";
+
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
+	//dispbottom .@position+" x "+.@enchant;
+	
+	close;
+
+S_Initialize:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+		
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:	
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+	next;
+	if(select("^0000FF100% Success Rate^000000 (500xRare Coins):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	//Additional dialogue to remind player of their choice
+	mes .@name$;
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "Do you want to proceed?";
+	next;
+	if(select("No:Yes, I am sure")==1) close;
+	
+	if (!.@nofail) {
+		mes .@name$;
+		if(Zeny < 500000) {
+			mes "You've got to pay 500,000 Zeny if you want the services.";
+			close;
+		} else {
+			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
+			mes "Proceed?";
+			next;
+			if(select("No:Yes")==1) close;
+		}
+	}
+	
+	if(.@nofail && countitem(18010) < 500) {
+		mes .@name$;
+		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		close;
+	}
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	delequip .@part;
+	if(.@nofail) delitem 18010,500; //Rare Coins
+	if(!.@nofail) Zeny -= 500000;
+	if(!.@nofail && rand(1,100) <= 30) {
+		mes "^FF0000Unfortunately, we failed.^000000";
+		mes "The equipment has been destroyed.";
+		close;
+	}		
+	mes "I have reset this equipment.";
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	for ( .@i = getiteminfo(.@eq_id,10); .@i < MAX_SLOTS; .@i++ ) {
+		if (callfunc("F_IsCard",.@equip_card[.@i]) == 1)
+			.@equip_card[.@i] = 0;// Armor Enchant System
+	}
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],0,0,0;
+
+	close;
+
+	function	Chk_Slot {
+		// Error : -1
+		// Limit : 999
+			
+		.@max = getarg(0,-1);
+		.@loc1 = getarg(1,-1);
+		.@loc2 = getarg(2,-1);
+		.@loc3 = getarg(3,-1);
+
+		.@pos = 999;
+		switch(.@max) {
+		case 1:
+			if(.@loc3 == 0) .@pos = 3;
+			break;
+		case 2:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;
+			break;
+		case 3:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;		
+			else if(.@loc1 == 0) .@pos = 1;	
+			break;
+		default:
+			return -1;			
+		}
+		
+		return .@pos;
+	}
+	
+	function	Set_Enchant {
+		.@class = getarg(0,-1);
+		.@pos = getarg(1,-1);
+		.@isarmor = getarg(2,-1);
+		.@refine = getarg(3,-1);
+		
+		if(.@class == -1 || .@pos == -1 || .@isarmor == -1 || .@refine == -1) {
+			return -1;
+		}
+		//dispbottom .@class+" "+.@pos+" "+.@isarmor+" "+.@refine;
+		.@rand_first = rand(getarraysize(.FirstJ_Enchant));
+		.@rand_second = rand(getarraysize(.SecondJ_Enchant));
+		.@rand_normal = rand(getarraysize(.Normal_Enchant));
+		.@rand_elite = rand(getarraysize(.Elite_Enchant));
+		//dispbottom "Start";
+		//dispbottom .@rand_first;
+		//dispbottom .@rand_second;
+		//dispbottom .@rand_normal;
+		//dispbottom "End";
+		//debugmes "End";
+		switch(.@class) {
+		default:
+			return -1;
+		case 1: //I
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 1) {
+				.@enchant = .Elite_Enchant[.@rand_elite];
+				break;
+			}
+			else{
+				.@enchant = .Normal_Enchant[.@rand_normal];
+				break;
+			}
+			break;
+		case 2: //II
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 2) 
+				.@enchant = .SecondJ_Enchant[.@rand_second];
+			else
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;
+		case 3: //III
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 3) 
+				.@enchant = .SecondJ_Enchant[.@rand_second];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;			
+		case 4: //IV
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 3) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];
+			break;
+		}
+		return .@enchant;
+	}
+	
+OnInit:
+	//Set Enchant List
+	setarray .Normal_Enchant[0],	
+		4700, //Str1
+		4710, //Int1
+		4730, //Agi1
+		4720, //Dex1
+		4740, //Vit1
+		4750, //Luk1
+		//4701, //Str2
+		//4711, //Int2
+		//4731, //Agi2
+		//4721, //Dex2
+		//4741, //Vit2
+		//4751, //Luk2
+		18016, //XP+5%
+		18017, //DROP+3%
+		18019, //ATK+2
+		18020, //MATK+2
+		18021; //HP+1%
+	
+	setarray .FirstJ_Enchant[0],
+		29387, //Swordsman_Essence_Lv1
+		29388, //Merchant_Essence_Lv1
+		29389, //Thief_Essence_Lv1
+		29390, //Mage_Essence_Lv1
+		29391, //Aco_Essence_Lv1
+		29392, //Archer_Essence_Lv1
+		29393, //Swordsman_Essence_Lv2
+		29394, //Merchant_Essence_Lv2
+		29395, //Thief_Essence_Lv2
+		29396, //Mage_Essence_Lv2
+		29397, //Aco_Essence_Lv2
+		29398; //Archer_Essence_Lv2			
+	
+	setarray .Elite_Enchant[0],
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		//29526, //Ninja Essence Lv2
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		//29572, //Ninja Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+	
+	setarray .SecondJ_Enchant[0],
+		29399, //Knight's Essence Lv1
+		29400, //Smith's Essence Lv1
+		29401, //Assassin's Essence Lv1
+		29402, //Wizard's Essence Lv1
+		29403, //Priest's Essence Lv1
+		29404, //Hunter's Essence Lv1
+		29405, //Crusader's Essence Lv1
+		29406, //Alchemist's Essence Lv1
+		29407, //Rogue's Essence Lv1
+		29408, //Sage's Essence Lv1
+		29409, //Monk's Essence Lv1
+		29410, //BD's Essence Lv1
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		//29525, //Ninja Essence Lv1
+		//29526, //Ninja Essence Lv2
+		29553, //Knight's Essence Lv1
+		29554, //Smith's Essence Lv1
+		29555, //Assassin's Essence Lv1
+		29556, //Wizard's Essence Lv1
+		29557, //Priest's Essence Lv1
+		29558, //Hunter's Essence Lv1
+		//29559, //Ninja Essence Lv1
+		29560, //Crusader's Essence Lv1
+		29561, //Alchemist's Essence Lv1
+		29562, //Rogue's Essence Lv1
+		29563, //Sage's Essence Lv1
+		29564, //Monk's Essence Lv1
+		29565, //BD's Essence Lv1
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		//29572, //Ninja Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+			
+	end;
+}
+
+
+//============================================================
+// Expedition Gear Enchantment (kRo Zero)
+//============================================================
+paramk,25,171,3	script	1st Job Essence Statue#mdg	111,{
+function Set_Enchant; function Chk_Slot;
+
+	callfunc("F_CheckWeight",strnpcinfo(1),2);
+	disable_items;
+	.@name$ = "["+strnpcinfo(1)+"]";
+	
+	mes .@name$;
+	mes "Pray to the Statue of Hero.";
+	mes "It will grant power to your ^0000FFExpedition Equipment^000000.";
+	next;
+	switch(select("Information:^0000FFEnchant Expedition Gear^000000:^FF0000Reset Expedition Gear^000000")) {
+	case 1:
+		mes .@name$;
+		mes "The statue can apply enchants to Expedition of Armor, Garment, Footgear and Accessory!";
+		next;
+		mes .@name$;
+		mes "If ^0000ffExpedition Armor^000000 is refined to +6 or above, it has chance to obtain ^0000FFSpecial 1st Job Essence^000000 enchant!";
+		next;
+		mes .@name$;
+		mes "Enchant & reset fee: 500000 zeny.";
+		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
+		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		close;
+	case 2:
+		.@service_type = 1;
+		break;
+	case 3:
+		.@service_type = 2;
+		break;
+	}
+	mes .@name$;
+	mes "Which equipment do you wish to be enchanted?";
+	next;
+	
+	setarray .@indices[1], EQI_ARMOR, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R;
+	for( .@i = 1; .@i <= 5; .@i++ ) {
+		if( getequipisequiped(.@indices[.@i]) )
+			.@menu$ = .@menu$ + F_getpositionname(.@indices[.@i]) + "-[" + getequipname(.@indices[.@i]) + "]";
+		.@menu$ = .@menu$ + ":";
+	}
+	.@select = select(.@menu$);
+	.@part = .@indices[ .@select ];	
+	
+	if (!getequipisequiped(.@part)) {
+		mes .@name$;
+		mes "You have to wear the equipment.";
+		close;
+	}
+	
+	switch(.@service_type) {
+		case 1: callsub S_Enchant,.@part; break;
+		case 2: callsub S_Initialize,.@part; break;
+	}
+	
+	close;
+
+S_Enchant:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_name = getitemname(.@eq_id);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+	
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:
+		.@class = 4;
+		.@max_ench = 1;
+		break;		
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+		.@class = 3;
+		.@max_ench = 1;
+		break;	
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+		.@class = 2;	
+		.@max_ench = 2;
+		break;	
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		.@class = 1;	
+		.@max_ench = 3;
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+
+	//Check equipment position	
+	.@position = Chk_Slot(.@max_ench,.@equip_card[1],.@equip_card[2],.@equip_card[3]);
+	 if(.@position == 999) {
+		mes .@name$;
+		mes "This equipment has reached it's enchant capacity.";
+		close;	
+	}
+
+	//Enchant Cost
+	.@Zeny = 500000;
+	
+	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
+		mes .@name$;
+		mes "Come back whenever you are ready!";
+		close;	
+	} else {
+		mes .@name$;
+		mes "Enchanting "+callfunc("F_ItemLink",.@eq_id)+",";
+		mes "will be applied on socket "+.@position+".";
+		mes "Proceed?";
+		next;
+		if(select("Yes","No")==2) close;
+		
+	}
+	
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@eq_id) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@eq_refine) ||
+		callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+				
+	// set enchant data
+	.@enchant = Set_Enchant(.@class,.@position,(.@part==EQI_ARMOR?1:0),getequiprefinerycnt(.@part));
+	
+	.@equip_card[.@position] = .@enchant;
+	if(.@position == -1 || .@enchant == -1 || .@enchant == 0) {
+		mes .@name$;
+		mes "An Error has occured.";
+		mes "Please contact the GM Team.";
+		close;	
+	}
+	
+	if (Zeny < .@Zeny) {
+		mes .@name$;
+		mes "Offer me "+callfunc("F_InsertComma",.@Zeny)+" Zeny.";
+		close;
+	}
+	Zeny-=.@Zeny;
+
+	delequip .@part;
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	mes "Enchanting of "+callfunc("F_ItemLink",.@eq_id)+" at socket "+.@position+" was successful.";
+
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
+	//dispbottom .@position+" x "+.@enchant;
+	
+	close;
+
+S_Initialize:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+		
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:	
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+	next;
+	if(select("^0000FF100% Success Rate^000000 (500x Rare Coin):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	//Additional dialogue to remind player of their choice
+	mes .@name$;
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "Do you want to proceed?";
+	next;
+	if(select("No:Yes, I am sure")==1) close;
+	
+	if (!.@nofail) {
+		mes .@name$;
+		if(Zeny < 500000) {
+			mes "You've got to pay 500,000 Zeny if you want the services.";
+			close;
+		} else {
+			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
+			mes "Proceed?";
+			next;
+			if(select("No:Yes")==1) close;
+		}
+	}
+	
+	if(.@nofail && countitem(18010) < 500) {
+		mes .@name$;
+		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		close;
+	}
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	delequip .@part;
+	if(.@nofail) delitem 18010,500; //Rare Coins
+	if(!.@nofail) Zeny -= 500000;
+	if(!.@nofail && rand(1,100) <= 30) {
+		mes "^FF0000Unfortunately, we failed.^000000";
+		mes "The equipment has been destroyed.";
+		close;
+	}		
+	mes "I have reset this equipment.";
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	for ( .@i = getiteminfo(.@eq_id,10); .@i < MAX_SLOTS; .@i++ ) {
+		if (callfunc("F_IsCard",.@equip_card[.@i]) == 1)
+			.@equip_card[.@i] = 0;// Armor Enchant System
+	}
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],0,0,0;
+
+	close;
+
+	function	Chk_Slot {
+		// Error : -1
+		// Limit : 999
+			
+		.@max = getarg(0,-1);
+		.@loc1 = getarg(1,-1);
+		.@loc2 = getarg(2,-1);
+		.@loc3 = getarg(3,-1);
+
+		.@pos = 999;
+		switch(.@max) {
+		case 1:
+			if(.@loc3 == 0) .@pos = 3;
+			break;
+		case 2:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;
+			break;
+		case 3:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;		
+			else if(.@loc1 == 0) .@pos = 1;	
+			break;
+		default:
+			return -1;			
+		}
+		
+		return .@pos;
+	}
+	
+	function	Set_Enchant {
+		.@class = getarg(0,-1);
+		.@pos = getarg(1,-1);
+		.@isarmor = getarg(2,-1);
+		.@refine = getarg(3,-1);
+		
+		if(.@class == -1 || .@pos == -1 || .@isarmor == -1 || .@refine == -1) {
+			return -1;
+		}
+		//dispbottom .@class+" "+.@pos+" "+.@isarmor+" "+.@refine;
+		.@rand_first = rand(getarraysize(.FirstJ_Enchant));
+		.@rand_second = rand(getarraysize(.SecondJ_Enchant));
+		.@rand_normal = rand(getarraysize(.Normal_Enchant));
+		.@rand_elite = rand(getarraysize(.Elite_Enchant));
+		//dispbottom "Start";
+		//dispbottom .@rand_first;
+		//dispbottom .@rand_second;
+		//dispbottom .@rand_normal;
+		//dispbottom "End";
+		//debugmes "End";
+		switch(.@class) {
+		default:
+			return -1;
+		case 1: //1
+			if(.@isarmor == 1 && .@refine >= 5 && .@pos == 1) {
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+				break;
+			}
+			else{
+				.@enchant = .Normal_Enchant[.@rand_normal];
+				break;
+			}
+			break;
+		case 2: //1I
+			if(.@isarmor == 1 && .@refine >= 5 && .@pos == 2) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;
+		case 3: //III
+			if(.@isarmor == 1 && .@refine >= 5 && .@pos == 3) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;			
+		case 4: //IV
+			if(.@isarmor == 1 && .@refine >= 5 && .@pos == 3) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];
+			break;
+		}
+		return .@enchant;
+	}
+	
+OnInit:
+	//Set Enchant List
+	setarray .Normal_Enchant[0],	
+		4700, //Str1
+		4710, //Int1
+		4730, //Agi1
+		4720, //Dex1
+		4740, //Vit1
+		4750, //Luk1
+		//4701, //Str2
+		//4711, //Int2
+		//4731, //Agi2
+		//4721, //Dex2
+		//4741, //Vit2
+		//4751, //Luk2
+		18016, //XP5%
+		18017, //DROP5%
+		18019, //ATK+2
+		18020, //MATK+2
+		18021; //HP1%
+	
+	setarray .FirstJ_Enchant[0],
+		29387, //Swordsman_Essence_Lv1
+		29388, //Merchant_Essence_Lv1
+		29389, //Thief_Essence_Lv1
+		29390, //Mage_Essence_Lv1
+		29391, //Aco_Essence_Lv1
+		29392, //Archer_Essence_Lv1
+		29393, //Swordsman_Essence_Lv2
+		29394, //Merchant_Essence_Lv2
+		29395, //Thief_Essence_Lv2
+		29396, //Mage_Essence_Lv2
+		29397, //Aco_Essence_Lv2
+		29398; //Archer_Essence_Lv2			
+	
+	setarray .Elite_Enchant[0],
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		29526, //Ninja Essence Lv2
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		29572, //Ninja Essence Lv2
+		29580, //Gun Essence Lv2
+		29582, //SG Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+	
+	setarray .SecondJ_Enchant[0],
+		29399, //Knight's Essence Lv1
+		29400, //Smith's Essence Lv1
+		29401, //Assassin's Essence Lv1
+		29402, //Wizard's Essence Lv1
+		29403, //Priest's Essence Lv1
+		29404, //Hunter's Essence Lv1
+		29405, //Crusader's Essence Lv1
+		29406, //Alchemist's Essence Lv1
+		29407, //Rogue's Essence Lv1
+		29408, //Sage's Essence Lv1
+		29409, //Monk's Essence Lv1
+		29410, //BD's Essence Lv1
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		29525, //Ninja Essence Lv1
+		29526, //Ninja Essence Lv2
+		29553, //Knight's Essence Lv1
+		29554, //Smith's Essence Lv1
+		29555, //Assassin's Essence Lv1
+		29556, //Wizard's Essence Lv1
+		29557, //Priest's Essence Lv1
+		29558, //Hunter's Essence Lv1
+		29559, //Ninja Essence Lv1
+		29560, //Crusader's Essence Lv1
+		29561, //Alchemist's Essence Lv1
+		29562, //Rogue's Essence Lv1
+		29563, //Sage's Essence Lv1
+		29564, //Monk's Essence Lv1
+		29565, //BD's Essence Lv1
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		29572, //Ninja Essence Lv2
+		29580, //Gun Essence Lv2
+		29582, //SG Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+			
+	end;
+}
+
+
+paramk,41,171,3	script	No Trans Essence Statue#mdg	111,{
+function Set_Enchant; function Chk_Slot;
+
+	callfunc("F_CheckWeight",strnpcinfo(1),2);
+	disable_items;
+	.@name$ = "["+strnpcinfo(1)+"]";
+	
+	mes .@name$;
+	mes "Pray to the Statue of Hero.";
+	mes "It will grant power to your ^0000FFExpedition Equipment^000000.";
+	next;
+	switch(select("Information:^0000FFEnchant Expedition Gear^000000:^FF0000Reset Expedition Gear^000000")) {
+	case 1:
+		mes .@name$;
+		mes "The statue can apply enchants to Expedition of Armor, Garment, Footgear and Accessory!";
+		next;
+		mes .@name$;
+		mes "If ^0000ffExpedition Armor^000000 is refined to +8 or above, it has chance to obtain ^0000FFSpecial Ninja/Gun/SG Job Essence^000000 enchant!";
+		next;
+		mes .@name$;
+		mes "Enchant & reset fee: 500000 zeny.";
+		mes "^FF0000There is a chance for the equipment to be destroyed permanently^000000 during resets.";
+		mes "Using 500 "+callfunc("F_ItemLink",18010)+" as reset material instead of zeny to remove the risks.";
+		close;
+	case 2:
+		.@service_type = 1;
+		break;
+	case 3:
+		.@service_type = 2;
+		break;
+	}
+	mes .@name$;
+	mes "Which equipment do you wish to be enchanted?";
+	next;
+	
+	setarray .@indices[1], EQI_ARMOR, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R;
+	for( .@i = 1; .@i <= 5; .@i++ ) {
+		if( getequipisequiped(.@indices[.@i]) )
+			.@menu$ = .@menu$ + F_getpositionname(.@indices[.@i]) + "-[" + getequipname(.@indices[.@i]) + "]";
+		.@menu$ = .@menu$ + ":";
+	}
+	.@select = select(.@menu$);
+	.@part = .@indices[ .@select ];	
+	
+	if (!getequipisequiped(.@part)) {
+		mes .@name$;
+		mes "You have to wear the equipment.";
+		close;
+	}
+	
+	switch(.@service_type) {
+		case 1: callsub S_Enchant,.@part; break;
+		case 2: callsub S_Initialize,.@part; break;
+	}
+	
+	close;
+
+S_Enchant:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_name = getitemname(.@eq_id);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+	
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:
+		.@class = 4;
+		.@max_ench = 1;
+		break;		
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+		.@class = 3;
+		.@max_ench = 1;
+		break;	
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+		.@class = 2;	
+		.@max_ench = 2;
+		break;	
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		.@class = 1;	
+		.@max_ench = 3;
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+
+	//Check equipment position	
+	.@position = Chk_Slot(.@max_ench,.@equip_card[1],.@equip_card[2],.@equip_card[3]);
+	 if(.@position == 999) {
+		mes .@name$;
+		mes "This equipment has reached it's enchant capacity.";
+		close;	
+	}
+
+	//Enchant Cost
+	.@Zeny = 500000;
+	
+	if(select("Pay with ^0000FF"+callfunc("F_InsertComma",.@Zeny)+"^000000 Zeny.","Cancel")==2) {
+		mes .@name$;
+		mes "Come back whenever you are ready!";
+		close;	
+	} else {
+		mes .@name$;
+		mes "Enchanting "+callfunc("F_ItemLink",.@eq_id)+",";
+		mes "will be applied on socket "+.@position+".";
+		mes "Proceed?";
+		next;
+		if(select("Yes","No")==2) close;
+		
+	}
+	
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@eq_id) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@eq_refine) ||
+		callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+				
+	// set enchant data
+	.@enchant = Set_Enchant(.@class,.@position,(.@part==EQI_ARMOR?1:0),getequiprefinerycnt(.@part));
+	
+	.@equip_card[.@position] = .@enchant;
+	if(.@position == -1 || .@enchant == -1 || .@enchant == 0) {
+		mes .@name$;
+		mes "An Error has occured.";
+		mes "Please contact the GM Team.";
+		close;	
+	}
+	
+	if (Zeny < .@Zeny) {
+		mes .@name$;
+		mes "Offer me "+callfunc("F_InsertComma",.@Zeny)+" Zeny.";
+		close;
+	}
+	Zeny-=.@Zeny;
+
+	delequip .@part;
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	mes "Enchanting of "+callfunc("F_ItemLink",.@eq_id)+" at socket "+.@position+" was successful.";
+
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
+	//dispbottom .@position+" x "+.@enchant;
+	
+	close;
+
+S_Initialize:
+	.@name$ = "["+strnpcinfo(1)+"]";
+	.@part = getarg(0);
+	.@eq_id = getequipid(.@part);
+	.@eq_refine = getequiprefinerycnt(.@part);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+		
+	switch(.@eq_id) {
+	//Expedition IV
+	case 28539:
+	case 22150:
+	case 15220:
+	case 20867:	
+	//Expedition III
+	case 28540:
+	case 28541:
+	case 22151:
+	case 22152:
+	case 15221:
+	case 15222:
+	case 20868:
+	case 20869:
+	//Expedition II
+	case 28542:
+	case 28543:
+	case 28544:
+	case 28545:
+	case 22153:
+	case 22154:
+	case 22155:
+	case 22156:
+	case 15223:
+	case 15224:
+	case 15225:
+	case 15226:
+	case 20870:
+	case 20871:
+	case 20872:
+	case 20873:
+	//Expedition I
+	case 28546:
+	case 28547:
+	case 28548:
+	case 28549:
+	case 22157:
+	case 22158:
+	case 22159:
+	case 22160:
+	case 15227:
+	case 15228:
+	case 15229:
+	case 15230:
+	case 20874:
+	case 20875:
+	case 20876:
+	case 20877:
+		break;	
+	default: 
+		mes .@name$;
+		mes "What is ^990099"+getequipname(.@part)+"^000000?";
+		mes "The statue doesn't recognize this item.";
+		close;
+	}
+	next;
+	if(select("^0000FF100% Success Rate^000000 (500x Rare Coin):70% Success Rate (500,000 Zeny)")==1) .@nofail = 1;
+	//Additional dialogue to remind player of their choice
+	mes .@name$;
+	mes "You selected the "+(.@nofail==1?"^0000FF100% Success Rate^000000 500x Rare Coin":"^FF000070% Success Rate^000000 500,000 Zeny")+" Option.";
+	mes "Do you want to proceed?";
+	next;
+	if(select("No:Yes, I am sure")==1) close;
+	
+	if (!.@nofail) {
+		mes .@name$;
+		if(Zeny < 500000) {
+			mes "You've got to pay 500,000 Zeny if you want the services.";
+			close;
+		} else {
+			mes "^FF0000There is a chance of the equipment being destroyed forever^000000!";
+			mes "Proceed?";
+			next;
+			if(select("No:Yes")==1) close;
+		}
+	}
+	
+	if(.@nofail && countitem(18010) < 500) {
+		mes .@name$;
+		mes "You need to offer 500x <ITEM>"+getitemname(18010)+"<INFO>18010</INFO></ITEM> for the 100% Success option.";
+		close;
+	}
+	specialeffect2 EF_REPAIRWEAPON;
+	mes .@name$;
+	delequip .@part;
+	if(.@nofail) delitem 18010,500; //Rare Coins
+	if(!.@nofail) Zeny -= 500000;
+	if(!.@nofail && rand(1,100) <= 30) {
+		mes "^FF0000Unfortunately, we failed.^000000";
+		mes "The equipment has been destroyed.";
+		close;
+	}		
+	mes "I have reset this equipment.";
+//		GetNonSlotItemSock2 .@eq_refine .@eq_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	for ( .@i = getiteminfo(.@eq_id,10); .@i < MAX_SLOTS; .@i++ ) {
+		if (callfunc("F_IsCard",.@equip_card[.@i]) == 1)
+			.@equip_card[.@i] = 0;// Armor Enchant System
+	}
+	getitem2 .@eq_id,1,1,.@eq_refine,0,.@equip_card[0],0,0,0;
+
+	close;
+
+	function	Chk_Slot {
+		// Error : -1
+		// Limit : 999
+			
+		.@max = getarg(0,-1);
+		.@loc1 = getarg(1,-1);
+		.@loc2 = getarg(2,-1);
+		.@loc3 = getarg(3,-1);
+
+		.@pos = 999;
+		switch(.@max) {
+		case 1:
+			if(.@loc3 == 0) .@pos = 3;
+			break;
+		case 2:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;
+			break;
+		case 3:
+			if(.@loc3 == 0) .@pos = 3;
+			else if(.@loc2 == 0) .@pos = 2;		
+			else if(.@loc1 == 0) .@pos = 1;	
+			break;
+		default:
+			return -1;			
+		}
+		
+		return .@pos;
+	}
+	
+	function	Set_Enchant {
+		.@class = getarg(0,-1);
+		.@pos = getarg(1,-1);
+		.@isarmor = getarg(2,-1);
+		.@refine = getarg(3,-1);
+		
+		if(.@class == -1 || .@pos == -1 || .@isarmor == -1 || .@refine == -1) {
+			return -1;
+		}
+		//dispbottom .@class+" "+.@pos+" "+.@isarmor+" "+.@refine;
+		.@rand_first = rand(getarraysize(.FirstJ_Enchant));
+		.@rand_second = rand(getarraysize(.SecondJ_Enchant));
+		.@rand_normal = rand(getarraysize(.Normal_Enchant));
+		.@rand_elite = rand(getarraysize(.Elite_Enchant));
+		//dispbottom "Start";
+		//dispbottom .@rand_first;
+		//dispbottom .@rand_second;
+		//dispbottom .@rand_normal;
+		//dispbottom "End";
+		//debugmes "End";
+		switch(.@class) {
+		default:
+			return -1;
+		case 1: //1
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 1) {
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+				break;
+			}
+			else{
+				.@enchant = .Normal_Enchant[.@rand_normal];
+				break;
+			}
+			break;
+		case 2: //1I
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 2) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;
+		case 3: //III
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 3) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];		
+			break;			
+		case 4: //IV
+			if(.@isarmor == 1 && .@refine >= 8 && .@pos == 3) 
+				.@enchant = .FirstJ_Enchant[.@rand_first];
+			else 
+				.@enchant = .Normal_Enchant[.@rand_normal];
+			break;
+		}
+		return .@enchant;
+	}
+	
+OnInit:
+	//Set Enchant List
+	setarray .Normal_Enchant[0],
+		4700, //Str1
+		4710, //Int1
+		4730, //Agi1
+		4720, //Dex1
+		4740, //Vit1
+		4750, //Luk1
+		//4701, //Str2
+		//4711, //Int2
+		//4731, //Agi2
+		//4721, //Dex2
+		//4741, //Vit2
+		//4751, //Luk2
+		18016, //XP5%
+		18017, //DROP5%
+		18019, //ATK+2
+		18020, //MATK+2
+		18021; //HP1%
+	
+	setarray .FirstJ_Enchant[0],
+		//29387, //Swordsman_Essence_Lv1
+		//29388, //Merchant_Essence_Lv1
+		//29389, //Thief_Essence_Lv1
+		//29390, //Mage_Essence_Lv1
+		//29391, //Aco_Essence_Lv1
+		//29392, //Archer_Essence_Lv1
+		//29393, //Swordsman_Essence_Lv2
+		//29394, //Merchant_Essence_Lv2
+		//29395, //Thief_Essence_Lv2
+		//29396, //Mage_Essence_Lv2
+		//29397, //Aco_Essence_Lv2
+		//29398, //Archer_Essence_Lv2
+		29559, //Ninja Essence Lv1
+		29572, //Ninja Essence Lv2
+		29525, //Ninja Essence Lv1
+		29526, //Ninja Essence Lv2
+		29581, //SG Essence Lv1
+		29582, //SG Essence Lv2
+		29579, //Gun Essence Lv1
+		29580; //Gun Essence Lv2
+	
+	setarray .Elite_Enchant[0],
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		29526, //Ninja Essence Lv2
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		29572, //Ninja Essence Lv2
+		29580, //Gun Essence Lv2
+		29582, //SG Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+	
+	setarray .SecondJ_Enchant[0],
+		29399, //Knight's Essence Lv1
+		29400, //Smith's Essence Lv1
+		29401, //Assassin's Essence Lv1
+		29402, //Wizard's Essence Lv1
+		29403, //Priest's Essence Lv1
+		29404, //Hunter's Essence Lv1
+		29405, //Crusader's Essence Lv1
+		29406, //Alchemist's Essence Lv1
+		29407, //Rogue's Essence Lv1
+		29408, //Sage's Essence Lv1
+		29409, //Monk's Essence Lv1
+		29410, //BD's Essence Lv1
+		29411, //Knight's Essence Lv2
+		29412, //Smith's Essence Lv2
+		29413, //Assassin's Essence Lv2
+		29414, //Wizard's Essence Lv2
+		29415, //Priest's Essence Lv2
+		29416, //Hunter's Essence Lv2
+		29417, //Crusader's Essence Lv2
+		29418, //Alchemist's Essence Lv2
+		29419, //Rogue's Essence Lv2
+		29420, //Sage's Essence Lv2
+		29421, //Monk's Essence Lv2
+		29422, //BD's Essence Lv2
+		29525, //Ninja Essence Lv1
+		29526, //Ninja Essence Lv2
+		29553, //Knight's Essence Lv1
+		29554, //Smith's Essence Lv1
+		29555, //Assassin's Essence Lv1
+		29556, //Wizard's Essence Lv1
+		29557, //Priest's Essence Lv1
+		29558, //Hunter's Essence Lv1
+		29559, //Ninja Essence Lv1
+		29560, //Crusader's Essence Lv1
+		29561, //Alchemist's Essence Lv1
+		29562, //Rogue's Essence Lv1
+		29563, //Sage's Essence Lv1
+		29564, //Monk's Essence Lv1
+		29565, //BD's Essence Lv1
+		29566, //Knight's Essence Lv2
+		29567, //Smith's Essence Lv2
+		29568, //Assassin's Essence Lv2
+		29569, //Wizard's Essence Lv2
+		29570, //Priest's Essence Lv2
+		29571, //Hunter's Essence Lv2
+		29572, //Ninja Essence Lv2
+		29580, //Gun Essence Lv2
+		29582, //SG Essence Lv2
+		29573, //Crusader's Essence Lv2
+		29574, //Alchemist's Essence Lv2
+		29575, //Rogue's Essence Lv2
+		29576, //Sage's Essence Lv2
+		29577, //Monk's Essence Lv2
+		29578; //BD's Essence Lv2	
+			
+	end;
+}
