@@ -9,11 +9,8 @@
  **/
 
 //ACMD_DEF(newcommand),
-<<<<<<< HEAD
 ACMD_DEFR(battlestats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 ACMD_DEFR(enemystats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
-=======
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 ACMD_DEF(battleinfo),
 
 // Battleground Extended by Vykimo
