@@ -1,0 +1,9 @@
+- script Sample -1,{
+OnPCLoginEvent:
+if( #Daily != gettime(5) ){
+dispbottom "Gained Daily Items ...";
+getitem 18010,10;
+set #Daily,gettime(5);
+}
+end;
+}

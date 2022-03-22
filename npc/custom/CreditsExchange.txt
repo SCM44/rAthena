@@ -1,0 +1,45 @@
+// (c) Cydh
+-	script	#CPCreditsExchange	-1,{
+OnCommand:
+	.@tick = gettimetick(0);
+	if (#credits_command_delay < .@tick)
+		end;
+	#credits_command_delay = .@tick + 60;
+OnPCLoginEvent:
+	.@a = callfunc("F_GetCash", getcharid(3));
+	.@b = callfunc("F_GetVIP", getcharid(3));
+	dispbottom "Cash Points Added: "+.@a+" // VIP Time Added: "+.@b+" minutes";
+	end;
+
+OnInit:
+	bindatcmd "credits",strnpcinfo(0)+"::OnCommand",0,100;
+	end;
+}
+
+function	script	F_GetCash	{
+	.@aid = getarg(0);
+	.@n = query_sql("SELECT `amount` FROM `cp_credits_to_cashpoints` WHERE `claimed` IS NULL AND `account_id`='"+.@aid+"'", .@amount);
+	if (.@n < 1)
+		return 0;
+	query_sql("UPDATE `cp_credits_to_cashpoints` SET `claimed` = NOW() WHERE `account_id`='"+.@aid+"' AND `claimed` IS NULL");
+	.@total = 0;
+	for (.@i = 0; .@i < .@n; .@i++) {
+		#CASHPOINTS += .@amount[.@i];
+		.@total += .@amount[.@i];
+	}
+	return .@total;
+}
+
+function	script	F_GetVIP	{
+	.@aid = getarg(0);
+	.@n = query_sql("SELECT `duration` FROM `cp_credits_to_vip` WHERE `claimed` IS NULL AND `account_id`='"+.@aid+"'", .@duration);
+	if (.@n < 1)
+		return 0;
+	query_sql("UPDATE `cp_credits_to_vip` SET `claimed` = NOW() WHERE `account_id`='"+.@aid+"' AND `claimed` IS NULL");
+	.@total = 0;
+	for (.@i = 0; .@i < .@n; .@i++) {
+		vip_time(.@duration[.@i]);
+		.@total += .@duration[.@i];
+	}
+	return .@total;
+}

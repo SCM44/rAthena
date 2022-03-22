@@ -1,0 +1,41 @@
+-	script	DropBox#Get	FAKE_NPC,{
+
+OnNPCKillEvent:
+
+	switch(killedrid)
+	{
+		//Poring, Poporing
+		1002:
+		1031:
+			//ItemID,quantity,Chance (10000%)
+			//==
+			setarray .@drop[0],
+				18005,1,3,
+				29584,1,1;		//0,01%
+			break;
+	}
+
+	for(set .@i,0; .@i<getarraysize(.@drop); set .@i,.@i+3)
+	{
+		set .@sort,rand(1,10000);
+		if(.@sort <= .@drop[.@i+2] && !.@get)
+		{
+			//note: if you want the reward to be immune, you can uncomment the monsteringore.
+			//atcommand "@monsterignore";
+			getitem .@drop[.@i],.@drop[.@i+1];
+			//atcommand "@monsterignore";
+			set .@get,1;
+		}
+	}
+	
+	if(.@get)
+    {
+	   //note: the hateffect id depends on your hateffectinfo.lub id, after installing it change 136 to the last number.
+	   sleep2 100;
+       hateffect 165,true;
+	   sleep2 4000;
+	   hateffect 165,false;
+    }
+	set .@get,0;
+end;
+}
