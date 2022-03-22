@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libcommonr.a CMakeFiles/common.dir/sql.cpp.o
+/usr/bin/ranlib ../../lib/libcommonr.a

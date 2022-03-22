@@ -6,6 +6,19 @@
 
 
 15220:20867:22150:28539,{ bonus bAtk, 15; bonus bMatk, 15; bonus bAspdRate, 3; bonus bCastrate, - 5; } 
+<<<<<<< HEAD
+15221:20868:22151:28540,{ bonus bAtk, 25; bonus bAspdRate, 5; bonus2 bResEff,Eff_Stun,500; }
+15222:20869:22152:28541,{ bonus bMatk, 25; bonus bCastrate, - 8; bonus2 bResEff,Eff_Stun,500; }
+15223:20870:22153:28542,{ bonus bAtk, 30; bonus bCritAtkRate, 2; bonus bAspdRate, 7; bonus bCastrate, - 10; bonus2 bResEff,Eff_Stun,1000; }
+15224:20871:22154:28543,{ bonus bAtk, 30; bonus bLongAtkRate, 2; bonus bAspdRate, 7; bonus bCastrate, - 10; bonus2 bResEff,Eff_Stun,1000; }
+15225:20872:22155:28544,{ bonus bMAtk, 30; bonus bMatkRate, 2; bonus bCastrate, - 10; bonus2 bResEff,Eff_Stun,1000; }
+15226:20873:22156:28545,{ bonus bMAtk, 30; bonus bHealPower, 2; bonus bCastrate, - 7; bonus2 bResEff,Eff_Stun,1000; }
+15227:20874:22157:28546,{ bonus bAtk, 35; bonus bAspdRate, 10; bonus bCritAtkRate, 8; bonus bCastrate, - 15; bonus2 bResEff,Eff_Stun,2000; }
+15228:20875:22158:28547,{ bonus bAtk, 35; bonus bAspdRate, 10; bonus bLongAtkRate, 8; bonus bCastrate, - 15; bonus2 bResEff,Eff_Stun,2000; }
+15229:20876:22159:28548,{ bonus bMatk, 35; bonus bMatkRate, 5; bonus bCastrate, 15; bonus2 bResEff,Eff_Stun,2000; }
+15230:20877:22160:28549,{ bonus bMatk, 35; bonus bHealPower, 10; bonus bCastrate, 15; bonus2 bResEff,Eff_Stun,2000; }
+
+=======
 15221:20868:22151:28540,{ bonus bAtk, 25; bonus bAspdRate, 5; }
 15222:20869:22152:28541,{ bonus bMatk, 25; bonus bCastrate, - 8; }
 15223:20870:22153:28542,{ bonus bAtk, 30; bonus bCritAtkRate, 2; bonus bAspdRate, 7; bonus bCastrate, - 10; }
@@ -16,6 +29,7 @@
 15228:20875:22158:28547,{ bonus bAtk, 35; bonus bAspdRate, 10; bonus bLongAtkRate, 8; bonus bCastrate, - 15; }
 15229:20876:22159:28548,{ bonus bMatk, 35; bonus bMatkRate, 5; bonus bCastrate, 15; }
 15230:20877:22160:28549,{ bonus bMatk, 35; bonus bHealPower, 10; bonus bCastrate, 15; }
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 1166:2527,{ bonus2 bAddRace,RC_Dragon,5; }
 1420:2115,{ bonus3 bAutoSpellWhenHit,"HP_ASSUMPTIO",2,5; }
 1420:2133,{ bonus2 bAddClass,Class_All,4; bonus bDef,2; }

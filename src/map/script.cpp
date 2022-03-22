@@ -23839,10 +23839,10 @@ BUILDIN_FUNC(hateffect){
 	int16 effectID = script_getnum(st,2);
 	bool enable = script_getnum(st,3) ? true : false;
 
-	if( effectID <= HAT_EF_MIN || effectID >= HAT_EF_MAX ){
-		ShowError( "buildin_hateffect: unsupported hat effect id %d\n", effectID );
-		return SCRIPT_CMD_FAILURE;
-	}
+//	if( effectID <= HAT_EF_MIN || effectID >= HAT_EF_MAX ){
+//		ShowError( "buildin_hateffect: unsupported hat effect id %d\n", effectID );
+//		return SCRIPT_CMD_FAILURE;
+//	}
 
 	auto it = util::vector_get( sd->hatEffects, effectID );
 

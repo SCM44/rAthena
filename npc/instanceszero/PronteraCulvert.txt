@@ -139,9 +139,18 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 			mes "Only the registered members can enter the instance "+.@md_name$+".";
 			close;
 		case IE_OK:
+<<<<<<< HEAD
+			if(.@quest){
+				setquest .@quest;
+			break;
+			}
+		}
+
+=======
 			setquest .@quest;
 			break;
 		}
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		//debugmes "Instance Entrance Prontera Culvert "+strcharinfo(0)+".";
 		close;
 	case 3: close;
@@ -385,10 +394,17 @@ OnTimer15000:
 				setunitdata 'Boss,UMOB_ATKMAX, 'boss_max_atk + (50 * 'Buff);
 				setunitdata 'Boss,UMOB_MATKMIN, 'boss_min_matk + (50 * 'Buff);
 				setunitdata 'Boss,UMOB_MATKMAX, 'boss_max_matk + (50 * 'Buff);
+<<<<<<< HEAD
+				setunitdata 'Boss,UMOB_DEF, 'boss_def + 2;
+				setunitdata 'Boss,UMOB_MDEF, 'boss_mdef + 2;
+				setunitdata 'Boss,UMOB_HIT, 'boss_hit + 2;
+				setunitdata 'Boss,UMOB_FLEE, 'boss_flee + 2;
+=======
 				setunitdata 'Boss,UMOB_DEF, 'boss_def + (15 * 'Buff);
 				setunitdata 'Boss,UMOB_MDEF, 'boss_mdef + (5 * 'Buff);
 				setunitdata 'Boss,UMOB_HIT, 'boss_hit + (15 * 'Buff);
 				setunitdata 'Boss,UMOB_FLEE, 'boss_flee + (15 * 'Buff);
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			}
 			movenpc instance_npcname(strnpcinfo(0)),.@arr[UMOB_X],.@arr[UMOB_Y];
 			specialeffect EF_HEAL,AREA,instance_npcname(strnpcinfo(0));
@@ -478,6 +494,15 @@ OnFumes:
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
+<<<<<<< HEAD
+		18005,50,	//Mixed_Rune_Fragment
+		29587,50,	//Shimmering_Crystal_Box
+		29587,25,	//Shimmering_Crystal_Box
+		29584,1,	//Rune_Box
+		29585,3,	//PVM_Box
+		29586,10,	//Refine_Box
+		29586,5,	//Refine_Box
+=======
 		18005,5,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
@@ -485,11 +510,36 @@ OnFumes:
 		29587,25,	//Shimmering_Crystal_Box
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		22150,100,	//Expedition_Greaves_4
 		22150,50,	//Expedition_Greaves_4
 		22150,50,	//Expedition_Greaves_4
 		28539,100,	//Expedition_Ring_4
 		28539,50,	//Expedition_Ring_4
+<<<<<<< HEAD
+		28539,50,	//Expedition_Ring_4
+		6635,1;		//Blacksmith Blessing
+	} else if ('Mode == 3) {
+		setarray .@reward[1],
+		//25458,100,	//Sparkling_Opal
+		//25458,50,	//Sparkling_Opal
+		//25458,10,	//Sparkling_Opal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		25424,100,	//Shimmering_Crystal
+		29584,5,	//Rune_Box
+		29586,20,	//Refine_Box
+		29585,20,	//Pvm_Box
+		29584,1,	//Rune_Box
+		29585,2,	//PVM_Box
+		29586,10,	//Refine_Box
+		18005,100,	//Mixed_Rune_Fragment
+		29587,100,	//Shimmering_Crystal_Box
+		29587,100,	//Shimmering_Crystal_Box
+=======
 		28539,50;	//Expedition_Ring_4
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
@@ -505,6 +555,7 @@ OnFumes:
 		29587,100,	//Shimmering_Crystal_Box
 		29587,75,	//Shimmering_Crystal_Box
 		29587,50,	//Shimmering_Crystal_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,30,		//Oridecon_Stone
@@ -523,6 +574,20 @@ OnFumes:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
+<<<<<<< HEAD
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+=======
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
@@ -535,6 +600,7 @@ OnFumes:
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
 		990,20,		//Boody_Red
@@ -543,7 +609,12 @@ OnFumes:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
+<<<<<<< HEAD
+		993,20,		//Yellow_Live
+		6635,10;	//Blacksmith Blessing
+=======
 		993,20;		//Yellow_Live
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	

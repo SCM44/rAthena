@@ -9,6 +9,8 @@
  **/
 
 //ACMD_DEF(newcommand),
+ACMD_DEFR(battlestats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
+ACMD_DEFR(enemystats, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 ACMD_DEF(battleinfo),
 
 // Battleground Extended by Vykimo

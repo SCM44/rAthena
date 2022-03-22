@@ -1351,6 +1351,8 @@ Body:
         Luk: 1
   - Jobs:
       Supernovice: true
+    HpFactor: 50
+    SpFactor: 500
     BaseASPD:
       Fist: 500
       Dagger: 650

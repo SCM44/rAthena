@@ -9827,6 +9827,24 @@ Body:
          if (!checkoption(Option_Wug) && !checkoption(Option_Wugrider))
             setfalcon (!checkfalcon());
       }
+  - Id: 12887
+    AegisName: C_Wing_Of_Fly
+    Name: Infinite Flywing
+    Type: Usable
+    Flags:
+      NoConsume: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemskill "AL_TELEPORT",1;
   - Id: 12900
     AegisName: Battle_Manual_Box
     Name: Battle Manual Box
@@ -22980,6 +22998,25 @@ Body:
     Weight: 10
     Script: |
       getitem 6241,50;
+  - Id: 17251
+    AegisName: C_Wing_Of_Fly_3Day_Box
+    Name: C Wing Of Fly 3Day Box
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_C_Wing_Of_Fly_3Day_Box);
   - Id: 22777
     AegisName: Gift_Buff_Set
     Name: Gift Buff Set
@@ -23071,9 +23108,15 @@ Body:
     Buy: 20
     Weight: 10
     Script: |
+<<<<<<< HEAD
+      getitem(callfunc("F_Rand", 18006, 18007, 18008, 18005, 18005, 18005, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
+      if (rand(2) == 0)
+        getitem(callfunc("F_Rand", 18006, 18007, 18008, 18006, 18007,18005, 18005,18005, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
+=======
       getitem(callfunc("F_Rand", 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
       if (rand(2) == 0)
         getitem(callfunc("F_Rand", 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18006, 18007, 18008, 18009), rand(1, 2));
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
   - Id: 29585
     AegisName: PVM_Box
     Name: PVM Box

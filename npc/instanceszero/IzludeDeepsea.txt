@@ -107,7 +107,11 @@ OnStart:
 		areamonster 'Map$,51,43,350,332,"--ja--",.@m_info[.@m],.@amt,.@label$;
 		
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
+<<<<<<< HEAD
+			setd("'"+.@mob$+.@i), $@mobid[.@i];
+=======
 			setd(".@"+.@mob$+.@i), $@mobid[.@i];
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			if(unitexists(getd("'"+.@mob$+.@i))) {
 				getunitdata getd("'"+.@mob$+.@i),.@data;
 				setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
@@ -401,11 +405,18 @@ OnInstanceInit:
 		25424,40,	//Shimmering_Crystal
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
+<<<<<<< HEAD
+		18005,50,	//Mixed_Rune_Fragment
+		18005,1,	//Mixed_Rune_Fragment
+		29586,10,	//Refine_Box
+		29586,10,	//Refine_Box
+=======
 		18005,10,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
 		18005,1,	//Mixed_Rune_Fragment
 		29586,5,	//Refine_Box
 		29586,3,	//Refine_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
 		29585,5,	//Pvm_Box
@@ -417,6 +428,29 @@ OnInstanceInit:
 		29589,25,	//Crimson_Crystal_Box
 		25476,100,	//Crimson_Magic_Crystal
 		25476,70,	//Crimson_Magic_Crystal
+<<<<<<< HEAD
+		25476,40,	//Crimson_Magic_Crystal
+		6635,1;		//Blacksmith Blessing
+	} else if ('Mode == 3) {
+		setarray .@reward[1],
+		//25459,100,	//Aqua_Sapphire
+		//25459,50,	//Aqua_Sapphire
+		//25459,10,	//Aqua_Sapphire
+		25424,100,	//Shimmering_Crystal
+		25424,70,	//Shimmering_Crystal
+		25424,40,	//Shimmering_Crystal
+		18005,100,	//Mixed_Rune_Fragment
+		29586,20,	//Refine_Box
+		29586,20,	//Refine_Box
+		29584,2,	//Rune_Box
+		29585,10,	//Pvm_Box
+		29584,5,	//Rune_Box
+		29585,5,	//Pvm_Box
+		29587,100,	//Shimmering_Crystal_Box
+		29587,50,	//Shimmering_Crystal_Box
+		29589,100,	//Crimson_Crystal_Box
+		29589,50,	//Crimson_Crystal_Box
+=======
 		25476,40;	//Crimson_Magic_Crystal
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
@@ -431,6 +465,7 @@ OnInstanceInit:
 		29587,25,	//Shimmering_Crystal_Box
 		29589,50,	//Crimson_Crystal_Box
 		29589,25,	//Crimson_Crystal_Box
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -449,6 +484,20 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
+<<<<<<< HEAD
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,100,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,70,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,40,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+		//25429,10,	//Mythril_Ore
+=======
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
@@ -461,6 +510,7 @@ OnInstanceInit:
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
@@ -468,7 +518,13 @@ OnInstanceInit:
 		992,100,	//Wind_Of_Verdure 
 		992,20,		//Wind_Of_Verdure 
 		993,100,	//Yellow_Live
+<<<<<<< HEAD
+		993,20,		//Yellow_Live
+		6635,10;	//Blacksmith Blessing
+
+=======
 		993,20;		//Yellow_Live
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
 	

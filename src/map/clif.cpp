@@ -18477,6 +18477,78 @@ void clif_bg_emblem(struct map_session_data *sd, struct guild *g)
 	WFIFOSET(fd,WFIFOW(fd,2));
 }
 
+<<<<<<< HEAD
+//void clif_bg_memberlist(struct map_session_data *sd)
+//{
+//	int fd, c = 0;
+//	struct map_session_data *psd;
+//	nullpo_retv(sd);
+//	std::shared_ptr<s_battleground_data> bg;
+//
+//	if( (fd = sd->fd) == 0 )
+//		return;
+//	if( !(sd->bg_id && (bg = util::umap_find(bg_team_db, sd->bg_id))))
+//		return;
+//
+//	WFIFOHEAD(fd,bg->members.size() * 104 + 4);
+//	WFIFOW(fd,0) = 0x154;
+//	for (const auto& member : bg->members) {
+//		if ((psd = member.sd) == nullptr)
+//			continue;
+//		WFIFOL(fd,c*104+ 4) = psd->status.account_id;
+//		WFIFOL(fd,c*104+ 8) = psd->status.char_id;
+//		WFIFOW(fd,c*104+12) = psd->status.hair;
+//		WFIFOW(fd,c*104+14) = psd->status.hair_color;
+//		WFIFOW(fd,c*104+16) = psd->status.sex;
+//		WFIFOW(fd,c*104+18) = psd->status.class_;
+//		WFIFOW(fd,c*104+20) = psd->status.base_level;
+//		WFIFOL(fd,c*104+22) = 0;
+//		WFIFOL(fd,c*104+26) = 1; // Online
+//		WFIFOL(fd,c*104+30) = psd->bmaster_flag ? 0 : 1; // Position
+//		if( psd->state.bg_afk )
+//			memcpy(WFIFOP(fd,c*104+34),"AFK",50);
+//		else
+//			memset(WFIFOP(fd,c*104+34),0,50);
+//		memcpy(WFIFOP(fd,c*104+84),psd->status.name,NAME_LENGTH);
+//		c++;
+//	}
+//	WFIFOW(fd, 2)=c*104+4;
+//	WFIFOSET(fd,WFIFOW(fd,2));
+//}
+
+
+void clif_bg_memberlist(struct map_session_data *sd)
+{
+    int fd, c = 0;
+    nullpo_retv(sd);
+
+    if( (fd = sd->fd) == 0 )
+        return;
+    std::shared_ptr<s_battleground_data> bgd = util::umap_find(bg_team_db, sd->bg_id);
+    if( !(sd->bg_id && bgd != NULL) )
+        return;
+
+    WFIFOHEAD(fd,bgd->members.size() * 34 + 4);
+    WFIFOW(fd,0) = 0xaa5;
+    for (const auto &pl_sd : bgd->members) {
+        if( ( sd = pl_sd.sd ) == nullptr )
+            continue;
+        WFIFOL(fd, c * 34 + 4) = pl_sd.sd->status.account_id;
+        WFIFOL(fd, c * 34 + 8) = pl_sd.sd->status.char_id;
+        WFIFOW(fd, c * 34 + 12) = pl_sd.sd->status.hair;
+        WFIFOW(fd, c * 34 + 14) = pl_sd.sd->status.hair_color;
+        WFIFOW(fd, c * 34 + 16) = pl_sd.sd->status.sex;
+        WFIFOW(fd, c * 34 + 18) = pl_sd.sd->status.class_;
+        WFIFOW(fd, c * 34 + 20) = pl_sd.sd->status.base_level;
+        WFIFOL(fd, c * 34 + 22) = 0; // Exp slot used to show kills
+        WFIFOL(fd, c * 34 + 26) = 1; // Online
+        WFIFOL(fd, c * 34 + 30) = (pl_sd.sd->status.char_id == bgd->leader_char_id) ? 0 : 1; // Position
+        WFIFOL(fd,c*34+34)=(uint32)time(NULL);
+        c++;
+    }
+    WFIFOW(fd, 2)=c * 34 + 4;
+    WFIFOSET(fd,WFIFOW(fd,2));
+=======
 void clif_bg_memberlist(struct map_session_data *sd)
 {
 	int fd, c = 0;
@@ -18513,6 +18585,7 @@ void clif_bg_memberlist(struct map_session_data *sd)
 	}
 	WFIFOW(fd, 2)=c*104+4;
 	WFIFOSET(fd,WFIFOW(fd,2));
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 }
 
 void clif_bg_leave(struct map_session_data *sd, const char *name, const char *mes)

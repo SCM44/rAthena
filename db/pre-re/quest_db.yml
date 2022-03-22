@@ -7114,20 +7114,77 @@ Body:
     Title: Poring village Information
   - Id: 12417
     Title: Poring village Quest 2
+<<<<<<< HEAD
+    TimeLimit: +1d
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
   - Id: 12418
     Title: Poring Village Recruiter
   - Id: 12419
     Title: Orc memorial 1
   - Id: 12420
     Title: Orc memorial 2
+<<<<<<< HEAD
+    TimeLimit: +1d
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
   - Id: 12424
     Title: Prontera Culvert Memorial 1
   - Id: 12425
     Title: Prontera Culvert Memorial 2
+<<<<<<< HEAD
+    TimeLimit: +1d
+=======
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
   - Id: 12437
     Title: Memorial Association 1
   - Id: 12438
     Title: Memorial Association 2
+<<<<<<< HEAD
+    TimeLimit: +1d
+  - Id: 12439
+    Title: Memorial Association 3
+    TimeLimit: +1d
+  - Id: 12440
+    Title: Memorial Association 4
+    TimeLimit: +1d
+  - Id: 30101
+    Title: Poring village cooldown 1
+    TimeLimit: +1d
+  - Id: 30102
+    Title: Poring village cooldown 2
+    TimeLimit: +1d
+  - Id: 30103
+    Title: Prontera culvert cooldown 1
+    TimeLimit: +1d
+  - Id: 30104
+    Title: Prontera culvert cooldown 2
+    TimeLimit: +1d
+  - Id: 30105
+    Title: Orcs Memory cooldown 1
+    TimeLimit: +1d
+  - Id: 30106
+    Title: Orcs Memory cooldown 2
+    TimeLimit: +1d
+  - Id: 30107
+    Title: Ant Hell cooldown 1
+    TimeLimit: +1d
+  - Id: 30108
+    Title: Ant Hell cooldown 2
+    TimeLimit: +1d
+  - Id: 30109
+    Title: Izlude Deepsea cooldown 1
+    TimeLimit: +1d
+  - Id: 30110
+    Title: Izlude Deepsea cooldown 2
+    TimeLimit: +1d
+  - Id: 30111
+    Title: Sunken Ship cooldown 1
+    TimeLimit: +1d
+  - Id: 30112
+    Title: Sunken Ship cooldown 2
+    TimeLimit: +1d
+=======
   - Id: 12439
     Title: Memorial Association 3
   - Id: 12440
@@ -7162,6 +7219,7 @@ Body:
     TimeLimit: +4h
   - Id: 30112
     Title: Sunken Ship cooldown 2
+>>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 
 
