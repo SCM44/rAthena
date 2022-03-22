@@ -42569,7 +42569,6 @@ Body:
       bonus(bLuk, 2);
       bonus(bAgi, 2);
       }
-<<<<<<< HEAD
       if (getrefine() >= 9) bonus(bCritAtkRate, BaseLevel / 20);
 
 #------------COSTUMES------------------------------------------
@@ -49078,7 +49077,3 @@ Body:
       Costume_Head_Top: true
     ArmorLevel: 1
     View: 2129
-
-=======
-      if (getrefine() >= 9) bonus(bCritAtkRate, BaseLevel / 20);
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
