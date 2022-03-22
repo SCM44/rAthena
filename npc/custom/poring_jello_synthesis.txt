@@ -1,0 +1,167 @@
+//===== rAthena Script =======================================
+//= Enchant & Synthesis NPC (kRo Zero)
+//============================================================
+
+prt_fild05,174,237,1	script	Vegetable Enhancer#pv	4_F_02,{
+	callfunc("F_CheckWeight",strnpcinfo(1),2);
+
+	disable_items;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Nice to meet you.";
+	mes "I can ^FF0000enhance or reset^000000 your vegetable headgears with a ^0000FF70% success rate^000000!";
+	mes "Or would you rather have me do the ^0000FFStone Synthesis^000000?";	
+	next;
+	switch(select("^0000FFEnchant Vegetable^000000:^FF0000Reset Vegetable^000000")) {
+	case 1:
+		set .@service_type,1;
+		break;
+	case 2:
+		set .@service_type,2;
+		break;
+	}
+	
+	
+	if (Zeny < 20000 || countitem(909) < 50) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I need the following items:";
+		mes " ~^0000FF50 Jellopy^000000";
+		mes " ~^0000FF20,000 Zeny^000000";		
+		mes "Is that too much to ask?";
+		close;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Ok, so are you ready?";
+	mes "Before I start working on this, which vegetable did you want me to work on?";
+	next;
+	
+	.@part = EQI_HEAD_LOW;
+	.@equip_id = getequipid(.@part);
+	if(.@equip_id == 19238 || .@equip_id == 19239) .@vege$ = "^0000FF"+getitemname(.@equip_id)+"^000000";
+		else .@vege$ = "^B0B0B0I am not wearing the equipment^000000"
+	.@i = select("Cancel",.@vege$)-2;
+	if (.@i == -1) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Maybe next time then?";
+		close;
+	}
+	if (!getequipisequiped(.@part) || (.@equip_id != 19238 && .@equip_id != 19239)) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Make sure you're wearing the equipment first.";
+		close;
+	}
+
+	switch(.@service_type) {
+		case 1: callsub S_Enchant; break;
+		case 2: callsub S_Initialize; break;
+	}
+
+	mes "["+strnpcinfo(1)+"]";
+	mes "^990099"+getequipname(.@part)+"^000000??";
+	mes "I can't work on this piece of equipment.";
+	close;
+
+S_Enchant:
+	set .@part, EQI_HEAD_LOW;
+	set .@equip_id, getequipid(.@part);
+	set .@equip_name$, getitemname(.@equip_id);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+
+	mes "["+strnpcinfo(1)+"]";
+	if (.@equip_card[3] == 0) {
+		mes "Let's start the enhancement. Remember, ^990000there is a 30% chance for the equipment to be destroyed^000000. Continue?";
+	} else {
+		mes "This equipment has been strengthened to the limit. Further enhancement is impossible at its current state.";
+		close;
+	}
+	next;
+	
+	.@i = rand(1,99);
+
+	 if (.@i < 10) .@enchant = 4700; //Str1
+	else if (.@i < 20) .@enchant = 4720; // dex1
+	else if (.@i < 30) .@enchant = 18019; // ATK+2
+	else if (.@i < 40) .@enchant = 18018; // 1% vol de vie
+	else if (.@i < 50) .@enchant = 18017; // 3 Drop%
+	else if (.@i < 60) .@enchant = 18016; // 5 Xp%
+	else if (.@i < 68) .@enchant = 18020; // matk+2
+	else if (.@i < 76) .@enchant = 18022; // Def+1
+	else if (.@i < 84) .@enchant = 18023; // MDEF+1
+	else if (.@i < 92) .@enchant = 4710; // INT+1
+	else .@enchant = 18019; //ATK2
+	
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@equip_refine) ||
+		callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+
+	if (.@equip_card[3] == 0) .@equip_card[3] = .@enchant;
+	else {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I think there was an enhancing limit to the equipment.";
+		close;
+	}
+	
+	.@Zeny = 20000;
+	if(select("Proceed (20,000 Zeny & 50 Jellopies)","Cancel")==2) {
+		mes "["+strnpcinfo(1)+"]";	
+		mes "Okay..";
+		close;
+	}
+	if (Zeny < .@Zeny || countitem(909) < 50) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I won't proceed unless you pay the fees:";
+		mes " ~^0000FF50 Jellopy^000000";
+		mes " ~^0000FF20,000 Zeny^000000";		
+		close;
+	}
+	Zeny -= .@Zeny;
+	delitem 909,50;
+	delequip .@part;
+	specialeffect2 EF_REPAIRWEAPON;
+	if(rand(1,100) <= 30) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Sorry.... I failed!!!";
+		mes "^FF0000Your equipment has been destroyed.";
+		close;		
+	}				
+	
+	mes "["+strnpcinfo(1)+"]";
+	mes "I've successfully enhanced the ^990000"+.@equip_name$+"^000000!!";
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
+
+	close;
+		
+S_Initialize:
+	set .@part, EQI_HEAD_LOW;
+	set .@equip_id, getequipid(.@part);
+	set .@equip_name$, getitemname(.@equip_id);
+
+	if(select("70% Success Rate (20,000 Zeny)","Cancel")==2) {
+		mes "["+strnpcinfo(1)+"]";	
+		mes "Okay..";
+		close;
+	}
+	if (Zeny < 20000) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I won't proceed unless you pay the fees:";
+		mes " ~^0000FF20,000 Zeny^000000";	
+		close;
+	}
+	specialeffect2 EF_REPAIRWEAPON;
+	mes "["+strnpcinfo(1)+"]";
+	delequip .@part;
+	Zeny -= 20000;
+	
+	if(rand(1,100) <= 30) {
+		mes "^FF0000Unfortunately, we failed.^000000";
+		mes "The "+.@equip_name$+" has been destroyed.";
+		close;
+	}		
+	mes "I have initialized the "+.@equip_name$+".";
+	getitem .@equip_id,1;
+	close;
+
+}
