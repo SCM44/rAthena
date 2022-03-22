@@ -1,0 +1,36 @@
+//======================================================================================
+// Map Index
+//======================================================================================
+//Contains the list of maps with their respective IDs for inter-server use.
+//IDs must never change, therefore any new maps need to be added at the end,
+//and old ones must not be removed, but may be replaced.
+//Format:
+//mapname<tab>index <- specifies index for this map
+//mapname <- map will use index of previous map +1
+//Note that map index 0 is special and reserved for "error" status. 
+
+//======================================================================================
+//Place your custom maps with a starting ID here.
+//======================================================================================
+//Example:
+//
+//mymap	1250
+//mymap-2
+
+// BG Extended
+bg_ctf
+bg_tdm
+bg_eoe
+bg_con01
+bg_con02
+bg_con03
+bg_con04
+bg_con05
+bg_con06
+bg_kvm
+bg_sc
+bg_dom
+bg_rush01
+bg_rush02
+bg_rush03
+bg_rush04

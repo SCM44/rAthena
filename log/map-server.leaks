@@ -1,0 +1,18 @@
+
+Memory manager: Memory leaks found at 2022/02/19 22h56m37s (Git Hash 176e3075d016c3a335cc27a3baa23163a1cd7879).
+0001 : map.cpp line 3604 size 168000 address 0x0x7f7f2bdc7040
+0002 : map.cpp line 3604 size 115200 address 0x0x55a481542fe0
+0003 : map.cpp line 3604 size 180000 address 0x0x7f7f2bdf1040
+0004 : map.cpp line 3604 size 107520 address 0x0x55a481528ba0
+0005 : map.cpp line 3604 size 72000 address 0x0x55a481517220
+0006 : map.cpp line 3604 size 72000 address 0x0x55a4815058a0
+0007 : map.cpp line 3604 size 72000 address 0x0x55a4814f3f20
+0008 : map.cpp line 3604 size 320000 address 0x0x7f7f2be1d040
+0009 : map.cpp line 3604 size 320000 address 0x0x7f7f2be6c040
+0010 : map.cpp line 3604 size 320000 address 0x0x7f7f2bebb040
+0011 : map.cpp line 3604 size 320000 address 0x0x7f7f2bf0a040
+0012 : map.cpp line 3604 size 320000 address 0x0x7f7f2bf59040
+0013 : map.cpp line 3604 size 320000 address 0x0x7f7f2bfa8040
+0014 : map.cpp line 3604 size 72000 address 0x0x55a4814e25a0
+0015 : map.cpp line 3604 size 72000 address 0x0x55a4814d0c20
+0016 : map.cpp line 3604 size 85280 address 0x0x55a4814bbec0

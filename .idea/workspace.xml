@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d3af65b7-cc90-4421-aee5-6635cfe69d64" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/grammar.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/libconfig.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/libconfig.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/scanctx.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/scanner.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/libconfig/obj/strbuf.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/binary.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/contrib/graphbuilder.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/contrib/graphbuilderadapter.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/convert.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/directives.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/emit.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/emitfromevents.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/emitter.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/emitterstate.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/emitterutils.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/exceptions.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/exp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/memory.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/node.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/node_data.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/nodebuilder.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/nodeevents.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/null.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/ostream_wrapper.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/parse.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/parser.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/regex_yaml.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/scanner.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/scanscalar.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/scantag.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/scantoken.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/simplekey.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/singledocparser.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/stream.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/src/tag.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3rdparty/yaml-cpp/obj/yaml-cpp.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/atcommands.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/battle_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/char_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/inter_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/inter_server.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/log_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/login_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/map_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/packet_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/import/script_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_chn_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_eng_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_frn_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_grm_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_idn_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_mal_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_por_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_rus_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_spn_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conf/msg_conf/import/map_msg_tha_conf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/abra_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/achievement_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/achievement_level_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/attendance.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/attr_fix.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/battleground_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/castle_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/const.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/create_arrow_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/elemental_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/exp_guild.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/exp_homun.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/guild_skill_tree.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/homun_skill_tree.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/homunculus_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/instance_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_cash_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_combo_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_group_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_noequip.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_randomopt_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/item_randomopt_group.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/job_noenter_map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/job_stats.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/level_penalty.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/magicmushroom_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/map_cache.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/map_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mercenary_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_avail.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_chat_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_item_ratio.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_skill_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/mob_summon.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/pet_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/produce_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/quest_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/refine.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/size_fix.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/skill_changematerial_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/skill_damage_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/skill_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/skill_nocast_db.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/skill_tree.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/spellbook_db.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/statpoint.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/import/status_disabled.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/char-server.launch.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/login-server.launch.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/map-server.launch.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/map-server.leaks" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Sixte/Dev2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="26h5q3CwxFz7iIsfNVMJaBQCQTn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ChangesTree.GroupingKeys" value="" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../xampp/htdocs" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3af65b7-cc90-4421-aee5-6635cfe69d64" name="Changes" comment="" />
+      <created>1647863165320</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647863165320</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add origin">
+      <created>1647906347961</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647906347961</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add imports">
+      <created>1647910108510</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647910108510</updated>
+    </task>
+    <task id="LOCAL-00003" summary="bad merge corrected">
+      <created>1647911726877</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1647911726877</updated>
+    </task>
+    <task id="LOCAL-00004" summary="change header and content of files">
+      <created>1647912143095</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647912143095</updated>
+    </task>
+    <task id="LOCAL-00005" summary="change npc folder">
+      <created>1647913307376</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1647913307376</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change some files to correct compilation">
+      <created>1647915282905</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647915282905</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add npc">
+      <created>1647944861818</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1647944861818</updated>
+    </task>
+    <task id="LOCAL-00008" summary="remove npc">
+      <created>1647944924711</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1647944924711</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add npc">
+      <created>1647945080754</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1647945080754</updated>
+    </task>
+    <task id="LOCAL-00010" summary="del npc 2">
+      <created>1647945146514</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1647945146514</updated>
+    </task>
+    <task id="LOCAL-00011" summary="reset src">
+      <created>1647946475060</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1647946475060</updated>
+    </task>
+    <task id="LOCAL-00012" summary="remove ALL bitch">
+      <created>1647946662003</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1647946662003</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Make it shine bro">
+      <created>1647948146489</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1647948146489</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="add origin" />
+    <MESSAGE value="add imports" />
+    <MESSAGE value="bad merge corrected" />
+    <MESSAGE value="change header and content of files" />
+    <MESSAGE value="change npc folder" />
+    <MESSAGE value="change some files to correct compilation" />
+    <MESSAGE value="remove npc" />
+    <MESSAGE value="add npc" />
+    <MESSAGE value="del npc 2" />
+    <MESSAGE value="reset src" />
+    <MESSAGE value="remove ALL bitch" />
+    <MESSAGE value="Make it shine bro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make it shine bro" />
+  </component>
+</project>
