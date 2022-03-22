@@ -1,0 +1,777 @@
+
+//===== rAthena Script =======================================
+//= Poring Village (kRo Renewal)
+//============================================================
+
+//Entrance NPC
+izlude,175,185,5	script	Emily#begi	671,5,5,{
+
+	if(BaseLevel < 30 || BaseLevel > 99 ){
+		mes "[Emily]";
+		mes "The ^0000ffPoring Village^000000 is a secret location with treasures!";
+		mes "But, I'll only show location to adventurers around my level, between 30 ~ 99!";
+		close;
+	}
+	mes "^ff0000If you attempt to tame any monsters, it will not count as a kill. Please be careful.^000000";
+    next;
+	 .@md_name$ = "Poring Village";
+        switch(checkquest(12417,PLAYTIME)) {
+        case -1: break;
+        case 0:
+        case 1:
+			mes "[Emily]";
+            mes "Sorry, but the entry period to the "+.@md_name$+" has expired.";
+            mes "Take a rest while waiting for the dungeon to be available again.";
+			next;
+			switch(select("Reset cooldown (200,000z)","No thanks.")){
+				
+				case 1:
+					if(zeny < 200000){
+						mes "[Emily]";
+						mes "You want to reset the cooldown, it will cost you 200,000 zeny.";
+						close;
+					}
+					mes "[Emily]";
+					mes "Well, if you insist...I'll be taking the zeny and reset the instance for you.";
+					mes "You may enter.";
+					set zeny,zeny-200000;
+					erasequest 12417;
+					close;
+				
+				case 2:
+					mes "[Emily]";
+					mes "Have a good day!";
+					close;
+			}
+
+        case 2:
+            erasequest 12417;
+            mes "[Emily]";
+            mes "The cooldown has expired.";
+            mes "You may re-enter the Memorial Dungeon.";
+            close;
+	}
+
+		if(isbegin_quest(12416) == 0){
+				mes "[Emily]";
+				mes "My name is Emily, I'm here to wait for an adventurer to join my party. It seems to work out.";
+				next;
+				select("Who would want to party up with you?!");
+				mes "[Emily]";
+				mes "No...please don't judge too fast. Why don't you listen to my story and then rethink about it?";
+				mes "I'm proposing a great treasure hunt with great payment!";
+				next;
+				switch(select("Not interested.","Great payment?")){
+					
+					case 1:
+						mes "[Emily]";
+						mes "Ah~ That's not clever. It would be better to join up with me than wild hunt alone.";
+						close;
+						
+					case 2:
+						mes "[Emily]";
+						mes "Yes, you heard it right. With great payment!";
+						next;
+						mes "[Emily]";
+						mes "I receive a map of ^0000ffPoring Village^000000, a place even beginners like us can survive with large chance.";
+						next;
+						mes "[Emily]";
+						mes "On the map guide it says that there are great treasures hidden in there, and I'm proposing to split the loots after we finish this job.";
+						next;
+						select("50 / 50 and I'll join.");
+						mes "[Emily]";
+						mes "What are you talking about? It's 30 / 70, of course I'm taking the 70%, no less than this.";
+						next;
+						select("No, 50 / 50, lesser than this is waste of my time.");
+						mes "[Emily]";
+						mes "40 / 60!!!";
+						next;
+						select("50 / 50...");
+						mes "[Emily]";
+						mes "Urgh, you are making me crazy!";
+						mes "Okay! 50 / 50. Deal!";
+						setquest 12416;
+						completequest 12416;
+						setquest 12418;
+						close;
+				}
+		}
+		mes "[Emily]";
+		mes "So, are you ready to go on an adventure with me?";
+		next;
+		switch(select("Prepare Poring Village:Enter the Dungeon:Cancel")) {
+			case 1:
+				if (is_party_leader() == false) {
+					mes "[Emily]";
+					mes "Please tell your Party Leader to create the instance.";
+					close;
+				}
+				instance_create(.@md_name$);
+				mes "[Emily]";
+				mes "The Memorial Dungeon of Poring Village has been created.";
+				mes "You may now enter.";
+				close;
+				
+			case 2:
+               switch( instance_enter(.@md_name$) ) {
+                    case IE_NOMEMBER:
+                        end;
+                    case IE_NOINSTANCE:
+                        mes "There is no Memorial Dungeon registered.";
+                        close;
+                    case IE_OTHER:
+                        mes "An unknown error has occurred.";
+                        close;
+                    case IE_OK:
+						mes "[Emily]";
+                        mes "I'll meet you there!";
+                        mapannounce "izlude", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
+                        if(isbegin_quest(12417)<1) setquest 12417;
+                }
+				close;
+				
+			case 3:
+				mes "[Emily]";
+				mes "You have not prepared?";
+				mes "Can't really help it I guess";
+				close;
+		} 
+		mes "[Emily]";
+		mes "I think it would be a good idea to start this epic adventure after forming a party.";
+		close;
+
+OnTouch:
+	npctalk "Party up with me, let's venture to the Poring Village.",strnpcinfo(0),bc_self;
+end;
+
+
+OnInit:
+	questinfo QTYPE_QUEST,QMARK_YELLOW,"isbegin_quest(12416) == 0 && BaseLevel >= 30 && BaseLevel <= 99";
+end;
+
+}
+
+1@begi,106,30,5	script	Emily#start1	4_GEFFEN_03,{
+}
+
+1@begi,106,30,5	script	#start_wp1_1	4_GEFFEN_03,5,5,{
+end;
+
+OnTouch:
+	if (is_party_leader() == false) {
+		end;
+	}
+	disablenpc instance_npcname( "#start_wp1_1", instance_id() );
+	npctalk "Emily: I mean this is the village of Porings?",instance_npcname("Emily#start1");
+	sleep2 3000;
+	npctalk "Emily: Okay, let's move forward.",instance_npcname("Emily#start1");
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Alright, let's go.";
+	disablenpc instance_npcname( "Emily#start1", instance_id() );
+	enablenpc instance_npcname( "Emily#start2", instance_id() );
+	end;
+}
+
+
+1@begi,139,39,3	script	Emily#start2	4_GEFFEN_03,{
+	
+	mes "[Emily]";
+	mes "I'm going to start slowly now...";
+	close;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;
+	
+}
+
+1@begi,139,39,3	script	#start_wp1_2	HIDDEN_WARP_NPC,5,5,{
+end;
+
+OnTouch:
+	if (is_party_leader() == false) {
+		end;
+	}
+	disablenpc instance_npcname( "#start_wp1_2", instance_id() );
+	mapannounce instance_mapname("1@begi"),"???: I can hear people's voices, everyone, prepare a welcome ceremony.", bc_map;
+	sleep2 3000;
+	npctalk "Emily: What is it talking about?",instance_npcname("Emily#start2");
+	sleep2 3000;
+	npctalk "Emily: It looks like something is ahead of us. Is it here to welcome us?",instance_npcname("Emily#start2");
+	sleep2 1000;
+	mapannounce instance_mapname("1@begi"),"???: Catch the humans so they don't escape and take away all our valuables!", bc_map;
+	sleep2 3000;
+	npctalk "Emily: Ummm... I don't think it's that friendly. Let's hide for a while!",instance_npcname("Emily#start2");
+	sleep2 3000;
+	npctalk "Emily: Oh you can't hide? Well, there's nothing I can do, try your best to escape here, cause I'll go first.",instance_npcname("Emily#start2");
+	hideonnpc instance_npcname(strnpcinfo(0));
+	specialeffect 90,AREA, instance_npcname("Barricade#alapovibar3");
+	sleep2 500;
+	specialeffect 90,AREA, instance_npcname("Barricade#alapovibar3");
+	specialeffect2 EF_BASH3D;
+	disablenpc instance_npcname( "Barricade#alapovibar", instance_id() );
+	disablenpc instance_npcname( "Barricade#alapovibar2", instance_id() );
+	disablenpc instance_npcname( "Barricade#alapovibar3", instance_id() );
+	disablenpc instance_npcname( "Barricade#alapovibar4", instance_id() );
+	disablenpc instance_npcname( "Barricade#alapovibar5", instance_id() );
+	disablenpc instance_npcname( "Barricade#alapovibar6", instance_id() );
+	setcell instance_mapname( "1@begi", instance_id() ),145,35,145,41,cell_walkable,1;
+	donpcevent instance_npcname("poring_village") + "::OnSummon";
+	disablenpc instance_npcname( "Emily#start2", instance_id() );
+	end;
+
+}
+
+1@begi,101,107,4	script	poring_village	HIDDEN_WARP_NPC,2,2,{
+	function summon_normal;
+	function summon_guardian;
+	end;
+
+OnSummon: //Define monster list 
+	//Poring, Drops, Poporing, Marin, Goldring, Amering, King Poring
+	setarray 'List,3815,3813,3814,3816,3811,3812,3810;
+	summon_normal;
+	end;
+	
+OnInstanceInit:
+	'Mode = 0;
+	'Map$ = instance_mapname(strnpcinfo(4));
+	'NPC_Name$ = instance_npcname( strnpcinfo(0) );
+	
+	'Boss_Stage = 0;
+	end;
+
+function	summon_normal	{
+	'Boss_Stage++;
+	
+	switch( 'Boss_Stage ){
+		case 1:
+			set .@clabel$, 'NPC_Name$ + "::OnNormalDied";
+			//poring, drops, poporing
+			areamonster 'Map$,155,32,171,32,"--ja--",'List[1],8,.@clabel$;
+			areamonster 'Map$,81,56,42,57,"--ja--",'List[1],8,.@clabel$;
+			areamonster 'Map$,188,47,188,61,"--ja--",'List[3],8,.@clabel$;
+			areamonster 'Map$,105,66,171,67,"--ja--",'List[3],8,.@clabel$;
+			areamonster 'Map$,60,113,76,113,"--ja--",'List[3],8,.@clabel$;
+			areamonster 'Map$,169,38,188,38,"--ja--",'List[2],8,.@clabel$;
+			areamonster 'Map$,28,73,25,83,"--ja--",'List[2],8,.@clabel$;
+			areamonster 'Map$,179,68,104,68,"--ja--",'List[0],8,.@clabel$;
+			break;
+		case 2:
+			set .@clabel$, 'NPC_Name$ + "::OnNormalDied2";
+			//drops, marin, poporing
+			areamonster 'Map$,193,143,182,143,"--ja--",'List[0],8,.@clabel$;
+			areamonster 'Map$,154,143,50,144,"--ja--",'List[0],8,.@clabel$;
+			areamonster 'Map$,191,97,195,97,"--ja--",'List[1],8,.@clabel$;
+			areamonster 'Map$,145,144,56,143,"--ja--",'List[1],8,.@clabel$;
+			areamonster 'Map$,203,108,217,108,"--ja--",'List[2],8,.@clabel$;
+			areamonster 'Map$,156,143,51,143,"--ja--",'List[2],8,.@clabel$;
+			areamonster 'Map$,214,116,214,119,"--ja--",'List[3],8,.@clabel$;
+			areamonster 'Map$,151,144,67,143,"--ja--",'List[3],8,.@clabel$;
+			break;
+		case 3:
+			set .@clabel$, 'NPC_Name$ + "::OnNormalDied3";
+			//poring, drops, marin, poporing
+			areamonster 'Map$,81,197,109,197,"--ja--",'List[3],16,.@clabel$;
+			areamonster 'Map$,127,185,150,185,"--ja--",'List[3],16,.@clabel$;
+			break;
+	}
+	return;
+}
+
+function	summon_guardian	{
+	.@label$ = 'NPC_Name$ + "::OnGuardianDied";
+			
+	switch( 'Boss_Stage ){
+		case 1:
+			//Gold Poring
+			setarray .@monster,'List[4];
+			setarray .@coordinate,107, 115, 125, 101;
+			break;
+		case 2:
+			//Amering
+			setarray .@monster,'List[5];
+			setarray .@coordinate,34,167,54,154;
+			break;
+		case 3:
+			//Almighty King of Porings
+			setarray .@monster,'List[6];
+			setarray .@coordinate,164,204,189,187;
+			break;
+	}
+	.@monster_size = getarraysize( .@monster );
+	for( .@i=0; .@i < .@monster_size; .@i++ ) {
+		areamonster 'Map$,.@coordinate[0],.@coordinate[1],.@coordinate[2],.@coordinate[3],"--ja--",.@monster[.@i],1,.@label$,2;
+	}
+	return;
+}
+	
+OnNormalDied:
+	.@remaining = mobcount('Map$,'NPC_Name$+"::OnNormalDied" );
+	
+	if((.@remaining > 10 && .@remaining%5 == 0) || .@remaining <= 10)
+		//instance_announce 0,"Remaining Poring Villagers : "+.@remaining,bc_map;
+	
+	if( .@remaining == 0 ){
+		sleep2 500;
+		instance_announce 0,"Emily: Wow, that's great, isn't it? You dealt with all these porings.",bc_map;
+		sleep2 3000;
+		instance_announce 0,"Emily: But does that gold poring looks a little odd? You better be careful.",bc_map;
+		sleep2 3000;
+		instance_announce 0,"Emily: Oh, and I looked at it earlier, and when I got close to that blue light pillar, my strength surged.",bc_map;
+	if('Boss_Stage == 3) {
+			instance_announce instance_id(), "[Almighty King of Porings] What is this? You damn trespasser!", bc_map, 0xFF0000;
+			sleep2 1500;
+			instance_announce instance_id(), "[Almighty King of Porings] Can't you humans leave alone in peace??", bc_map, 0xFF0000;
+			sleep2 1500;
+			instance_announce instance_id(), "[Almighty King of Porings] You will regret being here.. I shall exterminate you!!", bc_map, 0xFF0000;
+			sleep2 1500;
+		}
+		summon_guardian;
+	}
+	end;
+
+OnNormalDied2:
+	.@remaining = mobcount('Map$,'NPC_Name$+"::OnNormalDied2" );
+	
+	if((.@remaining > 10 && .@remaining%5 == 0) || .@remaining <= 10)
+		//instance_announce 0,"Remaining Poring Villagers : "+.@remaining,bc_map;
+	
+	if( .@remaining == 0 ){
+		sleep2 500;
+		instance_announce 0,"Emily: There seems to be a middle stage boss. Looks a bit tougher...",bc_map;
+		sleep2 3000;
+		instance_announce 0,"Emily: I hate battles, so I'll see if I can find any useful treasures. Keep up the hard work ~",bc_map;
+	if('Boss_Stage == 3) {
+			instance_announce instance_id(), "[Almighty King of Porings] What is this? You damn trespasser!", bc_map, 0xFF0000;
+			sleep2 1500;
+			instance_announce instance_id(), "[Almighty King of Porings] Can't you humans leave alone in peace??", bc_map, 0xFF0000;
+			sleep2 1500;
+			instance_announce instance_id(), "[Almighty King of Porings] You will regret being here.. I shall exterminate you!!", bc_map, 0xFF0000;
+			sleep2 1500;
+		}
+		summon_guardian;
+	}
+	end;
+
+OnNormalDied3:
+	.@remaining = mobcount('Map$,'NPC_Name$+"::OnNormalDied3" );
+	
+	if((.@remaining > 10 && .@remaining%5 == 0) || .@remaining <= 10)
+		//instance_announce 0,"Remaining Poring Villagers : "+.@remaining,bc_map;
+	
+	if( .@remaining == 0 ){
+		//sleep2 500;
+		//instance_announce 0,"Emily: Wow, that's great, isn't it? You dealt with all these porings.",bc_map;
+		//sleep2 3000;
+		//instance_announce 0,"Emily: But does that gold poring looks a little odd? You better be careful.",bc_map;
+		//sleep2 3000;
+		//instance_announce 0,"Emily: Oh, and I looked at it earlier, and when I got close to that blue light pillar, my strength surged.",bc_map;
+	if('Boss_Stage == 3) {
+			instance_announce instance_id(), "King Poring: Hey... I want you to stop doing this and then go home.", bc_map;
+			sleep2 3000;
+			instance_announce instance_id(), "Emily: What? Who are you?", bc_map;
+			sleep2 3000;
+			instance_announce instance_id(), "King Poring: I'm the head of this village, King Poring! I'm sorry for the late intro.", bc_map;
+			sleep2 3000;
+			instance_announce instance_id(), "King Poring: There must have been some misunderstanding in the flyers we distributed, but this village is poor and there is nothing to see.", bc_map;
+			sleep2 3000;
+			instance_announce instance_id(), "Emily: I'll look into it a bit more and decide. More than anything else, I'm in need of zeny right now!", bc_map;
+			sleep2 3000;
+			instance_announce instance_id(), "King Poring: Ugh... I hate fighting, but I have no choice.", bc_map;
+		}
+		summon_guardian;
+	}
+	end;
+	
+OnGuardianDied:
+	.@remaining = mobcount('Map$,'NPC_Name$+"::OnGuardianDied" );
+	
+	if( !.@remaining ){
+		sleep2 500;
+		
+		//Boss Stage
+		switch('Boss_Stage) {
+		case 1:
+			//instance_announce instance_id(), "[Goldring] Don't be fooled human, this is just a beginning!!", bc_map, 0xFF0000;
+			specialeffect 90,AREA, instance_npcname("Barricade#alapovibarB3");
+			sleep2 500;
+			specialeffect 90,AREA, instance_npcname("Barricade#alapovibarB3");
+			specialeffect2 EF_BASH3D;
+			disablenpc instance_npcname( "Barricade#alapovibarB", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarB2", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarB3", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarB4", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarB5", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarB6", instance_id() );
+			setcell instance_mapname( "1@begi", instance_id() ),156,100,156,107,cell_walkable,1;
+			break;
+		case 2:
+			specialeffect 90,AREA, instance_npcname("Barricade#alapovibarC3");
+			sleep2 500;
+			specialeffect 90,AREA, instance_npcname("Barricade#alapovibarC3");
+			specialeffect2 EF_BASH3D;
+			disablenpc instance_npcname( "Barricade#alapovibarC", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarC2", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarC3", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarC4", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarC5", instance_id() );
+			disablenpc instance_npcname( "Barricade#alapovibarC6", instance_id() );
+			setcell instance_mapname( "1@begi", instance_id() ),59,188,59,197,cell_walkable,1;
+			break;			
+		case 3:
+			enablenpc instance_npcname("Treasure Chest#begi");
+			enablenpc instance_npcname( "Emily#alapovivig", instance_id() );
+			end;
+		}
+		
+		sleep 500;
+		summon_normal;
+	}
+	end;
+	
+}
+
+//Barricades 1
+1@begi,146,35,5	script	Barricade#alapovibar	4_ROPEPILE,{
+	end;
+
+OnInstanceInit:
+	setcell instance_mapname( "1@begi", instance_id() ),145,35,145,41,cell_walkable,0;
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@begi,146,36,5	duplicate(Barricade#alapovibar)	Barricade#alapovibar2	4_ROPEPILE
+1@begi,146,37,5	duplicate(Barricade#alapovibar)	Barricade#alapovibar3	4_ROPEPILE
+1@begi,146,38,5	duplicate(Barricade#alapovibar)	Barricade#alapovibar4	4_ROPEPILE
+1@begi,146,39,5	duplicate(Barricade#alapovibar)	Barricade#alapovibar5	4_ROPEPILE
+1@begi,146,40,5	duplicate(Barricade#alapovibar)	Barricade#alapovibar6	4_ROPEPILE
+
+
+//Barricades 2
+1@begi,156,100,5	script	Barricade#alapovibarB	4_ROPEPILE,{
+	end;
+
+OnInstanceInit:
+	setcell instance_mapname( "1@begi", instance_id() ),156,100,156,107,cell_walkable,0;
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@begi,156,101,5	duplicate(Barricade#alapovibarB)	Barricade#alapovibarB2	4_ROPEPILE
+1@begi,156,102,5	duplicate(Barricade#alapovibarB)	Barricade#alapovibarB3	4_ROPEPILE
+1@begi,156,103,5	duplicate(Barricade#alapovibarB)	Barricade#alapovibarB4	4_ROPEPILE
+1@begi,156,104,5	duplicate(Barricade#alapovibarB)	Barricade#alapovibarB5	4_ROPEPILE
+1@begi,156,105,5	duplicate(Barricade#alapovibarB)	Barricade#alapovibarB6	4_ROPEPILE
+
+//Barricades 3
+1@begi,59,187,5	script	Barricade#alapovibarC	4_ROPEPILE,{
+	end;
+
+OnInstanceInit:
+	setcell instance_mapname( "1@begi", instance_id() ),59,188,59,197,cell_walkable,0;
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@begi,59,188,5	duplicate(Barricade#alapovibarC)	Barricade#alapovibarC2	4_ROPEPILE
+1@begi,59,189,5	duplicate(Barricade#alapovibarC)	Barricade#alapovibarC3	4_ROPEPILE
+1@begi,59,190,5	duplicate(Barricade#alapovibarC)	Barricade#alapovibarC4	4_ROPEPILE
+1@begi,59,191,5	duplicate(Barricade#alapovibarC)	Barricade#alapovibarC5	4_ROPEPILE
+1@begi,59,192,5	duplicate(Barricade#alapovibarC)	Barricade#alapovibarC6	4_ROPEPILE
+
+
+
+//Stat Buff
+1@begi,117,109,5	script	Strange Light#begi1	10043,6,6,{
+end;
+
+OnTouch_:
+	specialeffect2 EF_ENHANCE;
+	transform 1629,60000; //Hillwind
+	sc_start SC_GLASTHEIM_STATE,30000,1,10000,SCSTART_NOTICKDEF;
+	switch(rand(1,3)){
+		case 1:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : If it's now, I don't think it will feel anything if you peck at someone!!";
+			end;
+		case 2:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Oooooo!!! Parrot-like power springs up aaaaaaah!";
+			end;
+		
+		case 3:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Can I fly too? Weeeeeeeee! Peck peck!";
+			end;
+	}
+	end;
+}
+
+1@begi,40,167,5	duplicate(Strange Light#begi1)	Strange Light#begi2	10043,3,3
+1@begi,175,200,5	duplicate(Strange Light#begi1)	Strange Light#begi3	10043,3,3
+
+
+1@begi,173,193,4	script	Treasure Chest#begi	10005,{
+
+	//Jello Fragment Box, Jello Fragments
+	if(gettime(DT_DAYOFWEEK) == MONDAY) .@frag = 25465;
+	if(gettime(DT_DAYOFWEEK) == TUESDAY) .@frag = 25466;
+	if(gettime(DT_DAYOFWEEK) == WEDNESDAY) .@frag = 25467;
+	if(gettime(DT_DAYOFWEEK) == THURSDAY) .@frag = 25468;
+	if(gettime(DT_DAYOFWEEK) == FRIDAY) .@frag = 25469;
+	if(gettime(DT_DAYOFWEEK) == SATURDAY) .@frag = 23649;
+	if(gettime(DT_DAYOFWEEK) == SUNDAY) .@frag = 23649;
+
+		setarray .@reward[1],
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18010,10,	
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18005,2,
+		18005,1,	
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18010,10,	
+		18010,100,	
+		18010,100,		
+		18010,10,	
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18010,10,
+		18010,100,	
+		18010,100,	
+		18010,10,	
+		18010,10,	
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,	//Day-Based Ore
+		.@frag,100,
+		.@frag,100,
+		.@frag,80,	//Day-Based Ore
+		.@frag,80,	//Day-Based Ore
+		.@frag,60,	//Day-Based Ore
+		.@frag,60,	//Day-Based Ore
+		.@frag,40,	//Day-Based Ore
+		.@frag,40,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,20,	//Day-Based Ore
+		.@frag,10,	//Day-Based Ore
+		.@frag,10;	//Day-Based Ore
+
+	getmapxy('Map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
+	
+	specialeffect EF_ASSUMPTIO; 
+	specialeffect EF_FORESTLIGHT2; //Forest Light
+	specialeffect EF_COIN;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	specialeffect EF_STEAL;
+	hideonnpc instance_npcname(strnpcinfo(0)); //55462
+	.@limit = getarraysize(.@reward);
+	for(.@i = 1; .@i<=.@limit; .@i+=2) {
+		if(rand(100) < (.@reward[.@i+1] + .@bonus))
+			makeitem .@reward[.@i],1,'Map$,.@x+rand(3)-1,.@y+rand(3)-1;
+	}
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0)); //55462
+	end;	
+}
+
+
+1@begi,199,186,5	script	Emily#alapovivig	671,{
+	//Give all 1st timers
+	if(isbegin_quest(12418) == 1) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "You can take all the items you picked up in this dungeon, because I took them separately.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Oh, I just picked up all of these things, so you have one too. It's my first visit, so to commemorate it...";
+		completequest 12418;
+		getexp 10000,5000;
+		//getitem 14532,1;
+		getitem F_Rand(19238,19239),1;
+		//getitem(callfunc("F_Rand", 19238, 19239),1;
+		next;
+	}
+	mes "[Emily]";
+	mes "Shall we go out now? Hold on tight to the boat.";
+	close2;
+	//getitem F_Rand(18010,18010,18010,18010,18010,18010,18010,18010,19238,19239),1;
+	//getitem .@frag,1;
+	warp "izlude",173,180;
+	end;
+
+OnInstanceInit:
+	disablenpc strnpcinfo(3);
+	end;
+}
+
+
+//---------------------------------------------
+//-------Hat Enchanter for Carrot / Leek
+//---------------------------------------------
+
+izlude,172,215,4	script	Vegetable Enchant2#pv	4_F_02,{
+	callfunc("F_CheckWeight",strnpcinfo(1),2);
+
+	disable_items;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Nice to meet you.";
+	mes "I can ^FF0000enchant or reset^000000 your Poring Village headgears with a ^0000FF70% success rate^000000!";
+	next;
+	switch(select("^0000FFEnchant Vegetable^000000:^FF0000Reset Enchant^000000")) {
+	case 1:
+		set .@service_type,1;
+		break;
+	case 2:
+		set .@service_type,2;
+		break;
+	}
+	if (Zeny < 20000 || countitem(909) < 50) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I need the following items:";
+		mes " ~^0000FF50 Jellopy^000000";
+		mes " ~^0000FF20,000 Zeny^000000";		
+		mes "Is that too much to ask?";
+		close;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Ok, so are you ready?";
+	mes "Before I start working on this, which vegetable did you want me to work on?";
+	next;
+	.@part = EQI_HEAD_LOW;
+	.@equip_id = getequipid(.@part);
+	if(.@equip_id == 19238 || .@equip_id == 19239) .@vege$ = "^0000FF"+getitemname(.@equip_id)+"^000000";
+		else .@vege$ = "^B0B0B0I am not wearing the equipment^000000"
+	.@i = select("Cancel",.@vege$)-2;
+	if (.@i == -1) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Maybe next time then?";
+		close;
+	}
+	if (!getequipisequiped(.@part) || (.@equip_id != 19238 && .@equip_id != 19239)) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Make sure you're wearing the equipment first.";
+		close;
+	}
+	switch(.@service_type) {
+		case 1: callsub S_Enchant; break;
+		case 2: callsub S_Initialize; break;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "^990099"+getequipname(.@part)+"^000000??";
+	mes "I can't work on this piece of equipment.";
+	close;
+
+S_Enchant:
+	set .@part, EQI_HEAD_LOW;
+	set .@equip_id, getequipid(.@part);
+	set .@equip_name$, getitemname(.@equip_id);
+	setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+	mes "["+strnpcinfo(1)+"]";
+	if (.@equip_card[3] == 0) {
+		mes "Let's start the enchanting. Remember, ^990000there is a 30% chance for the equipment to be destroyed^000000. Continue?";
+	} else {
+		mes "This equipment has been strengthened to the limit. Further enchanting is impossible at its current state.";
+		close;
+	}
+	next;
+	.@i = rand(1,99);
+	 if (.@i < 10) .@enchant = 4700; //Str1
+	else if (.@i < 20) .@enchant = 4710; //Int1
+	else if (.@i < 30) .@enchant = 4730; //Agi1
+	else if (.@i < 40) .@enchant = 4720; //Dex1
+	else if (.@i < 50) .@enchant = 4740; //Vit1
+	else if (.@i < 60) .@enchant = 4750; //Luk1
+	else if (.@i < 68) .@enchant = 4795; //HP100
+	else if (.@i < 76) .@enchant = 4796; //HP200
+	else if (.@i < 84) .@enchant = 4928; //SP10
+	else if (.@i < 92) .@enchant = 4870; //SP25
+	else .@enchant = 4800; //SP50
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@equip_refine) ||
+		callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+	if (.@equip_card[3] == 0) .@equip_card[3] = .@enchant;
+	else {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I think there was an enhancing limit to the equipment.";
+		close;
+	}
+	.@Zeny = 20000;
+	if(select("Proceed (20,000 Zeny & 50 Jellopies)","Cancel")==2) {
+		mes "["+strnpcinfo(1)+"]";	
+		mes "Okay..";
+		close;
+	}
+	if (Zeny < .@Zeny || countitem(909) < 50) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I won't proceed unless you pay the fees:";
+		mes " ~^0000FF50 Jellopy^000000";
+		mes " ~^0000FF20,000 Zeny^000000";		
+		close;
+	}
+	Zeny -= .@Zeny;
+	delitem 909,50;
+	delequip .@part;
+	specialeffect2 EF_REPAIRWEAPON;
+	if(rand(1,100) <= 30) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Sorry.... I failed!!!";
+		mes "^FF0000Your equipment has been destroyed.";
+		close;		
+	}				
+	
+	mes "["+strnpcinfo(1)+"]";
+	mes "I've successfully enhanced the ^990000"+.@equip_name$+"^000000!!";
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
+	getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
+
+	close;
+		
+S_Initialize:
+	set .@part, EQI_HEAD_LOW;
+	set .@equip_id, getequipid(.@part);
+	set .@equip_name$, getitemname(.@equip_id);
+
+	if(select("70% Success Rate (20,000 Zeny)","Cancel")==2) {
+		mes "["+strnpcinfo(1)+"]";	
+		mes "Okay..";
+		close;
+	}
+	if (Zeny < 20000) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "I won't proceed unless you pay the fees:";
+		mes " ~^0000FF20,000 Zeny^000000";	
+		close;
+	}
+	specialeffect2 EF_REPAIRWEAPON;
+	mes "["+strnpcinfo(1)+"]";
+	delequip .@part;
+	Zeny -= 20000;
+	
+	if(rand(1,100) <= 30) {
+		mes "^FF0000Unfortunately, we failed.^000000";
+		mes "The "+.@equip_name$+" has been destroyed.";
+		close;
+	}		
+	mes "I have initialized the "+.@equip_name$+".";
+	getitem .@equip_id,1;
+	close;
+
+}

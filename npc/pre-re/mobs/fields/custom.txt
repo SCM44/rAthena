@@ -1,0 +1,6 @@
+sh_fild16,0,0	monster	Enraged Swordman	22002,40
+sh_fild16,0,0	monster	Enraged Mage	22003,40
+sh_fild16,0,0	monster	Enraged Thief	22004,40
+sh_fild16,0,0	monster	Enraged Merchant	22005,40
+sh_fild16,0,0	monster	Enraged Archer	22006,40
+sh_fild16,0,0	monster	Enraged Acolyte	22007,40
