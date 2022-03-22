@@ -1846,7 +1846,6 @@ enum e_special_effects {
 	EF_SPRITEMABLE,
 	EF_TUNAPARTY,
 	EF_MAX
-	=9999
 };
 
 enum e_hat_effects : int16{

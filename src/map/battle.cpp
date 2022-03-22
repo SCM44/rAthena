@@ -7820,7 +7820,7 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 			md.damage = 50;
 			md.flag |= BF_WEAPON;
 			break;
-#ifndef RENEWAL
+#ifdef RENEWAL
 		case HT_LANDMINE:
 		case MA_LANDMINE:
 		case HT_BLASTMINE:
@@ -7849,7 +7849,7 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 				//Blitz-beat Damage
 				if(!sd || !(skill = pc_checkskill(sd,HT_STEELCROW)))
 					skill = 0;
-#ifndef RENEWAL
+#ifdef RENEWAL
 				md.damage = (sstatus->dex / 10 + sstatus->agi / 2 + skill * 3 + 40) * 2;
 				RE_LVL_MDMOD(100);
 #else

@@ -10187,7 +10187,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 			break;
 		}
-		if (skill_id == SL_SUPERNOVICE && dstsd && dstsd->die_counter)
+		if (skill_id == SL_SUPERNOVICE && dstsd && dstsd->die_counter && !(rnd()%100))
 		{	//Erase death count 1% of the casts
 			pc_setparam(dstsd, SP_PCDIECOUNTER, 0);
 			clif_specialeffect(bl, EF_ANGEL2, AREA);
