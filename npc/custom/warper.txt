@@ -1,6 +1,6 @@
-//===== rAthena Script ======================================= 
+//===== rAthena Script =======================================
 //= Warper
-//===== Description: ========================================= 
+//===== Description: =========================================
 //= A complete - but very condensed - warper script.
 //===== Additional Comments: =================================
 //= 1.0 Initial script By [Euphy].
@@ -131,34 +131,23 @@ function Restrict {
 	Towns:
 // --------------------------------------------------
 menu	"Prontera",T1, "Alberta",T2, "Aldebaran",T3, "Amatsu",T4, "Ayothaya",T5,
-    	 "Comodo",T7, "Einbech",T10, 
+    	 "Comodo",T7, "Einbech",T10,
     	"Einbroch",T11, "Geffen",T13, "Gonryun",T14, "Hugel",T15,
     	"Izlude",T16, "Jawaii",T17, "Lighthalzen",T19, "Louyang",T20,
-<<<<<<< HEAD
-		"Lutie",T21,
-=======
 		"Lutie",T21, "Manuk",T24,
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		 "Morocc",T27, "Moscovia",T28,
 		"Nameless Island",T29, "Niflheim",T30, "Payon",T31, "Rachel",T32,
 		"Thor Camp",T34, "Umbala",T35, "Veins",T36, "Yuno",T37;
 
 T1: Go("prontera",155,183);
 T2: Go("alberta",28,234);
-T3: Go("aldebaran",140,115);
-T4: Go("amatsu",111,151);
+T3: Go("aldebaran",140,131);
+T4: Go("amatsu",198,84);
 T5: Go("ayothaya",208,166);
-<<<<<<< HEAD
-T7: Go("comodo",190,155);
-T10: Go("einbech",178,129);
-T11: Go("einbroch",64,200);
-T13: Go("geffen",120,69);
-=======
 T7: Go("comodo",209,143);
 T10: Go("einbech",63,35);
 T11: Go("einbroch",64,200);
 T13: Go("geffen",119,59);
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 T14: Go("gonryun",160,120);
 T15: Go("hugel",96,145);
 T16: Go("izlude",128,(checkre(3)?146:114));
@@ -166,25 +155,18 @@ T17: Go("jawaii",251,132);
 T19: Go("lighthalzen",158,92);
 T20: Go("louyang",217,100);
 T21: Go("xmas",147,134);
-<<<<<<< HEAD
-=======
 T24: Go("manuk",282,138);
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 T25: Go("mid_camp",210,288);
 T27: Go("morocc",156,93);
 T28: Go("moscovia",223,184);
 T29: Go("nameless_n",256,215);
 T30: Go("niflheim",202,174);
 T31: Go("payon",179,100);
-<<<<<<< HEAD
-T32: Go("rachel",114,135);
-=======
 T32: Go("rachel",130,110);
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 T34: Go("thor_camp",246,68);
 T35: Go("umbala",97,153);
 T36: Go("veins",216,123);
-T37: Go("yuno",157,185);
+T37: Go("yuno",157,51);
 
 // --------------------------------------------------
 	Fields:
@@ -194,16 +176,11 @@ menu	"Amatsu Fields",F1, "Ayothaya Fields",F2,
     	 "Comodo Fields",F5,
     	"Einbroch Fields",F8,
     	"Geffen Fields",F10, "Gonryun Fields",F11, "Hugel Fields",F12,
-		"Lighthalzen Fields",F14, "Louyang Field",F15, 
-<<<<<<< HEAD
-		"Lutie Field",F16, 
-		"Mjolnir Fields",F19, "Niflheim Fields",F21, 
-=======
-		"Lutie Field",F16, "Manuk Fields",F18, 
-		"Mjolnir Fields",F19, "Moscovia Fields",F20, "Niflheim Fields",F21, 
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
-		"Payon Forests",F22, "Prontera Fields",F23, "Rachel Fields",F24, 
-		"Sograt Deserts",F25, "Umbala Fields",F27, 
+		"Lighthalzen Fields",F14, "Louyang Field",F15,
+		"Lutie Field",F16, "Manuk Fields",F18,
+		"Mjolnir Fields",F19, "Moscovia Fields",F20, "Niflheim Fields",F21,
+		"Payon Forests",F22, "Prontera Fields",F23, "Rachel Fields",F24,
+		"Sograt Deserts",F25, "Umbala Fields",F27,
 		"Veins Fields",F28, "Yuno Fields",F29;
 
 F1: setarray @c[2],190,197;
@@ -223,7 +200,7 @@ F11: setarray @c[2],220,227;
 	 Disp("Kunlun Field",1,1); Pick("gon_fild");
 F12: Restrict("Pre-RE",3,7);
 	 setarray @c[2],268,101,222,193,232,185,252,189,196,106,216,220,227,197;
-	 Disp("Hugel Field",1,7); Pick("hu_fild");	 
+	 Disp("Hugel Field",1,7); Pick("hu_fild");
 F14: setarray @c[2],240,179,185,235,240,226;
 	 Disp("Lighthalzen Field",1,3); Pick("lhz_fild");
 F15: setarray @c[2],229,187;
@@ -234,6 +211,8 @@ F18: setarray @c[2],35,236,35,262,84,365;
 	 Disp("Manuk Field",1,3); Pick("man_fild");
 F19: setarray @c[2],204,120,175,193,208,213,179,180,181,240,195,270,235,202,188,215,205,144,245,223,180,206,196,208;
 	 Disp("Mjolnir Field",1,12); Pick("mjolnir_");
+F20: setarray @c[2],82,104,131,147;
+	 Disp("Moscovia Field",1,2); Pick("mosk_fild");
 F21: setarray @c[2],215,229,167,234;
 	 Disp("Niflheim Field",1,2); Pick("nif_fild");
 F22: Restrict("Pre-RE",5,11);
@@ -395,7 +374,7 @@ D41: Restrict("Pre-RE",1,2);
 //	setarray @c[2],134,65,240,128,153,137,111,240,208,240;
 //	Disp("Gloria 1:Gloria 2:Gloria 3:Gloria 4:Gloria 5");
 //	Pick("","te_prt_gld","te_prt_gld","te_prt_gld","te_prt_gld","te_prt_gld");
-	
+
 // --------------------------------------------------
 //	Guild_Dungeons:
 // --------------------------------------------------
@@ -429,13 +408,13 @@ D41: Restrict("Pre-RE",1,2);
 // --------------------------------------------------
 	Instances:
 // --------------------------------------------------
-menu		
+menu
 
 		"Poring Village",I1,
 		"Prontera Culvert",I2,
 		"Orc's Memory",I3,
-		"Ant Hell",I4,	
-		"Izlude Deepsea",I5,		
+		"Ant Hell",I4,
+		"Izlude Deepsea",I5,
 		"Sunken Ship",I6;
 		//"Endless Tower",I7,
 		//"Nidhoggur's Nest",I8,
@@ -460,7 +439,7 @@ S1: Go("auction_01",22,68);
 S2: Go("bat_room",154,150);
 S3: Go("cmd_in02",179,129);
 S4: Restrict("RE");
-	Go("dali",113,82);	
+	Go("dali",113,82);
 S5: Restrict("RE");
 	Go("moc_para01",31,14);
 S6: Go("gon_test",48,10);
@@ -485,17 +464,10 @@ OnInit:
 alb2trea,57,70,6	duplicate(Warper)	Warper#tre	759
 alberta,28,240,4	duplicate(Warper)	Warper#alb	759
 aldebaran,145,118,4	duplicate(Warper)	Warper#alde	759
-<<<<<<< HEAD
-amatsu,107,157,4	duplicate(Warper)	Warper#ama	759
-ayothaya,209,169,6	duplicate(Warper)	Warper#ayo	759
-comodo,194,158,4	duplicate(Warper)	Warper#com	759
-einbech,171,128,6	duplicate(Warper)	Warper#einbe	759
-=======
 amatsu,203,87,4	duplicate(Warper)	Warper#ama	759
 ayothaya,209,169,6	duplicate(Warper)	Warper#ayo	759
 comodo,194,158,4	duplicate(Warper)	Warper#com	759
 einbech,59,38,6	duplicate(Warper)	Warper#einbe	759
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 einbroch,69,202,4	duplicate(Warper)	Warper#einbr	759
 gef_fild10,71,339,4	duplicate(Warper)	Warper#orc	759
 geffen,124,72,4	duplicate(Warper)	Warper#gef	759
@@ -503,11 +475,7 @@ glast_01,372,308,4	duplicate(Warper)	Warper#glh	759
 gonryun,162,122,4	duplicate(Warper)	Warper#gon	759
 hugel,101,151,4	duplicate(Warper)	Warper#hug	759
 izlu2dun,110,92,4	duplicate(Warper)	Warper#izd	759
-<<<<<<< HEAD
-izlude,122,118,4	duplicate(Warper)	Warper#izl	759	//Pre-RE: (132,120)
-=======
 izlude,134,150,4	duplicate(Warper)	Warper#izl	759	//Pre-RE: (132,120)
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 jawaii,253,138,4	duplicate(Warper)	Warper#jaw	759
 lighthalzen,162,102,4	duplicate(Warper)	Warper#lhz	759
 louyang,208,103,6	duplicate(Warper)	Warper#lou	759
@@ -516,11 +484,7 @@ mid_camp,216,288,4	duplicate(Warper)	Warper#mid	759
 mjolnir_02,85,364,4	duplicate(Warper)	Warper#mjo	759
 moc_ruins,64,164,4	duplicate(Warper)	Warper#moc	759
 morocc,159,97,4	duplicate(Warper)	Warper#mor	759
-<<<<<<< HEAD
-moscovia,217,196,4	duplicate(Warper)	Warper#mos	759
-=======
 moscovia,229,191,4	duplicate(Warper)	Warper#mos	759
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 nameless_n,259,213,4	duplicate(Warper)	Warper#nam	759
 niflheim,205,179,4	duplicate(Warper)	Warper#nif	759
 pay_arche,42,134,4	duplicate(Warper)	Warper#arc	759
@@ -528,21 +492,13 @@ payon,182,108,4	duplicate(Warper)	Warper#pay	759
 prontera,159,192,4	duplicate(Warper)	Warper#prt	759
 prontera,229,85,4	duplicate(Warper)	Warper#prt2	759
 prt_fild05,279,223,6	duplicate(Warper)	Warper#cul	759
-<<<<<<< HEAD
-rachel,112,141,4	duplicate(Warper)	Warper#rac	759
-=======
 rachel,135,116,4	duplicate(Warper)	Warper#rac	759
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 splendide,205,153,4	duplicate(Warper)	Warper#spl	759
 thor_camp,249,76,4	duplicate(Warper)	Warper#thor	759
 umbala,106,150,3	duplicate(Warper)	Warper#umb	759
 veins,214,123,4	duplicate(Warper)	Warper#ve	759
 xmas,150,136,6	duplicate(Warper)	Warper#xmas	759
-<<<<<<< HEAD
-yuno,150,185,4	duplicate(Warper)	Warper#yuno	759
-=======
 yuno,162,47,4	duplicate(Warper)	Warper#yuno	759
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 sh_fild16,329,127,4	duplicate(Warper)	Warper#pvp1	759
 sh_fild16,108,331,4	duplicate(Warper)	Warper#pvp2	759
 sh_fild16,329,127,4	duplicate(Warper)	Warper#pvp3	759

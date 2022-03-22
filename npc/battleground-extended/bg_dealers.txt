@@ -1,10 +1,10 @@
-//===== rAthena Script ======================================= 
+//===== rAthena Script =======================================
 //= BattleGround System - Item Dealer
-//===== By: ================================================== 
+//===== By: ==================================================
 //= L0ne_W0lf & Vykimo
-//===== Current Version: ===================================== 
+//===== Current Version: =====================================
 //= 2.0
-//===== Compatible With: ===================================== 
+//===== Compatible With: =====================================
 //= rAthena Project
 //============================================================
 
@@ -69,7 +69,7 @@ bat_room,159,150,3	script	KVM Logistic Officer#a	10187,{
 				mes "Please select a sub-category.";
 				next;
 				switch(select("Dagger:One-handed Sword:Two-handed Sword:One-handed Spear:Two-handed Spear")) {
-				case 1: callsub PurchaseItem,13042,0,1; //Krieger_Dagger1 
+				case 1: callsub PurchaseItem,13042,0,1; //Krieger_Dagger1
 				case 2:
 					mes "[Logistics]";
 					mes "You have selected the 'One-handed Sword' category.";
@@ -329,49 +329,49 @@ bat_room,159,146,3	script	Telma	10121,{
 				setarray .@Value[0],   100, 100,    80,    25,    25,    25,    20;
 				set .@cID, getbattleflag("woe_reserved_char_id");
 				set .@Tarjet$, "War of Emperium or GvG";
-				break;				
+				break;
 			case 2: // Other Items (All)
 				setarray .@Items[0],  12072, 12077, 12082, 12087, 12092, 12097, 12429, 12430, 12431, 12432, 12433, 12434, 7776;
 				setarray .@Amount[0],     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,    1;
 				setarray .@Value[0],     20,    20,    20,    20,    20,    20,    20,    20,    20,    20,    20,    20, 2000;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
-				break;				
+				break;
 			case 3: // Other Items (Creator)
 				setarray .@Items[0],   7136,  7137,  7139,  7135, 7138;
 				setarray .@Amount[0],     1,     1,     1,     1,    1;
 				setarray .@Value[0],     75,    20,    20,    20,   30;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
-				break;				
+				break;
 			case 4: // Other Items (Assassin Cross)
 				setarray .@Items[0],    678;
 				setarray .@Amount[0],     1;
 				setarray .@Value[0],     75;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
-				break;				
+				break;
 			case 5: // Other Items (High Wizard)
 				setarray .@Items[0],  7321;
 				setarray .@Amount[0],    1;
 				setarray .@Value[0],  5;
 				set .@cID, 0;
 				set .@Tarjet$, "Everywhere";
-				break;				
+				break;
 			//case 6: // Other Items (Mecanics)
 			//	setarray .@Items[0],  1549;
 			//	setarray .@Amount[0],    1;
 			//	setarray .@Value[0],  1500;
 			//	set .@cID, 0;
 			//	set .@Tarjet$, "Everywhere";
-			//	break;				
+			//	break;
 			//case 7: // Other Items (Professor)
 			//	setarray .@Items[0],  1025, 997, 996, 995, 994;
 			//	setarray .@Amount[0],   10,   5,   5,   5,   5;
 			//	setarray .@Value[0],    10,  25,  25,  25,  25;
 			//	set .@cID, 0;
 			//	set .@Tarjet$, "Everywhere";
-			//	break;				
+			//	break;
 			case 6: // Other Items (Professor)
 				setarray .@Items[0],  1025, 997, 996, 995, 994, 715, 716, 717;
 				setarray .@Amount[0],   10,   5,   5,   5,   5,  50,  50,  50;
@@ -382,8 +382,8 @@ bat_room,159,146,3	script	Telma	10121,{
 			}
 		}
 		break;
-		
-	case 2: 
+
+	case 2:
 		{
 			switch( select("^0000FFBG Exclusive (All)^000000:BG Exclusive (Creator):BG Exclusive (Assassin Cross):BG Exclusive (High wizard):BG Exclusive (Professor)") )
 			{
@@ -451,7 +451,7 @@ bat_room,159,146,3	script	Telma	10121,{
 	mes "It will cost you " + .@Value[.@j] + " badges per pack.";
 	mes "Remember this can only be used on " + .@Tarjet$ + ".";
 	next;
-	
+
 	mes "[Telma]";
 	mes "But tell me first, where do you want to receive the items?";
 	next;
@@ -469,7 +469,7 @@ bat_room,159,146,3	script	Telma	10121,{
 		mes "Talk to me again when you do your selections.";
 		close;
 	}
-	
+
 	set .@vtotal, .@total * .@Value[.@j]; // Value of all Packages
 	set .@total, .@total * .@Amount[.@j]; // Total Amount of Items
 
@@ -534,7 +534,7 @@ bat_room,159,146,3	script	Telma	10121,{
 			mes "Invalid number... Sorry.";
 			close;
 		}
-		
+
 		if( .@i7828 > .@vcount ) set .@i7828,.@vcount;
 		set .@vcount, .@vcount - .@i7828;
 	}
@@ -553,7 +553,7 @@ bat_room,159,146,3	script	Telma	10121,{
 			mes "Invalid number... Sorry.";
 			close;
 		}
-		
+
 		if( .@i7829 > .@vcount ) set .@i7829,.@vcount;
 		set .@vcount, .@vcount - .@i7829;
 	}
@@ -669,15 +669,9 @@ OnInit:
 	end;
 }
 
-<<<<<<< HEAD
 bat_room,1,1,3	itemshop	BraveryExchanger	111,7828,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
 bat_room,1,1,3	itemshop	ValorExchanger	111,7829,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
 bat_room,1,1,3	itemshop	HeroismExchanger	111,7773,1187:2000,1281:2000,1282:2000,1310:2000,1382:2000,1426:2000,1486:2000,1546:2000,1576:2000,1577:2000,1640:2000,1641:2000,1743:2000,1826:2000,1827:2000,1927:2000,1981:2000,2002:2000,13042:2000,13110:2000,13176:2000,13177:2000,13178:2000,13179:2000,13307:2000,13416:2000,13417:2000,13418:2000,18006:1000,18007:1500,18008:500,18009:5000,29584:1500,29586:500
-=======
-bat_room,1,1,3	itemshop	BraveryExchanger	111,7828,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100,18006:500,18007:1500,18008:500,18009:5000,29584:1500,29586:500
-bat_room,1,1,3	itemshop	ValorExchanger	111,7829,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100,18006:500,18007:1500,18008:500,18009:5000,29584:1500,29586:500
-bat_room,1,1,3	itemshop	HeroismExchanger	111,7773,1187:2000,1281:2000,1282:2000,1310:2000,1382:2000,1426:2000,1486:2000,1546:2000,1576:2000,1577:2000,1640:2000,1641:2000,1743:2000,1826:2000,1827:2000,1927:2000,1981:2000,2002:2000,13042:2000,13110:2000,13176:2000,13177:2000,13178:2000,13179:2000,13307:2000,13416:2000,13417:2000,13418:2000,18006:500,18007:1500,18008:500,18009:5000,29584:1500,29586:500
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 
 bat_room,159,154,3	script	Erundek	10132,{
 	mes "[Erundek]";
@@ -744,28 +738,28 @@ bat_room,163,152,2	script	Exchange Machine#bg	564,{
 	switch(select("War Badges:Valor Badges:Bravery Badges:Rare Coin")) {
 		case 1:
 			if(countitem(7804) >= .@cb) {
-				delitem 7804, .@cb; 
+				delitem 7804, .@cb;
 				getitem 7773, .@cb;
 				.@ok = 1;
 			}
 			break;
 		case 2:
 			if(countitem(7804) >= .@cb) {
-				delitem 7804, .@cb; 
+				delitem 7804, .@cb;
 				getitem 7829, .@cb;
 				.@ok = 1;
 			}
 			break;
 		case 3:
 			if(countitem(7804) >= .@cb) {
-				delitem 7804, .@cb; 
+				delitem 7804, .@cb;
 				getitem 7828, .@cb;
 				.@ok = 1;
 			}
 			break;
 		case 4:
 			if(countitem(7804) >= .@cb) {
-				delitem 7804, .@cb; 
+				delitem 7804, .@cb;
 				getitem 18010, .@cb;
 				.@ok = 1;
 			}
@@ -777,7 +771,7 @@ bat_room,163,152,2	script	Exchange Machine#bg	564,{
 	} else
 		dispbottom "[Exchange Machine] No enough Battleground Badges for the exchange.";
 	end;
-	
+
 OnInit:
     waitingroom "BG Badges Exchanger",0;
 	end;
