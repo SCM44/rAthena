@@ -57,14 +57,14 @@ OnInstanceInit:
 	npctalk "Good luck in searching for the deep sea creature!";
 	close2;
 	hideonnpc instance_npcname(strnpcinfo(0));
-	donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnStart"; 
-	donpcevent instance_npcname("#izu_timer") + "::OnStartTimer"; 
+	donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnStart";
+	donpcevent instance_npcname("#izu_timer") + "::OnStartTimer";
 	end;
 
 OnTouch_:
 //	npctalk "Welcome to Izlude Deepsea~";
 	end;
-	
+
 OnInstanceInit:
 	'Mode = 0;
 	'Geyser_1 = 0;
@@ -74,7 +74,7 @@ OnInstanceInit:
 	'Boss = 0;
 	'Map$ = instance_mapname("1@izu");
 	end;
-	
+
 OnStart:
 	//Retrieve Mode Modifiers
 	.@arr$ = getvariableofnpc(.mode_config$,"#Instance_Config");
@@ -93,29 +93,25 @@ OnStart:
 			break;
 		}
 	}
-		
+
 	//Spawn Dynamic Mobs
 	setarray .@m_info,20082,20,20083,50,20084,15,20085,20;
 	.@label$ = instance_npcname(strnpcinfo(0))+"::OnMobBuff";
 	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=2) {
-		
+
 		//Initialize Array
 		deletearray $@mobid[0],getarraysize($@mobid);
 
 		.@mob$ = .@m_info[.@m]+"_";
 		.@amt = .@m_info[.@m+1] * .@amt_mod;
 		areamonster 'Map$,51,43,350,332,"--ja--",.@m_info[.@m],.@amt,.@label$;
-		
+
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
-<<<<<<< HEAD
-			setd("'"+.@mob$+.@i), $@mobid[.@i];
-=======
 			setd(".@"+.@mob$+.@i), $@mobid[.@i];
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			if(unitexists(getd("'"+.@mob$+.@i))) {
 				getunitdata getd("'"+.@mob$+.@i),.@data;
 				setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-				setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;
 				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
 				setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
 			}
@@ -130,19 +126,19 @@ OnStart:
 	}
 	end;
 OnMobBuff:
-	instance_announce 0,"The soul of the defeated monster has enchanced the abilities of his felllow sea creatures.",bc_map,"0xFFFFFF",FW_BOLD;	
-	
+	instance_announce 0,"The soul of the defeated monster has enchanced the abilities of his felllow sea creatures.",bc_map,"0xFFFFFF",FW_BOLD;
+
 	for(.@m=0; .@m<getarraysize('buff_mobs); .@m+=2) {
-		
+
 		.@mob$ = replacestr(getmonsterinfo(.@m_info[.@m],0)," ","_");
-		
+
 		for(.@i = 1; .@i <= 'buff_mobs[.@m+1]; .@i++) {
 			//if(getd("'Merman"+.@i) == 0) continue;
 			if(unitexists(getd("'Merman"+.@i))) {
 				if(unitexists(getd("'"+.@mob$+.@i))) {
 					getunitdata getd("'"+.@mob$+.@i),.@data;
 					setunitdata getd("'"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] + 1000;
-					setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] + 1000;	
+					setunitdata getd("'"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] + 1000;
 					setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] + 150;
 					setunitdata getd("'"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] + 150;
 				}
@@ -150,19 +146,19 @@ OnMobBuff:
 		}
 	}
 	end;
-	
+
 OnBoss:
 	sleep 9000;
-	instance_announce 0,"Deepsea Coelacanth: Earthdwellers, accept the sea as your tomb!!",bc_map,"0xFFFFFF",FW_BOLD;	
-	
+	instance_announce 0,"Deepsea Coelacanth: Earthdwellers, accept the sea as your tomb!!",bc_map,"0xFFFFFF",FW_BOLD;
+
 	//Initialize Array
 	deletearray $@mobid[0],getarraysize($@mobid);
-		
+
 	if('Boss == 0) monster instance_mapname("1@izu"),236,214,"--ja--",20081,1,instance_npcname("Memorial Society Member#izu2") + "::OnBossDead";
 	'Boss = $@mobid[0];
 	if(unitexists('Boss)) {
 		unittalk 'Boss,"Earthdwellers, before the might of the sea!!";
-		
+
 		//Apply Modifiers
 		getunitdata 'Boss,.@boss_data;
 		setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
@@ -176,10 +172,10 @@ OnBoss:
 		setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
 		setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
 	}
-	
+
 	initnpctimer;
 	end;
-	
+
 OnTimer5000:
 	'Bones = 0;
 	if(unitexists('Boss)) {
@@ -192,40 +188,40 @@ OnTimer5000:
 		// event type every 10%
 		.@x1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 		.@y1 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-		
+
 		.@x2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 		.@y2 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-		
+
 		.@x3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 		.@y3 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-		
+
 		.@x4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 		.@y4 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
-		
+
 		.@x5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 		.@y5 = F_Rand(-7,-6,-5,-4,-3,3,4,5,6,7);
 
 		switch( .@percent_hp / 10 ) {
-		case 10: 
+		case 10:
 		case 9:
 		case 8:
 			'Bones = 1;
 			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
-			break;	
+			break;
 		case 7:
 		case 6:
 		case 5:
 			'Bones = 2;
 			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
 			monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
-			break;		
+			break;
 		case 4:
-		case 3:	
+		case 3:
 			'Bones = 3;
 			monster 'Map$[0],.@mobx+.@x1,.@moby+.@y1,"",1960,1, .@label$;
 			monster 'Map$[0],.@mobx+.@x2,.@moby+.@y2,"",1960,1, .@label$;
 			monster 'Map$[0],.@mobx+.@x3,.@moby+.@y2,"",1961,1, .@label$;
-			break;	
+			break;
 		case 2:
 		case 1:
 		case 0:
@@ -235,11 +231,11 @@ OnTimer5000:
 			monster 'Map$[0],.@mobx+.@x3,.@moby+.@y3,"",1960,1, .@label$;
 			monster 'Map$[0],.@mobx+.@x4,.@moby+.@y4,"",1960,1, .@label$;
 			monster 'Map$[0],.@mobx+.@x5,.@moby+.@y5,"",1961,1, .@label$;
-			break;	
+			break;
 		}
 	}
 	end;
-	
+
 OnTimer65000:
 	.@label$ = instance_npcname("Memorial Society Member#izu2") + "::OnThorn";
 	killmonster 'Map$[0], .@label$;
@@ -247,15 +243,15 @@ OnTimer65000:
 	if(unitexists('Boss)) {
 		getunitdata 'Boss, .@arr;
 		setunitdata 'Boss,UMOB_HP,.@arr[UMOB_HP] + ('Bones * 9999);
-	}	
+	}
 	movenpc instance_npcname(strnpcinfo(0)),.@arr[UMOB_X],.@arr[UMOB_Y];
 	specialeffect EF_HEAL,AREA,instance_npcname(strnpcinfo(0));
 	initnpctimer;
 	end;
-			
+
 OnThorn:
 	end;
-	
+
 OnBossDead:
 	stopnpctimer;
 	.@label$ = instance_npcname("Memorial Society Member#izu2") + "::OnThorn";
@@ -282,7 +278,7 @@ OnBossDead:
 		message strcharinfo(0),"It seemed as if something huge and heavy rested here...";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnBoss";
-			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;		
+			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"Let's investigate elsewhere";
@@ -296,7 +292,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;	
+	end;
 }
 
 1@izu,45,59,4	script	Seabed Indentation#2	723,{
@@ -307,13 +303,13 @@ OnInstanceInit:
 		message strcharinfo(0),"It seemed as if something huge and heavy rested here...";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnBoss";
-			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;	
+			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"Let's investigate elsewhere";
 	}
 	end;
-	
+
 OnTimer9000:
 	specialeffect 247;
 	initnpctimer;
@@ -321,7 +317,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;			
+	end;
 }
 
 1@izu,339,331,4	script	Seabed Indentation#3	723,{
@@ -332,13 +328,13 @@ OnInstanceInit:
 		message strcharinfo(0),"It seemed as if something huge and heavy rested here...";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#izu2") + "::OnBoss";
-			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;	
+			else instance_announce 0,"Remaining seabed Indentation to investigate: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"Let's investigate elsewhere";
 	}
 	end;
-	
+
 OnTimer9000:
 	specialeffect 247;
 	initnpctimer;
@@ -346,7 +342,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;		
+	end;
 }
 
 1@izu,327,64,4	script	Seabed Indentation#4	723,{
@@ -363,7 +359,7 @@ OnInstanceInit:
 		message strcharinfo(0),"Let's investigate elsewhere";
 	}
 	end;
-	
+
 OnTimer9000:
 	specialeffect 247;
 	initnpctimer;
@@ -371,7 +367,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;			
+	end;
 }
 
 
@@ -383,7 +379,7 @@ OnInstanceInit:
 		}
 		'RewardUniqueIDLogs$ = 'RewardUniqueIDLogs$ + "||" + .@unique_id;
 	}
-	
+
 	set .@ins_map$,strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -397,7 +393,7 @@ OnInstanceInit:
 	if(.@party_inmap >=6 && .@party_inmap <12) .@bonus = 5;
 		else if (.@party_inmap >=12) .@bonus = 15;
 		else .@bonus = 0;
-		
+
 	if('Mode <= 2) {
 		setarray .@reward[1],
 		25424,100,	//Shimmering_Crystal
@@ -405,18 +401,11 @@ OnInstanceInit:
 		25424,40,	//Shimmering_Crystal
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
-<<<<<<< HEAD
-		18005,50,	//Mixed_Rune_Fragment
-		18005,1,	//Mixed_Rune_Fragment
-		29586,10,	//Refine_Box
-		29586,10,	//Refine_Box
-=======
 		18005,10,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
 		18005,1,	//Mixed_Rune_Fragment
 		29586,5,	//Refine_Box
 		29586,3,	//Refine_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
 		29585,5,	//Pvm_Box
@@ -428,29 +417,6 @@ OnInstanceInit:
 		29589,25,	//Crimson_Crystal_Box
 		25476,100,	//Crimson_Magic_Crystal
 		25476,70,	//Crimson_Magic_Crystal
-<<<<<<< HEAD
-		25476,40,	//Crimson_Magic_Crystal
-		6635,1;		//Blacksmith Blessing
-	} else if ('Mode == 3) {
-		setarray .@reward[1],
-		//25459,100,	//Aqua_Sapphire
-		//25459,50,	//Aqua_Sapphire
-		//25459,10,	//Aqua_Sapphire
-		25424,100,	//Shimmering_Crystal
-		25424,70,	//Shimmering_Crystal
-		25424,40,	//Shimmering_Crystal
-		18005,100,	//Mixed_Rune_Fragment
-		29586,20,	//Refine_Box
-		29586,20,	//Refine_Box
-		29584,2,	//Rune_Box
-		29585,10,	//Pvm_Box
-		29584,5,	//Rune_Box
-		29585,5,	//Pvm_Box
-		29587,100,	//Shimmering_Crystal_Box
-		29587,50,	//Shimmering_Crystal_Box
-		29589,100,	//Crimson_Crystal_Box
-		29589,50,	//Crimson_Crystal_Box
-=======
 		25476,40;	//Crimson_Magic_Crystal
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
@@ -465,7 +431,6 @@ OnInstanceInit:
 		29587,25,	//Shimmering_Crystal_Box
 		29589,50,	//Crimson_Crystal_Box
 		29589,25,	//Crimson_Crystal_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -484,20 +449,6 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-<<<<<<< HEAD
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-=======
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
@@ -510,28 +461,21 @@ OnInstanceInit:
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
 		991,20,		//Crystal_Blue
-		992,100,	//Wind_Of_Verdure 
-		992,20,		//Wind_Of_Verdure 
+		992,100,	//Wind_Of_Verdure
+		992,20,		//Wind_Of_Verdure
 		993,100,	//Yellow_Live
-<<<<<<< HEAD
-		993,20,		//Yellow_Live
-		6635,10;	//Blacksmith Blessing
-
-=======
 		993,20;		//Yellow_Live
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
-	
+
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
 	hideonnpc instance_npcname(strnpcinfo(0)); //55462
-	
+
 	.@limit = getarraysize(.@reward);
 	for(.@i = 1; .@i<=.@limit; .@i+=2) {
 		if(rand(100) < (.@reward[.@i+1] + .@bonus))
@@ -547,10 +491,10 @@ OnInstanceInit:
 	}
 	enablenpc instance_npcname("Memorial Society Member#izu3");
 	end;
-	
+
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
 
 1@izu,233,218,4	duplicate(Treasure Chest#izu1)	Treasure Chest#izu2	10005
@@ -583,5 +527,5 @@ OnInstanceInit:
 
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }

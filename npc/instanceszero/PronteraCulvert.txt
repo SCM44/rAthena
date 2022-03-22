@@ -46,7 +46,7 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 	.@ins_mas = getpartyleader(.@party_id,2);
 	.@p_name$ = getpartyname(.@party_id);
 	.@md_name$ = "Prontera Culvert";
-	
+
 	mes "["+strnpcinfo(1)+"]";
 	mes "Hello there.";
 	if(Sex == 1) set .@sex$,"Boy";
@@ -70,10 +70,10 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 	mes "..help me?";
 	next;
 	if(getcharid(0) == .@ins_mas) .@str$ = "I'll clean the ^FF0000Prontera Culvert^000000 for you!";
-	
+
 	switch(select(.@str$,"Enter ^FF0000Prontera Culvert^000000","Cancel")) {
 	case 1:
-	
+
 		//Load Config Settings
 		.@select = select(getvariableofnpc(.menu_config$,"#Instance_Config"));
 		.@arr$ = getvariableofnpc(.level_config$,"#Instance_Config");
@@ -87,10 +87,10 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 			}
 		}
 		//Check Cooldown
-		callfunc("F_ChkInsCD",.@quest);	
+		callfunc("F_ChkInsCD",.@quest);
 		//Check Level
 		callfunc("F_ChkInsLv",.@min_level,.@max_level);
-		
+
 		//Create Instance
 		.@inst_id = instance_create(.@md_name$);
 		if (.@inst_id < 0) {
@@ -101,7 +101,7 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 		}
 
 		setinstancevar('Mode,.@select,.@inst_id);
-		
+
 		mes "["+strnpcinfo(1)+"]";
 		mes "You may now enter.";
 		//debugmes "Instance Creation: Prontera Culvert";
@@ -121,11 +121,11 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 				}
 			}
 			//Check Cooldown
-			callfunc("F_ChkInsCD",.@quest);	
+			callfunc("F_ChkInsCD",.@quest);
 			//Check Level
 			callfunc("F_ChkInsLv",.@min_level,.@max_level);
 		}
-		
+
 		mes "["+strnpcinfo(1)+"]";
 		switch( instance_enter(.@md_name$) ) {
 		case IE_OTHER:
@@ -139,23 +139,14 @@ prt_fild05,281,227,5	script	Manager Jurgens#prtc	853,{
 			mes "Only the registered members can enter the instance "+.@md_name$+".";
 			close;
 		case IE_OK:
-<<<<<<< HEAD
-			if(.@quest){
-				setquest .@quest;
-			break;
-			}
-		}
-
-=======
 			setquest .@quest;
 			break;
 		}
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		//debugmes "Instance Entrance Prontera Culvert "+strcharinfo(0)+".";
 		close;
 	case 3: close;
 	}
-	
+
 OnInit:
 	waitingroom "Culvert Clearing",0;
 	end;
@@ -186,8 +177,8 @@ OnInit:
 	npctalk "Thank you for helping out!";
 	close2;
 	hideonnpc instance_npcname(strnpcinfo(0));
-	donpcevent instance_npcname("Manager Jurgens#prtc2") + "::OnStart"; 
-	donpcevent instance_npcname("#prtc_timer") + "::OnStartTimer"; 
+	donpcevent instance_npcname("Manager Jurgens#prtc2") + "::OnStart";
+	donpcevent instance_npcname("#prtc_timer") + "::OnStartTimer";
 	end;
 
 OnInstanceInit:
@@ -201,7 +192,7 @@ OnInstanceInit:
 OnTouch_:
 //	npctalk "Welcome to Prontera Culverts";
 	end;
-	
+
 OnStart:
 	//Retrieve Mode Modifiers
 	.@arr$ = getvariableofnpc(.mode_config$,"#Instance_Config");
@@ -220,11 +211,11 @@ OnStart:
 			break;
 		}
 	}
-	
+
 	//Spawn Dynamic Mobs
 	setarray .@m_info,3972,25,3973,10;
-	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=2) {	
-		
+	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=2) {
+
 		//Initialize Array
 		deletearray $@mobid[0],getarraysize($@mobid);
 
@@ -237,19 +228,19 @@ OnStart:
 			if(unitexists(getd(".@"+.@mob$+.@i))) {
 				getunitdata getd(".@"+.@mob$+.@i),.@data;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-				setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
 			}
 		}
 	}
-	
+
 	//Eggs
 	.@event$ = instance_npcname("Manager Jurgens#prtc2") + "::OnCulvertEggKill";
 	sleep 500;
 	areamonster 'Map$,15,38,102,170,"--ja--",3974,10,.@event$;	//Thief Bug Egg
 	areamonster 'Map$,137,29,182,181,"--ja--",3974,12,.@event$;	//Thief Bug Egg
-	
+
 	//Normal Mobs
 	areamonster 'Map$,15,38,158,175,"--ja--",1005,5;	//Familiar
 	areamonster 'Map$,15,38,158,175,"--ja--",1054,5;	//Thief Bug
@@ -267,15 +258,15 @@ OnCulvertEggKill:
 	}
 	if('EggKilled == .@ct && !'BossActive) {
 		hideonnpc instance_npcname(strnpcinfo(0));
-		instance_announce 0,"Ancient Golden Bug: There is no escape from the deepest abyss of the culverts!!",bc_map,"0xFFFFFF",FW_BOLD;	
-		
+		instance_announce 0,"Ancient Golden Bug: There is no escape from the deepest abyss of the culverts!!",bc_map,"0xFFFFFF",FW_BOLD;
+
 		//Initialize Array
 		deletearray $@mobid[0],getarraysize($@mobid);
-		
+
 		if('Boss == 0) monster instance_mapname("1@prtc"),99,99,"--ja--",3975,1,instance_npcname("Manager Jurgens#prtc2") + "::OnBossDead";
 		'Boss = $@mobid[0];
 		'BossActive = 1;
-		
+
 		if(unitexists('Boss)) {
 			//Apply Modifiers
 			getunitdata 'Boss,.@boss_data;
@@ -301,11 +292,11 @@ OnCulvertEggKill:
 			setunitdata 'Boss,UMOB_HIT,'boss_hit ;
 			setunitdata 'Boss,UMOB_FLEE,'boss_flee;
 
-			
+
 			.@label$ = instance_npcname("Manager Jurgens#prtc2") + "::OnEgg";
 			.@boss_x = .@boss_data[UMOB_X];
 			.@boss_y = .@boss_data[UMOB_Y];
-		
+
 			for(.@i = 1; .@i <=1; .@i++) {
 				//freeloop(1);
 				do {
@@ -313,7 +304,7 @@ OnCulvertEggKill:
 					.@egg_y = .@boss_y + F_Rand(-3,-2,-1,1,2,3);
 				} while (!checkcell('Map$,.@egg_x,.@egg_y,cell_chkpass) || (.@egg_x == .@x_1 && .@egg_y == .@y_1) || (.@egg_x == .@x_2 && .@egg_y == .@y_2) || (.@egg_x == .@x_3 && .@egg_y == .@y_3) || (.@egg_x == .@x_4 && .@egg_y == .@y_4) );
 				//freeloop(0);
-				
+
 				switch(.@i){
 				case 1: .@x_1 = .@egg_x; .@y_1 = .@egg_y; break;
 				case 2: .@x_2 = .@egg_x; .@y_2 = .@egg_y; break;
@@ -321,16 +312,16 @@ OnCulvertEggKill:
 				case 4: .@x_4 = .@egg_x; .@y_4 = .@egg_y; break;
 				default: break;
 				}
-					
+
 				monster 'Map$,.@egg_x,.@egg_y,"",3974,1, .@label$;
 			}
 		}
-		
+
 		initnpctimer instance_npcname("#Venom_Fog");
 		initnpctimer;
 	}
 	end;
-	
+
 OnEgg:
 	'Eggs = mobcount(instance_mapname('Map$[0]),instance_npcname(strnpcinfo(0))+"::OnEgg");
 
@@ -363,14 +354,14 @@ OnTimer10000:
 			.@egg_y = .@boss_y + F_Rand(-3,-2,2,3);
 		} while (!checkcell('Map$[0],.@egg_x,.@egg_y,cell_chkpass));
 		freeloop(0);
-		
+
 		monster 'Map$[0],.@egg_x,.@egg_y,"",3974,1, .@label$;
 		'Slave_Egg = $@mobid[0];
 		getunitdata 'Slave_Egg,.@data;
 		setunitdata 'Slave_Egg,UMOB_HP,3;
 	}
 	end;
-	
+
 OnTimer15000:
 	if(!'BossActive) {
 		stopnpctimer;
@@ -378,7 +369,7 @@ OnTimer15000:
 	}
 	'Eggs = mobcount(instance_mapname('Map$[0]),instance_npcname(strnpcinfo(0))+"::OnEgg");
 	if('Eggs >= 1) {
-	
+
 		'Heal = 'Eggs;
 		.@label$ = instance_npcname("Manager Jurgens#prtc2") + "::OnEgg";
 		if(unitexists('Boss)) {
@@ -386,7 +377,7 @@ OnTimer15000:
 
 			//Heal
 			setunitdata 'Boss,UMOB_HP,.@arr[UMOB_HP] + ('Heal * 5102);
-			instance_announce 0,"The Golden Thief Bug has absorbed the nearby eggs and recovered "+('Heal * 5102)+" HP in total.",bc_map,"0xFFFFFF",FW_BOLD;	
+			instance_announce 0,"The Golden Thief Bug has absorbed the nearby eggs and recovered "+('Heal * 5102)+" HP in total.",bc_map,"0xFFFFFF",FW_BOLD;
 			//Buff
 			if('Buff < 10) {
 				'Buff++;
@@ -394,17 +385,10 @@ OnTimer15000:
 				setunitdata 'Boss,UMOB_ATKMAX, 'boss_max_atk + (50 * 'Buff);
 				setunitdata 'Boss,UMOB_MATKMIN, 'boss_min_matk + (50 * 'Buff);
 				setunitdata 'Boss,UMOB_MATKMAX, 'boss_max_matk + (50 * 'Buff);
-<<<<<<< HEAD
-				setunitdata 'Boss,UMOB_DEF, 'boss_def + 2;
-				setunitdata 'Boss,UMOB_MDEF, 'boss_mdef + 2;
-				setunitdata 'Boss,UMOB_HIT, 'boss_hit + 2;
-				setunitdata 'Boss,UMOB_FLEE, 'boss_flee + 2;
-=======
 				setunitdata 'Boss,UMOB_DEF, 'boss_def + (15 * 'Buff);
 				setunitdata 'Boss,UMOB_MDEF, 'boss_mdef + (5 * 'Buff);
 				setunitdata 'Boss,UMOB_HIT, 'boss_hit + (15 * 'Buff);
 				setunitdata 'Boss,UMOB_FLEE, 'boss_flee + (15 * 'Buff);
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 			}
 			movenpc instance_npcname(strnpcinfo(0)),.@arr[UMOB_X],.@arr[UMOB_Y];
 			specialeffect EF_HEAL,AREA,instance_npcname(strnpcinfo(0));
@@ -416,9 +400,9 @@ OnTimer15000:
 OnBossDead:
 	stopnpctimer;
 	'BossActive = 0;
-	donpcevent instance_npcname("#prtc_timer") + "::OnStopTimer"; 
+	donpcevent instance_npcname("#prtc_timer") + "::OnStopTimer";
 	.@label$ = instance_npcname("Manager Jurgens#prtc2") + "::OnEgg";
-	killmonster 'Map$[0], .@label$; 
+	killmonster 'Map$[0], .@label$;
 	donpcevent instance_npcname("#Venom_Fog")+"::OnEnd";
 	enablenpc instance_npcname("Treasure Chest#prtc1");
 	if ('Mode == 1) {
@@ -429,7 +413,7 @@ OnBossDead:
 		for (.@i = 1; .@i <= 'unique_members; ++.@i) {
 			enablenpc instance_npcname("Treasure Chest#prtc" + .@i);
 		}
-	}	
+	}
 	end;
 }
 
@@ -456,7 +440,7 @@ OnTimer50:
 OnEnd:
 OnTimer3500:
 	.@label$ = instance_npcname("Manager Jurgens#prtc2") + "::OnVenom";
-	killmonster 'Map$[0], .@label$; 
+	killmonster 'Map$[0], .@label$;
 	initnpctimer;
 	end;
 OnFumes:
@@ -474,7 +458,7 @@ OnFumes:
 
 	//Log Event
 	//debugmes "Instance Completion: Prontera Culvert"+strcharinfo(0)+".";
-	
+
 	set .@ins_map$,strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -488,21 +472,12 @@ OnFumes:
 	if(.@party_inmap >=7 && .@party_inmap <12) .@bonus = 10;
 		else if (.@party_inmap >=12) .@bonus = 15;
 		else .@bonus = 0;
-	
+
 	if('Mode <= 2) {
 		setarray .@reward[1],
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
 		25424,100,	//Shimmering_Crystal
-<<<<<<< HEAD
-		18005,50,	//Mixed_Rune_Fragment
-		29587,50,	//Shimmering_Crystal_Box
-		29587,25,	//Shimmering_Crystal_Box
-		29584,1,	//Rune_Box
-		29585,3,	//PVM_Box
-		29586,10,	//Refine_Box
-		29586,5,	//Refine_Box
-=======
 		18005,5,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
@@ -510,36 +485,11 @@ OnFumes:
 		29587,25,	//Shimmering_Crystal_Box
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		22150,100,	//Expedition_Greaves_4
 		22150,50,	//Expedition_Greaves_4
 		22150,50,	//Expedition_Greaves_4
 		28539,100,	//Expedition_Ring_4
 		28539,50,	//Expedition_Ring_4
-<<<<<<< HEAD
-		28539,50,	//Expedition_Ring_4
-		6635,1;		//Blacksmith Blessing
-	} else if ('Mode == 3) {
-		setarray .@reward[1],
-		//25458,100,	//Sparkling_Opal
-		//25458,50,	//Sparkling_Opal
-		//25458,10,	//Sparkling_Opal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		29584,5,	//Rune_Box
-		29586,20,	//Refine_Box
-		29585,20,	//Pvm_Box
-		29584,1,	//Rune_Box
-		29585,2,	//PVM_Box
-		29586,10,	//Refine_Box
-		18005,100,	//Mixed_Rune_Fragment
-		29587,100,	//Shimmering_Crystal_Box
-		29587,100,	//Shimmering_Crystal_Box
-=======
 		28539,50;	//Expedition_Ring_4
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
@@ -555,7 +505,6 @@ OnFumes:
 		29587,100,	//Shimmering_Crystal_Box
 		29587,75,	//Shimmering_Crystal_Box
 		29587,50,	//Shimmering_Crystal_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,30,		//Oridecon_Stone
@@ -574,20 +523,6 @@ OnFumes:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-<<<<<<< HEAD
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-=======
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
@@ -600,28 +535,22 @@ OnFumes:
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
 		991,20,		//Crystal_Blue
-		992,100,	//Wind_Of_Verdure 
-		992,20,		//Wind_Of_Verdure 
+		992,100,	//Wind_Of_Verdure
+		992,20,		//Wind_Of_Verdure
 		993,100,	//Yellow_Live
-<<<<<<< HEAD
-		993,20,		//Yellow_Live
-		6635,10;	//Blacksmith Blessing
-=======
 		993,20;		//Yellow_Live
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
-	
+
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
 	hideonnpc instance_npcname(strnpcinfo(0)); //55462
-	
+
 	.@limit = getarraysize(.@reward);
 	for(.@i = 1; .@i<=.@limit; .@i+=2) {
 		if(rand(100) < (.@reward[.@i+1] + .@bonus))
@@ -637,10 +566,10 @@ OnFumes:
 	}
 	enablenpc instance_npcname("Manager Jurgens#prtc3");
 	end;
-	
+
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
 
 1@prtc,99,102,4	duplicate(Treasure Chest#prtc1)	Treasure Chest#prtc2	10005
@@ -675,6 +604,5 @@ OnInstanceInit:
 
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
-

@@ -88,16 +88,16 @@ OnTouch:
 	npctalk "Good luck in treasure hunting!";
 	close2;
 	hideonnpc instance_npcname(strnpcinfo(0));
-	donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart"; 
+	donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart";
 	enablenpc instance_npcname("#sks07");
 	enablenpc instance_npcname("#sks06-1");
-	//donpcevent instance_npcname("#sks_timer") + "::OnStartTimer"; 
+	//donpcevent instance_npcname("#sks_timer") + "::OnStartTimer";
 	end;
 
 OnTouch_:
 //	npctalk "Welcome to Sunken Ship~";
 	end;
-	
+
 OnInstanceInit:
 	'Mode = 0;
 	'Special = 0;
@@ -107,9 +107,9 @@ OnInstanceInit:
 	disablenpc instance_npcname("#sks07");
 	disablenpc instance_npcname("#sks06-1");
 	end;
-	
+
 OnManhole:
-	instance_announce 0,"Stormy Mimic has escaped from the manhole!!",bc_map,"0xFFFFFF",FW_BOLD;	
+	instance_announce 0,"Stormy Mimic has escaped from the manhole!!",bc_map,"0xFFFFFF",FW_BOLD;
 	areamonster 'Map$,25,35,120,168,"--ja--",20113,1,instance_npcname("Mimic's Chest#sks")+"::OnMimic";	//Stormy Mimic
 	end;
 OnStart:
@@ -130,11 +130,11 @@ OnStart:
 			break;
 		}
 	}
-	
+
 	//Spawn Dynamic Mobs
 	setarray .@m_info,20114,15,20115,30,20116,10;
 	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=2) {
-		
+
 		//Initialize Array
 		deletearray $@mobid[0],getarraysize($@mobid);
 
@@ -147,7 +147,7 @@ OnStart:
 			if(unitexists('mobid[.@i])) {
 				getunitdata 'mobid[.@i],.@data;
 				setunitdata 'mobid[.@i],UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-				setunitdata 'mobid[.@i],UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata 'mobid[.@i],UMOB_HP,.@data[UMOB_HP] * .@hp_mod;
 				setunitdata 'mobid[.@i],UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
 				setunitdata 'mobid[.@i],UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
 			}
@@ -155,12 +155,12 @@ OnStart:
 	}
 	//Manhole
 	areamonster 'Map$,25,35,120,168,"--ja--",20112,1,instance_npcname(strnpcinfo(0))+"::OnManhole";
-		
+
 	//Special Pirate Skeleton
 	setarray .@arr,20,166,69,181,118,166;
 	for(.@i=0; .@i<getarraysize(.@arr); .@i+=2)
 		monster 'Map$,.@arr[.@i],.@arr[.@i+1],"Treasure Guardian",20115,1,instance_npcname(strnpcinfo(0)) + "::OnSpecial";
-			
+
 	//Minion Hydras
 	deletearray .@arr[0],getarraysize(.@arr);
 	setarray .@arr,67,161,87,160,76,182,51,160,88,161,86,161,69,160,67,160,88,160,68,160,49,160,48,160,87,161,89,161,50,160,70,161,69,161,89,160,70,160,50,161,49,161,86,160,60,182,51,161,48,161,68,161;
@@ -169,14 +169,14 @@ OnStart:
 	end;
 
 OnBoss:
-	instance_announce 0,"Stormy Drake: I shall chop your head off, You imbecile looter!!",bc_map,"0xFFFFFF",FW_BOLD;	
-	
+	instance_announce 0,"Stormy Drake: I shall chop your head off, You imbecile looter!!",bc_map,"0xFFFFFF",FW_BOLD;
+
 	//Initialize Array
 	deletearray $@mobid[0],getarraysize($@mobid);
-		
+
 	if('Boss == 0) monster instance_mapname("1@sks"),163,57,"--ja--",20111,1,instance_npcname(strnpcinfo(0)) + "::OnBossDead";
 	'Boss = $@mobid[0];
-	
+
 	//Apply Modifiers
 	if(unitexists('Boss)) {
 		unittalk 'Boss,"A bunch of foolish thiefs are about to meet their doom!";
@@ -192,13 +192,13 @@ OnBoss:
 		setunitdata 'Boss,UMOB_HIT,.@boss_data[UMOB_HIT] * 'boss_hit_mod ;
 		setunitdata 'Boss,UMOB_FLEE,.@boss_data[UMOB_FLEE] * 'boss_flee_mod;
 	}
-	
+
 	//Summon Hydra buffers
 	setarray .@arr,168,40,168,47,159,40,159,40,152,49,152,66,175,49,175,66,160,68,167,68,161,82,161,82;
 	for(.@i=0; .@i<getarraysize(.@arr); .@i+=2)
 		monster 'Map$,.@arr[.@i],.@arr[.@i+1],"--ja--",20117,1,instance_npcname(strnpcinfo(0)) + "::OnBakuretsu";
 	end;
-	
+
 OnMinion:
 	end;
 OnBakuretsu:
@@ -241,7 +241,7 @@ OnSpecial:
 		donpcevent instance_npcname("Memorial Society Member#sks2") + "::OnBoss";
 	}
 	if('Special < 3) {
-		instance_announce 0,"Remaining Treasure Guardians: "+(3 - 'Special),bc_map,"0xFFFFFF",FW_BOLD;	
+		instance_announce 0,"Remaining Treasure Guardians: "+(3 - 'Special),bc_map,"0xFFFFFF",FW_BOLD;
 	}
 	end;
 }
@@ -249,19 +249,19 @@ OnSpecial:
 1@sks,1,1,4	script	Mimic's Chest#sks	4_TREASURE_BOX,{
 	//Check if Party Leader
 	callfunc "F_ChkInstancePT","";
-	
+
 	setarray .@reward[1],
 	25424,100,	//Shimmering_Crystal
 	29584,2,	//Rune_Box
 	29585,5,	//Pvm_Box
 	29586,5;	//Refine_Box
-	
+
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
-	
+
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
-	hideonnpc instance_npcname(strnpcinfo(0)); //55462 
-	
+	hideonnpc instance_npcname(strnpcinfo(0)); //55462
+
 	.@limit = getarraysize(.@reward);
 	for(.@i = 1; .@i<=.@limit; .@i+=2) {
 		if(rand(100) < (.@reward[.@i+1] + .@bonus))
@@ -269,14 +269,14 @@ OnSpecial:
 	}
 	end;
 OnMimic:
-	instance_announce 0,"Stormy Mimic: No!! My treasure..",bc_map,"0xFFFFFF",FW_BOLD;	
+	instance_announce 0,"Stormy Mimic: No!! My treasure..",bc_map,"0xFFFFFF",FW_BOLD;
 	hideoffnpc instance_npcname(strnpcinfo(0));
 	getmapxy(.@map$,.@x,.@y,BL_PC);
 	movenpc instance_npcname(strnpcinfo(0)),.@x,.@y;
 	end;
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
 
 1@sks,164,57,4	script	Treasure Chest#sks1	4_TREASURE_BOX,{
@@ -287,7 +287,7 @@ OnInstanceInit:
 		}
 		'RewardUniqueIDLogs$ = 'RewardUniqueIDLogs$ + "||" + .@unique_id;
 	}
-	
+
 	set .@ins_map$,strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -301,7 +301,7 @@ OnInstanceInit:
 	if(.@party_inmap >=6 && .@party_inmap <12) .@bonus = 5;
 		else if (.@party_inmap >=12) .@bonus = 15;
 		else .@bonus = 0;
-	
+
 	if('Mode <= 2) {
 		setarray .@reward[1],
 		25424,100,	//Shimmering_Crystal
@@ -314,33 +314,21 @@ OnInstanceInit:
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
 		25424,10,	//Shimmering_Crystal
-<<<<<<< HEAD
-		18005,50,	//Mixed_Rune_Fragment
-=======
 		18005,10,	//Mixed_Rune_Fragment
 		18005,5,	//Mixed_Rune_Fragment
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		18005,5,	//Mixed_Rune_Fragment
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
 		29588,50,	//Azure_Crystal_Box
-		29588,25,	//Azure_Crystal_Box	
+		29588,25,	//Azure_Crystal_Box
 		25475,100,	//Azure_Crystal
 		25475,50,	//Azure_Crystal
 		25475,10,	//Azure_Crystal
-<<<<<<< HEAD
-		29586,10,	//Refine_Box
-		29586,5,	//Refine_Box
-		29584,2,	//Rune_Box
-		29584,2,	//Rune_Box
-		29585,10,	//Pvm_Box
-=======
 		29586,5,	//Refine_Box
 		29586,3,	//Refine_Box
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
 		29585,5,	//Pvm_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		29585,3,	//Pvm_Box
 		23649,100,	//Gel_Fragment_Box
 		23649,100,	//Gel_Fragment_Box
@@ -358,43 +346,10 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-<<<<<<< HEAD
-		6635,5;		//Blacksmith Blessing
-		//25429,100,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,10;	//Mythril_Ore	
-	} else if ('Mode == 3) {
-		setarray .@reward[1],
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,100,	//Shimmering_Crystal
-		25424,10,	//Shimmering_Crystal
-		25424,10,	//Shimmering_Crystal
-		25424,10,	//Shimmering_Crystal
-		25424,10,	//Shimmering_Crystal
-		18005,100,	//Mixed_Rune_Fragment
-		//25460,100,	//Bloody_Ruby
-		//25460,50,	//Bloody_Ruby
-		//25460,10,	//Bloody_Ruby
-		29586,30,	//Refine_Box
-		29586,20,	//Refine_Box
-		29584,5,	//Rune_Box
-		29584,5,	//Rune_Box
-		29585,20,	//Pvm_Box
-		29585,20,	//Pvm_Box
-		29588,100,	//Azure_Crystal_Box
-		29588,50,	//Azure_Crystal_Box
-		29587,100,	//Shimmering_Crystal_Box
-		29587,50,	//Shimmering_Crystal_Box
-=======
 		25429,100,	//Mythril_Ore
 		25429,70,	//Mythril_Ore
 		25429,40,	//Mythril_Ore
-		25429,10;	//Mythril_Ore	
+		25429,10;	//Mythril_Ore
 	} else if ('Mode == 3) {
 		setarray .@reward[1],
 		25460,100,	//Bloody_Ruby
@@ -410,7 +365,6 @@ OnInstanceInit:
 		29588,25,	//Azure_Crystal_Box
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -439,20 +393,6 @@ OnInstanceInit:
 		23649,50,	//Gel_Fragment_Box
 		23649,10,	//Gel_Fragment_Box
 		23649,10,	//Gel_Fragment_Box
-<<<<<<< HEAD
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,100,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,70,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,40,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-		//25429,10,	//Mythril_Ore
-=======
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
 		25429,100,	//Mythril_Ore
@@ -465,27 +405,21 @@ OnInstanceInit:
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
 		25429,10,	//Mythril_Ore
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
 		991,20,		//Crystal_Blue
-		992,100,	//Wind_Of_Verdure 
-		992,20,		//Wind_Of_Verdure 
+		992,100,	//Wind_Of_Verdure
+		992,20,		//Wind_Of_Verdure
 		993,100,	//Yellow_Live
-<<<<<<< HEAD
-		993,20,		//Yellow_Live
-		6635,10;	//Blacksmith Blessing
-=======
 		993,20;		//Yellow_Live
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
-	
+
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
 	hideonnpc instance_npcname(strnpcinfo(0)); //55462
-	
+
 	.@limit = getarraysize(.@reward);
 	for(.@i = 1; .@i<=.@limit; .@i+=2) {
 		if(rand(100) < (.@reward[.@i+1] + .@bonus))
@@ -501,11 +435,11 @@ OnInstanceInit:
 	}
 	enablenpc instance_npcname("Memorial Society Member#sks3");
 	end;
-	
+
 
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
 
 1@sks,160,54,4	duplicate(Treasure Chest#sks1)	Treasure Chest#sks2	10005
@@ -538,5 +472,5 @@ OnInstanceInit:
 
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }

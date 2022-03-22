@@ -19,7 +19,7 @@
 
 arena_room,94,93,5	script	Vendigos	97,{
 	mes "[Vendigos]";
-	mes "Welcome to the world of Arena, the battle against a time limit.";
+	mes "Welcome to the world of Arecana, the battle against a time limit.";
 	mes "My name is Vendigos, I am here to help you.";
 	next;
 	mes "[Vendigos]";

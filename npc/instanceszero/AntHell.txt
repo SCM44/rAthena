@@ -64,7 +64,7 @@ OnInstanceInit:
 	npctalk "Good luck! I better get out of here before it gets worse..";
 	close2;
 		hideonnpc instance_npcname(strnpcinfo(0));
-		donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart"; 
+		donpcevent instance_npcname(strnpcinfo(0)) + "::OnStart";
 		donpcevent instance_npcname("#ant_timer") + "::OnStartTimer";
 	end;
 
@@ -78,7 +78,7 @@ OnInstanceInit:
 	'Weaken = 0;
 	'Map$ = instance_mapname("1@ant");
 	end;
-	
+
 OnStart:
 	//Retrieve Mode Modifiers
 	.@arr$ = getvariableofnpc(.mode_config$,"#Instance_Config");
@@ -97,24 +97,24 @@ OnStart:
 			break;
 		}
 	}
-	
+
 	//Spawn Dynamic Mobs
 	setarray .@m_info,20077,25,20078,20,20079,25,20080,25;
 	for(.@m=0; .@m<getarraysize(.@m_info); .@m+=2) {
-		
+
 		//Initialize Array
 		deletearray $@mobid[0],getarraysize($@mobid);
 
 		.@mob$ = .@m_info[.@m]+"_";
 		.@amt = .@m_info[.@m+1] * .@amt_mod;
 		areamonster 'Map$,42,42,247,254,"--ja--",.@m_info[.@m],.@amt;
-	
+
 		for(.@i = 0; .@i < getarraysize($@mobid); .@i++) {
 			setd(".@"+.@mob$+.@i), $@mobid[.@i];
 			if(unitexists(getd(".@"+.@mob$+.@i))) {
 				getunitdata getd(".@"+.@mob$+.@i),.@data;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_MAXHP,.@data[UMOB_MAXHP] * .@hp_mod;
-				setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;		
+				setunitdata getd(".@"+.@mob$+.@i),UMOB_HP,.@data[UMOB_HP] * .@hp_mod;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMIN,.@data[UMOB_ATKMIN] * .@atk_mod;
 				setunitdata getd(".@"+.@mob$+.@i),UMOB_ATKMAX,.@data[UMOB_ATKMAX] * .@atk_mod;
 			}
@@ -136,17 +136,17 @@ OnBoss:
 
 	//Initialize Array
 	deletearray $@mobid[0],getarraysize($@mobid);
-		
+
 	if('Boss == 0) monster 'Map$,253,31,"--ja--",20076,1,instance_npcname("Memorial Society Member#ant2") + "::OnBossDead";
 	'Boss = $@mobid[0];
 	if(unitexists('Boss)) {
 		unittalk 'Boss,"Trespasser, I will protect my kingdom from the likes of you!!";
 		getunitdata 'Boss,.@boss_data;
-			
+
 		setunitdata 'Boss,UMOB_MAXHP,.@boss_data[UMOB_MAXHP] * 'boss_hp_mod;
 		setunitdata 'Boss,UMOB_HP,.@boss_data[UMOB_HP] * 'boss_hp_mod;
 	}
-	
+
 	//Save Stats
 	'atk1_nm = .@boss_data[UMOB_ATKMIN] * 'boss_atk_mod;
 	'atk2_nm = .@boss_data[UMOB_ATKMAX] * 'boss_atk_mod;
@@ -156,7 +156,7 @@ OnBoss:
 	'mdef_nm = .@boss_data[UMOB_MDEF] * 'boss_mdef_mod;
 	'hit_nm = .@boss_data[UMOB_HIT] * 'boss_hit_mod;
 	'flee_nm = .@boss_data[UMOB_FLEE] * 'boss_flee_mod;
-	
+
 	//Set 'Weakened' Stats
 	'atk1_wk = 'atk1_nm/2;
 	'atk2_wk = 'atk2_nm/2;
@@ -166,7 +166,7 @@ OnBoss:
 	'mdef_wk = 'mdef_nm/2;
 	'hit_wk = 'hit_nm/2;
 	'flee_wk = 'flee_nm/2;
-	
+
 	initnpctimer;
 	donpcevent instance_npcname(strnpcinfo(0))+"::OnRestore";
 	end;
@@ -184,7 +184,7 @@ OnTimer15000:
 		.@percent_hp = (.@arr[UMOB_HP] * 100) / .@arr[UMOB_MAXHP];
 		.@label$ = instance_npcname("Memorial Society Member#ant2") + "::OnDarkCross";
 		switch( .@percent_hp / 10 ) {
-		case 10: 
+		case 10:
 		case 9:
 		case 8:
 		case 7:
@@ -206,7 +206,7 @@ OnTimer15000:
 			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
 			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
 			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;
-			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;		
+			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y], "#darkcross",3038,1, .@label$;
 			monster 'Map$, .@arr[UMOB_X]-9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
 			monster 'Map$, .@arr[UMOB_X]+9, .@arr[UMOB_Y]-9, "#darkcross",3038,1, .@label$;
 			monster 'Map$, .@arr[UMOB_X], .@arr[UMOB_Y]+9, "#darkcross",3038,1, .@label$;
@@ -214,32 +214,32 @@ OnTimer15000:
 			sleep 5000;
 			killmonster 'Map$, .@label$;
 			break;
-			break;	
+			break;
 		}
 	}
 	end;
-	
+
 OnTimer20000:
 	if(rand(1,4)==3) {
 		'Weaken = 1;
 		donpcevent instance_npcname(strnpcinfo(0))+"::OnWeaken";
-		instance_announce 0,"Memorial Society Member: The toxic fumes has intensified. Maya seems to have been severely weakened.",bc_map,"0xFFFFFF",FW_BOLD;	
-		instance_announce 0,"Memorial Society Member: Take this opportunity to damage Maya!!.",bc_map,"0xFFFFFF",FW_BOLD;	
+		instance_announce 0,"Memorial Society Member: The toxic fumes has intensified. Maya seems to have been severely weakened.",bc_map,"0xFFFFFF",FW_BOLD;
+		instance_announce 0,"Memorial Society Member: Take this opportunity to damage Maya!!.",bc_map,"0xFFFFFF",FW_BOLD;
 		if(unitexists('Boss))
 			unittalk 'Boss,"What sorcery is this? Why do I feel bad about this...?";
 	}
 	end;
 OnTimer35000:
 	if('Weaken == 1) {
-		'Weaken = 0;	
+		'Weaken = 0;
 		donpcevent instance_npcname(strnpcinfo(0))+"::OnRestore";
 		instance_announce 0,"The toxic fumes has dissipated. Maya has recovered from the toxic fumes.",bc_map,"0xFFFFFF",FW_BOLD;
 		if(unitexists('Boss))
 			unittalk 'Boss,"I won't let myself be brought down by this!";
 	}
 	initnpctimer;
-	end;	
-	
+	end;
+
 OnWeaken:
 	if(unitexists('Boss)) {
 		setunitdata 'Boss,UMOB_ATKMIN,'atk1_wk;
@@ -263,8 +263,8 @@ OnRestore:
 		setunitdata 'Boss,UMOB_HIT,'hit_nm;
 		setunitdata 'Boss,UMOB_FLEE,'flee_nm;
 	}
-	end;		
-		
+	end;
+
 OnDarkCross:
 	end;
 OnBossDead:
@@ -293,7 +293,7 @@ OnTimer100:
 		stopnpctimer;
 		end;
 	}
-OnTimer2000:	
+OnTimer2000:
 	.@label$ = instance_npcname(strnpcinfo(0))+"::OnFumes";
 	areamonster 'Map$,127,24,218,300,"#toxicfumes",2536,150,.@label$;	//Toxic Fumes 2536
 	end;
@@ -314,12 +314,12 @@ OnFumes:
 		message strcharinfo(0),"You have managed to seal this toxic geyser!";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#ant2") + "::OnBoss";
-			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;	
+			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"I should head to the other geysers...";
 	}
-	end;	
+	end;
 
 OnTimer9000:
 	specialeffect 247;
@@ -328,7 +328,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;	
+	end;
 }
 
 1@ant,247,261,4	script	Toxic Steam Geyser#ant2	4_ENERGY_BLACK,{
@@ -339,12 +339,12 @@ OnInstanceInit:
 		message strcharinfo(0),"You have managed to seal this toxic geyser!";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#ant2") + "::OnBoss";
-			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;			
+			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"I should head to the other geysers...";
 	}
-	end;	
+	end;
 
 OnTimer9000:
 	specialeffect 247;
@@ -353,7 +353,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;	
+	end;
 }
 
 1@ant,81,258,4	script	Toxic Steam Geyser#ant3	4_ENERGY_BLACK,{
@@ -364,12 +364,12 @@ OnInstanceInit:
 		message strcharinfo(0),"You have managed to seal this toxic geyser!";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#ant2") + "::OnBoss";
-			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;	
+			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"I should head to the other geysers...";
 	}
-	end;	
+	end;
 
 OnTimer9000:
 	specialeffect 247;
@@ -378,7 +378,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;		
+	end;
 }
 
 1@ant,239,32,4	script	Toxic Steam Geyser#ant4	4_ENERGY_BLACK,{
@@ -389,12 +389,12 @@ OnInstanceInit:
 		message strcharinfo(0),"You have managed to seal this toxic geyser!";
 		.@sum = ('Geyser_1 + 'Geyser_2 + 'Geyser_3 + 'Geyser_4);
 		if(.@sum == 4) donpcevent instance_npcname("Memorial Society Member#ant2") + "::OnBoss";
-			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;		
+			else instance_announce 0,"Remaining Toxic Steam Geysers to seal: "+(4-.@sum),bc_map,"0xFFFFFF",FW_BOLD;
 		hideonnpc instance_npcname(strnpcinfo(0));
 	} else {
 		message strcharinfo(0),"I should head to the other geysers...";
 	}
-	end;	
+	end;
 
 OnTimer9000:
 	specialeffect 247;
@@ -403,7 +403,7 @@ OnTimer9000:
 OnInstanceInit:
 	hideonnpc instance_npcname(strnpcinfo(0));
 	disablenpc instance_npcname(strnpcinfo(0));
-	end;			
+	end;
 }
 
 
@@ -415,7 +415,7 @@ OnInstanceInit:
 		}
 		'RewardUniqueIDLogs$ = 'RewardUniqueIDLogs$ + "||" + .@unique_id;
 	}
-	
+
 	set .@ins_map$,strcharinfo(3);
 	getpartymember(getcharid(1)),2;
 	for( .@i = 0; .@i < $@partymembercount; .@i++ ) {
@@ -429,7 +429,7 @@ OnInstanceInit:
 	if(.@party_inmap >=6 && .@party_inmap <12) .@bonus = 5;
 		else if (.@party_inmap >=12) .@bonus = 15;
 		else .@bonus = 0;
-		
+
 	if('Mode <= 2) {
 		setarray .@reward[1],
 		25424,100,	//Shimmering_Crystal
@@ -438,21 +438,12 @@ OnInstanceInit:
 		29587,50,	//Shimmering_Crystal_Box
 		29587,25,	//Shimmering_Crystal_Box
 		29586,5,	//Refine_Box
-<<<<<<< HEAD
 		29586,10,	//Refine_Box
-=======
-		29586,3,	//Refine_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		29584,1,	//Rune_Box
 		29584,1,	//Rune_Box
 		29585,5,	//Pvm_Box
 		29585,3,	//Pvm_Box
-<<<<<<< HEAD
 		18005,50,	//Mixed_Rune_Fragment
-=======
-		18005,10,	//Mixed_Rune_Fragment
-		18005,5,	//Mixed_Rune_Fragment
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		18005,1,	//Mixed_Rune_Fragment
 		23649,100,	//Gel_Fragment_Box
 		23649,70,	//Gel_Fragment_Box
@@ -462,7 +453,6 @@ OnInstanceInit:
 		29588,10,	//Azure_Crystal_Box
 		25475,100,	//Azure_Crystal
 		25475,70,	//Azure_Crystal
-<<<<<<< HEAD
 		25475,40,	//Azure_Crystal
 		6635,1;		//Blacksmith Blessing
 	} else if ('Mode == 3) {
@@ -481,22 +471,6 @@ OnInstanceInit:
 		29588,50,	//Azure_Crystal_Box
 		29587,100,	//Shimmering_Crystal_Box
 		29587,50,	//Shimmering_Crystal_Box
-=======
-		25475,40;	//Azure_Crystal
-	} else if ('Mode == 3) {
-		setarray .@reward[1],
-		25460,100,	//Bloody_Ruby
-		25460,50,	//Bloody_Ruby
-		25460,10,	//Bloody_Ruby
-		29586,5,	//Refine_Box
-		29586,3,	//Refine_Box
-		29584,2,	//Rune_Box
-		29585,5,	//Pvm_Box
-		29588,50,	//Azure_Crystal_Box
-		29588,25,	//Azure_Crystal_Box
-		29587,50,	//Shimmering_Crystal_Box
-		29587,25,	//Shimmering_Crystal_Box
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		756,100,	//Oridecon_Stone
 		756,100,	//Oridecon_Stone
 		756,20,		//Oridecon_Stone
@@ -515,7 +489,6 @@ OnInstanceInit:
 		985,100,	//Elunium
 		985,15,		//Elunium
 		985,15,		//Elunium
-<<<<<<< HEAD
 		//25429,100,	//Mythril_Ore
 		//25429,100,	//Mythril_Ore
 		//25429,100,	//Mythril_Ore
@@ -528,40 +501,22 @@ OnInstanceInit:
 		//25429,10,	//Mythril_Ore
 		//25429,10,	//Mythril_Ore
 		//25429,10,	//Mythril_Ore
-=======
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,100,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,70,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,40,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
-		25429,10,	//Mythril_Ore
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 		990,100,	//Boody_Red
 		990,20,		//Boody_Red
         991,100,	//Crystal_Blue
 		991,20,		//Crystal_Blue
-		992,100,	//Wind_Of_Verdure 
-		992,20,		//Wind_Of_Verdure 
+		992,100,	//Wind_Of_Verdure
+		992,20,		//Wind_Of_Verdure
 		993,100,	//Yellow_Live
-<<<<<<< HEAD
 		993,20,		//Yellow_Live
 		6635,10;	//Blacksmith Blessing
-=======
-		993,20;		//Yellow_Live
->>>>>>> bf22a4018d122d26125cb20e8dd71a833beeb988
 	}
 	getmapxy(.@map$,.@x,.@y,BL_NPC,instance_npcname(strnpcinfo(0)));
-	
+
 	specialeffect 10; //55462
 	specialeffect 307; //Forest Light
 	hideonnpc instance_npcname(strnpcinfo(0)); //55462
-	
+
 	.@limit = getarraysize(.@reward);
 	for(.@i = 1; .@i<=.@limit; .@i+=2) {
 		if(rand(100) < (.@reward[.@i+1] + .@bonus))
@@ -577,10 +532,10 @@ OnInstanceInit:
 	}
 	enablenpc instance_npcname("Memorial Society Member#ant3");
 	end;
-	
+
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
 
 1@ant,251,64,4	duplicate(Treasure Chest#ant1)	Treasure Chest#ant2	10005
@@ -613,5 +568,5 @@ OnInstanceInit:
 
 OnInstanceInit:
 	disablenpc instance_npcname(strnpcinfo(0)); //55462
-	end;	
+	end;
 }
